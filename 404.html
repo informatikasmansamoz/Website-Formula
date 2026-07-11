@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Halaman Tidak Ditemukan — FORMULA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F7F6F3;
+  --ink: #14151A;
+  --ink-soft: #5B5D66;
+  --accent: #FF5A1F;
+  --accent-tint: #FFE7DA;
+  --line: #E2E0DA;
+  --f-display: 'Space Grotesk', sans-serif;
+  --f-mono: 'IBM Plex Mono', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.container {
+  max-width: 600px;
+  text-align: center;
+}
+.code {
+  font-family: var(--f-mono);
+  font-size: clamp(6rem, 20vw, 10rem);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  opacity: 0.15;
+  margin-bottom: -1.5rem;
+}
+.icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+h1 {
+  font-family: var(--f-display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.8rem;
+}
+h1 span {
+  color: var(--accent);
+}
+p {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 44ch;
+  margin: 0 auto 2rem;
+}
+.btn {
+  font-weight: 600;
+  font-size: .9rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .75rem 1.8rem;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  transition: all .18s ease;
+  border-radius: 4px;
+}
+.btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn-solid {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink);
+}
+.btn-solid:hover {
+  background: #e0500f;
+  border-color: #e0500f;
+}
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.divider {
+  width: 60px;
+  height: 2px;
+  background: var(--line);
+  margin: 2rem auto;
+}
+.status {
+  font-family: var(--f-mono);
+  font-size: .72rem;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  padding: .3rem .8rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16A34A;
+  margin-right: .4rem;
+  animation: ping 2.4s ease-out infinite;
+}
+@keyframes ping {
+  0% { box-shadow: 0 0 0 0 rgba(22,163,74,.45); }
+  70% { box-shadow: 0 0 0 6px rgba(22,163,74,0); }
+  100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+}
+@media (max-width: 600px) {
+  .container { padding: 0 1rem; }
+  .code { font-size: clamp(4rem, 25vw, 6rem); }
+  .icon { font-size: 3rem; }
+  p { font-size: .95rem; }
+  .actions { flex-direction: column; align-items: center; }
+  .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="code">404</div>
+  <span class="icon">🔧</span>
+  <h1>Halaman <span>Sedang</span> Diperbaiki</h1>
+  <p>Maaf, halaman yang Anda cari sedang dalam proses perbaikan atau belum tersedia. Tim FORMULA sedang bekerja keras untuk menyajikan konten terbaik.</p>
+  
+  <div class="divider"></div>
+  
+  <div class="actions">
+    <a href="index.html" class="btn btn-solid">← Kembali ke Home</a>
+    <a href="classes.html" class="btn">Lihat Program Lain</a>
+  </div>
+  
+  <div class="status">
+    <span class="status-dot"></span> STATUS: MAINTENANCE
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery — FORMULA SMAN 1 MOJOSARI</title>
+<meta name="description" content="Galeri kegiatan FORMULA — dokumentasi workshop, kompetisi, dan karya anggota." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta http-equiv="refresh" content="0; url=404.html" />
+<script>
+(function() {
+  // Daftar halaman yang VALID (yang boleh diakses)
+  var validPages = [
+    'index.html',
+    'about.html',
+    'classes.html', 
+    'gallery.html',
+    'contact.html',
+    'login.html',
+    '404.html',
+    'maintenance.html'
+  ];
+  
+  var currentFile = window.location.pathname.split('/').pop() || 'index.html';
+  
+  // Kalo file gak ada di daftar valid DAN bukan redirect manual
+  if (!validPages.includes(currentFile) && !window.location.search.includes('redirect=false')) {
+    window.location.replace('404.html');
+  }
+})();
+</script>
+<style>
+/* ============================================================
+   DESIGN TOKENS — SAME AS MAIN
+   ============================================================ */
+:root{
+  --paper:      #F7F6F3;
+  --paper-2:    #FFFFFF;
+  --ink:        #14151A;
+  --ink-soft:   #5B5D66;
+  --ink-faint:  #9A9CA3;
+  --line:       #E2E0DA;
+  --line-strong:#CFCCC4;
+  --accent:     #FF5A1F;
+  --accent-tint:#FFE7DA;
+  --status:     #16A34A;
+
+  --f-display: 'Space Grotesk', sans-serif;
+  --f-body:    'Inter', sans-serif;
+  --f-mono:    'IBM Plex Mono', monospace;
+
+  --max: 1120px;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family: var(--f-body);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+a{ color:inherit; text-decoration:none; }
+img,svg{ display:block; }
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 2rem; }
+.mono{ font-family:var(--f-mono); }
+
+/* eyebrow / IP-style section tag */
+.tag{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-family:var(--f-mono); font-size:.72rem; letter-spacing:.04em;
+  color: var(--accent); text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.tag::before{ content:"//"; color: var(--line-strong); }
+
+h1,h2,h3{ font-family:var(--f-display); letter-spacing:-0.01em; color:var(--ink); }
+
+/* ============================================================
+   NAV — SAME AS MAIN
+   ============================================================ */
+.nav{
+  position:sticky; top:0; z-index:50;
+  background: rgba(247,246,243,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:var(--max); margin:0 auto; padding: 1rem 2rem;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.brand{ display:flex; align-items:center; gap:.7rem; text-decoration:none; }
+.brand .mark{
+  width:34px; height:34px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--f-mono); font-weight:500; font-size:.68rem;
+  color:var(--ink);
+  overflow:hidden;
+  border-radius:4px;
+  padding:0;
+}
+.brand .mark img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.brand .name{ font-family:var(--f-display); font-weight:700; font-size:.95rem; line-height:1.15; }
+.brand .sub{ font-family:var(--f-mono); font-size:.6rem; color:var(--ink-soft); letter-spacing:.05em; }
+
+.status-pill{
+  display:none;
+  align-items:center; gap:.5rem;
+  font-family:var(--f-mono); font-size:.65rem; color:var(--ink-soft);
+  border:1px solid var(--line); padding:.3rem .7rem;
+}
+.status-dot{
+  width:6px; height:6px; border-radius:50%; background:var(--status);
+  box-shadow:0 0 0 0 rgba(22,163,74,.5);
+  animation: ping 2.4s ease-out infinite;
+}
+@keyframes ping{
+  0%{ box-shadow:0 0 0 0 rgba(22,163,74,.45); }
+  70%{ box-shadow:0 0 0 6px rgba(22,163,74,0); }
+  100%{ box-shadow:0 0 0 0 rgba(22,163,74,0); }
+}
+
+.nav-links{ display:flex; align-items:center; gap:1.9rem; }
+.nav-links a{
+  text-decoration:none; font-size:.85rem; color:var(--ink-soft);
+  position:relative; padding-bottom:2px;
+}
+.nav-links a:hover{ color:var(--ink); }
+.nav-links a.active{ color:var(--ink); }
+.nav-links a.active::after{
+  content:""; position:absolute; left:0; right:0; bottom:-4px; height:2px; background:var(--accent);
+}
+.nav-cta{ display:flex; align-items:center; gap:.9rem; }
+.btn{
+  font-family:var(--f-body); font-weight:600; font-size:.82rem;
+  text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  padding:.65rem 1.3rem; border:1.5px solid var(--ink); color:var(--ink);
+  transition: all .18s ease;
+}
+.btn:hover{ background:var(--ink); color:var(--paper); }
+.btn-solid{ background:var(--accent); border-color:var(--accent); color:var(--ink); }
+.btn-solid:hover{ background:#e0500f; border-color:#e0500f; color:var(--ink); }
+.btn-ghost{ border-color:transparent; padding:.65rem .4rem; }
+.btn-ghost:hover{ background:transparent; color:var(--ink); text-decoration:underline; }
+
+.menu-toggle{ display:none; background:none; border:1px solid var(--ink); width:38px; height:38px; font-size:1.1rem; cursor:pointer; }
+
+:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.page-header{
+  padding: 5rem 0 3rem;
+  border-bottom:1px solid var(--line);
+}
+.page-header h1{
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight:700; line-height:0.92; letter-spacing:-0.03em;
+}
+.page-header h1 .dim{ color: var(--ink-faint); }
+.page-header .subhead{
+  font-family:var(--f-mono); font-size:.85rem; color:var(--ink-soft);
+  margin-top:1rem; letter-spacing:.02em;
+}
+.page-header p{
+  font-size:1.05rem; color:var(--ink-soft); line-height:1.75;
+  max-width:56ch; margin-top:1.2rem;
+}
+
+/* ============================================================
+   GALLERY CONTENT
+   ============================================================ */
+.section{ padding: 4.5rem 0; border-bottom:1px solid var(--line); }
+.section:last-of-type{ border-bottom:none; }
+
+.section-head{
+  display:grid; grid-template-columns: 1fr 1.6fr; gap:3rem;
+  margin-bottom:2.5rem;
+}
+.section-head h2{
+  font-size:clamp(1.7rem,3.4vw,2.3rem);
+  font-weight:600; line-height:1.08;
+}
+.section-head p{
+  color:var(--ink-soft); line-height:1.7; max-width:46ch; align-self:end;
+}
+
+/* Filter */
+.filter-group{
+  display:flex;
+  gap:.5rem;
+  flex-wrap:wrap;
+  margin-bottom:2rem;
+}
+.filter-group button{
+  font-family:var(--f-body);
+  font-size:.78rem;
+  font-weight:500;
+  padding:.4rem 1.2rem;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--ink-soft);
+  border-radius:100px;
+  cursor:pointer;
+  transition: all .18s ease;
+}
+.filter-group button:hover{
+  border-color:var(--accent);
+  color:var(--ink);
+}
+.filter-group button.active{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:var(--paper);
+}
+
+/* Gallery Masonry */
+.gallery-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:1.2rem;
+}
+.gallery-item{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+  transition: all .25s ease;
+}
+.gallery-item:hover{
+  border-color:var(--accent);
+  transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(255,90,31,.08);
+}
+.gallery-item .thumb{
+  width:100%;
+  aspect-ratio: 16/10;
+  overflow:hidden;
+  background:var(--line);
+}
+.gallery-item .thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition: transform .3s ease;
+}
+.gallery-item:hover .thumb img{
+  transform:scale(1.03);
+}
+.gallery-item .info{
+  padding:1rem 1.2rem 1.2rem;
+}
+.gallery-item .info .badge{
+  font-family:var(--f-mono);
+  font-size:.6rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--accent);
+  background:var(--accent-tint);
+  padding:.15rem .6rem;
+  border-radius:4px;
+  display:inline-block;
+  margin-bottom:.4rem;
+}
+.gallery-item .info h3{
+  font-size:1rem;
+  font-weight:600;
+  margin-bottom:.2rem;
+}
+.gallery-item .info .date{
+  font-family:var(--f-mono);
+  font-size:.68rem;
+  color:var(--ink-faint);
+}
+
+/* Achievements */
+.achievement-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:1.2rem;
+}
+.achievement-card{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:1.5rem 1.2rem;
+  text-align:center;
+  transition: all .2s ease;
+}
+.achievement-card:hover{
+  border-color:var(--accent);
+  transform:translateY(-2px);
+}
+.achievement-card .icon{
+  font-size:2.2rem;
+  margin-bottom:.5rem;
+}
+.achievement-card .year{
+  font-family:var(--f-mono);
+  font-size:.65rem;
+  color:var(--accent);
+}
+.achievement-card h3{
+  font-size:.95rem;
+  font-weight:600;
+  margin:.3rem 0 .2rem;
+}
+.achievement-card p{
+  color:var(--ink-soft);
+  font-size:.8rem;
+  line-height:1.6;
+}
+
+/* ============================================================
+   FOOTER — SAME AS MAIN
+   ============================================================ */
+footer{ background:var(--ink); color:rgba(247,246,243,0.55); padding: 3rem 0 1.5rem; }
+.f-inner{ max-width:var(--max); margin:0 auto; padding:0 2rem; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2.5rem; }
+footer h4{ font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase; letter-spacing:.1em; color:rgba(247,246,243,0.3); margin-bottom:.9rem; }
+footer a{ display:block; text-decoration:none; color:rgba(247,246,243,0.55); font-size:.85rem; margin-bottom:.5rem; }
+footer a:hover{ color:var(--accent); }
+footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,243,0.4); }
+.f-bottom{ max-width:var(--max); margin:2rem auto 0; padding:1.2rem 2rem 0; border-top:1px solid rgba(247,246,243,0.1); display:flex; justify-content:space-between; font-family:var(--f-mono); font-size:.68rem; color:rgba(247,246,243,0.25); flex-wrap:wrap; gap:.5rem; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px){
+  .nav-links, .nav-cta, .status-pill{ display:none; }
+  .menu-toggle{ display:block; }
+  .section-head{ grid-template-columns:1fr; gap:1.2rem; }
+  .gallery-grid{ grid-template-columns:1fr; max-width:480px; margin:0 auto; }
+  .achievement-grid{ grid-template-columns:1fr 1fr; }
+  .f-inner{ grid-template-columns:1fr; }
+}
+@media (max-width: 500px){
+  .achievement-grid{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index-redesign.html" class="brand">
+      <div class="mark"><img src="formula.png" alt="FORMULA Logo" /></div>
+      <div>
+        <div class="name">FORMULA</div>
+        <div class="sub">SMAN 1 MOJOSARI</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index-redesign.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="classes.html">Classes</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <div class="status-pill"><span class="status-dot"></span> STATUS: ONLINE</div>
+      <a href="login.html" class="btn btn-ghost">Masuk</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScH8Oel0L4_xAGUkQriMvJZI5JbleQSDMCwpKVkSIzxg14u2A/viewform" class="btn btn-solid">Daftar</a>
+    </div>
+    <button class="menu-toggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- ============ PAGE HEADER ============ -->
+<header class="page-header">
+  <div class="wrap">
+    <div class="tag">10.0.0.3 — gallery</div>
+    <h1>FORMULA<br/><span class="dim">Galeri Kegiatan</span></h1>
+    <div class="subhead">SMAN 1 Mojosari — Mojokerto</div>
+    <p>Dokumentasi workshop, kompetisi, dan momen-momen berharga selama perjalanan FORMULA.</p>
+  </div>
+</header>
+
+<!-- ============ GALLERY SECTION ============ -->
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">10.0.0.4 — dokumentasi</div>
+      <h2>Kegiatan &amp; momen</h2>
+      <p>Setiap foto adalah bukti bahwa belajar di FORMULA bukan cuma teori — tapi kerja nyata dan kolaborasi.</p>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-group">
+      <button class="active">Semua</button>
+      <button>Workshop</button>
+      <button>Kompetisi</button>
+      <button>Proyek</button>
+      <button>Lab</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80" alt="Workshop coding" loading="lazy" />
+        </div>
+        <div class="info">
+          <span class="badge">Workshop</span>
+          <h3>Belajar JavaScript Dasar</h3>
+          <span class="date">Februari 2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Desain grafis" loading="lazy" />
+        </div>
+        <div class="info">
+          <span class="badge">Proyek</span>
+          <h3>Desain Logo Angkatan</h3>
+          <span class="date">Januari 2026</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80" alt="Kompetisi" loading="lazy" />
+        </div>
+        <div class="info">
+          <span class="badge">Kompetisi</span>
+          <h3>LKS Web Technology 2025</h3>
+          <span class="date">November 2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1575089976121-8ed7b2a54265?w=600&q=80" alt="Animasi" loading="lazy" />
+        </div>
+        <div class="info">
+          <span class="badge">Workshop</span>
+          <h3>Animasi 2D dengan After Effects</h3>
+          <span class="date">Oktober 2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="Riset UI/UX" loading="lazy" />
+        </div>
+        <div class="info">
+          <span class="badge">Proyek</span>
+          <h3>UI/UX Design Aplikasi Sekolah</h3>
+          <span class="date">September 2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=600&q=80" alt="Fotografi" loading="lazy" />
+        </div>
+        <div class="info">
+          <span class="badge">Lab</span>
+          <h3>Praktek Fotografi Produk</h3>
+          <span class="date">Agustus 2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="Kerja tim" loading="lazy" />
+        </div>
+        <div class="info">
+          <span class="badge">Workshop</span>
+          <h3>Kolaborasi Proyek Website</h3>
+          <span class="date">Juli 2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt="Server" loading="lazy" />
+        </div>
+        <div class="info">
+          <span class="badge">Lab</span>
+          <h3>Setup Server &amp; Deployment</h3>
+          <span class="date">Juni 2025</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&q=80" alt="Presentasi" loading="lazy" />
+        </div>
+        <div class="info">
+          <span class="badge">Kompetisi</span>
+          <h3>Presentasi Final Proyek</h3>
+          <span class="date">Mei 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACHIEVEMENTS ============ -->
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">10.0.0.5 — prestasi</div>
+      <h2>Penghargaan &amp; pencapaian</h2>
+      <p>Jejak prestasi yang sudah diraih oleh anggota FORMULA di berbagai ajang.</p>
+    </div>
+
+    <div class="achievement-grid">
+      <div class="achievement-card">
+        <div class="icon">🥇</div>
+        <div class="year">2025</div>
+        <h3>LKS Web Technology</h3>
+        <p>Juara 1 bidang Web Technology tingkat Kabupaten.</p>
+      </div>
+      <div class="achievement-card">
+        <div class="icon">🏆</div>
+        <div class="year">2024</div>
+        <h3>LKS Desain Grafis</h3>
+        <p>Juara 2 bidang Desain Grafis tingkat Provinsi.</p>
+      </div>
+      <div class="achievement-card">
+        <div class="icon">🥈</div>
+        <div class="year">2024</div>
+        <h3>Kompetisi UI/UX</h3>
+        <p>Juara 2 Lomba UI/UX Design se-Jawa Timur.</p>
+      </div>
+      <div class="achievement-card">
+        <div class="icon">⭐</div>
+        <div class="year">2023</div>
+        <h3>Best Extracurricular</h3>
+        <p>Ekskul terbaik SMAN 1 Mojosari bidang teknologi &amp; kreatif.</p>
+      </div>
+      <div class="achievement-card">
+        <div class="icon">🥉</div>
+        <div class="year">2023</div>
+        <h3>LKS Multimedia</h3>
+        <p>Juara 3 bidang Multimedia tingkat Kabupaten.</p>
+      </div>
+      <div class="achievement-card">
+        <div class="icon">📱</div>
+        <div class="year">2022</div>
+        <h3>Hackathon Sekolah</h3>
+        <p>Juara 1 Hackathon antar sekolah se-Mojokerto.</p>
+      </div>
+      <div class="achievement-card">
+        <div class="icon">🎨</div>
+        <div class="year">2022</div>
+        <h3>Lomba Poster Digital</h3>
+        <p>Juara favorit Lomba Poster Digital tingkat nasional.</p>
+      </div>
+      <div class="achievement-card">
+        <div class="icon">🌐</div>
+        <div class="year">2021</div>
+        <h3>Website Sekolah</h3>
+        <p>Peluncuran website resmi SMAN 1 Mojosari oleh anggota FORMULA.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section" style="border-bottom:none; padding:3rem 0 1rem;">
+  <div class="wrap" style="text-align:center;">
+    <div class="tag" style="justify-content:center;">10.0.0.6 — ikut</div>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem); font-weight:600; margin-bottom:1rem;">Mau jadi bagian dari galeri berikutnya?</h2>
+    <p style="color:var(--ink-soft); margin-bottom:1.8rem;">Karya kamu berikutnya mungkin ada di sini.</p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="classes.html" class="btn">Lihat Program</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScH8Oel0L4_xAGUkQriMvJZI5JbleQSDMCwpKVkSIzxg14u2A/viewform" class="btn btn-solid">Daftar Sekarang →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="f-inner">
+    <div>
+      <div style="display:flex; align-items:center; gap:.7rem; margin-bottom:1rem;">
+        <div class="mark" style="border-color:rgba(247,246,243,.3); color:#F7F6F3; overflow:hidden; border-radius:4px; padding:0;">
+          <img src="formula.png" alt="FORMULA Logo" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div style="color:#F7F6F3; font-family:var(--f-display); font-weight:700; font-size:.95rem;">FORMULA</div>
+      </div>
+      <p>Komunitas teknologi Informatika dan Multimedia — mencetak talenta kreatif digital unggul dari SMAN 1 Mojosari.</p>
+    </div>
+    <div>
+      <h4>Navigasi</h4>
+      <a href="index-redesign.html">Home</a>
+      <a href="about.html">Tentang</a>
+      <a href="gallery.html">Galeri</a>
+      <a href="contact.html">Kontak</a>
+    </div>
+    <div>
+      <h4>Program</h4>
+      <a href="web-development.html">Web Development</a>
+      <a href="desain-grafis.html">Desain Grafis</a>
+      <a href="classes.html">Semua Program →</a>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2026 FORMULA · SMAN 1 MOJOSARI</span>
+    <span>NODE: MOJOSARI-01 / STATUS: ONLINE</span>
+  </div>
+</footer>
+
+<script>
+// Filter functionality
+document.querySelectorAll('.filter-group button').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-group button').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    // Simple filter simulation - could be enhanced with real filtering
+    const filter = this.textContent;
+    const items = document.querySelectorAll('.gallery-item');
+    items.forEach(item => {
+      const badge = item.querySelector('.badge')?.textContent || '';
+      if (filter === 'Semua' || badge === filter) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>

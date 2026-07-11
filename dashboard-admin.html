@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard Admin — FORMULA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper: #F7F6F3; --paper-2: #FFFFFF; --ink: #14151A;
+  --ink-soft: #5B5D66; --ink-faint: #9A9CA3;
+  --line: #E2E0DA; --line-strong: #CFCCC4;
+  --accent: #FF5A1F; --accent-tint: #FFE7DA;
+  --status: #16A34A;
+  --f-display: 'Space Grotesk', sans-serif;
+  --f-body: 'Inter', sans-serif;
+  --f-mono: 'IBM Plex Mono', monospace;
+  --max: 1120px;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{
+  font-family: var(--f-body);
+  background: var(--paper);
+  color: var(--ink);
+  min-height:100vh;
+}
+a{ color:inherit; text-decoration:none; }
+img{ display:block; }
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 2rem; }
+.mono{ font-family:var(--f-mono); }
+
+.nav{
+  position:sticky; top:0; z-index:50;
+  background: rgba(247,246,243,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:var(--max); margin:0 auto; padding:1rem 2rem;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.brand{ display:flex; align-items:center; gap:.7rem; }
+.brand .mark{
+  width:34px; height:34px; overflow:hidden; border-radius:4px;
+}
+.brand .mark img{ width:100%; height:100%; object-fit:cover; }
+.brand .name{
+  font-family:var(--f-display); font-weight:700; font-size:.95rem; line-height:1.15;
+}
+.brand .sub{
+  font-family:var(--f-mono); font-size:.6rem; color:var(--ink-soft); letter-spacing:.05em;
+}
+.nav-cta{ display:flex; align-items:center; gap:.9rem; }
+.btn-logout{
+  background:transparent; border:1px solid #ef4444; color:#ef4444;
+  padding:.4rem 1rem; border-radius:6px; font-weight:600; font-size:.78rem;
+  cursor:pointer; transition: all .18s ease;
+}
+.btn-logout:hover{ background:#ef4444; color:white; }
+
+.dashboard-header{ padding:2.5rem 0 1.5rem; border-bottom:1px solid var(--line); }
+.dashboard-header h1{
+  font-family:var(--f-display); font-size:clamp(1.8rem,3vw,2.4rem);
+  font-weight:600; letter-spacing:-0.02em;
+}
+.dashboard-header h1 span{ color:var(--accent); }
+.dashboard-header .subhead{ color:var(--ink-soft); font-size:.95rem; margin-top:.3rem; }
+
+.section{ padding:2.5rem 0; border-bottom:1px solid var(--line); }
+.section:last-of-type{ border-bottom:none; }
+.section-head{
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem;
+}
+.section-head h2{
+  font-family:var(--f-display); font-size:1.2rem; font-weight:600;
+}
+.section-head .tag{
+  font-family:var(--f-mono); font-size:.65rem; color:var(--ink-faint);
+}
+.section-head .btn-add{
+  font-family:var(--f-body); font-weight:600; font-size:.78rem;
+  padding:.4rem 1rem; background:var(--accent); color:var(--paper-2);
+  border:none; border-radius:6px; cursor:pointer;
+}
+
+.stats-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem;
+}
+.stat-card{
+  background:var(--paper-2); border:1px solid var(--line); border-radius:8px;
+  padding:1.2rem; text-align:center;
+}
+.stat-card .number{
+  font-family:var(--f-display); font-size:1.8rem; font-weight:700; color:var(--accent);
+}
+.stat-card .label{ color:var(--ink-soft); font-size:.82rem; margin-top:.2rem; }
+
+.table-wrap{ overflow-x:auto; }
+table{
+  width:100%; border-collapse:collapse;
+  background:var(--paper-2); border-radius:8px; overflow:hidden;
+}
+th, td{
+  padding:.8rem 1rem; text-align:left; font-size:.85rem;
+  border-bottom:1px solid var(--line);
+}
+th{
+  font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--ink-faint); background:var(--paper);
+}
+td{ color:var(--ink-soft); }
+td .badge{
+  font-family:var(--f-mono); font-size:.6rem; text-transform:uppercase;
+  padding:.15rem .5rem; border-radius:4px;
+}
+td .badge.admin{ background:#fef3c7; color:#d97706; }
+td .badge.member{ background:#dbeafe; color:#2563eb; }
+td .btn-edit{
+  background:transparent; border:1px solid var(--line);
+  padding:.2rem .6rem; border-radius:4px; font-size:.7rem;
+  cursor:pointer; margin-right:.3rem;
+}
+td .btn-delete{
+  background:transparent; border:1px solid #ef4444; color:#ef4444;
+  padding:.2rem .6rem; border-radius:4px; font-size:.7rem;
+  cursor:pointer;
+}
+
+footer{ background:var(--ink); color:rgba(247,246,243,0.55); padding:2.5rem 0 1.5rem; margin-top:2rem; }
+.f-inner{ max-width:var(--max); margin:0 auto; padding:0 2rem; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2.5rem; }
+footer h4{
+  font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase;
+  letter-spacing:.1em; color:rgba(247,246,243,0.3); margin-bottom:.9rem;
+}
+footer a{
+  display:block; color:rgba(247,246,243,0.55); font-size:.85rem; margin-bottom:.5rem;
+}
+footer a:hover{ color:var(--accent); }
+footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,243,0.4); }
+.f-bottom{
+  max-width:var(--max); margin:2rem auto 0; padding:1.2rem 2rem 0;
+  border-top:1px solid rgba(247,246,243,0.1);
+  display:flex; justify-content:space-between;
+  font-family:var(--f-mono); font-size:.68rem; color:rgba(247,246,243,0.25);
+  flex-wrap:wrap; gap:.5rem;
+}
+
+.modal{
+  display:none; position:fixed; inset:0; z-index:999;
+  background:rgba(0,0,0,0.4); align-items:center; justify-content:center;
+}
+.modal.show{ display:flex; }
+.modal-content{
+  background:var(--paper-2); border-radius:12px; padding:2rem;
+  max-width:500px; width:100%; max-height:80vh; overflow-y:auto;
+}
+.modal-content h3{
+  font-family:var(--f-display); font-size:1.2rem; font-weight:600; margin-bottom:1rem;
+}
+.modal-content label{
+  font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--ink-faint); display:block; margin:.8rem 0 .3rem;
+}
+.modal-content input, .modal-content select{
+  width:100%; padding:.6rem .8rem;
+  font-family:var(--f-body); font-size:.85rem;
+  background:var(--paper); border:1px solid var(--line); border-radius:6px;
+  outline:none;
+}
+.modal-content .btn-save{
+  margin-top:1.2rem; padding:.7rem 1.5rem;
+  background:var(--accent); color:var(--paper-2);
+  border:none; border-radius:6px; font-weight:600; cursor:pointer;
+}
+.modal-content .btn-cancel{
+  margin-top:1.2rem; margin-left:.5rem; padding:.7rem 1.5rem;
+  background:transparent; border:1px solid var(--line); border-radius:6px;
+  font-weight:600; cursor:pointer;
+}
+
+.toast{
+  position:fixed; top:1.5rem; right:1.5rem;
+  padding:.8rem 1.2rem; border-radius:8px; font-weight:500; font-size:.85rem;
+  display:none; align-items:center; gap:.6rem; z-index:999;
+  box-shadow:0 4px 16px rgba(0,0,0,0.08); max-width:360px;
+}
+.toast.show{ display:flex; }
+.toast.success{ background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
+.toast.error{ background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
+
+@media (max-width: 900px){
+  .stats-grid{ grid-template-columns:1fr 1fr; }
+  .f-inner{ grid-template-columns:1fr; }
+}
+@media (max-width: 500px){ .stats-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <div class="mark"><img src="formula.png" alt="FORMULA Logo" /></div>
+      <div>
+        <div class="name">FORMULA</div>
+        <div class="sub">SMAN 1 MOJOSARI</div>
+      </div>
+    </a>
+    <div class="nav-cta">
+      <span style="font-family:var(--f-mono); font-size:.7rem; color:var(--ink-soft);" id="userDisplay">Admin</span>
+      <button class="btn-logout" id="logoutBtn">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<header class="dashboard-header">
+  <div class="wrap">
+    <h1>Dashboard <span>Admin</span></h1>
+    <p class="subhead" id="welcomeText">Kelola anggota dan program FORMULA</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Statistik</h2>
+      <span class="tag">// overview</span>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="number" id="totalAnggota">0</div>
+        <div class="label">Total Anggota</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="totalAdmin">0</div>
+        <div class="label">Admin</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="totalProgram">0</div>
+        <div class="label">Program Aktif</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="totalProyek">0</div>
+        <div class="label">Proyek Selesai</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Daftar Anggota</h2>
+      <div>
+        <button class="btn-add" id="btnTambahAnggota">+ Tambah</button>
+        <span class="tag">// manage</span>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Minat</th>
+            <th>Role</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="memberTableBody">
+          <tr><td colspan="5" style="text-align:center; color:var(--ink-faint);">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Tambah/Edit -->
+<div class="modal" id="memberModal">
+  <div class="modal-content">
+    <h3 id="modalTitle">Tambah Anggota</h3>
+    <form id="memberForm">
+      <label>Nama Lengkap</label>
+      <input type="text" id="formNama" required />
+      <label>Email</label>
+      <input type="email" id="formEmail" required />
+      <label>Password</label>
+      <input type="password" id="formPassword" placeholder="Minimal 6 karakter" />
+      <label>Minat</label>
+      <select id="formMinat">
+        <option value="Web Development">Web Development</option>
+        <option value="Desain Grafis">Desain Grafis</option>
+        <option value="Animasi & Multimedia">Animasi & Multimedia</option>
+        <option value="UI/UX Design">UI/UX Design</option>
+        <option value="Programming">Programming</option>
+        <option value="Fotografi & Videografi">Fotografi & Videografi</option>
+      </select>
+      <label>Role</label>
+      <select id="formRole">
+        <option value="member">Anggota</option>
+        <option value="admin">Admin</option>
+      </select>
+      <div style="margin-top:1.2rem;">
+        <button type="submit" class="btn-save" id="formSubmit">Simpan</button>
+        <button type="button" class="btn-cancel" id="formCancel">Batal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast"><span id="toastIcon">✅</span><span id="toastText">Berhasil!</span></div>
+
+<footer>
+  <div class="f-inner">
+    <div>
+      <div style="display:flex; align-items:center; gap:.7rem; margin-bottom:1rem;">
+        <div class="mark" style="border-color:rgba(247,246,243,.3); color:#F7F6F3; overflow:hidden; border-radius:4px; padding:0;">
+          <img src="formula.png" alt="FORMULA Logo" style="width:25%;height:25%;object-fit:cover;" />
+        </div>
+        <div style="color:#F7F6F3; font-family:var(--f-display); font-weight:700; font-size:.95rem;">FORMULA</div>
+      </div>
+      <p>Komunitas teknologi Informatika dan Multimedia — mencetak talenta kreatif digital unggul.</p>
+    </div>
+    <div>
+      <h4>Navigasi</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">Tentang</a>
+      <a href="gallery.html">Galeri</a>
+      <a href="contact.html">Kontak</a>
+    </div>
+    <div>
+      <h4>Program</h4>
+      <a href="#">Web Development</a>
+      <a href="#">Desain Grafis</a>
+      <a href="#">Semua Program →</a>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2026 FORMULA · SMAN 1 MOJOSARI</span>
+    <span>NODE: MOJOSARI-01 / STATUS: ONLINE</span>
+  </div>
+</footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, updateProfile, deleteUser } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+  import { getDatabase, ref, get, set, push, remove, update, child } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_TwXy2y4-ym9jE8VLi297huJJvf1MwBM",        // GANTI
+    authDomain: "formula-7373d.firebaseapp.com",
+    projectId: "formula-7373d",
+    storageBucket: "formula-7373d.firebasestorage.appm",
+    messagingSenderId: "647287637575",
+    appId: "1:647287637575:web:0ac5b158b74247f930d362"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+
+  const userDisplay = document.getElementById('userDisplay');
+  const welcomeText = document.getElementById('welcomeText');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const tableBody = document.getElementById('memberTableBody');
+  const totalAnggota = document.getElementById('totalAnggota');
+  const totalAdmin = document.getElementById('totalAdmin');
+  const totalProgram = document.getElementById('totalProgram');
+  const totalProyek = document.getElementById('totalProyek');
+
+  const modal = document.getElementById('memberModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const form = document.getElementById('memberForm');
+  const formNama = document.getElementById('formNama');
+  const formEmail = document.getElementById('formEmail');
+  const formPassword = document.getElementById('formPassword');
+  const formMinat = document.getElementById('formMinat');
+  const formRole = document.getElementById('formRole');
+  const formSubmit = document.getElementById('formSubmit');
+  const formCancel = document.getElementById('formCancel');
+  const btnTambah = document.getElementById('btnTambahAnggota');
+
+  let editingUid = null;
+
+  function showToast(text, isSuccess = true) {
+    const toast = document.getElementById('toast');
+    toast.className = 'toast show' + (isSuccess ? ' success' : ' error');
+    document.getElementById('toastText').textContent = text;
+    document.getElementById('toastIcon').textContent = isSuccess ? '✅' : '⚠️';
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => { toast.className = 'toast'; }, 4000);
+  }
+
+  async function loadMembers() {
+    try {
+      const snapshot = await get(ref(db, 'users'));
+      if (snapshot.exists()) {
+        const users = snapshot.val();
+        const keys = Object.keys(users);
+        let html = '';
+        let countAnggota = 0, countAdmin = 0;
+
+        keys.forEach(key => {
+          const data = users[key];
+          if (data.role === 'admin') countAdmin++;
+          else countAnggota++;
+
+          html += `
+            <tr>
+              <td><strong>${data.nama || 'Tidak ada'}</strong></td>
+              <td>${data.email || '-'}</td>
+              <td>${data.minat || '-'}</td>
+              <td><span class="badge ${data.role === 'admin' ? 'admin' : 'member'}">${data.role || 'member'}</span></td>
+              <td>
+                <button class="btn-edit" data-uid="${key}">Edit</button>
+                <button class="btn-delete" data-uid="${key}">Hapus</button>
+              </td>
+            </tr>
+          `;
+        });
+
+        tableBody.innerHTML = html || '<tr><td colspan="5" style="text-align:center; color:var(--ink-faint);">Belum ada anggota</td></tr>';
+        totalAnggota.textContent = countAnggota;
+        totalAdmin.textContent = countAdmin;
+        totalProgram.textContent = '5';
+        totalProyek.textContent = '12';
+
+        // Event listeners untuk tombol edit/hapus
+        document.querySelectorAll('.btn-edit').forEach(btn => {
+          btn.addEventListener('click', () => openEditModal(btn.dataset.uid));
+        });
+        document.querySelectorAll('.btn-delete').forEach(btn => {
+          btn.addEventListener('click', () => deleteMember(btn.dataset.uid));
+        });
+      }
+    } catch (error) {
+      console.error('Error loading members:', error);
+    }
+  }
+
+  function openEditModal(uid) {
+    editingUid = uid;
+    modalTitle.textContent = 'Edit Anggota';
+    formSubmit.textContent = 'Update';
+
+    const userRef = ref(db, 'users/' + uid);
+    get(userRef).then(snapshot => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        formNama.value = data.nama || '';
+        formEmail.value = data.email || '';
+        formMinat.value = data.minat || 'Web Development';
+        formRole.value = data.role || 'member';
+        formPassword.placeholder = 'Kosongkan jika tidak diubah';
+        formPassword.value = '';
+        modal.classList.add('show');
+      }
+    });
+  }
+
+  function openAddModal() {
+    editingUid = null;
+    modalTitle.textContent = 'Tambah Anggota';
+    formSubmit.textContent = 'Simpan';
+    form.reset();
+    formPassword.placeholder = 'Minimal 6 karakter';
+    modal.classList.add('show');
+  }
+
+  async function deleteMember(uid) {
+    if (!confirm('Yakin ingin menghapus anggota ini?')) return;
+
+    try {
+      // Hapus dari database
+      await remove(ref(db, 'users/' + uid));
+      showToast('Anggota berhasil dihapus!', true);
+      loadMembers();
+    } catch (error) {
+      console.error('Delete error:', error);
+      showToast('Gagal menghapus anggota.', false);
+    }
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nama = formNama.value.trim();
+    const email = formEmail.value.trim();
+    const password = formPassword.value;
+    const minat = formMinat.value;
+    const role = formRole.value;
+
+    if (!nama || !email) {
+      showToast('Nama dan email harus diisi!', false);
+      return;
+    }
+
+    try {
+      if (editingUid) {
+        // Update existing user
+        const updateData = { nama, email, minat, role };
+        await update(ref(db, 'users/' + editingUid), updateData);
+        showToast('Data anggota berhasil diupdate!', true);
+      } else {
+        // Create new user
+        if (!password || password.length < 6) {
+          showToast('Password minimal 6 karakter!', false);
+          return;
+        }
+        const userCred = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCred.user, { displayName: nama });
+        await set(ref(db, 'users/' + userCred.user.uid), {
+          nama, email, minat, role,
+          programs: 0, projects: 0, certificates: 0,
+          createdAt: new Date().toISOString()
+        });
+        showToast('Anggota berhasil ditambahkan!', true);
+      }
+      modal.classList.remove('show');
+      loadMembers();
+    } catch (error) {
+      console.error('Error:', error);
+      showToast(error.message || 'Terjadi kesalahan.', false);
+    }
+  });
+
+  btnTambah.addEventListener('click', openAddModal);
+  formCancel.addEventListener('click', () => modal.classList.remove('show'));
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('show'); });
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      userDisplay.textContent = user.displayName || 'Admin';
+      welcomeText.textContent = `Selamat datang, ${user.displayName || 'Admin'}!`;
+
+      try {
+        const snapshot = await get(ref(db, 'users/' + user.uid));
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          if (data.role !== 'admin') {
+            window.location.href = 'dashboard-anggota-formula.html';
+          }
+        }
+        loadMembers();
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    } else {
+      window.location.href = 'login.html';
+    }
+  });
+
+  logoutBtn.addEventListener('click', async () => {
+    try {
+      await signOut(auth);
+      showToast('Logout berhasil!', true);
+      setTimeout(() => { window.location.href = 'login.html'; }, 1000);
+    } catch (error) {
+      showToast('Gagal logout.', false);
+    }
+  });
+</script>
+
+</body>
+</html>

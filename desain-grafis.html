@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Desain Grafis — FORMULA SMAN 1 MOJOSARI</title>
+<meta name="description" content="Program Desain Grafis FORMULA — belajar logo, branding, poster, ilustrasi digital, dan UI/UX design dengan tools profesional." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS — SAME AS MAIN
+   ============================================================ */
+:root{
+  --paper:      #F7F6F3;
+  --paper-2:    #FFFFFF;
+  --ink:        #14151A;
+  --ink-soft:   #5B5D66;
+  --ink-faint:  #9A9CA3;
+  --line:       #E2E0DA;
+  --line-strong:#CFCCC4;
+  --accent:     #FF5A1F;
+  --accent-tint:#FFE7DA;
+  --status:     #16A34A;
+
+  --f-display: 'Space Grotesk', sans-serif;
+  --f-body:    'Inter', sans-serif;
+  --f-mono:    'IBM Plex Mono', monospace;
+
+  --max: 1120px;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family: var(--f-body);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+a{ color:inherit; text-decoration:none; }
+img,svg{ display:block; }
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 2rem; }
+.mono{ font-family:var(--f-mono); }
+
+/* eyebrow / IP-style section tag */
+.tag{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-family:var(--f-mono); font-size:.72rem; letter-spacing:.04em;
+  color: var(--accent); text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.tag::before{ content:"//"; color: var(--line-strong); }
+
+h1,h2,h3{ font-family:var(--f-display); letter-spacing:-0.01em; color:var(--ink); }
+
+/* ============================================================
+   NAV — SAME AS MAIN
+   ============================================================ */
+.nav{
+  position:sticky; top:0; z-index:50;
+  background: rgba(247,246,243,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:var(--max); margin:0 auto; padding: 1rem 2rem;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.brand{ display:flex; align-items:center; gap:.7rem; text-decoration:none; }
+.brand .mark{
+  width:34px; height:34px;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+  border-radius:4px;
+  padding:0;
+}
+.brand .mark img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.brand .name{ font-family:var(--f-display); font-weight:700; font-size:.95rem; line-height:1.15; }
+.brand .sub{ font-family:var(--f-mono); font-size:.6rem; color:var(--ink-soft); letter-spacing:.05em; }
+
+.status-pill{
+  display:none;
+  align-items:center; gap:.5rem;
+  font-family:var(--f-mono); font-size:.65rem; color:var(--ink-soft);
+  border:1px solid var(--line); padding:.3rem .7rem;
+}
+.status-dot{
+  width:6px; height:6px; border-radius:50%; background:var(--status);
+  box-shadow:0 0 0 0 rgba(22,163,74,.5);
+  animation: ping 2.4s ease-out infinite;
+}
+@keyframes ping{
+  0%{ box-shadow:0 0 0 0 rgba(22,163,74,.45); }
+  70%{ box-shadow:0 0 0 6px rgba(22,163,74,0); }
+  100%{ box-shadow:0 0 0 0 rgba(22,163,74,0); }
+}
+
+.nav-links{ display:flex; align-items:center; gap:1.9rem; }
+.nav-links a{
+  text-decoration:none; font-size:.85rem; color:var(--ink-soft);
+  position:relative; padding-bottom:2px;
+}
+.nav-links a:hover{ color:var(--ink); }
+.nav-links a.active{ color:var(--ink); }
+.nav-links a.active::after{
+  content:""; position:absolute; left:0; right:0; bottom:-4px; height:2px; background:var(--accent);
+}
+.nav-cta{ display:flex; align-items:center; gap:.9rem; }
+.btn{
+  font-family:var(--f-body); font-weight:600; font-size:.82rem;
+  text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  padding:.65rem 1.3rem; border:1.5px solid var(--ink); color:var(--ink);
+  transition: all .18s ease;
+}
+.btn:hover{ background:var(--ink); color:var(--paper); }
+.btn-solid{ background:var(--accent); border-color:var(--accent); color:var(--ink); }
+.btn-solid:hover{ background:#e0500f; border-color:#e0500f; color:var(--ink); }
+.btn-ghost{ border-color:transparent; padding:.65rem .4rem; }
+.btn-ghost:hover{ background:transparent; color:var(--ink); text-decoration:underline; }
+
+.menu-toggle{ display:none; background:none; border:1px solid var(--ink); width:38px; height:38px; font-size:1.1rem; cursor:pointer; }
+
+:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.page-header{
+  padding: 5rem 0 3rem;
+  border-bottom:1px solid var(--line);
+}
+.page-header .breadcrumb{
+  font-family:var(--f-mono);
+  font-size:.7rem;
+  color:var(--ink-faint);
+  margin-bottom:.8rem;
+}
+.page-header .breadcrumb a{ color:var(--accent); }
+.page-header .breadcrumb a:hover{ text-decoration:underline; }
+.page-header h1{
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight:700; line-height:0.92; letter-spacing:-0.03em;
+}
+.page-header h1 .dim{ color: var(--ink-faint); }
+.page-header .subhead{
+  font-family:var(--f-mono); font-size:.85rem; color:var(--ink-soft);
+  margin-top:1rem; letter-spacing:.02em;
+}
+.page-header p{
+  font-size:1.05rem; color:var(--ink-soft); line-height:1.75;
+  max-width:56ch; margin-top:1.2rem;
+}
+.page-header .badge-program{
+  display:inline-block;
+  font-family:var(--f-mono);
+  font-size:.65rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--accent);
+  background:var(--accent-tint);
+  padding:.25rem .8rem;
+  border-radius:100px;
+  margin-top:.8rem;
+}
+
+/* ============================================================
+   PROGRAM CONTENT
+   ============================================================ */
+.section{ padding: 4.5rem 0; border-bottom:1px solid var(--line); }
+.section:last-of-type{ border-bottom:none; }
+
+.section-head{
+  display:grid; grid-template-columns: 1fr 1.6fr; gap:3rem;
+  margin-bottom:2.5rem;
+}
+.section-head h2{
+  font-size:clamp(1.7rem,3.4vw,2.3rem);
+  font-weight:600; line-height:1.08;
+}
+.section-head p{
+  color:var(--ink-soft); line-height:1.7; max-width:46ch; align-self:end;
+}
+
+/* Curriculum Grid */
+.curriculum-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:1.5rem;
+}
+.curriculum-card{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:1.8rem 1.5rem;
+  transition: all .25s ease;
+}
+.curriculum-card:hover{
+  border-color:var(--accent);
+  transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(255,90,31,.08);
+}
+.curriculum-card .level{
+  font-family:var(--f-mono);
+  font-size:.6rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--accent);
+  background:var(--accent-tint);
+  padding:.2rem .6rem;
+  border-radius:4px;
+  display:inline-block;
+  margin-bottom:.8rem;
+}
+.curriculum-card h3{
+  font-size:1.1rem;
+  font-weight:600;
+  margin-bottom:.5rem;
+}
+.curriculum-card ul{
+  list-style:none;
+  padding:0;
+}
+.curriculum-card ul li{
+  color:var(--ink-soft);
+  font-size:.85rem;
+  line-height:1.6;
+  padding:.3rem 0;
+  padding-left:1.2rem;
+  position:relative;
+}
+.curriculum-card ul li::before{
+  content:"›";
+  position:absolute;
+  left:0;
+  color:var(--accent);
+  font-weight:700;
+}
+
+/* Tools */
+.tools-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:1.2rem;
+}
+.tool-item{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:1.5rem;
+  text-align:center;
+  transition: all .2s ease;
+}
+.tool-item:hover{
+  border-color:var(--accent);
+  transform:translateY(-2px);
+}
+.tool-item .icon{
+  font-size:2rem;
+  margin-bottom:.5rem;
+  display:block;
+}
+.tool-item h4{
+  font-size:.9rem;
+  font-weight:600;
+}
+.tool-item p{
+  color:var(--ink-soft);
+  font-size:.78rem;
+  margin-top:.2rem;
+}
+
+/* Portfolio / Projects */
+.portfolio-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:1.2rem;
+}
+.portfolio-item{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+  transition: all .25s ease;
+}
+.portfolio-item:hover{
+  border-color:var(--accent);
+  transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(255,90,31,.08);
+}
+.portfolio-item .preview{
+  width:100%;
+  height:180px;
+  background:var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:3rem;
+  color:var(--ink-faint);
+}
+.portfolio-item .info{
+  padding:1.2rem;
+}
+.portfolio-item .info .year{
+  font-family:var(--f-mono);
+  font-size:.65rem;
+  color:var(--accent);
+}
+.portfolio-item .info h3{
+  font-size:1rem;
+  font-weight:600;
+  margin:.2rem 0;
+}
+.portfolio-item .info p{
+  color:var(--ink-soft);
+  font-size:.82rem;
+  line-height:1.5;
+}
+.portfolio-item .info .badge{
+  font-family:var(--f-mono);
+  font-size:.6rem;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  padding:.15rem .5rem;
+  border-radius:4px;
+  background:var(--accent-tint);
+  color:var(--accent);
+  display:inline-block;
+  margin-top:.4rem;
+}
+
+/* ============================================================
+   FOOTER — SAME AS MAIN
+   ============================================================ */
+footer{ background:var(--ink); color:rgba(247,246,243,0.55); padding: 3rem 0 1.5rem; }
+.f-inner{ max-width:var(--max); margin:0 auto; padding:0 2rem; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2.5rem; }
+footer h4{ font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase; letter-spacing:.1em; color:rgba(247,246,243,0.3); margin-bottom:.9rem; }
+footer a{ display:block; text-decoration:none; color:rgba(247,246,243,0.55); font-size:.85rem; margin-bottom:.5rem; }
+footer a:hover{ color:var(--accent); }
+footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,243,0.4); }
+.f-bottom{ max-width:var(--max); margin:2rem auto 0; padding:1.2rem 2rem 0; border-top:1px solid rgba(247,246,243,0.1); display:flex; justify-content:space-between; font-family:var(--f-mono); font-size:.68rem; color:rgba(247,246,243,0.25); flex-wrap:wrap; gap:.5rem; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px){
+  .nav-links, .nav-cta, .status-pill{ display:none; }
+  .menu-toggle{ display:block; }
+  .section-head{ grid-template-columns:1fr; gap:1.2rem; }
+  .curriculum-grid{ grid-template-columns:1fr; max-width:480px; margin:0 auto; }
+  .tools-grid{ grid-template-columns:1fr 1fr; }
+  .portfolio-grid{ grid-template-columns:1fr; max-width:400px; margin:0 auto; }
+  .f-inner{ grid-template-columns:1fr; }
+}
+@media (max-width: 500px){
+  .tools-grid{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index-redesign.html" class="brand">
+      <div class="mark"><img src="formula.png" alt="FORMULA Logo" /></div>
+      <div>
+        <div class="name">FORMULA</div>
+        <div class="sub">SMAN 1 MOJOSARI</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index-redesign.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="classes.html" class="active">Classes</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <div class="status-pill"><span class="status-dot"></span> STATUS: ONLINE</div>
+      <a href="login.html" class="btn btn-ghost">Masuk</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScH8Oel0L4_xAGUkQriMvJZI5JbleQSDMCwpKVkSIzxg14u2A/viewform" class="btn btn-solid">Daftar</a>
+    </div>
+    <button class="menu-toggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- ============ PAGE HEADER ============ -->
+<header class="page-header">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="classes.html">// programs</a> / desain-grafis</div>
+    <div class="tag">10.0.0.6 — desain</div>
+    <h1>Desain <span class="dim">Grafis</span></h1>
+    <div class="subhead">SMAN 1 Mojosari — Mojokerto</div>
+    <p>Belajar membuat logo, poster, ilustrasi digital, dan antarmuka pengguna. Dari teori warna sampai portofolio profesional — semua dipelajari lewat proyek nyata.</p>
+    <span class="badge-program">🎨 3 level · 10 modul · 6 bulan</span>
+  </div>
+</section>
+
+<!-- ============ CURRICULUM ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">10.0.0.7 — kurikulum</div>
+      <h2>Dari dasar sampai mahir</h2>
+      <p>Setiap level punya proyek akhir yang harus diselesaikan sebelum naik ke level berikutnya.</p>
+    </div>
+    <div class="curriculum-grid">
+      <!-- Level 1 -->
+      <div class="curriculum-card">
+        <span class="level">Level 01 · Dasar</span>
+        <h3>Fundamental Desain</h3>
+        <ul>
+          <li>Teori Warna &amp; Tipografi</li>
+          <li>Komposisi &amp; Layout</li>
+          <li>Pengenalan Adobe Photoshop</li>
+          <li>Pengenalan Adobe Illustrator</li>
+          <li>Dasar-dasar Canva</li>
+          <li>Proyek: Poster &amp; Kartu Nama</li>
+        </ul>
+      </div>
+      <!-- Level 2 -->
+      <div class="curriculum-card">
+        <span class="level">Level 02 · Menengah</span>
+        <h3>Desain Visual &amp; Branding</h3>
+        <ul>
+          <li>Logo &amp; Identitas Brand</li>
+          <li>Desain Poster &amp; Banner</li>
+          <li>Ilustrasi Digital Dasar</li>
+          <li>Fotografi Dasar &amp; Editing</li>
+          <li>Social Media Design</li>
+          <li>Proyek: Branding Sederhana</li>
+        </ul>
+      </div>
+      <!-- Level 3 -->
+      <div class="curriculum-card">
+        <span class="level">Level 03 · Mahir</span>
+        <h3>UI/UX &amp; Desain Profesional</h3>
+        <ul>
+          <li>UX Research &amp; User Flow</li>
+          <li>UI Design dengan Figma</li>
+          <li>Prototyping &amp; Testing</li>
+          <li>Motion Graphic Dasar</li>
+          <li>Portofolio &amp; Presentasi</li>
+          <li>Proyek: Aplikasi Mobile UI</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOOLS ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">10.0.0.8 — tools</div>
+      <h2>Software yang dipakai</h2>
+      <p>Tools desain profesional yang digunakan di industri kreatif.</p>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-item">
+        <span class="icon">🎨</span>
+        <h4>Adobe Photoshop</h4>
+        <p>Manipulasi &amp; editing gambar</p>
+      </div>
+      <div class="tool-item">
+        <span class="icon">✏️</span>
+        <h4>Adobe Illustrator</h4>
+        <p>Desain vektor &amp; logo</p>
+      </div>
+      <div class="tool-item">
+        <span class="icon">📐</span>
+        <h4>Figma</h4>
+        <p>UI/UX design &amp; prototyping</p>
+      </div>
+      <div class="tool-item">
+        <span class="icon">🖌️</span>
+        <h4>Canva</h4>
+        <p>Desain cepat &amp; sosial media</p>
+      </div>
+      <div class="tool-item">
+        <span class="icon">🎬</span>
+        <h4>Adobe Premiere</h4>
+        <p>Editing video dasar</p>
+      </div>
+      <div class="tool-item">
+        <span class="icon">📸</span>
+        <h4>Adobe Lightroom</h4>
+        <p>Color grading &amp; editing foto</p>
+      </div>
+      <div class="tool-item">
+        <span class="icon">🎞️</span>
+        <h4>After Effects</h4>
+        <p>Motion graphic dasar</p>
+      </div>
+      <div class="tool-item">
+        <span class="icon">🖍️</span>
+        <h4>Procreate</h4>
+        <p>Ilustrasi digital</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTFOLIO ============ -->
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">10.0.0.9 — portofolio</div>
+      <h2>Karya anggota</h2>
+      <p>Hasil karya desain dari anggota FORMULA yang sudah dipublikasikan.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <div class="preview">🎨</div>
+        <div class="info">
+          <span class="year">2026</span>
+          <h3>Logo SMAN 1 Mojosari</h3>
+          <p>Redesign logo sekolah dengan pendekatan modern dan minimalis.</p>
+          <span class="badge">Logo &amp; Branding</span>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <div class="preview">🖌️</div>
+        <div class="info">
+          <span class="year">2025</span>
+          <h3>Poster Dies Natalis</h3>
+          <p>Poster acara ulang tahun sekolah dengan tema budaya lokal.</p>
+          <span class="badge">Poster Design</span>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <div class="preview">📱</div>
+        <div class="info">
+          <span class="year">2025</span>
+          <h3>UI Aplikasi Sekolah</h3>
+          <p>Desain antarmuka aplikasi mobile untuk informasi akademik.</p>
+          <span class="badge">UI/UX Design</span>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <div class="preview">📸</div>
+        <div class="info">
+          <span class="year">2024</span>
+          <h3>Branding UMKM Lokal</h3>
+          <p>Identitas visual untuk usaha kecil di sekitar Mojosari.</p>
+          <span class="badge">Branding</span>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <div class="preview">✏️</div>
+        <div class="info">
+          <span class="year">2024</span>
+          <h3>Ilustrasi Digital</h3>
+          <p>Ilustrasi karakter dengan teknik digital painting.</p>
+          <span class="badge">Ilustrasi</span>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <div class="preview">🎬</div>
+        <div class="info">
+          <span class="year">2024</span>
+          <h3>Motion Graphic Promosi</h3>
+          <p>Animasi promosi untuk acara sekolah dengan After Effects.</p>
+          <span class="badge">Motion Graphic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section" style="border-bottom:none; padding:3rem 0 1rem;">
+  <div class="wrap" style="text-align:center;">
+    <div class="tag" style="justify-content:center;">10.0.0.10 — gabung</div>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem); font-weight:600; margin-bottom:1rem;">Mau jadi desainer grafis?</h2>
+    <p style="color:var(--ink-soft); margin-bottom:1.8rem;">Mulai dari nol, bikin karya desain pertamamu dalam 3 bulan.</p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="classes.html" class="btn">Lihat Program Lain</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScH8Oel0L4_xAGUkQriMvJZI5JbleQSDMCwpKVkSIzxg14u2A/viewform" class="btn btn-solid">Daftar Sekarang →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="f-inner">
+    <div>
+      <div style="display:flex; align-items:center; gap:.7rem; margin-bottom:1rem;">
+        <div class="mark" style="border-color:rgba(247,246,243,.3); color:#F7F6F3; overflow:hidden; border-radius:4px; padding:0;">
+          <img src="formula.png" alt="FORMULA Logo" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div style="color:#F7F6F3; font-family:var(--f-display); font-weight:700; font-size:.95rem;">FORMULA</div>
+      </div>
+      <p>Komunitas teknologi Informatika dan Multimedia — mencetak talenta kreatif digital unggul dari SMAN 1 Mojosari.</p>
+    </div>
+    <div>
+      <h4>Navigasi</h4>
+      <a href="index-redesign.html">Home</a>
+      <a href="about.html">Tentang</a>
+      <a href="gallery.html">Galeri</a>
+      <a href="contact.html">Kontak</a>
+    </div>
+    <div>
+      <h4>Program</h4>
+      <a href="web-development.html">Web Development</a>
+      <a href="desain-grafis.html">Desain Grafis</a>
+      <a href="classes.html">Semua Program →</a>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2026 FORMULA · SMAN 1 MOJOSARI</span>
+    <span>NODE: MOJOSARI-01 / STATUS: ONLINE</span>
+  </div>
+</footer>
+
+</body>
+</html>

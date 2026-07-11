@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — FORMULA SMAN 1 MOJOSARI</title>
+<meta name="description" content="Hubungi FORMULA — ekstrakurikuler Informatika dan Multimedia SMAN 1 Mojosari." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS — SAME AS MAIN
+   ============================================================ */
+:root{
+  --paper:      #F7F6F3;
+  --paper-2:    #FFFFFF;
+  --ink:        #14151A;
+  --ink-soft:   #5B5D66;
+  --ink-faint:  #9A9CA3;
+  --line:       #E2E0DA;
+  --line-strong:#CFCCC4;
+  --accent:     #FF5A1F;
+  --accent-tint:#FFE7DA;
+  --status:     #16A34A;
+
+  --f-display: 'Space Grotesk', sans-serif;
+  --f-body:    'Inter', sans-serif;
+  --f-mono:    'IBM Plex Mono', monospace;
+
+  --max: 1120px;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family: var(--f-body);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+a{ color:inherit; text-decoration:none; }
+img,svg{ display:block; }
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 2rem; }
+.mono{ font-family:var(--f-mono); }
+
+/* eyebrow / IP-style section tag */
+.tag{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-family:var(--f-mono); font-size:.72rem; letter-spacing:.04em;
+  color: var(--accent); text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.tag::before{ content:"//"; color: var(--line-strong); }
+
+h1,h2,h3{ font-family:var(--f-display); letter-spacing:-0.01em; color:var(--ink); }
+
+/* ============================================================
+   NAV — SAMA PERSIS DENGAN INDEX, ABOUT, CLASSES
+   ============================================================ */
+.nav{
+  position:sticky; top:0; z-index:50;
+  background: rgba(247,246,243,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:var(--max); margin:0 auto; padding: 1rem 2rem;
+  display:flex; align-items:center; justify-content:space-between;
+  position:relative;
+}
+.brand{ display:flex; align-items:center; gap:.7rem; text-decoration:none; }
+.brand .mark{
+  width:34px; height:34px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--f-mono); font-weight:500; font-size:.68rem;
+  color:var(--ink);
+  overflow:hidden;
+  border-radius:4px;
+  padding:0;
+}
+.brand .mark img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.brand .name{ font-family:var(--f-display); font-weight:700; font-size:.95rem; line-height:1.15; }
+.brand .sub{ font-family:var(--f-mono); font-size:.6rem; color:var(--ink-soft); letter-spacing:.05em; }
+
+.status-pill{
+  display:flex;
+  align-items:center; gap:.5rem;
+  font-family:var(--f-mono); font-size:.65rem; color:var(--ink-soft);
+  border:1px solid var(--line); padding:.3rem .7rem;
+}
+.status-dot{
+  width:6px; height:6px; border-radius:50%; background:var(--status);
+  box-shadow:0 0 0 0 rgba(22,163,74,.5);
+  animation: ping 2.4s ease-out infinite;
+}
+@keyframes ping{
+  0%{ box-shadow:0 0 0 0 rgba(22,163,74,.45); }
+  70%{ box-shadow:0 0 0 6px rgba(22,163,74,0); }
+  100%{ box-shadow:0 0 0 0 rgba(22,163,74,0); }
+}
+
+.nav-links{ display:flex; align-items:center; gap:1.9rem; }
+.nav-links a{
+  text-decoration:none; font-size:.85rem; color:var(--ink-soft);
+  position:relative; padding-bottom:2px;
+}
+.nav-links a:hover{ color:var(--ink); }
+.nav-links a.active{ color:var(--ink); }
+.nav-links a.active::after{
+  content:""; position:absolute; left:0; right:0; bottom:-4px; height:2px; background:var(--accent);
+}
+.nav-cta{ display:flex; align-items:center; gap:.9rem; }
+.btn{
+  font-family:var(--f-body); font-weight:600; font-size:.82rem;
+  text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
+  padding:.65rem 1.3rem; border:1.5px solid var(--ink); color:var(--ink);
+  transition: all .18s ease;
+}
+.btn:hover{ background:var(--ink); color:var(--paper); }
+.btn-solid{ background:var(--accent); border-color:var(--accent); color:var(--ink); }
+.btn-solid:hover{ background:#e0500f; border-color:#e0500f; color:var(--ink); }
+.btn-ghost{ border-color:transparent; padding:.65rem .4rem; }
+.btn-ghost:hover{ background:transparent; color:var(--ink); text-decoration:underline; }
+
+.menu-toggle{ display:none; background:none; border:1px solid var(--ink); width:38px; height:38px; font-size:1.1rem; cursor:pointer; }
+
+:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+/* ============================================================
+   MOBILE NAV — SAMA PERSIS DENGAN HALAMAN LAIN
+   ============================================================ */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    gap: 0;
+    z-index: 100;
+  }
+
+  .nav-links.open {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  .nav-links a {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+    width: 100%;
+  }
+
+  .nav-cta {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+    gap: 0.8rem;
+  }
+
+  .nav-cta.open {
+    display: flex;
+  }
+
+  .nav-cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .status-pill {
+    display: flex !important;
+    justify-content: center;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  @keyframes slideDown {
+    from { 
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.page-header{
+  padding: 5rem 0 3rem;
+  border-bottom:1px solid var(--line);
+}
+.page-header h1{
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight:700; line-height:0.92; letter-spacing:-0.03em;
+}
+.page-header h1 .dim{ color: var(--ink-faint); }
+.page-header .subhead{
+  font-family:var(--f-mono); font-size:.85rem; color:var(--ink-soft);
+  margin-top:1rem; letter-spacing:.02em;
+}
+.page-header p{
+  font-size:1.05rem; color:var(--ink-soft); line-height:1.75;
+  max-width:56ch; margin-top:1.2rem;
+}
+
+/* ============================================================
+   CONTACT CONTENT
+   ============================================================ */
+.section{ padding: 4.5rem 0; border-bottom:1px solid var(--line); }
+.section:last-of-type{ border-bottom:none; }
+
+.section-head{
+  display:grid; grid-template-columns: 1fr 1.6fr; gap:3rem;
+  margin-bottom:2.5rem;
+}
+.section-head h2{
+  font-size:clamp(1.7rem,3.4vw,2.3rem);
+  font-weight:600; line-height:1.08;
+}
+.section-head p{
+  color:var(--ink-soft); line-height:1.7; max-width:46ch; align-self:end;
+}
+
+/* Contact Grid */
+.contact-grid{
+  display:grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap:3rem;
+}
+.contact-info{
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+}
+.contact-info .info-item{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:1.5rem;
+  transition: all .2s ease;
+}
+.contact-info .info-item:hover{
+  border-color:var(--accent);
+}
+.contact-info .info-item .icon{
+  font-size:1.4rem;
+  margin-bottom:.4rem;
+  display:block;
+}
+.contact-info .info-item h3{
+  font-size:.95rem;
+  font-weight:600;
+  margin-bottom:.2rem;
+}
+.contact-info .info-item p,
+.contact-info .info-item a{
+  color:var(--ink-soft);
+  font-size:.85rem;
+  line-height:1.6;
+  display:block;
+}
+.contact-info .info-item a:hover{
+  color:var(--accent);
+}
+
+/* Form */
+.contact-form-wrap{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:2rem;
+}
+.contact-form-wrap .form-label{
+  font-family:var(--f-mono);
+  font-size:.65rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--ink-faint);
+  display:block;
+  margin-bottom:.3rem;
+}
+.contact-form-wrap input,
+.contact-form-wrap select,
+.contact-form-wrap textarea{
+  width:100%;
+  padding:.75rem 1rem;
+  font-family:var(--f-body);
+  font-size:.9rem;
+  color:var(--ink);
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:6px;
+  outline:none;
+  transition: border-color .2s ease;
+  margin-bottom:1.2rem;
+}
+.contact-form-wrap input:focus,
+.contact-form-wrap select:focus,
+.contact-form-wrap textarea:focus{
+  border-color:var(--accent);
+}
+.contact-form-wrap textarea{
+  resize:vertical;
+  min-height:100px;
+}
+.contact-form-wrap .btn-submit{
+  font-family:var(--f-body);
+  font-weight:600;
+  font-size:.88rem;
+  padding:.75rem 2rem;
+  background:var(--accent);
+  color:var(--paper);
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  transition: background .2s ease;
+}
+.contact-form-wrap .btn-submit:hover{
+  background:#e0500f;
+}
+.contact-form-wrap .btn-submit:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+.contact-form-wrap .form-row{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:1rem;
+}
+.contact-form-wrap .full{ grid-column:span 2; }
+
+/* ============================================================
+   FOOTER — SAME AS MAIN
+   ============================================================ */
+footer{ background:var(--ink); color:rgba(247,246,243,0.55); padding: 3rem 0 1.5rem; }
+.f-inner{ max-width:var(--max); margin:0 auto; padding:0 2rem; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2.5rem; }
+footer h4{ font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase; letter-spacing:.1em; color:rgba(247,246,243,0.3); margin-bottom:.9rem; }
+footer a{ display:block; text-decoration:none; color:rgba(247,246,243,0.55); font-size:.85rem; margin-bottom:.5rem; }
+footer a:hover{ color:var(--accent); }
+footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,243,0.4); }
+.f-bottom{ max-width:var(--max); margin:2rem auto 0; padding:1.2rem 2rem 0; border-top:1px solid rgba(247,246,243,0.1); display:flex; justify-content:space-between; font-family:var(--f-mono); font-size:.68rem; color:rgba(247,246,243,0.25); flex-wrap:wrap; gap:.5rem; }
+
+/* Toast notification */
+.toast{
+  margin-top:1rem;
+  padding:.75rem 1rem;
+  border-radius:6px;
+  font-weight:500;
+  font-size:.85rem;
+  display:none;
+  align-items:center;
+  gap:.5rem;
+}
+.toast.show{ display:flex; }
+.toast.success{
+  background:#ecfdf5;
+  border:1px solid #a7f3d0;
+  color:#065f46;
+}
+.toast.error{
+  background:#fef2f2;
+  border:1px solid #fecaca;
+  color:#991b1b;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px){
+  .section-head{ grid-template-columns:1fr; gap:1.2rem; }
+  .contact-grid{ grid-template-columns:1fr; }
+  .contact-form-wrap .form-row{ grid-template-columns:1fr; }
+  .contact-form-wrap .full{ grid-column:span 1; }
+  .f-inner{ grid-template-columns:1fr; }
+}
+
+@media (max-width: 600px) {
+  .page-header h1{ font-size: clamp(2.2rem, 10vw, 3.5rem); }
+  .wrap{ padding:0 1.2rem; }
+  .nav-inner{ padding: 0.8rem 1.2rem; }
+  .contact-form-wrap{ padding:1.2rem; }
+  .contact-info .info-item{ padding:1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <div class="mark"><img src="formula.png" alt="FORMULA Logo" /></div>
+      <div>
+        <div class="name">FORMULA</div>
+        <div class="sub">SMAN 1 MOJOSARI</div>
+      </div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="classes.html">Classes</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+    <div class="nav-cta" id="navCta">
+      <div class="status-pill"><span class="status-dot"></span> STATUS: ONLINE</div>
+      <a href="login.html" class="btn btn-ghost">Masuk</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScH8Oel0L4_xAGUkQriMvJZI5JbleQSDMCwpKVkSIzxg14u2A/viewform" class="btn btn-solid">Daftar</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- ============ PAGE HEADER ============ -->
+<header class="page-header">
+  <div class="wrap">
+    <div class="tag">10.0.0.5 — contact</div>
+    <h1>FORMULA<br/><span class="dim">Hubungi Kami</span></h1>
+    <div class="subhead">SMAN 1 Mojosari — Mojokerto</div>
+    <p>Ada pertanyaan tentang program, jadwal, atau pendaftaran? Kami siap membantu.</p>
+  </div>
+</header>
+
+<!-- ============ CONTACT SECTION ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">10.0.0.6 — connect</div>
+      <h2>Kontak &amp; lokasi</h2>
+      <p>Kami balas dalam waktu maksimal 1x24 jam — biasanya lebih cepat dari itu.</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Info Kontak -->
+      <div class="contact-info">
+        <div class="info-item">
+          <span class="icon">📍</span>
+          <h3>Alamat</h3>
+          <p>SMAN 1 Mojosari<br/>Lab Komputer<br/>Jln. Pemuda 55 Mojosari Kabupaten Mojokerto – Jawa Timur Kode Pos 61382</p>
+        </div>
+        <div class="info-item">
+          <span class="icon">📧</span>
+          <h3>Email</h3>
+          <a href="mailto:formula.sman1mojosari@gmail.com">formulamedia@gmail.com</a>
+        </div>
+        <div class="info-item">
+          <span class="icon">📱</span>
+          <h3>WhatsApp</h3>
+          <a href="https://wa.me/6287763715780">+62 877-6371-5780</a>
+        </div>
+        <div class="info-item">
+          <span class="icon">📅</span>
+          <h3>Jam Kerja</h3>
+          <p>Senin–Jumat: 08.00–15.00 WIB<br/>Kegiatan: Kamis, 15.30–17.00 WIB</p>
+        </div>
+        <div class="info-item">
+          <span class="icon">🌐</span>
+          <h3>Media Sosial</h3>
+          <a href="#" style="display:inline; margin-right:.8rem;">Instagram</a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="contact-form-wrap">
+        <h3 style="font-size:1.2rem; font-weight:600; margin-bottom:1.2rem;">Kirim Pesan</h3>
+        <p style="color:var(--ink-soft); font-size:.88rem; margin-bottom:1.5rem;">Isi form di bawah, kami akan hubungi kamu via WhatsApp.</p>
+
+        <form id="contactForm">
+          <div class="form-row">
+            <div>
+              <span class="form-label">Nama</span>
+              <input type="text" placeholder="Nama kamu" required id="contactName" />
+            </div>
+            <div>
+              <span class="form-label">Email</span>
+              <input type="email" placeholder="email@example.com" required id="contactEmail" />
+            </div>
+          </div>
+          <div>
+            <span class="form-label">Minat</span>
+            <select id="contactInterest">
+              <option value="Web Development">Web Development</option>
+              <option value="Desain Grafis">Desain Grafis</option>
+              <option value="Animasi & Multimedia">Animasi & Multimedia</option>
+              <option value="UI/UX Design">UI/UX Design</option>
+              <option value="Programming">Programming</option>
+              <option value="Fotografi & Videografi">Fotografi & Videografi</option>
+            </select>
+          </div>
+          <div>
+            <span class="form-label">WhatsApp</span>
+            <input type="tel" placeholder="08123456789" required id="contactWa" />
+          </div>
+          <div>
+            <span class="form-label">Pesan</span>
+            <textarea rows="4" placeholder="Tulis pesan kamu..." required id="contactMessage"></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="contactBtn">Kirim via WhatsApp →</button>
+        </form>
+
+        <div id="toast" class="toast">
+          <span id="toastIcon">✅</span>
+          <span id="toastText">Pesan terkirim!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAP / LOKASI ============ -->
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">10.0.0.7 — lokasi</div>
+      <h2>Datang langsung ke lab</h2>
+      <p>Kami lebih suka ngobrol langsung — datang aja ke lab Komputer setiap Kamis sore.</p>
+    </div>
+    <div style="background:var(--paper-2); border:1px solid var(--line); border-radius:8px; overflow:hidden;">
+      <div style="width:100%; height:280px; background:var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink-soft); font-family:var(--f-mono); font-size:.85rem;">
+        📍 SMAN 1 Mojosari · Lab Komputer
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section" style="border-bottom:none; padding:3rem 0 1rem;">
+  <div class="wrap" style="text-align:center;">
+    <div class="tag" style="justify-content:center;">10.0.0.8 — gabung</div>
+    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem); font-weight:600; margin-bottom:1rem;">Siap mulai?</h2>
+    <p style="color:var(--ink-soft); margin-bottom:1.8rem;">Kami tunggu kamu di lab setiap Kamis sore.</p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="classes.html" class="btn">Lihat Program</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScH8Oel0L4_xAGUkQriMvJZI5JbleQSDMCwpKVkSIzxg14u2A/viewform" class="btn btn-solid">Daftar Sekarang →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="f-inner">
+    <div>
+      <div style="display:flex; align-items:center; gap:.7rem; margin-bottom:1rem;">
+        <div class="mark" style="border-color:rgba(247,246,243,.3); color:#F7F6F3; overflow:hidden; border-radius:4px; padding:0;">
+          <img src="formula.png" alt="FORMULA Logo" style="width:25%;height:25%;object-fit:cover;" />
+        </div>
+        <div style="color:#F7F6F3; font-family:var(--f-display); font-weight:700; font-size:.95rem;">FORMULA</div>
+      </div>
+      <p>Komunitas teknologi Informatika dan Multimedia — mencetak talenta kreatif digital unggul dari SMAN 1 Mojosari.</p>
+    </div>
+    <div>
+      <h4>Navigasi</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">Tentang</a>
+      <a href="gallery.html">Galeri</a>
+      <a href="contact.html">Kontak</a>
+    </div>
+    <div>
+      <h4>Program</h4>
+      <a href="web-development.html">Web Development</a>
+      <a href="desain-grafis.html">Desain Grafis</a>
+      <a href="classes.html">Semua Program →</a>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2026 FORMULA · SMAN 1 MOJOSARI</span>
+    <span>NODE: MOJOSARI-01 / STATUS: ONLINE</span>
+  </div>
+</footer>
+
+<script>
+// Navbar toggle - SAMA PERSIS DENGAN HALAMAN LAIN
+document.addEventListener('DOMContentLoaded', function() {
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  const navCta = document.getElementById('navCta');
+
+  menuToggle.addEventListener('click', function() {
+    navLinks.classList.toggle('open');
+    navCta.classList.toggle('open');
+    this.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    this.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-inner')) {
+      navLinks.classList.remove('open');
+      navCta.classList.remove('open');
+      menuToggle.textContent = '☰';
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+
+// Contact Form
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('contactEmail').value.trim();
+  const interest = document.getElementById('contactInterest').value;
+  const wa = document.getElementById('contactWa').value.replace(/\D/g, '');
+  const message = document.getElementById('contactMessage').value.trim();
+  const btn = document.getElementById('contactBtn');
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toastText');
+  const toastIcon = document.getElementById('toastIcon');
+
+  function showToast(text, isSuccess) {
+    toast.className = 'toast show';
+    toast.className += isSuccess ? ' success' : ' error';
+    toastText.textContent = text;
+    toastIcon.textContent = isSuccess ? '✅' : '⚠️';
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => { toast.className = 'toast'; }, 4000);
+  }
+
+  if (!name || !email || !wa || !message) {
+    showToast('Semua field wajib diisi!', false);
+    return;
+  }
+
+  if (!/^(08|62)\d{8,12}$/.test(wa)) {
+    showToast('Format WhatsApp tidak valid (08/62 + 8-12 digit)', false);
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Mengirim...';
+
+  const waFormatted = wa.startsWith('08') ? '62' + wa.slice(1) : wa;
+  const text = `Halo FORMULA!\n\nNama: ${name}\nEmail: ${email}\nMinat: ${interest}\nWA: ${waFormatted}\nPesan: ${message}`;
+  const url = `https://wa.me/6287763715780?text=${encodeURIComponent(text)}`;
+
+  setTimeout(() => {
+    window.open(url, '_blank');
+    showToast('Pesan terkirim! Kami akan hubungi kamu.', true);
+    btn.disabled = false;
+    btn.textContent = 'Kirim via WhatsApp →';
+    document.getElementById('contactForm').reset();
+  }, 800);
+});
+
+// WA input only numbers
+document.getElementById('contactWa').addEventListener('input', function() {
+  this.value = this.value.replace(/\D/g, '');
+});
+</script>
+
+</body>
+</html>
