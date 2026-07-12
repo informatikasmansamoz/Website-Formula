@@ -9,19 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:      #F7F6F3;
-  --paper-2:    #FFFFFF;
-  --ink:        #14151A;
-  --ink-soft:   #5B5D66;
-  --ink-faint:  #9A9CA3;
-  --line:       #E2E0DA;
-  --line-strong:#CFCCC4;
-  --accent:     #FF5A1F;
-  --accent-tint:#FFE7DA;
-  --status:     #16A34A;
+  --paper: #F7F6F3; --paper-2: #FFFFFF; --ink: #14151A;
+  --ink-soft: #5B5D66; --ink-faint: #9A9CA3;
+  --line: #E2E0DA; --line-strong: #CFCCC4;
+  --accent: #FF5A1F; --accent-tint: #FFE7DA;
+  --status: #16A34A;
   --f-display: 'Space Grotesk', sans-serif;
-  --f-body:    'Inter', sans-serif;
-  --f-mono:    'IBM Plex Mono', monospace;
+  --f-body: 'Inter', sans-serif;
+  --f-mono: 'IBM Plex Mono', monospace;
 }
 *{ margin:0; padding:0; box-sizing:border-box; }
 body{
@@ -56,119 +51,55 @@ img{ display:block; }
   text-align:center;
 }
 .login-card .brand .mark{
-  width:200px;
-  height:200px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  border-radius:100px;
-  margin:0 auto;
+  width:200px; height:200px;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; border-radius:100px; margin:0 auto;
 }
 .login-card .brand .mark img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  width:100%; height:100%; object-fit:cover;
 }
 .login-card .brand .name{
-  font-family:var(--f-display);
-  font-weight:700;
-  font-size:1.2rem;
-  line-height:1.15;
-  color:var(--ink);
+  font-family:var(--f-display); font-weight:700; font-size:1.2rem; line-height:1.15; color:var(--ink);
 }
 .login-card .brand .sub{
-  font-family:var(--f-mono);
-  font-size:.6rem;
-  color:var(--ink-soft);
-  letter-spacing:.05em;
-  margin-top:-.2rem;
+  font-family:var(--f-mono); font-size:.6rem; color:var(--ink-soft); letter-spacing:.05em; margin-top:-.2rem;
 }
 .login-card h1{
-  font-family:var(--f-display);
-  font-size:1.6rem;
-  font-weight:600;
-  margin-bottom:.2rem;
-  text-align:center;
+  font-family:var(--f-display); font-size:1.6rem; font-weight:600; margin-bottom:.2rem; text-align:center;
 }
 .login-card .subhead{
-  color:var(--ink-soft);
-  font-size:.88rem;
-  margin-bottom:1.8rem;
-  text-align:center;
+  color:var(--ink-soft); font-size:.88rem; margin-bottom:1.8rem; text-align:center;
 }
 .login-card form{
-  display:flex;
-  flex-direction:column;
-  gap:1.2rem;
+  display:flex; flex-direction:column; gap:1.2rem;
 }
 .login-card label{
-  font-family:var(--f-mono);
-  font-size:.65rem;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:var(--ink-faint);
-  display:block;
-  margin-bottom:.3rem;
+  font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--ink-faint); display:block; margin-bottom:.3rem;
 }
 .login-card input{
-  width:100%;
-  padding:.75rem 1rem;
-  font-family:var(--f-body);
-  font-size:.9rem;
-  color:var(--ink);
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:6px;
-  outline:none;
-  transition: border-color .2s ease;
+  width:100%; padding:.75rem 1rem;
+  font-family:var(--f-body); font-size:.9rem; color:var(--ink);
+  background:var(--paper); border:1px solid var(--line); border-radius:6px;
+  outline:none; transition: border-color .2s ease;
 }
-.login-card input:focus{
-  border-color:var(--accent);
-}
+.login-card input:focus{ border-color:var(--accent); }
 .login-card .btn-login{
-  font-family:var(--f-body);
-  font-weight:600;
-  font-size:.88rem;
-  padding:.75rem 1.5rem;
-  background:var(--accent);
-  color:var(--paper-2);
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  transition: background .2s ease;
-  margin-top:.3rem;
-  width:100%;
+  font-family:var(--f-body); font-weight:600; font-size:.88rem;
+  padding:.75rem 1.5rem; background:var(--accent); color:var(--paper-2);
+  border:none; border-radius:6px; cursor:pointer;
+  transition: background .2s ease; margin-top:.3rem; width:100%;
 }
-.login-card .btn-login:hover{
-  background:#e0500f;
-}
-.login-card .btn-login:disabled{
-  opacity:0.6;
-  cursor:not-allowed;
-}
+.login-card .btn-login:hover{ background:#e0500f; }
+.login-card .btn-login:disabled{ opacity:0.6; cursor:not-allowed; }
 .toast{
-  margin-top:1rem;
-  padding:.7rem 1rem;
-  border-radius:6px;
-  font-weight:500;
-  font-size:.82rem;
-  display:none;
-  align-items:center;
-  gap:.5rem;
-  justify-content:center;
+  margin-top:1rem; padding:.7rem 1rem; border-radius:6px;
+  font-weight:500; font-size:.82rem; display:none;
+  align-items:center; gap:.5rem; justify-content:center;
 }
 .toast.show{ display:flex; }
-.toast.success{
-  background:#ecfdf5;
-  border:1px solid #a7f3d0;
-  color:#065f46;
-}
-.toast.error{
-  background:#fef2f2;
-  border:1px solid #fecaca;
-  color:#991b1b;
-}
+.toast.success{ background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
+.toast.error{ background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
 @media (max-width: 500px){
   .login-card{ padding:1.8rem 1.2rem; }
   .login-card .brand .mark{ width:50px; height:50px; }
@@ -210,24 +141,19 @@ img{ display:block; }
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-  import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+  import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-  // ============================================================
-  // KONFIGURASI FIREBASE — GANTI DENGAN MILIKMU
-  // ============================================================
   const firebaseConfig = {
-    apiKey: "AIzaSyB_TwXy2y4-ym9jE8VLi297huJJvf1MwBM",
-    authDomain: "formula-7373d.firebaseapp.com",
-    projectId: "formula-7373d",
-    storageBucket: "formula-7373d.firebasestorage.app",
-    messagingSenderId: "647287637575",
-    appId: "1:647287637575:web:0ac5b158b74247f930d362"
+    apiKey: "AIzaSyBT20RmFLmBMQnNr5pMFGHwTlFnhYSqvA4",
+    authDomain: "formula-sman1mojosari.firebaseapp.com",
+    projectId: "formula-sman1mojosari",
+    storageBucket: "formula-sman1mojosari.firebasestorage.app",
+    messagingSenderId: "20405558374",
+    appId: "1:20405558374:web:8f7142be995d73ec00e1a7"
   };
 
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getDatabase(app);
+  const db = getFirestore(app);
 
   const form = document.getElementById('loginForm');
   const email = document.getElementById('loginEmail');
@@ -246,25 +172,6 @@ img{ display:block; }
     window.toastTimer = setTimeout(() => { toast.className = 'toast'; }, 4000);
   }
 
-  // Cek sudah login
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      try {
-        const snapshot = await get(ref(db, 'users/' + user.uid));
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-          if (data.role === 'admin') {
-            window.location.replace('dashboard-admin.html');
-          } else {
-            window.location.replace('dashboard-anggota-formula.html');
-          }
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
-  });
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -280,38 +187,60 @@ img{ display:block; }
     btn.textContent = 'Memuat...';
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, emailVal, passVal);
-      const user = userCredential.user;
+      // Cari user di Firestore berdasarkan email
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("email", "==", emailVal));
+      const querySnapshot = await getDocs(q);
 
-      const snapshot = await get(ref(db, 'users/' + user.uid));
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        showToast('Login berhasil!', true);
-
-        setTimeout(() => {
-          if (data.role === 'admin') {
-            window.location.replace('dashboard-admin.html');
-          } else {
-            window.location.replace('dashboard-anggota-formula.html');
-          }
-        }, 1200);
-      } else {
-        showToast('Data pengguna tidak ditemukan.', false);
+      if (querySnapshot.empty) {
+        showToast('Email tidak terdaftar!', false);
         btn.disabled = false;
         btn.textContent = 'Masuk →';
+        return;
       }
+
+      // Ambil data user pertama
+      let userData = null;
+      let userId = null;
+      querySnapshot.forEach((doc) => {
+        userData = doc.data();
+        userId = doc.id;
+      });
+
+      // CEK PASSWORD (simple, bisa ditambahin hashing nanti)
+      if (userData.password !== passVal) {
+        showToast('Password salah!', false);
+        btn.disabled = false;
+        btn.textContent = 'Masuk →';
+        return;
+      }
+
+      // Login berhasil
+      showToast('Login berhasil!', true);
+      
+      // Setelah data user ditemukan
+localStorage.setItem('userLoggedIn', 'true');
+localStorage.setItem('userEmail', emailVal);
+localStorage.setItem('userRole', userData.role || 'member');
+localStorage.setItem('userName', userData.nama || '');
+
+      // Simpan session sederhana (localStorage)
+      localStorage.setItem('userLoggedIn', 'true');
+      localStorage.setItem('userEmail', emailVal);
+      localStorage.setItem('userRole', userData.role || 'member');
+      localStorage.setItem('userName', userData.nama || '');
+
+      setTimeout(() => {
+        if (userData.role === 'admin') {
+          window.location.replace('dashboard-admin.html');
+        } else {
+          window.location.replace('dashboard-anggota-formula.html');
+        }
+      }, 1200);
 
     } catch (error) {
       console.error('Login error:', error);
-      let message = 'Terjadi kesalahan. Coba lagi.';
-      switch (error.code) {
-        case 'auth/user-not-found': message = 'Email tidak terdaftar.'; break;
-        case 'auth/wrong-password': message = 'Password salah.'; break;
-        case 'auth/invalid-email': message = 'Format email tidak valid.'; break;
-        case 'auth/too-many-requests': message = 'Terlalu banyak percobaan. Coba nanti.'; break;
-        default: message = error.message || 'Gagal login. Coba lagi.';
-      }
-      showToast(message, false);
+      showToast('Terjadi kesalahan. Coba lagi.', false);
       btn.disabled = false;
       btn.textContent = 'Masuk →';
     }
