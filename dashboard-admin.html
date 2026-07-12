@@ -245,6 +245,10 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
         <div class="number" id="totalProyek">0</div>
         <div class="label">Proyek Selesai</div>
       </div>
+      <div class="stat-card">
+        <div class="number" id="totalBerita">0</div>
+        <div class="label">Total Berita</div>
+      </div>
     </div>
   </div>
 </section>
@@ -277,7 +281,35 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   </div>
 </section>
 
-<!-- Modal Tambah/Edit -->
+<!-- ============ KELOLA BERITA ============ -->
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Kelola Berita</h2>
+      <div>
+        <button class="btn-add" id="btnTambahBerita">+ Tambah Berita</button>
+        <span class="tag">// manage</span>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Judul</th>
+            <th>Tanggal</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="beritaTableBody">
+          <tr><td colspan="4" style="text-align:center; color:var(--ink-faint);">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Tambah/Edit Anggota -->
 <div class="modal" id="memberModal">
   <div class="modal-content">
     <h3 id="modalTitle">Tambah Anggota</h3>
@@ -310,6 +342,27 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   </div>
 </div>
 
+<!-- Modal Berita -->
+<div class="modal" id="beritaModal">
+  <div class="modal-content">
+    <h3 id="beritaModalTitle">Tambah Berita</h3>
+    <form id="beritaForm">
+      <label>Judul Berita</label>
+      <input type="text" id="formBeritaJudul" required placeholder="Masukkan judul berita" />
+      <label>Tanggal (opsional)</label>
+      <input type="date" id="formBeritaTanggal" />
+      <label>Link Gambar (URL)</label>
+      <input type="url" id="formBeritaGambar" placeholder="https://contoh.com/gambar.jpg" />
+      <label>Konten / Isi Berita</label>
+      <textarea id="formBeritaKonten" rows="6" required placeholder="Tulis isi berita lengkap di sini..."></textarea>
+      <div style="margin-top:1.2rem;">
+        <button type="submit" class="btn-save" id="beritaSubmit">Simpan</button>
+        <button type="button" class="btn-cancel" id="beritaCancel">Batal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div id="toast" class="toast"><span id="toastIcon">✅</span><span id="toastText">Berhasil!</span></div>
 
 <footer>
@@ -332,9 +385,9 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
     </div>
     <div>
       <h4>Program</h4>
-      <a href="#">Web Development</a>
-      <a href="#">Desain Grafis</a>
-      <a href="#">Semua Program →</a>
+      <a href="web-development.html">Web Development</a>
+      <a href="desain-grafis.html">Desain Grafis</a>
+      <a href="classes.html">Semua Program →</a>
     </div>
   </div>
   <div class="f-bottom">
@@ -345,31 +398,113 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, updateProfile, deleteUser } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-  import { getDatabase, ref, get, set, push, remove, update, child } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+  import { getFirestore, doc, getDoc, getDocs, collection, setDoc, deleteDoc, updateDoc, query, where, addDoc, orderBy } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyB_TwXy2y4-ym9jE8VLi297huJJvf1MwBM",        // GANTI
-    authDomain: "formula-7373d.firebaseapp.com",
-    projectId: "formula-7373d",
-    storageBucket: "formula-7373d.firebasestorage.appm",
-    messagingSenderId: "647287637575",
-    appId: "1:647287637575:web:0ac5b158b74247f930d362"
+    apiKey: "AIzaSyBT20RmFLmBMQnNr5pMFGHwTlFnhYSqvA4",
+    authDomain: "formula-sman1mojosari.firebaseapp.com",
+    projectId: "formula-sman1mojosari",
+    storageBucket: "formula-sman1mojosari.firebasestorage.app",
+    messagingSenderId: "20405558374",
+    appId: "1:20405558374:web:8f7142be995d73ec00e1a7"
   };
 
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getDatabase(app);
+  const db = getFirestore(app);
 
-  const userDisplay = document.getElementById('userDisplay');
-  const welcomeText = document.getElementById('welcomeText');
-  const logoutBtn = document.getElementById('logoutBtn');
+  // CEK LOGIN SEDERHANA (dari localStorage)
+  const userEmail = localStorage.getItem('userEmail');
+  const userRole = localStorage.getItem('userRole');
+
+  if (!userEmail || userRole !== 'admin') {
+    window.location.replace('login.html');
+  }
+
+  // Tampilkan nama user
+  document.getElementById('userDisplay').textContent = localStorage.getItem('userName') || 'Admin';
+  document.getElementById('welcomeText').textContent = `Selamat datang, ${localStorage.getItem('userName') || 'Admin'}!`;
+
+  // ============ LOGOUT ============
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('userLoggedIn');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userName');
+    window.location.replace('login.html');
+  });
+
+  // ============ TOAST ============
+  function showToast(text, isSuccess = true) {
+    const toast = document.getElementById('toast');
+    toast.className = 'toast show' + (isSuccess ? ' success' : ' error');
+    document.getElementById('toastText').textContent = text;
+    document.getElementById('toastIcon').textContent = isSuccess ? '✅' : '⚠️';
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => { toast.className = 'toast'; }, 4000);
+  }
+
+  // ============ LOAD MEMBERS ============
   const tableBody = document.getElementById('memberTableBody');
   const totalAnggota = document.getElementById('totalAnggota');
   const totalAdmin = document.getElementById('totalAdmin');
-  const totalProgram = document.getElementById('totalProgram');
-  const totalProyek = document.getElementById('totalProyek');
 
+  async function loadMembers() {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'users'));
+      let html = '';
+      let countAnggota = 0, countAdmin = 0;
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data.role === 'admin') countAdmin++;
+        else countAnggota++;
+
+        html += `
+          <tr>
+            <td><strong>${data.nama || 'Tidak ada'}</strong></td>
+            <td>${data.email || '-'}</td>
+            <td>${data.minat || '-'}</td>
+            <td><span class="badge ${data.role === 'admin' ? 'admin' : 'member'}">${data.role || 'member'}</span></td>
+            <td>
+              <button class="btn-edit" data-uid="${doc.id}">Edit</button>
+              <button class="btn-delete" data-uid="${doc.id}">Hapus</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      tableBody.innerHTML = html || '<tr><td colspan="5" style="text-align:center; color:var(--ink-faint);">Belum ada anggota</td></tr>';
+      totalAnggota.textContent = countAnggota;
+      totalAdmin.textContent = countAdmin;
+      document.getElementById('totalProgram').textContent = '5';
+      document.getElementById('totalProyek').textContent = '12';
+
+      document.querySelectorAll('.btn-edit').forEach(btn => {
+        btn.addEventListener('click', () => openEditModal(btn.dataset.uid));
+      });
+      document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', () => deleteMember(btn.dataset.uid));
+      });
+    } catch (error) {
+      console.error('Error loading members:', error);
+    }
+  }
+
+  // ============ DELETE MEMBER ============
+  async function deleteMember(uid) {
+    if (!confirm('Yakin ingin menghapus anggota ini?')) return;
+    try {
+      await deleteDoc(doc(db, 'users', uid));
+      showToast('Anggota berhasil dihapus!', true);
+      loadMembers();
+      loadBerita();
+    } catch (error) {
+      console.error('Delete error:', error);
+      showToast('Gagal menghapus anggota.', false);
+    }
+  }
+
+  // ============ MODAL MEMBER ============
   const modal = document.getElementById('memberModal');
   const modalTitle = document.getElementById('modalTitle');
   const form = document.getElementById('memberForm');
@@ -381,84 +516,7 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   const formSubmit = document.getElementById('formSubmit');
   const formCancel = document.getElementById('formCancel');
   const btnTambah = document.getElementById('btnTambahAnggota');
-
   let editingUid = null;
-
-  function showToast(text, isSuccess = true) {
-    const toast = document.getElementById('toast');
-    toast.className = 'toast show' + (isSuccess ? ' success' : ' error');
-    document.getElementById('toastText').textContent = text;
-    document.getElementById('toastIcon').textContent = isSuccess ? '✅' : '⚠️';
-    clearTimeout(window.toastTimer);
-    window.toastTimer = setTimeout(() => { toast.className = 'toast'; }, 4000);
-  }
-
-  async function loadMembers() {
-    try {
-      const snapshot = await get(ref(db, 'users'));
-      if (snapshot.exists()) {
-        const users = snapshot.val();
-        const keys = Object.keys(users);
-        let html = '';
-        let countAnggota = 0, countAdmin = 0;
-
-        keys.forEach(key => {
-          const data = users[key];
-          if (data.role === 'admin') countAdmin++;
-          else countAnggota++;
-
-          html += `
-            <tr>
-              <td><strong>${data.nama || 'Tidak ada'}</strong></td>
-              <td>${data.email || '-'}</td>
-              <td>${data.minat || '-'}</td>
-              <td><span class="badge ${data.role === 'admin' ? 'admin' : 'member'}">${data.role || 'member'}</span></td>
-              <td>
-                <button class="btn-edit" data-uid="${key}">Edit</button>
-                <button class="btn-delete" data-uid="${key}">Hapus</button>
-              </td>
-            </tr>
-          `;
-        });
-
-        tableBody.innerHTML = html || '<tr><td colspan="5" style="text-align:center; color:var(--ink-faint);">Belum ada anggota</td></tr>';
-        totalAnggota.textContent = countAnggota;
-        totalAdmin.textContent = countAdmin;
-        totalProgram.textContent = '5';
-        totalProyek.textContent = '12';
-
-        // Event listeners untuk tombol edit/hapus
-        document.querySelectorAll('.btn-edit').forEach(btn => {
-          btn.addEventListener('click', () => openEditModal(btn.dataset.uid));
-        });
-        document.querySelectorAll('.btn-delete').forEach(btn => {
-          btn.addEventListener('click', () => deleteMember(btn.dataset.uid));
-        });
-      }
-    } catch (error) {
-      console.error('Error loading members:', error);
-    }
-  }
-
-  function openEditModal(uid) {
-    editingUid = uid;
-    modalTitle.textContent = 'Edit Anggota';
-    formSubmit.textContent = 'Update';
-
-    const userRef = ref(db, 'users/' + uid);
-    get(userRef).then(snapshot => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        formNama.value = data.nama || '';
-        formEmail.value = data.email || '';
-        formMinat.value = data.minat || 'Web Development';
-        formRole.value = data.role || 'member';
-        formPassword.placeholder = 'Kosongkan jika tidak diubah';
-        formPassword.value = '';
-        modal.classList.add('show');
-      }
-    });
-  }
 
   function openAddModal() {
     editingUid = null;
@@ -469,18 +527,22 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
     modal.classList.add('show');
   }
 
-  async function deleteMember(uid) {
-    if (!confirm('Yakin ingin menghapus anggota ini?')) return;
-
-    try {
-      // Hapus dari database
-      await remove(ref(db, 'users/' + uid));
-      showToast('Anggota berhasil dihapus!', true);
-      loadMembers();
-    } catch (error) {
-      console.error('Delete error:', error);
-      showToast('Gagal menghapus anggota.', false);
-    }
+  function openEditModal(uid) {
+    editingUid = uid;
+    modalTitle.textContent = 'Edit Anggota';
+    formSubmit.textContent = 'Update';
+    getDoc(doc(db, 'users', uid)).then(snapshot => {
+      if (snapshot.exists()) {
+        const data = snapshot.data();
+        formNama.value = data.nama || '';
+        formEmail.value = data.email || '';
+        formMinat.value = data.minat || 'Web Development';
+        formRole.value = data.role || 'member';
+        formPassword.placeholder = 'Kosongkan jika tidak diubah';
+        formPassword.value = '';
+        modal.classList.add('show');
+      }
+    });
   }
 
   form.addEventListener('submit', async (e) => {
@@ -499,27 +561,19 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
 
     try {
       if (editingUid) {
-        // Update existing user
-        const updateData = { nama, email, minat, role };
-        await update(ref(db, 'users/' + editingUid), updateData);
+        await updateDoc(doc(db, 'users', editingUid), { nama, email, minat, role });
         showToast('Data anggota berhasil diupdate!', true);
       } else {
-        // Create new user
         if (!password || password.length < 6) {
           showToast('Password minimal 6 karakter!', false);
           return;
         }
-        const userCred = await createUserWithEmailAndPassword(auth, email, password);
-        await updateProfile(userCred.user, { displayName: nama });
-        await set(ref(db, 'users/' + userCred.user.uid), {
-          nama, email, minat, role,
-          programs: 0, projects: 0, certificates: 0,
-          createdAt: new Date().toISOString()
-        });
+        await setDoc(doc(db, 'users', email), { nama, email, password, minat, role, programs: 0, projects: 0, certificates: 0, createdAt: new Date().toISOString() });
         showToast('Anggota berhasil ditambahkan!', true);
       }
       modal.classList.remove('show');
       loadMembers();
+      loadBerita();
     } catch (error) {
       console.error('Error:', error);
       showToast(error.message || 'Terjadi kesalahan.', false);
@@ -530,37 +584,139 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   formCancel.addEventListener('click', () => modal.classList.remove('show'));
   modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('show'); });
 
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      userDisplay.textContent = user.displayName || 'Admin';
-      welcomeText.textContent = `Selamat datang, ${user.displayName || 'Admin'}!`;
+  // ============ KELOLA BERITA ============
+  const beritaTableBody = document.getElementById('beritaTableBody');
+  const totalBerita = document.getElementById('totalBerita');
+  const beritaModal = document.getElementById('beritaModal');
+  const beritaModalTitle = document.getElementById('beritaModalTitle');
+  const beritaForm = document.getElementById('beritaForm');
+  const formBeritaJudul = document.getElementById('formBeritaJudul');
+  const formBeritaTanggal = document.getElementById('formBeritaTanggal');
+  const formBeritaGambar = document.getElementById('formBeritaGambar');
+  const formBeritaKonten = document.getElementById('formBeritaKonten');
+  const beritaSubmit = document.getElementById('beritaSubmit');
+  const beritaCancel = document.getElementById('beritaCancel');
+  const btnTambahBerita = document.getElementById('btnTambahBerita');
+  let editingBeritaKey = null;
 
-      try {
-        const snapshot = await get(ref(db, 'users/' + user.uid));
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-          if (data.role !== 'admin') {
-            window.location.href = 'dashboard-anggota-formula.html';
-          }
-        }
-        loadMembers();
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    } else {
-      window.location.href = 'login.html';
-    }
-  });
-
-  logoutBtn.addEventListener('click', async () => {
+  async function loadBerita() {
     try {
-      await signOut(auth);
-      showToast('Logout berhasil!', true);
-      setTimeout(() => { window.location.href = 'login.html'; }, 1000);
+      const q = query(collection(db, 'berita'), orderBy('createdAt', 'desc'));
+      const querySnapshot = await getDocs(q);
+      let html = '';
+      let count = 0;
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        count++;
+        html += `
+          <tr>
+            <td><strong>${data.title || 'Tanpa judul'}</strong></td>
+            <td>${data.date || data.createdAt ? new Date(data.createdAt).toLocaleDateString('id-ID') : '-'}</td>
+            <td><span class="badge" style="background:#dbeafe; color:#2563eb;">Published</span></td>
+            <td>
+              <button class="btn-edit-berita" data-berita-key="${doc.id}">Edit</button>
+              <button class="btn-delete-berita" data-berita-key="${doc.id}">Hapus</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      beritaTableBody.innerHTML = html || '<tr><td colspan="4" style="text-align:center; color:var(--ink-faint);">Belum ada berita</td></tr>';
+      totalBerita.textContent = count;
+
+      document.querySelectorAll('.btn-edit-berita').forEach(btn => {
+        btn.addEventListener('click', () => openEditBerita(btn.dataset.beritaKey));
+      });
+      document.querySelectorAll('.btn-delete-berita').forEach(btn => {
+        btn.addEventListener('click', () => deleteBerita(btn.dataset.beritaKey));
+      });
     } catch (error) {
-      showToast('Gagal logout.', false);
+      console.error('Error loading berita:', error);
+    }
+  }
+
+  function openAddBerita() {
+    editingBeritaKey = null;
+    beritaModalTitle.textContent = 'Tambah Berita';
+    beritaSubmit.textContent = 'Simpan';
+    beritaForm.reset();
+    beritaModal.classList.add('show');
+  }
+
+  function openEditBerita(key) {
+    editingBeritaKey = key;
+    beritaModalTitle.textContent = 'Edit Berita';
+    beritaSubmit.textContent = 'Update';
+    getDoc(doc(db, 'berita', key)).then(snapshot => {
+      if (snapshot.exists()) {
+        const data = snapshot.data();
+        formBeritaJudul.value = data.title || '';
+        formBeritaTanggal.value = data.date || '';
+        formBeritaGambar.value = data.image || '';
+        formBeritaKonten.value = data.content || '';
+        beritaModal.classList.add('show');
+      }
+    });
+  }
+
+  async function deleteBerita(key) {
+    if (!confirm('Yakin ingin menghapus berita ini?')) return;
+    try {
+      await deleteDoc(doc(db, 'berita', key));
+      showToast('Berita berhasil dihapus!', true);
+      loadBerita();
+    } catch (error) {
+      console.error('Delete error:', error);
+      showToast('Gagal menghapus berita.', false);
+    }
+  }
+
+  beritaForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const judul = formBeritaJudul.value.trim();
+    const tanggal = formBeritaTanggal.value;
+    const gambar = formBeritaGambar.value.trim();
+    const konten = formBeritaKonten.value.trim();
+
+    if (!judul || !konten) {
+      showToast('Judul dan konten harus diisi!', false);
+      return;
+    }
+
+    try {
+      const data = {
+        title: judul,
+        content: konten,
+        image: gambar || '',
+        date: tanggal || '',
+        createdAt: Date.now()
+      };
+
+      if (editingBeritaKey) {
+        await updateDoc(doc(db, 'berita', editingBeritaKey), data);
+        showToast('Berita berhasil diupdate!', true);
+      } else {
+        await addDoc(collection(db, 'berita'), data);
+        showToast('Berita berhasil ditambahkan!', true);
+      }
+
+      beritaModal.classList.remove('show');
+      loadBerita();
+    } catch (error) {
+      console.error('Error:', error);
+      showToast(error.message || 'Terjadi kesalahan.', false);
     }
   });
+
+  btnTambahBerita.addEventListener('click', openAddBerita);
+  beritaCancel.addEventListener('click', () => beritaModal.classList.remove('show'));
+  beritaModal.addEventListener('click', (e) => { if (e.target === beritaModal) beritaModal.classList.remove('show'); });
+
+  // ============ LOAD ALL ============
+  loadMembers();
+  loadBerita();
 </script>
 
 </body>
