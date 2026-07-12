@@ -59,6 +59,12 @@ img{ display:block; }
   cursor:pointer; transition: all .18s ease;
 }
 .btn-logout:hover{ background:#ef4444; color:white; }
+.btn-edit-profile{
+  background:transparent; border:1px solid var(--accent); color:var(--accent);
+  padding:.4rem 1rem; border-radius:6px; font-weight:600; font-size:.78rem;
+  cursor:pointer; transition: all .18s ease;
+}
+.btn-edit-profile:hover{ background:var(--accent); color:white; }
 
 .dashboard-header{ padding:2.5rem 0 1.5rem; border-bottom:1px solid var(--line); }
 .dashboard-header h1{
@@ -67,6 +73,16 @@ img{ display:block; }
 }
 .dashboard-header h1 span{ color:var(--accent); }
 .dashboard-header .subhead{ color:var(--ink-soft); font-size:.95rem; margin-top:.3rem; }
+.dashboard-header .profile-row{
+  display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; margin-top:1.5rem;
+  padding:1.5rem; background:var(--paper-2); border:1px solid var(--line); border-radius:8px;
+}
+.dashboard-header .profile-row .avatar{
+  width:60px; height:60px; border-radius:50%; background:var(--accent-tint);
+  display:flex; align-items:center; justify-content:center; font-size:1.8rem; font-weight:700; color:var(--accent);
+}
+.dashboard-header .profile-row .info h3{ font-size:1.1rem; font-weight:600; }
+.dashboard-header .profile-row .info .detail{ color:var(--ink-soft); font-size:.85rem; }
 
 .section{ padding:2.5rem 0; border-bottom:1px solid var(--line); }
 .section:last-of-type{ border-bottom:none; }
@@ -81,16 +97,58 @@ img{ display:block; }
 }
 
 .stats-grid{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem;
 }
 .stat-card{
   background:var(--paper-2); border:1px solid var(--line); border-radius:8px;
-  padding:1.2rem; text-align:center;
+  padding:1.2rem; text-align:center; transition: all .25s ease;
 }
+.stat-card:hover{ border-color:var(--accent); transform:translateY(-2px); }
 .stat-card .number{
   font-family:var(--f-display); font-size:1.8rem; font-weight:700; color:var(--accent);
 }
 .stat-card .label{ color:var(--ink-soft); font-size:.82rem; margin-top:.2rem; }
+
+.program-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;
+}
+.program-card{
+  background:var(--paper-2); border:1px solid var(--line); border-radius:8px;
+  padding:1.2rem; transition: all .25s ease;
+}
+.program-card:hover{ border-color:var(--accent); transform:translateY(-2px); }
+.program-card .icon{ font-size:1.8rem; margin-bottom:.3rem; }
+.program-card h3{ font-size:.95rem; font-weight:600; }
+.program-card .progress-bar{
+  width:100%; height:6px; background:var(--line); border-radius:4px; margin:.5rem 0;
+  overflow:hidden;
+}
+.program-card .progress-bar .fill{
+  height:100%; background:var(--accent); border-radius:4px; transition: width .6s ease;
+}
+.program-card .status{
+  font-family:var(--f-mono); font-size:.6rem; text-transform:uppercase;
+  padding:.15rem .5rem; border-radius:4px; display:inline-block;
+}
+.program-card .status.active{ background:#ecfdf5; color:#16a34a; }
+.program-card .status.pending{ background:#fef3c7; color:#d97706; }
+.program-card .status.done{ background:#dbeafe; color:#2563eb; }
+
+.news-mini-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;
+}
+.news-mini-card{
+  background:var(--paper-2); border:1px solid var(--line); border-radius:8px;
+  overflow:hidden; transition: all .25s ease; cursor:pointer;
+}
+.news-mini-card:hover{ border-color:var(--accent); transform:translateY(-2px); }
+.news-mini-card .thumb{
+  width:100%; height:120px; background:var(--line); overflow:hidden;
+}
+.news-mini-card .thumb img{ width:100%; height:100%; object-fit:cover; }
+.news-mini-card .info{ padding:.8rem 1rem; }
+.news-mini-card .info .date{ font-family:var(--f-mono); font-size:.6rem; color:var(--accent); }
+.news-mini-card .info h4{ font-size:.9rem; font-weight:600; margin:.2rem 0; }
 
 .activity-list{ display:flex; flex-direction:column; }
 .activity-item{
@@ -127,6 +185,41 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   flex-wrap:wrap; gap:.5rem;
 }
 
+/* Modal */
+.modal{
+  display:none; position:fixed; inset:0; z-index:999;
+  background:rgba(0,0,0,0.4); align-items:center; justify-content:center;
+}
+.modal.show{ display:flex; }
+.modal-content{
+  background:var(--paper-2); border-radius:12px; padding:2rem;
+  max-width:500px; width:100%; max-height:80vh; overflow-y:auto;
+}
+.modal-content h3{
+  font-family:var(--f-display); font-size:1.2rem; font-weight:600; margin-bottom:1rem;
+}
+.modal-content label{
+  font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--ink-faint); display:block; margin:.8rem 0 .3rem;
+}
+.modal-content input, .modal-content select, .modal-content textarea{
+  width:100%; padding:.6rem .8rem;
+  font-family:var(--f-body); font-size:.85rem;
+  background:var(--paper); border:1px solid var(--line); border-radius:6px;
+  outline:none;
+}
+.modal-content textarea{ resize:vertical; min-height:80px; }
+.modal-content .btn-save{
+  margin-top:1.2rem; padding:.7rem 1.5rem;
+  background:var(--accent); color:var(--paper-2);
+  border:none; border-radius:6px; font-weight:600; cursor:pointer;
+}
+.modal-content .btn-cancel{
+  margin-top:1.2rem; margin-left:.5rem; padding:.7rem 1.5rem;
+  background:transparent; border:1px solid var(--line); border-radius:6px;
+  font-weight:600; cursor:pointer;
+}
+
 .toast{
   position:fixed; top:1.5rem; right:1.5rem;
   padding:.8rem 1.2rem; border-radius:8px; font-weight:500; font-size:.85rem;
@@ -139,7 +232,10 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
 
 @media (max-width: 900px){
   .stats-grid{ grid-template-columns:1fr 1fr; }
+  .program-grid{ grid-template-columns:1fr; }
+  .news-mini-grid{ grid-template-columns:1fr; }
   .f-inner{ grid-template-columns:1fr; }
+  .dashboard-header .profile-row{ flex-direction:column; text-align:center; }
 }
 @media (max-width: 500px){ .stats-grid{ grid-template-columns:1fr; } }
 </style>
@@ -166,9 +262,24 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   <div class="wrap">
     <h1>Dashboard <span>Anggota</span></h1>
     <p class="subhead" id="welcomeText">Selamat datang di FORMULA!</p>
+
+    <!-- FITUR 1: PROFIL -->
+    <div class="profile-row">
+      <div class="avatar" id="avatarDisplay">A</div>
+      <div class="info">
+        <h3 id="profileName">Loading...</h3>
+        <div class="detail" id="profileEmail">email@example.com</div>
+        <div class="detail" id="profileMinat">Minat: -</div>
+        <div class="detail" id="profileRole">Role: Member</div>
+      </div>
+      <div style="margin-left:auto;">
+        <button class="btn-edit-profile" id="btnEditProfile">✏️ Edit Profil</button>
+      </div>
+    </div>
   </div>
 </header>
 
+<!-- FITUR 2-4: STATISTIK -->
 <section class="section">
   <div class="wrap">
     <div class="section-head">
@@ -188,10 +299,121 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
         <div class="number" id="sertifikatCount">0</div>
         <div class="label">Sertifikat</div>
       </div>
+      <div class="stat-card">
+        <div class="number" id="kehadiranCount">0</div>
+        <div class="label">Kehadiran</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- FITUR 5-8: PROGRAM -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Program Saya</h2>
+      <div>
+        <button class="btn-edit-profile" id="btnJoinProgram" style="padding:.3rem .8rem; font-size:.7rem;">+ Join Program</button>
+        <span class="tag">// aktif</span>
+      </div>
+    </div>
+    <div class="program-grid" id="programGrid">
+      <div style="grid-column:span 3; text-align:center; color:var(--ink-faint); padding:2rem 0;">Loading program...</div>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR 9: BERITA -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Berita Terbaru</h2>
+      <a href="berita.html" class="tag" style="color:var(--accent);">Lihat semua →</a>
+    </div>
+    <div class="news-mini-grid" id="newsGrid">
+      <div style="grid-column:span 3; text-align:center; color:var(--ink-faint); padding:1rem 0;">Loading berita...</div>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR 10-11: PRESTASI & GALERI -->
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Prestasi &amp; Galeri</h2>
+      <span class="tag">// portofolio</span>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;">
+      <div style="background:var(--paper-2); border:1px solid var(--line); border-radius:8px; padding:1.2rem;">
+        <h3 style="font-size:.95rem; font-weight:600; margin-bottom:.5rem;">🏆 Prestasi</h3>
+        <div id="prestasiList">
+          <p style="color:var(--ink-soft); font-size:.85rem;">Belum ada prestasi.</p>
+        </div>
+      </div>
+      <div style="background:var(--paper-2); border:1px solid var(--line); border-radius:8px; padding:1.2rem;">
+        <h3 style="font-size:.95rem; font-weight:600; margin-bottom:.5rem;">📸 Galeri Kegiatan</h3>
+        <div id="galeriList">
+          <p style="color:var(--ink-soft); font-size:.85rem;">Belum ada foto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR 12-14: TUGAS & KEHADIRAN -->
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Tugas &amp; Kehadiran</h2>
+      <span class="tag">// aktivitas</span>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.2rem;">
+      <div style="background:var(--paper-2); border:1px solid var(--line); border-radius:8px; padding:1.2rem;">
+        <h3 style="font-size:.9rem; font-weight:600; margin-bottom:.5rem;">📋 Tugas Aktif</h3>
+        <div id="tugasList">
+          <p style="color:var(--ink-soft); font-size:.82rem;">Tidak ada tugas.</p>
+        </div>
+      </div>
+      <div style="background:var(--paper-2); border:1px solid var(--line); border-radius:8px; padding:1.2rem;">
+        <h3 style="font-size:.9rem; font-weight:600; margin-bottom:.5rem;">✅ Kehadiran</h3>
+        <div id="kehadiranList">
+          <p style="color:var(--ink-soft); font-size:.82rem;">Total: 0 pertemuan</p>
+        </div>
+      </div>
+      <div style="background:var(--paper-2); border:1px solid var(--line); border-radius:8px; padding:1.2rem;">
+        <h3 style="font-size:.9rem; font-weight:600; margin-bottom:.5rem;">📤 Upload Tugas</h3>
+        <button class="btn-edit-profile" id="btnUploadTugas" style="padding:.3rem .8rem; font-size:.7rem;">Upload Tugas</button>
+        <p style="color:var(--ink-soft); font-size:.75rem; margin-top:.5rem;">Upload file tugasmu disini.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR 15-17: NOTIFIKASI, CHAT, KALENDER -->
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Notifikasi &amp; Lainnya</h2>
+      <span class="tag">// update</span>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.2rem;">
+      <div style="background:var(--paper-2); border:1px solid var(--line); border-radius:8px; padding:1.2rem; cursor:pointer;" id="notifBox">
+        <h3 style="font-size:.9rem; font-weight:600; margin-bottom:.3rem;">🔔 Notifikasi</h3>
+        <p style="color:var(--ink-soft); font-size:.82rem;" id="notifCount">0 notifikasi</p>
+      </div>
+      <div style="background:var(--paper-2); border:1px solid var(--line); border-radius:8px; padding:1.2rem; cursor:pointer;" onclick="window.location.href='#'">
+        <h3 style="font-size:.9rem; font-weight:600; margin-bottom:.3rem;">💬 Forum Diskusi</h3>
+        <p style="color:var(--ink-soft); font-size:.82rem;">Diskusi dengan anggota lain</p>
+      </div>
+      <div style="background:var(--paper-2); border:1px solid var(--line); border-radius:8px; padding:1.2rem; cursor:pointer;" onclick="window.location.href='#'">
+        <h3 style="font-size:.9rem; font-weight:600; margin-bottom:.3rem;">📅 Kalender</h3>
+        <p style="color:var(--ink-soft); font-size:.82rem;">Lihat jadwal kegiatan</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR 18: AKTIVITAS TERAKHIR -->
 <section class="section" style="border-bottom:none;">
   <div class="wrap">
     <div class="section-head">
@@ -218,6 +440,75 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   </div>
 </section>
 
+<!-- MODAL EDIT PROFIL (FITUR 2) -->
+<div class="modal" id="profileModal">
+  <div class="modal-content">
+    <h3 id="profileModalTitle">Edit Profil</h3>
+    <form id="profileForm">
+      <label>Nama Lengkap</label>
+      <input type="text" id="editNama" required />
+      <label>Email</label>
+      <input type="email" id="editEmail" required />
+      <label>Minat</label>
+      <select id="editMinat">
+        <option value="Web Development">Web Development</option>
+        <option value="Desain Grafis">Desain Grafis</option>
+        <option value="Animasi & Multimedia">Animasi & Multimedia</option>
+        <option value="UI/UX Design">UI/UX Design</option>
+        <option value="Programming">Programming</option>
+        <option value="Fotografi & Videografi">Fotografi & Videografi</option>
+      </select>
+      <label>Password Baru (kosongkan jika tidak diubah)</label>
+      <input type="password" id="editPassword" placeholder="Minimal 6 karakter" />
+      <div style="margin-top:1.2rem;">
+        <button type="submit" class="btn-save">Simpan</button>
+        <button type="button" class="btn-cancel" id="profileCancel">Batal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL JOIN PROGRAM (FITUR 6-7) -->
+<div class="modal" id="joinModal">
+  <div class="modal-content">
+    <h3>Join Program</h3>
+    <form id="joinForm">
+      <label>Pilih Program</label>
+      <select id="joinProgramSelect">
+        <option value="Web Development">Web Development</option>
+        <option value="Desain Grafis">Desain Grafis</option>
+        <option value="Animasi & Multimedia">Animasi & Multimedia</option>
+        <option value="UI/UX Design">UI/UX Design</option>
+        <option value="Programming">Programming</option>
+        <option value="Fotografi & Videografi">Fotografi & Videografi</option>
+      </select>
+      <div style="margin-top:1.2rem;">
+        <button type="submit" class="btn-save">Daftar Program</button>
+        <button type="button" class="btn-cancel" id="joinCancel">Batal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL UPLOAD TUGAS (FITUR 12) -->
+<div class="modal" id="uploadModal">
+  <div class="modal-content">
+    <h3>Upload Tugas</h3>
+    <form id="uploadForm">
+      <label>Judul Tugas</label>
+      <input type="text" id="uploadJudul" required placeholder="Nama tugas" />
+      <label>Deskripsi</label>
+      <textarea id="uploadDeskripsi" placeholder="Deskripsi tugas..."></textarea>
+      <label>Link Tugas (Google Drive, GitHub, dll)</label>
+      <input type="url" id="uploadLink" placeholder="https://..." />
+      <div style="margin-top:1.2rem;">
+        <button type="submit" class="btn-save">Upload</button>
+        <button type="button" class="btn-cancel" id="uploadCancel">Batal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div id="toast" class="toast"><span id="toastIcon">✅</span><span id="toastText">Berhasil!</span></div>
 
 <footer>
@@ -240,9 +531,9 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
     </div>
     <div>
       <h4>Program</h4>
-      <a href="#">Web Development</a>
-      <a href="#">Desain Grafis</a>
-      <a href="">Semua Program →</a>
+      <a href="web-development.html">Web Development</a>
+      <a href="desain-grafis.html">Desain Grafis</a>
+      <a href="classes.html">Semua Program →</a>
     </div>
   </div>
   <div class="f-bottom">
@@ -253,26 +544,384 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-  import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+  import { getFirestore, doc, getDoc, getDocs, collection, setDoc, updateDoc, query, orderBy, limit, where, addDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyB_TwXy2y4-ym9jE8VLi297huJJvf1MwBM",        // GANTI
-    authDomain: "formula-7373d.firebaseapp.com",
-    projectId: "formula-7373d",
-    storageBucket: "formula-7373d.firebasestorage.appm",
-    messagingSenderId: "647287637575",
-    appId: "1:647287637575:web:0ac5b158b74247f930d362"
+    apiKey: "AIzaSyBT20RmFLmBMQnNr5pMFGHwTlFnhYSqvA4",
+    authDomain: "formula-sman1mojosari.firebaseapp.com",
+    projectId: "formula-sman1mojosari",
+    storageBucket: "formula-sman1mojosari.firebasestorage.app",
+    messagingSenderId: "20405558374",
+    appId: "1:20405558374:web:8f7142be995d73ec00e1a7"
   };
 
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getDatabase(app);
+  const db = getFirestore(app);
 
-  const userDisplay = document.getElementById('userDisplay');
-  const welcomeText = document.getElementById('welcomeText');
-  const logoutBtn = document.getElementById('logoutBtn');
+  // ============ CEK LOGIN ============
+  const userEmail = localStorage.getItem('userEmail');
+  const userRole = localStorage.getItem('userRole');
+  const userName = localStorage.getItem('userName');
 
+  if (!userEmail) {
+    window.location.replace('login.html');
+  }
+
+  if (userRole === 'admin') {
+    window.location.replace('dashboard-admin.html');
+  }
+
+  let currentUserData = {};
+  let currentUid = '';
+
+  // ============ FITUR 1: TAMPILAN PROFIL ============
+  async function loadProfile() {
+    try {
+      const q = query(collection(db, 'users'), where('email', '==', userEmail));
+      const querySnapshot = await getDocs(q);
+      
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((doc) => {
+          currentUid = doc.id;
+          currentUserData = doc.data();
+        });
+        
+        const initial = (currentUserData.nama || 'A')[0].toUpperCase();
+        document.getElementById('avatarDisplay').textContent = initial;
+        document.getElementById('profileName').textContent = currentUserData.nama || 'Nama tidak ditemukan';
+        document.getElementById('profileEmail').textContent = currentUserData.email || '-';
+        document.getElementById('profileMinat').textContent = `Minat: ${currentUserData.minat || '-'}`;
+        document.getElementById('profileRole').textContent = `Role: ${currentUserData.role || 'Member'}`;
+        document.getElementById('userDisplay').textContent = currentUserData.nama || 'Anggota';
+        document.getElementById('welcomeText').textContent = `Selamat datang, ${currentUserData.nama || 'Anggota'}!`;
+        
+        // FITUR 3-4: Statistik
+        document.getElementById('programCount').textContent = currentUserData.programs || 0;
+        document.getElementById('proyekCount').textContent = currentUserData.projects || 0;
+        document.getElementById('sertifikatCount').textContent = currentUserData.certificates || 0;
+        document.getElementById('kehadiranCount').textContent = currentUserData.attendance || 0;
+      }
+    } catch (error) {
+      console.error('Error loading profile:', error);
+    }
+  }
+
+  // ============ FITUR 5-8: PROGRAM ============
+  async function loadPrograms() {
+    try {
+      const q = query(collection(db, 'programs'), orderBy('createdAt', 'desc'), limit(6));
+      const querySnapshot = await getDocs(q);
+      const grid = document.getElementById('programGrid');
+      
+      if (querySnapshot.empty) {
+        grid.innerHTML = `<div style="grid-column:span 3; text-align:center; color:var(--ink-faint); padding:2rem 0;">Belum ada program tersedia.</div>`;
+        return;
+      }
+
+      let html = '';
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const progress = data.progress || 0;
+        let statusClass = 'pending';
+        let statusText = 'Menunggu';
+        if (progress >= 100) { statusClass = 'done'; statusText = 'Selesai'; }
+        else if (progress > 0) { statusClass = 'active'; statusText = 'Aktif'; }
+        
+        html += `
+          <div class="program-card">
+            <div class="icon">${data.icon || '📚'}</div>
+            <h3>${data.name || 'Program'}</h3>
+            <div class="progress-bar"><div class="fill" style="width:${progress}%;"></div></div>
+            <span class="status ${statusClass}">${statusText} ${progress}%</span>
+            <p style="color:var(--ink-soft); font-size:.75rem; margin-top:.4rem;">${data.description || ''}</p>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    } catch (error) {
+      console.error('Error loading programs:', error);
+    }
+  }
+
+  // ============ FITUR 9: BERITA ============
+  async function loadNews() {
+    try {
+      const q = query(collection(db, 'berita'), orderBy('createdAt', 'desc'), limit(3));
+      const querySnapshot = await getDocs(q);
+      const grid = document.getElementById('newsGrid');
+      
+      if (querySnapshot.empty) {
+        grid.innerHTML = `<div style="grid-column:span 3; text-align:center; color:var(--ink-faint); padding:1rem 0;">Belum ada berita.</div>`;
+        return;
+      }
+
+      let html = '';
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        html += `
+          <div class="news-mini-card" onclick="window.location.href='berita.html?key=${doc.id}'">
+            <div class="thumb">
+              <img src="${data.image || 'https://placehold.co/400x200/e2e0da/14151A?text=FORMULA'}" alt="${data.title}" />
+            </div>
+            <div class="info">
+              <div class="date">${data.date || 'Tanpa tanggal'}</div>
+              <h4>${data.title || 'Berita'}</h4>
+            </div>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    } catch (error) {
+      console.error('Error loading news:', error);
+    }
+  }
+
+  // ============ FITUR 10: PRESTASI ============
+  async function loadPrestasi() {
+    try {
+      const q = query(collection(db, 'prestasi'), orderBy('tahun', 'desc'), limit(5));
+      const querySnapshot = await getDocs(q);
+      const list = document.getElementById('prestasiList');
+      
+      if (querySnapshot.empty) {
+        list.innerHTML = `<p style="color:var(--ink-soft); font-size:.85rem;">Belum ada prestasi.</p>`;
+        return;
+      }
+
+      let html = '';
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        html += `<p style="color:var(--ink-soft); font-size:.82rem; margin:.3rem 0;">🏅 ${data.nama || 'Prestasi'} (${data.tahun || '-'})</p>`;
+      });
+      list.innerHTML = html;
+    } catch (error) {
+      console.error('Error loading prestasi:', error);
+    }
+  }
+
+  // ============ FITUR 11: GALERI ============
+  async function loadGaleri() {
+    try {
+      const q = query(collection(db, 'gallery'), orderBy('createdAt', 'desc'), limit(4));
+      const querySnapshot = await getDocs(q);
+      const list = document.getElementById('galeriList');
+      
+      if (querySnapshot.empty) {
+        list.innerHTML = `<p style="color:var(--ink-soft); font-size:.85rem;">Belum ada foto.</p>`;
+        return;
+      }
+
+      let html = '<div style="display:grid; grid-template-columns:1fr 1fr; gap:.5rem;">';
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        html += `
+          <div style="border-radius:4px; overflow:hidden; height:60px;">
+            <img src="${data.image || 'https://placehold.co/100x60/e2e0da/14151A?text=G'}" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+        `;
+      });
+      html += '</div>';
+      list.innerHTML = html;
+    } catch (error) {
+      console.error('Error loading galeri:', error);
+    }
+  }
+
+  // ============ FITUR 12-14: TUGAS & KEHADIRAN ============
+  async function loadTugas() {
+    try {
+      const q = query(collection(db, 'tugas'), where('uid', '==', currentUid), orderBy('createdAt', 'desc'), limit(3));
+      const querySnapshot = await getDocs(q);
+      const list = document.getElementById('tugasList');
+      
+      if (querySnapshot.empty) {
+        list.innerHTML = `<p style="color:var(--ink-soft); font-size:.82rem;">Tidak ada tugas.</p>`;
+        return;
+      }
+
+      let html = '';
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        html += `<p style="color:var(--ink-soft); font-size:.78rem; margin:.2rem 0;">📄 ${data.judul || 'Tugas'}</p>`;
+      });
+      list.innerHTML = html;
+    } catch (error) {
+      console.error('Error loading tugas:', error);
+    }
+  }
+
+  // ============ FITUR 15: NOTIFIKASI ============
+  function loadNotifikasi() {
+    // Simulasi notifikasi
+    const count = Math.floor(Math.random() * 5);
+    document.getElementById('notifCount').textContent = `${count} notifikasi`;
+  }
+
+  // ============ FITUR 18: AKTIVITAS TERAKHIR ============
+  async function loadActivityLog() {
+    try {
+      const q = query(collection(db, 'activities'), where('uid', '==', currentUid), orderBy('createdAt', 'desc'), limit(5));
+      const querySnapshot = await getDocs(q);
+      const log = document.getElementById('activityLog');
+      
+      if (querySnapshot.empty) {
+        log.innerHTML = `
+          <div class="activity-item">
+            <span class="time">-</span>
+            <span class="desc">Belum ada aktivitas</span>
+            <span class="badge">-</span>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const time = data.time || '--:--';
+        const desc = data.desc || 'Aktivitas';
+        const badge = data.badge || 'update';
+        html += `
+          <div class="activity-item">
+            <span class="time">${time}</span>
+            <span class="desc">${desc}</span>
+            <span class="badge">${badge}</span>
+          </div>
+        `;
+      });
+      log.innerHTML = html;
+    } catch (error) {
+      console.error('Error loading activity log:', error);
+    }
+  }
+
+  // ============ FITUR 2: EDIT PROFIL ============
+  document.getElementById('btnEditProfile').addEventListener('click', () => {
+    document.getElementById('editNama').value = currentUserData.nama || '';
+    document.getElementById('editEmail').value = currentUserData.email || '';
+    document.getElementById('editMinat').value = currentUserData.minat || 'Web Development';
+    document.getElementById('editPassword').value = '';
+    document.getElementById('profileModal').classList.add('show');
+  });
+
+  document.getElementById('profileCancel').addEventListener('click', () => {
+    document.getElementById('profileModal').classList.remove('show');
+  });
+
+  document.getElementById('profileForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nama = document.getElementById('editNama').value.trim();
+    const email = document.getElementById('editEmail').value.trim();
+    const minat = document.getElementById('editMinat').value;
+    const password = document.getElementById('editPassword').value;
+
+    if (!nama || !email) {
+      showToast('Nama dan email harus diisi!', false);
+      return;
+    }
+
+    try {
+      const updateData = { nama, email, minat };
+      if (password && password.length >= 6) {
+        // Simpan password di Firestore (tanpa Auth)
+        updateData.password = password;
+      }
+      await updateDoc(doc(db, 'users', currentUid), updateData);
+      
+      // Update localStorage
+      localStorage.setItem('userName', nama);
+      localStorage.setItem('userEmail', email);
+      
+      showToast('Profil berhasil diupdate!', true);
+      document.getElementById('profileModal').classList.remove('show');
+      loadProfile();
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      showToast('Gagal update profil.', false);
+    }
+  });
+
+  // ============ FITUR 6-7: JOIN PROGRAM ============
+  document.getElementById('btnJoinProgram').addEventListener('click', () => {
+    document.getElementById('joinModal').classList.add('show');
+  });
+
+  document.getElementById('joinCancel').addEventListener('click', () => {
+    document.getElementById('joinModal').classList.remove('show');
+  });
+
+  document.getElementById('joinForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const program = document.getElementById('joinProgramSelect').value;
+
+    try {
+      await addDoc(collection(db, 'programs'), {
+        name: program,
+        uid: currentUid,
+        userEmail: userEmail,
+        progress: 0,
+        status: 'pending',
+        joinedAt: new Date().toISOString(),
+        createdAt: Date.now()
+      });
+
+      // Update statistik member
+      await updateDoc(doc(db, 'users', currentUid), {
+        programs: (currentUserData.programs || 0) + 1
+      });
+
+      showToast(`Berhasil join program ${program}!`, true);
+      document.getElementById('joinModal').classList.remove('show');
+      loadPrograms();
+      loadProfile();
+    } catch (error) {
+      console.error('Error joining program:', error);
+      showToast('Gagal join program.', false);
+    }
+  });
+
+  // ============ FITUR 12: UPLOAD TUGAS ============
+  document.getElementById('btnUploadTugas').addEventListener('click', () => {
+    document.getElementById('uploadModal').classList.add('show');
+  });
+
+  document.getElementById('uploadCancel').addEventListener('click', () => {
+    document.getElementById('uploadModal').classList.remove('show');
+  });
+
+  document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const judul = document.getElementById('uploadJudul').value.trim();
+    const deskripsi = document.getElementById('uploadDeskripsi').value.trim();
+    const link = document.getElementById('uploadLink').value.trim();
+
+    if (!judul) {
+      showToast('Judul tugas harus diisi!', false);
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, 'tugas'), {
+        judul,
+        deskripsi: deskripsi || '-',
+        link: link || '-',
+        uid: currentUid,
+        userEmail: userEmail,
+        status: 'pending',
+        createdAt: Date.now()
+      });
+
+      showToast('Tugas berhasil diupload!', true);
+      document.getElementById('uploadModal').classList.remove('show');
+      document.getElementById('uploadForm').reset();
+      loadTugas();
+    } catch (error) {
+      console.error('Error uploading tugas:', error);
+      showToast('Gagal upload tugas.', false);
+    }
+  });
+
+  // ============ TOAST ============
   function showToast(text, isSuccess = true) {
     const toast = document.getElementById('toast');
     toast.className = 'toast show' + (isSuccess ? ' success' : ' error');
@@ -282,40 +931,30 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
     window.toastTimer = setTimeout(() => { toast.className = 'toast'; }, 4000);
   }
 
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      userDisplay.textContent = user.displayName || user.email;
-      welcomeText.textContent = `Selamat datang, ${user.displayName || 'Anggota'}!`;
-
-      try {
-        const snapshot = await get(ref(db, 'users/' + user.uid));
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-          // Jika role admin, redirect ke dashboard admin
-          if (data.role === 'admin') {
-            window.location.href = 'dashboard-admin.html';
-          }
-          // Update stats
-          document.getElementById('programCount').textContent = data.programs || 0;
-          document.getElementById('proyekCount').textContent = data.projects || 0;
-          document.getElementById('sertifikatCount').textContent = data.certificates || 0;
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    } else {
-      window.location.href = 'login.html';
-    }
+  // ============ LOGOUT ============
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('userLoggedIn');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userName');
+    window.location.replace('login.html');
   });
 
-  logoutBtn.addEventListener('click', async () => {
-    try {
-      await signOut(auth);
-      showToast('Logout berhasil!', true);
-      setTimeout(() => { window.location.href = 'login.html'; }, 1000);
-    } catch (error) {
-      showToast('Gagal logout.', false);
-    }
+  // ============ LOAD ALL ============
+  loadProfile();
+  loadPrograms();
+  loadNews();
+  loadPrestasi();
+  loadGaleri();
+  loadTugas();
+  loadNotifikasi();
+  loadActivityLog();
+
+  // ============ REALTIME LISTENER UNTUK NOTIFIKASI ============
+  onSnapshot(collection(db, 'notifications'), (snapshot) => {
+    let count = 0;
+    snapshot.forEach(() => count++);
+    document.getElementById('notifCount').textContent = `${count} notifikasi`;
   });
 </script>
 
