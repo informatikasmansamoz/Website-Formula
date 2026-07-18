@@ -3,258 +3,149 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Login — FORMULA SMAN 1 MOJOSARI</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Login — FORMULA</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{
-  --paper: #F7F6F3; --paper-2: #FFFFFF; --ink: #14151A;
-  --ink-soft: #5B5D66; --ink-faint: #9A9CA3;
-  --line: #E2E0DA; --line-strong: #CFCCC4;
-  --accent: #FF5A1F; --accent-tint: #FFE7DA;
-  --status: #16A34A;
-  --f-display: 'Space Grotesk', sans-serif;
-  --f-body: 'Inter', sans-serif;
-  --f-mono: 'IBM Plex Mono', monospace;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f0f0f0;
 }
-*{ margin:0; padding:0; box-sizing:border-box; }
-body{
-  font-family: var(--f-body);
-  background: var(--paper);
-  color: var(--ink);
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:1.5rem;
+.login-box {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  width: 350px;
 }
-a{ color:inherit; text-decoration:none; }
-img{ display:block; }
-
-.login-card{
-  background:var(--paper-2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:2.5rem 2.8rem;
-  max-width:420px;
-  width:100%;
-  box-shadow:0 12px 40px rgba(0,0,0,0.04);
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
-.login-card .brand{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:.5rem;
-  margin-bottom:2rem;
-  text-align:center;
+button {
+  width: 100%;
+  padding: 12px;
+  background: #FF5A1F;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
 }
-.login-card .brand .mark{
-  width:100px; height:100px;
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden; border-radius:100px; margin:0 auto;
+button:hover { background: #e0500f; }
+#result {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
 }
-.login-card .brand .mark img{
-  width:100%; height:100%; object-fit:cover;
-}
-.login-card .brand .name{
-  font-family:var(--f-display); font-weight:700; font-size:1.2rem; line-height:1.15; color:var(--ink);
-}
-.login-card .brand .sub{
-  font-family:var(--f-mono); font-size:.6rem; color:var(--ink-soft); letter-spacing:.05em; margin-top:-.2rem;
-}
-.login-card h1{
-  font-family:var(--f-display); font-size:1.6rem; font-weight:600; margin-bottom:.2rem; text-align:center;
-}
-.login-card .subhead{
-  color:var(--ink-soft); font-size:.88rem; margin-bottom:1.8rem; text-align:center;
-}
-.login-card form{
-  display:flex; flex-direction:column; gap:1.2rem;
-}
-.login-card label{
-  font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase; letter-spacing:.08em;
-  color:var(--ink-faint); display:block; margin-bottom:.3rem;
-}
-.login-card input{
-  width:100%; padding:.75rem 1rem;
-  font-family:var(--f-body); font-size:.9rem; color:var(--ink);
-  background:var(--paper); border:1px solid var(--line); border-radius:6px;
-  outline:none; transition: border-color .2s ease;
-}
-.login-card input:focus{ border-color:var(--accent); }
-.login-card .btn-login{
-  font-family:var(--f-body); font-weight:600; font-size:.88rem;
-  padding:.75rem 1.5rem; background:var(--accent); color:var(--paper-2);
-  border:none; border-radius:6px; cursor:pointer;
-  transition: background .2s ease; margin-top:.3rem; width:100%;
-}
-.login-card .btn-login:hover{ background:#e0500f; }
-.login-card .btn-login:disabled{ opacity:0.6; cursor:not-allowed; }
-.toast{
-  margin-top:1rem; padding:.7rem 1rem; border-radius:6px;
-  font-weight:500; font-size:.82rem; display:none;
-  align-items:center; gap:.5rem; justify-content:center;
-}
-.toast.show{ display:flex; }
-.toast.success{ background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
-.toast.error{ background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
+.error { background: #fee; color: #c00; }
+.success { background: #efe; color: #060; }
 </style>
 </head>
 <body>
 
-<div class="login-card">
-  <div class="brand">
-    <div class="mark"><img src="formula.png" alt="FORMULA Logo" /></div>
-    <div>
-      <div class="name">FORMULA</div>
-      <div class="sub">SMAN 1 MOJOSARI</div>
-    </div>
-  </div>
-
-  <h1>Selamat Datang</h1>
-  <p class="subhead">Masuk ke dashboard</p>
-
+<div class="login-box">
+  <h2>🔐 Login FORMULA</h2>
   <form id="loginForm">
-    <div>
-      <label>Email</label>
-      <input type="email" placeholder="email@example.com" required id="loginEmail" />
-    </div>
-    <div>
-      <label>Password</label>
-      <input type="password" placeholder="••••••••" required id="loginPassword" />
-    </div>
-    <button type="submit" class="btn-login" id="loginBtn">Masuk →</button>
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button type="submit">Login</button>
   </form>
-
-  <div id="toast" class="toast">
-    <span id="toastIcon">✅</span>
-    <span id="toastText">Berhasil!</span>
-  </div>
+  <div id="result"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ============================================
-// KONFIGURASI SUPABASE - UDAH PAKE PUNYAMU!
+// KONFIGURASI SUPABASE
 // ============================================
-const SUPABASE_URL = 'https://xdpgscxconehpjisngxv.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhkcGdzY3hjb25laHBqaXNuZ3h2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzMTU5MTYsImV4cCI6MjA5OTg5MTkxNn0.phZh4eymJUU6ouQHLXvjxknMhbaQKo7RLm9usP8bfI4';
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabaseClient = supabase.createClient(
+  'https://xdpgscxconehpjisngxv.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhkcGdzY3hjb25laHBqaXNuZ3h2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzMTU5MTYsImV4cCI6MjA5OTg5MTkxNn0.phZh4eymJUU6ouQHLXvjxknMhbaQKo7RLm9usP8bfI4'
+);
 
 // ============================================
 // ELEMEN
 // ============================================
 const form = document.getElementById('loginForm');
-const emailInput = document.getElementById('loginEmail');
-const passwordInput = document.getElementById('loginPassword');
-const btn = document.getElementById('loginBtn');
-const toast = document.getElementById('toast');
-const toastText = document.getElementById('toastText');
-const toastIcon = document.getElementById('toastIcon');
-
-function showToast(text, isSuccess = true) {
-  toast.className = 'toast show';
-  toast.className += isSuccess ? ' success' : ' error';
-  toastText.textContent = text;
-  toastIcon.textContent = isSuccess ? '✅' : '⚠️';
-  clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(() => { toast.className = 'toast'; }, 4000);
-}
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const result = document.getElementById('result');
 
 // ============================================
-// LOGIN - TANPA .single() !!!
+// LOGIN - PAKE SUPABASE AUTH
 // ============================================
-form.addEventListener('submit', async function(e) {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
   
-  // MATIKAN DULU BUTTON BIAR GA DI KLIK 2X
-  btn.disabled = true;
-  btn.textContent = '⏳ Memuat...';
-
-  const emailVal = emailInput.value.trim();
-  const passVal = passwordInput.value.trim();
-
-  console.log('========================================');
-  console.log('🚀 PROSES LOGIN DIMULAI');
-  console.log('📧 Email:', `"${emailVal}"`);
-  console.log('🔑 Password:', `"${passVal}"`);
-  console.log('========================================');
-
-  if (!emailVal || !passVal) {
-    showToast('Email dan password harus diisi!', false);
-    btn.disabled = false;
-    btn.textContent = 'Masuk →';
-    return;
-  }
-
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
+  
+  result.className = '';
+  result.textContent = '⏳ Memuat...';
+  
+  console.log('🚀 LOGIN:', email);
+  
   try {
-    // 🔥 INI YANG BENAR - TANPA .single()!
-    console.log('🔍 Query ke Supabase...');
-    const { data, error } = await supabaseClient
+    // 🔥 PAKE SUPABASE AUTH - BIKIN auth.uid() KEBACA!
+    const { data: authData, error: authError } = await supabaseClient.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+    
+    console.log('🔐 Auth response:', { authData, authError });
+    
+    if (authError) {
+      result.className = 'error';
+      result.textContent = '❌ ' + authError.message;
+      return;
+    }
+    
+    // AMBIL DATA USER DARI TABEL USERS (PAKE auth_id)
+    const { data: userData, error: userError } = await supabaseClient
       .from('users')
       .select('*')
-      .eq('email', emailVal);
-
-    console.log('📦 Data dari DB:', data);
-    console.log('📦 Error dari DB:', error);
-
-    // CEK ERROR DULU
-    if (error) {
-      console.error('❌ ERROR:', error);
-      showToast('Terjadi kesalahan sistem!', false);
-      btn.disabled = false;
-      btn.textContent = 'Masuk →';
+      .eq('auth_id', authData.user.id)
+      .single();
+    
+    console.log('👤 User data:', userData);
+    
+    if (userError || !userData) {
+      result.className = 'error';
+      result.textContent = '❌ Data user tidak ditemukan!';
       return;
     }
-
-    // CEK APAKAH DATA KOSONG
-    if (!data || data.length === 0) {
-      console.log('❌ EMAIL TIDAK DITEMUKAN!');
-      showToast('Email tidak ditemukan!', false);
-      btn.disabled = false;
-      btn.textContent = 'Masuk →';
-      return;
-    }
-
-    // AMBIL USER PERTAMA
-    const user = data[0];
-    console.log('✅ USER DITEMUKAN:', user);
-    console.log('🔑 Password di DB:', `"${user.password}"`);
-    console.log('🔑 Password input:', `"${passVal}"`);
-
-    // CEK PASSWORD
-    if (user.password !== passVal) {
-      console.log('❌ PASSWORD SALAH!');
-      showToast('Password salah!', false);
-      btn.disabled = false;
-      btn.textContent = 'Masuk →';
-      return;
-    }
-
-    // ✅ LOGIN BERHASIL!
-    console.log('🎉🎉🎉 LOGIN BERHASIL! 🎉🎉🎉');
+    
+    // ✅ LOGIN BERHASIL
+    result.className = 'success';
+    result.textContent = '✅ Login berhasil! Redirecting...';
     
     localStorage.setItem('userLoggedIn', 'true');
-    localStorage.setItem('userEmail', emailVal);
-    localStorage.setItem('userRole', user.role || 'member');
-    localStorage.setItem('userName', user.nama || '');
-
-    showToast('Login berhasil! 🎉', true);
-
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userRole', userData.role || 'member');
+    localStorage.setItem('userName', userData.nama || '');
+    localStorage.setItem('userId', authData.user.id);
+    
     setTimeout(() => {
-      if (user.role === 'admin') {
+      if (userData.role === 'admin') {
         window.location.href = 'dashboard-admin.html';
       } else {
         window.location.href = 'dashboard-anggota-formula.html';
       }
-    }, 1200);
-
-  } catch (error) {
-    console.error('❌ ERROR GAK TERDUGA:', error);
-    showToast('Terjadi kesalahan. Coba lagi.', false);
-    btn.disabled = false;
-    btn.textContent = 'Masuk →';
+    }, 1500);
+    
+  } catch (err) {
+    console.error('❌ Error:', err);
+    result.className = 'error';
+    result.textContent = '❌ Error: ' + err.message;
   }
 });
 </script>
