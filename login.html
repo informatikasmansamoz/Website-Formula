@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Login — FORMULA SMAN 1 MOJOSARI</title>
+<title>Dashboard Admin — FORMULA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -17,6 +17,7 @@
   --f-display: 'Space Grotesk', sans-serif;
   --f-body: 'Inter', sans-serif;
   --f-mono: 'IBM Plex Mono', monospace;
+  --max: 1120px;
 }
 *{ margin:0; padding:0; box-sizing:border-box; }
 body{
@@ -24,227 +25,801 @@ body{
   background: var(--paper);
   color: var(--ink);
   min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:1.5rem;
 }
 a{ color:inherit; text-decoration:none; }
 img{ display:block; }
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 2rem; }
 .mono{ font-family:var(--f-mono); }
 
-.login-card{
-  background:var(--paper-2);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:2.5rem 2.8rem;
-  max-width:420px;
-  width:100%;
-  box-shadow:0 12px 40px rgba(0,0,0,0.04);
+.nav{
+  position:sticky; top:0; z-index:50;
+  background: rgba(247,246,243,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
 }
-.login-card .brand{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:.5rem;
-  margin-bottom:2rem;
-  text-align:center;
+.nav-inner{
+  max-width:var(--max); margin:0 auto; padding:1rem 2rem;
+  display:flex; align-items:center; justify-content:space-between;
 }
-.login-card .brand .mark{
-  width:200px; height:200px;
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden; border-radius:100px; margin:0 auto;
+.brand{ display:flex; align-items:center; gap:.7rem; }
+.brand .mark{
+  width:34px; height:34px; overflow:hidden; border-radius:4px;
 }
-.login-card .brand .mark img{
-  width:100%; height:100%; object-fit:cover;
+.brand .mark img{ width:100%; height:100%; object-fit:cover; }
+.brand .name{
+  font-family:var(--f-display); font-weight:700; font-size:.95rem; line-height:1.15;
 }
-.login-card .brand .name{
-  font-family:var(--f-display); font-weight:700; font-size:1.2rem; line-height:1.15; color:var(--ink);
+.brand .sub{
+  font-family:var(--f-mono); font-size:.6rem; color:var(--ink-soft); letter-spacing:.05em;
 }
-.login-card .brand .sub{
-  font-family:var(--f-mono); font-size:.6rem; color:var(--ink-soft); letter-spacing:.05em; margin-top:-.2rem;
+.nav-cta{ display:flex; align-items:center; gap:.9rem; }
+.btn-logout{
+  background:transparent; border:1px solid #ef4444; color:#ef4444;
+  padding:.4rem 1rem; border-radius:6px; font-weight:600; font-size:.78rem;
+  cursor:pointer; transition: all .18s ease;
 }
-.login-card h1{
-  font-family:var(--f-display); font-size:1.6rem; font-weight:600; margin-bottom:.2rem; text-align:center;
+.btn-logout:hover{ background:#ef4444; color:white; }
+
+.dashboard-header{ padding:2.5rem 0 1.5rem; border-bottom:1px solid var(--line); }
+.dashboard-header h1{
+  font-family:var(--f-display); font-size:clamp(1.8rem,3vw,2.4rem);
+  font-weight:600; letter-spacing:-0.02em;
 }
-.login-card .subhead{
-  color:var(--ink-soft); font-size:.88rem; margin-bottom:1.8rem; text-align:center;
+.dashboard-header h1 span{ color:var(--accent); }
+.dashboard-header .subhead{ color:var(--ink-soft); font-size:.95rem; margin-top:.3rem; }
+
+.section{ padding:2.5rem 0; border-bottom:1px solid var(--line); }
+.section:last-of-type{ border-bottom:none; }
+.section-head{
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem;
 }
-.login-card form{
-  display:flex; flex-direction:column; gap:1.2rem;
+.section-head h2{
+  font-family:var(--f-display); font-size:1.2rem; font-weight:600;
 }
-.login-card label{
-  font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase; letter-spacing:.08em;
-  color:var(--ink-faint); display:block; margin-bottom:.3rem;
+.section-head .tag{
+  font-family:var(--f-mono); font-size:.65rem; color:var(--ink-faint);
 }
-.login-card input{
-  width:100%; padding:.75rem 1rem;
-  font-family:var(--f-body); font-size:.9rem; color:var(--ink);
-  background:var(--paper); border:1px solid var(--line); border-radius:6px;
-  outline:none; transition: border-color .2s ease;
-}
-.login-card input:focus{ border-color:var(--accent); }
-.login-card .btn-login{
-  font-family:var(--f-body); font-weight:600; font-size:.88rem;
-  padding:.75rem 1.5rem; background:var(--accent); color:var(--paper-2);
+.section-head .btn-add{
+  font-family:var(--f-body); font-weight:600; font-size:.78rem;
+  padding:.4rem 1rem; background:var(--accent); color:var(--paper-2);
   border:none; border-radius:6px; cursor:pointer;
-  transition: background .2s ease; margin-top:.3rem; width:100%;
 }
-.login-card .btn-login:hover{ background:#e0500f; }
-.login-card .btn-login:disabled{ opacity:0.6; cursor:not-allowed; }
+
+.stats-grid{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:1.2rem;
+}
+.stat-card{
+  background:var(--paper-2); border:1px solid var(--line); border-radius:8px;
+  padding:1.2rem; text-align:center;
+}
+.stat-card .number{
+  font-family:var(--f-display); font-size:1.8rem; font-weight:700; color:var(--accent);
+}
+.stat-card .label{ color:var(--ink-soft); font-size:.82rem; margin-top:.2rem; }
+
+.table-wrap{ overflow-x:auto; }
+table{
+  width:100%; border-collapse:collapse;
+  background:var(--paper-2); border-radius:8px; overflow:hidden;
+}
+th, td{
+  padding:.8rem 1rem; text-align:left; font-size:.85rem;
+  border-bottom:1px solid var(--line);
+}
+th{
+  font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--ink-faint); background:var(--paper);
+}
+td{ color:var(--ink-soft); }
+td .badge{
+  font-family:var(--f-mono); font-size:.6rem; text-transform:uppercase;
+  padding:.15rem .5rem; border-radius:4px;
+}
+td .badge.admin{ background:#fef3c7; color:#d97706; }
+td .badge.member{ background:#dbeafe; color:#2563eb; }
+td .btn-edit{
+  background:transparent; border:1px solid var(--line);
+  padding:.2rem .6rem; border-radius:4px; font-size:.7rem;
+  cursor:pointer; margin-right:.3rem;
+}
+td .btn-delete{
+  background:transparent; border:1px solid #ef4444; color:#ef4444;
+  padding:.2rem .6rem; border-radius:4px; font-size:.7rem;
+  cursor:pointer;
+}
+
+footer{ background:var(--ink); color:rgba(247,246,243,0.55); padding:2.5rem 0 1.5rem; margin-top:2rem; }
+.f-inner{ max-width:var(--max); margin:0 auto; padding:0 2rem; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2.5rem; }
+footer h4{
+  font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase;
+  letter-spacing:.1em; color:rgba(247,246,243,0.3); margin-bottom:.9rem;
+}
+footer a{
+  display:block; color:rgba(247,246,243,0.55); font-size:.85rem; margin-bottom:.5rem;
+}
+footer a:hover{ color:var(--accent); }
+footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,243,0.4); }
+.f-bottom{
+  max-width:var(--max); margin:2rem auto 0; padding:1.2rem 2rem 0;
+  border-top:1px solid rgba(247,246,243,0.1);
+  display:flex; justify-content:space-between;
+  font-family:var(--f-mono); font-size:.68rem; color:rgba(247,246,243,0.25);
+  flex-wrap:wrap; gap:.5rem;
+}
+
+.modal{
+  display:none; position:fixed; inset:0; z-index:999;
+  background:rgba(0,0,0,0.4); align-items:center; justify-content:center;
+}
+.modal.show{ display:flex; }
+.modal-content{
+  background:var(--paper-2); border-radius:12px; padding:2rem;
+  max-width:500px; width:100%; max-height:80vh; overflow-y:auto;
+}
+.modal-content h3{
+  font-family:var(--f-display); font-size:1.2rem; font-weight:600; margin-bottom:1rem;
+}
+.modal-content label{
+  font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--ink-faint); display:block; margin:.8rem 0 .3rem;
+}
+.modal-content input, .modal-content select, .modal-content textarea{
+  width:100%; padding:.6rem .8rem;
+  font-family:var(--f-body); font-size:.85rem;
+  background:var(--paper); border:1px solid var(--line); border-radius:6px;
+  outline:none;
+}
+.modal-content textarea{ resize:vertical; min-height:80px; }
+.modal-content .btn-save{
+  margin-top:1.2rem; padding:.7rem 1.5rem;
+  background:var(--accent); color:var(--paper-2);
+  border:none; border-radius:6px; font-weight:600; cursor:pointer;
+}
+.modal-content .btn-cancel{
+  margin-top:1.2rem; margin-left:.5rem; padding:.7rem 1.5rem;
+  background:transparent; border:1px solid var(--line); border-radius:6px;
+  font-weight:600; cursor:pointer;
+}
+
 .toast{
-  margin-top:1rem; padding:.7rem 1rem; border-radius:6px;
-  font-weight:500; font-size:.82rem; display:none;
-  align-items:center; gap:.5rem; justify-content:center;
+  position:fixed; top:1.5rem; right:1.5rem;
+  padding:.8rem 1.2rem; border-radius:8px; font-weight:500; font-size:.85rem;
+  display:none; align-items:center; gap:.6rem; z-index:999;
+  box-shadow:0 4px 16px rgba(0,0,0,0.08); max-width:360px;
 }
 .toast.show{ display:flex; }
 .toast.success{ background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
 .toast.error{ background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
-@media (max-width: 500px){
-  .login-card{ padding:1.8rem 1.2rem; }
-  .login-card .brand .mark{ width:50px; height:50px; }
-  .login-card .brand .name{ font-size:1rem; }
+
+@media (max-width: 900px){
+  .stats-grid{ grid-template-columns:1fr 1fr; }
+  .f-inner{ grid-template-columns:1fr; }
 }
+@media (max-width: 500px){ .stats-grid{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 
-<div class="login-card">
-  <div class="brand">
-    <div class="mark"><img src="formula.png" alt="FORMULA Logo" /></div>
-    <div>
-      <div class="name">FORMULA</div>
-      <div class="sub">SMAN 1 MOJOSARI</div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <div class="mark"><img src="formula.png" alt="FORMULA Logo" /></div>
+      <div>
+        <div class="name">FORMULA</div>
+        <div class="sub">SMAN 1 MOJOSARI</div>
+      </div>
+    </a>
+    <div class="nav-cta">
+      <span style="font-family:var(--f-mono); font-size:.7rem; color:var(--ink-soft);" id="userDisplay">Admin</span>
+      <button class="btn-logout" id="logoutBtn">Logout</button>
     </div>
   </div>
+</nav>
 
-  <h1>Selamat Datang</h1>
-  <p class="subhead">Masuk ke dashboard</p>
+<header class="dashboard-header">
+  <div class="wrap">
+    <h1>Dashboard <span>Admin</span></h1>
+    <p class="subhead" id="welcomeText">Kelola anggota dan program FORMULA</p>
+  </div>
+</header>
 
-  <form id="loginForm">
-    <div>
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Statistik</h2>
+      <span class="tag">// overview</span>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="number" id="totalAnggota">0</div>
+        <div class="label">Total Anggota</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="totalAdmin">0</div>
+        <div class="label">Admin</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="totalProgram">0</div>
+        <div class="label">Program Aktif</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="totalProyek">0</div>
+        <div class="label">Proyek Selesai</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="totalBerita">0</div>
+        <div class="label">Total Berita</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Daftar Anggota</h2>
+      <div>
+        <button class="btn-add" id="btnTambahAnggota">+ Tambah</button>
+        <span class="tag">// manage</span>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Minat</th>
+            <th>Role</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="memberTableBody">
+          <tr><td colspan="5" style="text-align:center; color:var(--ink-faint);">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Kelola Berita -->
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Kelola Berita</h2>
+      <div>
+        <button class="btn-add" id="btnTambahBerita">+ Tambah Berita</button>
+        <span class="tag">// manage</span>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Judul</th>
+            <th>Tanggal</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="beritaTableBody">
+          <tr><td colspan="4" style="text-align:center; color:var(--ink-faint);">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Tambah/Edit Anggota -->
+<div class="modal" id="memberModal">
+  <div class="modal-content">
+    <h3 id="modalTitle">Tambah Anggota</h3>
+    <form id="memberForm">
+      <label>Nama Lengkap</label>
+      <input type="text" id="formNama" required />
       <label>Email</label>
-      <input type="email" placeholder="email@example.com" required id="loginEmail" />
-    </div>
-    <div>
+      <input type="email" id="formEmail" required />
       <label>Password</label>
-      <input type="password" placeholder="••••••••" required id="loginPassword" />
-    </div>
-    <button type="submit" class="btn-login" id="loginBtn">Masuk →</button>
-  </form>
-
-  <div id="toast" class="toast">
-    <span id="toastIcon">✅</span>
-    <span id="toastText">Berhasil!</span>
+      <input type="password" id="formPassword" placeholder="Minimal 6 karakter" />
+      <label>Minat</label>
+      <select id="formMinat">
+        <option value="Web Development">Web Development</option>
+        <option value="Desain Grafis">Desain Grafis</option>
+        <option value="Animasi & Multimedia">Animasi & Multimedia</option>
+        <option value="UI/UX Design">UI/UX Design</option>
+        <option value="Programming">Programming</option>
+        <option value="Fotografi & Videografi">Fotografi & Videografi</option>
+      </select>
+      <label>Role</label>
+      <select id="formRole">
+        <option value="member">Anggota</option>
+        <option value="admin">Admin</option>
+      </select>
+      <div style="margin-top:1.2rem;">
+        <button type="submit" class="btn-save" id="formSubmit">Simpan</button>
+        <button type="button" class="btn-cancel" id="formCancel">Batal</button>
+      </div>
+    </form>
   </div>
 </div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+<!-- Modal Berita -->
+<div class="modal" id="beritaModal">
+  <div class="modal-content">
+    <h3 id="beritaModalTitle">Tambah Berita</h3>
+    <form id="beritaForm">
+      <label>Judul Berita</label>
+      <input type="text" id="formBeritaJudul" required placeholder="Masukkan judul berita" />
+      <label>Tanggal (opsional)</label>
+      <input type="date" id="formBeritaTanggal" />
+      <label>Link Gambar (URL)</label>
+      <input type="url" id="formBeritaGambar" placeholder="https://contoh.com/gambar.jpg" />
+      <label>Konten / Isi Berita</label>
+      <textarea id="formBeritaKonten" rows="6" required placeholder="Tulis isi berita lengkap di sini..."></textarea>
+      <div style="margin-top:1.2rem;">
+        <button type="submit" class="btn-save" id="beritaSubmit">Simpan</button>
+        <button type="button" class="btn-cancel" id="beritaCancel">Batal</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBT20RmFLmBMQnNr5pMFGHwTlFnhYSqvA4",
-    authDomain: "formula-sman1mojosari.firebaseapp.com",
-    projectId: "formula-sman1mojosari",
-    storageBucket: "formula-sman1mojosari.firebasestorage.app",
-    messagingSenderId: "20405558374",
-    appId: "1:20405558374:web:8f7142be995d73ec00e1a7"
-  };
+<div id="toast" class="toast"><span id="toastIcon">✅</span><span id="toastText">Berhasil!</span></div>
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+<footer>
+  <div class="f-inner">
+    <div>
+      <div style="display:flex; align-items:center; gap:.7rem; margin-bottom:1rem;">
+        <div class="mark" style="border-color:rgba(247,246,243,.3); color:#F7F6F3; overflow:hidden; border-radius:4px; padding:0;">
+          <img src="formula.png" alt="FORMULA Logo" style="width:25%;height:25%;object-fit:cover;" />
+        </div>
+        <div style="color:#F7F6F3; font-family:var(--f-display); font-weight:700; font-size:.95rem;">FORMULA</div>
+      </div>
+      <p>Komunitas teknologi Informatika dan Multimedia — mencetak talenta kreatif digital unggul.</p>
+    </div>
+    <div>
+      <h4>Navigasi</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">Tentang</a>
+      <a href="gallery.html">Galeri</a>
+      <a href="contact.html">Kontak</a>
+    </div>
+    <div>
+      <h4>Program</h4>
+      <a href="web-development.html">Web Development</a>
+      <a href="desain-grafis.html">Desain Grafis</a>
+      <a href="classes.html">Semua Program →</a>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2026 FORMULA · SMAN 1 MOJOSARI</span>
+    <span>NODE: MOJOSARI-01 / STATUS: ONLINE</span>
+  </div>
+</footer>
 
-  const form = document.getElementById('loginForm');
-  const email = document.getElementById('loginEmail');
-  const password = document.getElementById('loginPassword');
-  const btn = document.getElementById('loginBtn');
-  const toast = document.getElementById('toast');
-  const toastText = document.getElementById('toastText');
-  const toastIcon = document.getElementById('toastIcon');
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ============================================
+  // KONFIGURASI SUPABASE
+  // ============================================
+  const supabaseUrl = 'https://xxxxxxxxxxxx.supabase.co'; // GANTI!
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // GANTI!
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+  // ============================================
+  // CEK LOGIN
+  // ============================================
+  const userEmail = localStorage.getItem('userEmail');
+  const userRole = localStorage.getItem('userRole');
+
+  if (!userEmail || userRole !== 'admin') {
+    window.location.replace('login.html');
+  }
+
+  document.getElementById('userDisplay').textContent = localStorage.getItem('userName') || 'Admin';
+  document.getElementById('welcomeText').textContent = `Selamat datang, ${localStorage.getItem('userName') || 'Admin'}!`;
+
+  // ============================================
+  // LOGOUT
+  // ============================================
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    localStorage.clear();
+    window.location.replace('login.html');
+  });
+
+  // ============================================
+  // TOAST
+  // ============================================
   function showToast(text, isSuccess = true) {
-    toast.className = 'toast show';
-    toast.className += isSuccess ? ' success' : ' error';
-    toastText.textContent = text;
-    toastIcon.textContent = isSuccess ? '✅' : '⚠️';
+    const toast = document.getElementById('toast');
+    toast.className = 'toast show' + (isSuccess ? ' success' : ' error');
+    document.getElementById('toastText').textContent = text;
+    document.getElementById('toastIcon').textContent = isSuccess ? '✅' : '⚠️';
     clearTimeout(window.toastTimer);
     window.toastTimer = setTimeout(() => { toast.className = 'toast'; }, 4000);
+  }
+
+  // ============================================
+  // LOAD MEMBERS
+  // ============================================
+  const tableBody = document.getElementById('memberTableBody');
+  const totalAnggota = document.getElementById('totalAnggota');
+  const totalAdmin = document.getElementById('totalAdmin');
+
+  async function loadMembers() {
+    try {
+      const { data: users, error } = await supabase
+        .from('users')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      let html = '';
+      let countAnggota = 0, countAdmin = 0;
+
+      users.forEach((user) => {
+        if (user.role === 'admin') countAdmin++;
+        else countAnggota++;
+
+        html += `
+          <tr>
+            <td><strong>${user.nama || 'Tidak ada'}</strong></td>
+            <td>${user.email || '-'}</td>
+            <td>${user.minat || '-'}</td>
+            <td><span class="badge ${user.role === 'admin' ? 'admin' : 'member'}">${user.role || 'member'}</span></td>
+            <td>
+              <button class="btn-edit" data-uid="${user.id}">Edit</button>
+              <button class="btn-delete" data-uid="${user.id}">Hapus</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      tableBody.innerHTML = html || '<tr><td colspan="5" style="text-align:center; color:var(--ink-faint);">Belum ada anggota</td></tr>';
+      totalAnggota.textContent = countAnggota;
+      totalAdmin.textContent = countAdmin;
+
+      // Statistik lain (nanti kita hitung dari database)
+      const { count: programCount } = await supabase
+        .from('programs')
+        .select('*', { count: 'exact', head: true });
+      document.getElementById('totalProgram').textContent = programCount || 0;
+
+      const { count: beritaCount } = await supabase
+        .from('berita')
+        .select('*', { count: 'exact', head: true });
+      document.getElementById('totalBerita').textContent = beritaCount || 0;
+
+      // Event listener untuk edit/delete
+      document.querySelectorAll('.btn-edit').forEach(btn => {
+        btn.addEventListener('click', () => openEditModal(btn.dataset.uid));
+      });
+      document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', () => deleteMember(btn.dataset.uid));
+      });
+    } catch (error) {
+      console.error('Error loading members:', error);
+    }
+  }
+
+  // ============================================
+  // DELETE MEMBER
+  // ============================================
+  async function deleteMember(uid) {
+    if (!confirm('Yakin ingin menghapus anggota ini?')) return;
+    try {
+      const { error } = await supabase
+        .from('users')
+        .delete()
+        .eq('id', uid);
+
+      if (error) throw error;
+
+      showToast('Anggota berhasil dihapus!', true);
+      loadMembers();
+      loadBerita();
+    } catch (error) {
+      console.error('Delete error:', error);
+      showToast('Gagal menghapus anggota.', false);
+    }
+  }
+
+  // ============================================
+  // MODAL MEMBER
+  // ============================================
+  const modal = document.getElementById('memberModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const form = document.getElementById('memberForm');
+  const formNama = document.getElementById('formNama');
+  const formEmail = document.getElementById('formEmail');
+  const formPassword = document.getElementById('formPassword');
+  const formMinat = document.getElementById('formMinat');
+  const formRole = document.getElementById('formRole');
+  const formSubmit = document.getElementById('formSubmit');
+  const formCancel = document.getElementById('formCancel');
+  const btnTambah = document.getElementById('btnTambahAnggota');
+  let editingUid = null;
+
+  function openAddModal() {
+    editingUid = null;
+    modalTitle.textContent = 'Tambah Anggota';
+    formSubmit.textContent = 'Simpan';
+    form.reset();
+    formPassword.placeholder = 'Minimal 6 karakter';
+    modal.classList.add('show');
+  }
+
+  function openEditModal(uid) {
+    editingUid = uid;
+    modalTitle.textContent = 'Edit Anggota';
+    formSubmit.textContent = 'Update';
+    
+    supabase
+      .from('users')
+      .select('*')
+      .eq('id', uid)
+      .single()
+      .then(({ data, error }) => {
+        if (error) throw error;
+        formNama.value = data.nama || '';
+        formEmail.value = data.email || '';
+        formMinat.value = data.minat || 'Web Development';
+        formRole.value = data.role || 'member';
+        formPassword.placeholder = 'Kosongkan jika tidak diubah';
+        formPassword.value = '';
+        modal.classList.add('show');
+      })
+      .catch(err => console.error('Error:', err));
   }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const emailVal = email.value.trim();
-    const passVal = password.value.trim();
+    const nama = formNama.value.trim();
+    const email = formEmail.value.trim();
+    const password = formPassword.value;
+    const minat = formMinat.value;
+    const role = formRole.value;
 
-    if (!emailVal || !passVal) {
-      showToast('Email dan password harus diisi!', false);
+    if (!nama || !email) {
+      showToast('Nama dan email harus diisi!', false);
       return;
     }
 
-    btn.disabled = true;
-    btn.textContent = 'Memuat...';
-
     try {
-      // Cari user di Firestore berdasarkan email
-      const usersRef = collection(db, "users");
-      const q = query(usersRef, where("email", "==", emailVal));
-      const querySnapshot = await getDocs(q);
+      if (editingUid) {
+        // Update user
+        const { error } = await supabase
+          .from('users')
+          .update({ nama, email, minat, role })
+          .eq('id', editingUid);
 
-      if (querySnapshot.empty) {
-        showToast('Email tidak terdaftar!', false);
-        btn.disabled = false;
-        btn.textContent = 'Masuk →';
-        return;
-      }
-
-      // Ambil data user pertama
-      let userData = null;
-      let userId = null;
-      querySnapshot.forEach((doc) => {
-        userData = doc.data();
-        userId = doc.id;
-      });
-
-      // CEK PASSWORD (simple, bisa ditambahin hashing nanti)
-      if (userData.password !== passVal) {
-        showToast('Password salah!', false);
-        btn.disabled = false;
-        btn.textContent = 'Masuk →';
-        return;
-      }
-
-      // Login berhasil
-      showToast('Login berhasil!', true);
-      
-      // Setelah data user ditemukan
-localStorage.setItem('userLoggedIn', 'true');
-localStorage.setItem('userEmail', emailVal);
-localStorage.setItem('userRole', userData.role || 'member');
-localStorage.setItem('userName', userData.nama || '');
-
-      // Simpan session sederhana (localStorage)
-      localStorage.setItem('userLoggedIn', 'true');
-      localStorage.setItem('userEmail', emailVal);
-      localStorage.setItem('userRole', userData.role || 'member');
-      localStorage.setItem('userName', userData.nama || '');
-
-      setTimeout(() => {
-        if (userData.role === 'admin') {
-          window.location.replace('dashboard-admin.html');
-        } else {
-          window.location.replace('dashboard-anggota-formula.html');
+        if (error) throw error;
+        showToast('Data anggota berhasil diupdate!', true);
+      } else {
+        // Buat user baru
+        if (!password || password.length < 6) {
+          showToast('Password minimal 6 karakter!', false);
+          return;
         }
-      }, 1200);
 
+        // 1. Buat auth user dulu
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+          email: email,
+          password: password
+        });
+
+        if (authError) throw authError;
+
+        // 2. Simpan data ke tabel users
+        const { error } = await supabase
+          .from('users')
+          .insert({
+            id: authData.user.id,
+            email: email,
+            nama: nama,
+            minat: minat,
+            role: role,
+            programs: 0,
+            projects: 0,
+            certificates: 0,
+            attendance: 0
+          });
+
+        if (error) throw error;
+        showToast('Anggota berhasil ditambahkan!', true);
+      }
+
+      modal.classList.remove('show');
+      loadMembers();
+      loadBerita();
     } catch (error) {
-      console.error('Login error:', error);
-      showToast('Terjadi kesalahan. Coba lagi.', false);
-      btn.disabled = false;
-      btn.textContent = 'Masuk →';
+      console.error('Error:', error);
+      showToast(error.message || 'Terjadi kesalahan.', false);
     }
   });
+
+  btnTambah.addEventListener('click', openAddModal);
+  formCancel.addEventListener('click', () => modal.classList.remove('show'));
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('show'); });
+
+  // ============================================
+  // KELOLA BERITA
+  // ============================================
+  const beritaTableBody = document.getElementById('beritaTableBody');
+  const totalBerita = document.getElementById('totalBerita');
+  const beritaModal = document.getElementById('beritaModal');
+  const beritaModalTitle = document.getElementById('beritaModalTitle');
+  const beritaForm = document.getElementById('beritaForm');
+  const formBeritaJudul = document.getElementById('formBeritaJudul');
+  const formBeritaTanggal = document.getElementById('formBeritaTanggal');
+  const formBeritaGambar = document.getElementById('formBeritaGambar');
+  const formBeritaKonten = document.getElementById('formBeritaKonten');
+  const beritaSubmit = document.getElementById('beritaSubmit');
+  const beritaCancel = document.getElementById('beritaCancel');
+  const btnTambahBerita = document.getElementById('btnTambahBerita');
+  let editingBeritaKey = null;
+
+  async function loadBerita() {
+    try {
+      const { data: berita, error } = await supabase
+        .from('berita')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      let html = '';
+      berita.forEach((item) => {
+        html += `
+          <tr>
+            <td><strong>${item.title || 'Tanpa judul'}</strong></td>
+            <td>${item.date || new Date(item.created_at).toLocaleDateString('id-ID')}</td>
+            <td><span class="badge" style="background:#dbeafe; color:#2563eb;">Published</span></td>
+            <td>
+              <button class="btn-edit-berita" data-berita-key="${item.id}">Edit</button>
+              <button class="btn-delete-berita" data-berita-key="${item.id}">Hapus</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      beritaTableBody.innerHTML = html || '<tr><td colspan="4" style="text-align:center; color:var(--ink-faint);">Belum ada berita</td></tr>';
+      totalBerita.textContent = berita.length;
+
+      document.querySelectorAll('.btn-edit-berita').forEach(btn => {
+        btn.addEventListener('click', () => openEditBerita(btn.dataset.beritaKey));
+      });
+      document.querySelectorAll('.btn-delete-berita').forEach(btn => {
+        btn.addEventListener('click', () => deleteBerita(btn.dataset.beritaKey));
+      });
+    } catch (error) {
+      console.error('Error loading berita:', error);
+    }
+  }
+
+  function openAddBerita() {
+    editingBeritaKey = null;
+    beritaModalTitle.textContent = 'Tambah Berita';
+    beritaSubmit.textContent = 'Simpan';
+    beritaForm.reset();
+    beritaModal.classList.add('show');
+  }
+
+  function openEditBerita(key) {
+    editingBeritaKey = key;
+    beritaModalTitle.textContent = 'Edit Berita';
+    beritaSubmit.textContent = 'Update';
+    
+    supabase
+      .from('berita')
+      .select('*')
+      .eq('id', key)
+      .single()
+      .then(({ data, error }) => {
+        if (error) throw error;
+        formBeritaJudul.value = data.title || '';
+        formBeritaTanggal.value = data.date || '';
+        formBeritaGambar.value = data.image || '';
+        formBeritaKonten.value = data.content || '';
+        beritaModal.classList.add('show');
+      })
+      .catch(err => console.error('Error:', err));
+  }
+
+  async function deleteBerita(key) {
+    if (!confirm('Yakin ingin menghapus berita ini?')) return;
+    try {
+      const { error } = await supabase
+        .from('berita')
+        .delete()
+        .eq('id', key);
+
+      if (error) throw error;
+      showToast('Berita berhasil dihapus!', true);
+      loadBerita();
+    } catch (error) {
+      console.error('Delete error:', error);
+      showToast('Gagal menghapus berita.', false);
+    }
+  }
+
+  beritaForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const judul = formBeritaJudul.value.trim();
+    const tanggal = formBeritaTanggal.value;
+    const gambar = formBeritaGambar.value.trim();
+    const konten = formBeritaKonten.value.trim();
+
+    if (!judul || !konten) {
+      showToast('Judul dan konten harus diisi!', false);
+      return;
+    }
+
+    try {
+      const data = {
+        title: judul,
+        content: konten,
+        image: gambar || '',
+        date: tanggal || '',
+        created_at: Date.now()
+      };
+
+      if (editingBeritaKey) {
+        const { error } = await supabase
+          .from('berita')
+          .update(data)
+          .eq('id', editingBeritaKey);
+
+        if (error) throw error;
+        showToast('Berita berhasil diupdate!', true);
+      } else {
+        const { error } = await supabase
+          .from('berita')
+          .insert(data);
+
+        if (error) throw error;
+        showToast('Berita berhasil ditambahkan!', true);
+      }
+
+      beritaModal.classList.remove('show');
+      loadBerita();
+    } catch (error) {
+      console.error('Error:', error);
+      showToast(error.message || 'Terjadi kesalahan.', false);
+    }
+  });
+
+  btnTambahBerita.addEventListener('click', openAddBerita);
+  beritaCancel.addEventListener('click', () => beritaModal.classList.remove('show'));
+  beritaModal.addEventListener('click', (e) => { if (e.target === beritaModal) beritaModal.classList.remove('show'); });
+
+  // ============================================
+  // REALTIME SUBSCRIPTION
+  // ============================================
+  // Subscribe ke perubahan users & berita
+  supabase
+    .channel('admin_channel')
+    .on(
+      'postgres_changes',
+      { event: '*', schema: 'public', table: 'users' },
+      () => { loadMembers(); }
+    )
+    .on(
+      'postgres_changes',
+      { event: '*', schema: 'public', table: 'berita' },
+      () => { loadBerita(); }
+    )
+    .subscribe();
+
+  // ============================================
+  // LOAD DATA
+  // ============================================
+  loadMembers();
+  loadBerita();
 </script>
 
 </body>
