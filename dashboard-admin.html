@@ -86,7 +86,7 @@ img{ display:block; }
 }
 
 .stats-grid{
-  display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem;
+  display:grid; grid-template-columns:repeat(5,1fr); gap:1.2rem;
 }
 .stat-card{
   background:var(--paper-2); border:1px solid var(--line); border-radius:8px;
@@ -163,12 +163,13 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase;
   letter-spacing:.05em; color:var(--ink-faint); display:block; margin:.8rem 0 .3rem;
 }
-.modal-content input, .modal-content select{
+.modal-content input, .modal-content select, .modal-content textarea{
   width:100%; padding:.6rem .8rem;
   font-family:var(--f-body); font-size:.85rem;
   background:var(--paper); border:1px solid var(--line); border-radius:6px;
   outline:none;
 }
+.modal-content textarea{ resize:vertical; min-height:80px; }
 .modal-content .btn-save{
   margin-top:1.2rem; padding:.7rem 1.5rem;
   background:var(--accent); color:var(--paper-2);
@@ -281,7 +282,7 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   </div>
 </section>
 
-<!-- ============ KELOLA BERITA ============ -->
+<!-- Kelola Berita -->
 <section class="section" style="border-bottom:none;">
   <div class="wrap">
     <div class="section-head">
@@ -396,23 +397,18 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   </div>
 </footer>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  import { getFirestore, doc, getDoc, getDocs, collection, setDoc, deleteDoc, updateDoc, query, where, addDoc, orderBy } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ============================================
+  // KONFIGURASI SUPABASE
+  // ============================================
+  const supabaseUrl = 'https://xxxxxxxxxxxx.supabase.co'; // GANTI!
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // GANTI!
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBT20RmFLmBMQnNr5pMFGHwTlFnhYSqvA4",
-    authDomain: "formula-sman1mojosari.firebaseapp.com",
-    projectId: "formula-sman1mojosari",
-    storageBucket: "formula-sman1mojosari.firebasestorage.app",
-    messagingSenderId: "20405558374",
-    appId: "1:20405558374:web:8f7142be995d73ec00e1a7"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  // CEK LOGIN SEDERHANA (dari localStorage)
+  // ============================================
+  // CEK LOGIN
+  // ============================================
   const userEmail = localStorage.getItem('userEmail');
   const userRole = localStorage.getItem('userRole');
 
@@ -420,20 +416,21 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
     window.location.replace('login.html');
   }
 
-  // Tampilkan nama user
   document.getElementById('userDisplay').textContent = localStorage.getItem('userName') || 'Admin';
   document.getElementById('welcomeText').textContent = `Selamat datang, ${localStorage.getItem('userName') || 'Admin'}!`;
 
-  // ============ LOGOUT ============
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    localStorage.removeItem('userLoggedIn');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('userName');
+  // ============================================
+  // LOGOUT
+  // ============================================
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    localStorage.clear();
     window.location.replace('login.html');
   });
 
-  // ============ TOAST ============
+  // ============================================
+  // TOAST
+  // ============================================
   function showToast(text, isSuccess = true) {
     const toast = document.getElementById('toast');
     toast.className = 'toast show' + (isSuccess ? ' success' : ' error');
@@ -443,31 +440,38 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
     window.toastTimer = setTimeout(() => { toast.className = 'toast'; }, 4000);
   }
 
-  // ============ LOAD MEMBERS ============
+  // ============================================
+  // LOAD MEMBERS
+  // ============================================
   const tableBody = document.getElementById('memberTableBody');
   const totalAnggota = document.getElementById('totalAnggota');
   const totalAdmin = document.getElementById('totalAdmin');
 
   async function loadMembers() {
     try {
-      const querySnapshot = await getDocs(collection(db, 'users'));
+      const { data: users, error } = await supabase
+        .from('users')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
       let html = '';
       let countAnggota = 0, countAdmin = 0;
 
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        if (data.role === 'admin') countAdmin++;
+      users.forEach((user) => {
+        if (user.role === 'admin') countAdmin++;
         else countAnggota++;
 
         html += `
           <tr>
-            <td><strong>${data.nama || 'Tidak ada'}</strong></td>
-            <td>${data.email || '-'}</td>
-            <td>${data.minat || '-'}</td>
-            <td><span class="badge ${data.role === 'admin' ? 'admin' : 'member'}">${data.role || 'member'}</span></td>
+            <td><strong>${user.nama || 'Tidak ada'}</strong></td>
+            <td>${user.email || '-'}</td>
+            <td>${user.minat || '-'}</td>
+            <td><span class="badge ${user.role === 'admin' ? 'admin' : 'member'}">${user.role || 'member'}</span></td>
             <td>
-              <button class="btn-edit" data-uid="${doc.id}">Edit</button>
-              <button class="btn-delete" data-uid="${doc.id}">Hapus</button>
+              <button class="btn-edit" data-uid="${user.id}">Edit</button>
+              <button class="btn-delete" data-uid="${user.id}">Hapus</button>
             </td>
           </tr>
         `;
@@ -476,9 +480,19 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
       tableBody.innerHTML = html || '<tr><td colspan="5" style="text-align:center; color:var(--ink-faint);">Belum ada anggota</td></tr>';
       totalAnggota.textContent = countAnggota;
       totalAdmin.textContent = countAdmin;
-      document.getElementById('totalProgram').textContent = '5';
-      document.getElementById('totalProyek').textContent = '12';
 
+      // Statistik lain (nanti kita hitung dari database)
+      const { count: programCount } = await supabase
+        .from('programs')
+        .select('*', { count: 'exact', head: true });
+      document.getElementById('totalProgram').textContent = programCount || 0;
+
+      const { count: beritaCount } = await supabase
+        .from('berita')
+        .select('*', { count: 'exact', head: true });
+      document.getElementById('totalBerita').textContent = beritaCount || 0;
+
+      // Event listener untuk edit/delete
       document.querySelectorAll('.btn-edit').forEach(btn => {
         btn.addEventListener('click', () => openEditModal(btn.dataset.uid));
       });
@@ -490,11 +504,19 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
     }
   }
 
-  // ============ DELETE MEMBER ============
+  // ============================================
+  // DELETE MEMBER
+  // ============================================
   async function deleteMember(uid) {
     if (!confirm('Yakin ingin menghapus anggota ini?')) return;
     try {
-      await deleteDoc(doc(db, 'users', uid));
+      const { error } = await supabase
+        .from('users')
+        .delete()
+        .eq('id', uid);
+
+      if (error) throw error;
+
       showToast('Anggota berhasil dihapus!', true);
       loadMembers();
       loadBerita();
@@ -504,7 +526,9 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
     }
   }
 
-  // ============ MODAL MEMBER ============
+  // ============================================
+  // MODAL MEMBER
+  // ============================================
   const modal = document.getElementById('memberModal');
   const modalTitle = document.getElementById('modalTitle');
   const form = document.getElementById('memberForm');
@@ -531,9 +555,14 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
     editingUid = uid;
     modalTitle.textContent = 'Edit Anggota';
     formSubmit.textContent = 'Update';
-    getDoc(doc(db, 'users', uid)).then(snapshot => {
-      if (snapshot.exists()) {
-        const data = snapshot.data();
+    
+    supabase
+      .from('users')
+      .select('*')
+      .eq('id', uid)
+      .single()
+      .then(({ data, error }) => {
+        if (error) throw error;
         formNama.value = data.nama || '';
         formEmail.value = data.email || '';
         formMinat.value = data.minat || 'Web Development';
@@ -541,8 +570,8 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
         formPassword.placeholder = 'Kosongkan jika tidak diubah';
         formPassword.value = '';
         modal.classList.add('show');
-      }
-    });
+      })
+      .catch(err => console.error('Error:', err));
   }
 
   form.addEventListener('submit', async (e) => {
@@ -561,16 +590,48 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
 
     try {
       if (editingUid) {
-        await updateDoc(doc(db, 'users', editingUid), { nama, email, minat, role });
+        // Update user
+        const { error } = await supabase
+          .from('users')
+          .update({ nama, email, minat, role })
+          .eq('id', editingUid);
+
+        if (error) throw error;
         showToast('Data anggota berhasil diupdate!', true);
       } else {
+        // Buat user baru
         if (!password || password.length < 6) {
           showToast('Password minimal 6 karakter!', false);
           return;
         }
-        await setDoc(doc(db, 'users', email), { nama, email, password, minat, role, programs: 0, projects: 0, certificates: 0, createdAt: new Date().toISOString() });
+
+        // 1. Buat auth user dulu
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+          email: email,
+          password: password
+        });
+
+        if (authError) throw authError;
+
+        // 2. Simpan data ke tabel users
+        const { error } = await supabase
+          .from('users')
+          .insert({
+            id: authData.user.id,
+            email: email,
+            nama: nama,
+            minat: minat,
+            role: role,
+            programs: 0,
+            projects: 0,
+            certificates: 0,
+            attendance: 0
+          });
+
+        if (error) throw error;
         showToast('Anggota berhasil ditambahkan!', true);
       }
+
       modal.classList.remove('show');
       loadMembers();
       loadBerita();
@@ -584,7 +645,9 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   formCancel.addEventListener('click', () => modal.classList.remove('show'));
   modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('show'); });
 
-  // ============ KELOLA BERITA ============
+  // ============================================
+  // KELOLA BERITA
+  // ============================================
   const beritaTableBody = document.getElementById('beritaTableBody');
   const totalBerita = document.getElementById('totalBerita');
   const beritaModal = document.getElementById('beritaModal');
@@ -601,29 +664,30 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
 
   async function loadBerita() {
     try {
-      const q = query(collection(db, 'berita'), orderBy('createdAt', 'desc'));
-      const querySnapshot = await getDocs(q);
-      let html = '';
-      let count = 0;
+      const { data: berita, error } = await supabase
+        .from('berita')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        count++;
+      if (error) throw error;
+
+      let html = '';
+      berita.forEach((item) => {
         html += `
           <tr>
-            <td><strong>${data.title || 'Tanpa judul'}</strong></td>
-            <td>${data.date || data.createdAt ? new Date(data.createdAt).toLocaleDateString('id-ID') : '-'}</td>
+            <td><strong>${item.title || 'Tanpa judul'}</strong></td>
+            <td>${item.date || new Date(item.created_at).toLocaleDateString('id-ID')}</td>
             <td><span class="badge" style="background:#dbeafe; color:#2563eb;">Published</span></td>
             <td>
-              <button class="btn-edit-berita" data-berita-key="${doc.id}">Edit</button>
-              <button class="btn-delete-berita" data-berita-key="${doc.id}">Hapus</button>
+              <button class="btn-edit-berita" data-berita-key="${item.id}">Edit</button>
+              <button class="btn-delete-berita" data-berita-key="${item.id}">Hapus</button>
             </td>
           </tr>
         `;
       });
 
       beritaTableBody.innerHTML = html || '<tr><td colspan="4" style="text-align:center; color:var(--ink-faint);">Belum ada berita</td></tr>';
-      totalBerita.textContent = count;
+      totalBerita.textContent = berita.length;
 
       document.querySelectorAll('.btn-edit-berita').forEach(btn => {
         btn.addEventListener('click', () => openEditBerita(btn.dataset.beritaKey));
@@ -648,22 +712,32 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
     editingBeritaKey = key;
     beritaModalTitle.textContent = 'Edit Berita';
     beritaSubmit.textContent = 'Update';
-    getDoc(doc(db, 'berita', key)).then(snapshot => {
-      if (snapshot.exists()) {
-        const data = snapshot.data();
+    
+    supabase
+      .from('berita')
+      .select('*')
+      .eq('id', key)
+      .single()
+      .then(({ data, error }) => {
+        if (error) throw error;
         formBeritaJudul.value = data.title || '';
         formBeritaTanggal.value = data.date || '';
         formBeritaGambar.value = data.image || '';
         formBeritaKonten.value = data.content || '';
         beritaModal.classList.add('show');
-      }
-    });
+      })
+      .catch(err => console.error('Error:', err));
   }
 
   async function deleteBerita(key) {
     if (!confirm('Yakin ingin menghapus berita ini?')) return;
     try {
-      await deleteDoc(doc(db, 'berita', key));
+      const { error } = await supabase
+        .from('berita')
+        .delete()
+        .eq('id', key);
+
+      if (error) throw error;
       showToast('Berita berhasil dihapus!', true);
       loadBerita();
     } catch (error) {
@@ -691,14 +765,23 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
         content: konten,
         image: gambar || '',
         date: tanggal || '',
-        createdAt: Date.now()
+        created_at: Date.now()
       };
 
       if (editingBeritaKey) {
-        await updateDoc(doc(db, 'berita', editingBeritaKey), data);
+        const { error } = await supabase
+          .from('berita')
+          .update(data)
+          .eq('id', editingBeritaKey);
+
+        if (error) throw error;
         showToast('Berita berhasil diupdate!', true);
       } else {
-        await addDoc(collection(db, 'berita'), data);
+        const { error } = await supabase
+          .from('berita')
+          .insert(data);
+
+        if (error) throw error;
         showToast('Berita berhasil ditambahkan!', true);
       }
 
@@ -714,7 +797,27 @@ footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,
   beritaCancel.addEventListener('click', () => beritaModal.classList.remove('show'));
   beritaModal.addEventListener('click', (e) => { if (e.target === beritaModal) beritaModal.classList.remove('show'); });
 
-  // ============ LOAD ALL ============
+  // ============================================
+  // REALTIME SUBSCRIPTION
+  // ============================================
+  // Subscribe ke perubahan users & berita
+  supabase
+    .channel('admin_channel')
+    .on(
+      'postgres_changes',
+      { event: '*', schema: 'public', table: 'users' },
+      () => { loadMembers(); }
+    )
+    .on(
+      'postgres_changes',
+      { event: '*', schema: 'public', table: 'berita' },
+      () => { loadBerita(); }
+    )
+    .subscribe();
+
+  // ============================================
+  // LOAD DATA
+  // ============================================
   loadMembers();
   loadBerita();
 </script>
