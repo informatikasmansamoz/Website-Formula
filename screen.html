@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Broadcast Screen · Guru & Siswa</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e1a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* ===== LOBBY ===== */
+        #lobby {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f35 100%);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .lobby-box {
+            background: rgba(22, 27, 46, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 3.5rem 4rem;
+            border-radius: 2.5rem;
+            border: 1px solid #2f3550;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            max-width: 520px;
+            width: 90%;
+        }
+
+        .lobby-box h1 {
+            color: #fff;
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .lobby-box h1 span {
+            color: #4a7cf7;
+            font-weight: 600;
+        }
+
+        .lobby-box .subtitle {
+            color: #8a93b5;
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #2a2f46;
+            padding-bottom: 1.5rem;
+        }
+
+        .role-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .role-btn {
+            padding: 18px 32px;
+            border: 2px solid #2f3550;
+            border-radius: 60px;
+            background: transparent;
+            color: #c8d0e8;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .role-btn i {
+            font-size: 1.4rem;
+        }
+
+        .role-btn:hover {
+            transform: translateY(-3px);
+            border-color: #4a7cf7;
+            background: rgba(74, 124, 247, 0.1);
+            color: #fff;
+        }
+
+        .role-btn.guru {
+            background: linear-gradient(135deg, #4a7cf7, #6c5ce7);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .role-btn.guru:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(74, 124, 247, 0.3);
+        }
+
+        .role-btn.siswa {
+            border-color: #3a405a;
+        }
+
+        .role-btn.siswa:hover {
+            border-color: #00d26a;
+            background: rgba(0, 210, 106, 0.08);
+        }
+
+        .lobby-footer {
+            margin-top: 2rem;
+            color: #4a5a7a;
+            font-size: 0.8rem;
+        }
+
+        /* ===== OVERLAY LOCKDOWN ===== */
+        #lockdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 999999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        #lockdown-overlay.active {
+            display: flex;
+        }
+
+        #lockdown-overlay .lock-icon {
+            font-size: 4rem;
+            color: #ff6b6b;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        #lockdown-overlay h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 300;
+        }
+
+        #lockdown-overlay p {
+            color: #8a93b5;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        #password-input {
+            padding: 14px 24px;
+            font-size: 1.1rem;
+            border: 2px solid #3a3f5c;
+            border-radius: 50px;
+            background: #1a1f2e;
+            color: #fff;
+            width: 300px;
+            max-width: 90%;
+            text-align: center;
+            outline: none;
+        }
+
+        #password-input:focus {
+            border-color: #4a7cf7;
+        }
+
+        #unlock-btn {
+            padding: 12px 40px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #4a7cf7, #6c5ce7);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        #unlock-btn:hover {
+            transform: scale(1.05);
+        }
+
+        #unlock-error {
+            color: #ff6b6b;
+            min-height: 1.5rem;
+        }
+
+        /* ===== MAIN APP ===== */
+        #app-container {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            background: #0f1322;
+        }
+
+        #app-container.active {
+            display: flex;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: #161b2e;
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2f46;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .top-bar .brand {
+            color: #a8b3d9;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-bar .brand i {
+            color: #4a7cf7;
+        }
+
+        .top-bar .status {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #8a93b5;
+            font-size: 0.85rem;
+        }
+
+        .status .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #00d26a;
+            border-radius: 50%;
+            display: inline-block;
+            animation: blink 1.2s infinite;
+        }
+
+        .status .live-dot.off {
+            background: #ff6b6b;
+            animation: none;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .status .role-badge {
+            background: #1e243a;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            border: 1px solid #2f3550;
+        }
+
+        .status .role-badge.guru {
+            border-color: #4a7cf7;
+            color: #4a7cf7;
+        }
+
+        .status .role-badge.siswa {
+            border-color: #00d26a;
+            color: #00d26a;
+        }
+
+        /* ===== SCREEN AREA ===== */
+        .screen-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #0a0e1a;
+            position: relative;
+            min-height: 0;
+        }
+
+        #screen-video {
+            width: 100%;
+            height: 100%;
+            max-height: calc(100vh - 80px);
+            background: #0d111f;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            border: 1px solid #242943;
+        }
+
+        .waiting-message {
+            color: #4a5a7a;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .waiting-message i {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            color: #2f3550;
+        }
+
+        /* ===== FLOATING CONTROLS ===== */
+        .floating-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 27, 46, 0.9);
+            backdrop-filter: blur(16px);
+            padding: 10px 20px;
+            border-radius: 60px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            border: 1px solid #2f3550;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .floating-controls button {
+            background: transparent;
+            border: none;
+            color: #c8d0e8;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s;
+            border: 1px solid transparent;
+        }
+
+        .floating-controls button:hover {
+            background: #282f4a;
+            color: #fff;
+        }
+
+        .floating-controls button.primary {
+            background: #4a7cf7;
+            color: #fff;
+        }
+
+        .floating-controls button.primary:hover {
+            background: #5f8cf9;
+        }
+
+        .floating-controls button.danger {
+            color: #ff6b6b;
+        }
+
+        .floating-controls button.danger:hover {
+            background: #3a1e2e;
+            border-color: #ff6b6b44;
+        }
+
+        .floating-controls .sep {
+            width: 1px;
+            height: 28px;
+            background: #2f3550;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .lobby-box {
+                padding: 2rem 1.5rem;
+            }
+            .lobby-box h1 {
+                font-size: 1.6rem;
+            }
+            .role-btn {
+                padding: 14px 20px;
+                font-size: 1rem;
+            }
+            .top-bar {
+                padding: 8px 14px;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .floating-controls {
+                bottom: 16px;
+                padding: 8px 12px;
+                gap: 6px;
+                width: 95%;
+                border-radius: 30px;
+            }
+            .floating-controls button {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+            #lockdown-overlay h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* ===== FULLSCREEN FORCE ===== */
+        :-webkit-full-screen #lockdown-overlay { display: flex !important; }
+        :-moz-full-screen #lockdown-overlay { display: flex !important; }
+        :fullscreen #lockdown-overlay { display: flex !important; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== LOBBY ===== -->
+    <div id="lobby">
+        <div class="lobby-box">
+            <h1>📡 <span>Broadcast</span>Screen</h1>
+            <div class="subtitle">Pilih peran Anda untuk bergabung</div>
+            <div class="role-buttons">
+                <button class="role-btn guru" onclick="joinAs('guru')">
+                    <i class="fas fa-chalkboard-teacher"></i> Guru · Broadcast
+                </button>
+                <button class="role-btn siswa" onclick="joinAs('siswa')">
+                    <i class="fas fa-user-graduate"></i> Siswa · Lihat Layar
+                </button>
+            </div>
+            <div class="lobby-footer">
+                <i class="fas fa-shield-alt"></i> Mode fullscreen &amp; aman
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== LOCKDOWN OVERLAY ===== -->
+    <div id="lockdown-overlay">
+        <div class="lock-icon">🔒</div>
+        <h2>Layar Terkunci</h2>
+        <p>Masukkan password untuk keluar dari mode fullscreen</p>
+        <input type="password" id="password-input" placeholder="Password..." autocomplete="off" />
+        <button id="unlock-btn">Buka Kunci</button>
+        <div id="unlock-error"></div>
+        <p style="color:#4a5a7a; font-size:0.75rem; margin-top:4px;">Password: <strong style="color:#6c7aa0;">admin123</strong></p>
+    </div>
+
+    <!-- ===== MAIN APP ===== -->
+    <div id="app-container">
+        <div class="top-bar">
+            <div class="brand">
+                <i class="fas fa-desktop"></i>
+                <span>Broadcast<span style="color:#4a7cf7;">Screen</span></span>
+            </div>
+            <div class="status">
+                <span class="live-dot" id="live-dot"></span>
+                <span id="live-status">Offline</span>
+                <span class="role-badge" id="role-badge">Guru</span>
+                <span style="opacity:0.3;">|</span>
+                <span style="font-size:0.75rem; color:#5a6a8a;"><i class="fas fa-lock"></i> Fullscreen</span>
+            </div>
+        </div>
+
+        <div class="screen-area">
+            <video id="screen-video" autoplay playsinline muted></video>
+            <div class="waiting-message" id="waiting-msg">
+                <i class="fas fa-hourglass-half"></i>
+                Menunggu broadcast dari guru...
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FLOATING CONTROLS ===== -->
+    <div class="floating-controls" id="controls">
+        <button id="start-share" class="primary">
+            <i class="fas fa-play"></i> Mulai Broadcast
+        </button>
+        <button id="stop-share" class="danger">
+            <i class="fas fa-stop"></i> Stop
+        </button>
+        <div class="sep"></div>
+        <button id="fullscreen-btn">
+            <i class="fas fa-expand"></i> Fullscreen
+        </button>
+        <button id="lock-btn" style="color:#ffb347;">
+            <i class="fas fa-lock"></i> Kunci
+        </button>
+    </div>
+
+    <!-- ===== SIMPLE PEER (CDN) ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js">
+    </script>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== KONFIGURASI =====
+            const PASSWORD = 'admin123';
+            let currentRole = null; // 'guru' atau 'siswa'
+            let mediaStream = null;
+            let isSharing = false;
+            let isFullscreen = false;
+            let isLocked = false;
+            let peer = null;
+            let isConnected = false;
+
+            // ===== DOM REFS =====
+            const lobby = document.getElementById('lobby');
+            const appContainer = document.getElementById('app-container');
+            const video = document.getElementById('screen-video');
+            const waitingMsg = document.getElementById('waiting-msg');
+            const startBtn = document.getElementById('start-share');
+            const stopBtn = document.getElementById('stop-share');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const lockBtn = document.getElementById('lock-btn');
+            const overlay = document.getElementById('lockdown-overlay');
+            const passwordInput = document.getElementById('password-input');
+            const unlockBtn = document.getElementById('unlock-btn');
+            const errorDiv = document.getElementById('unlock-error');
+            const liveDot = document.getElementById('live-dot');
+            const liveStatus = document.getElementById('live-status');
+            const roleBadge = document.getElementById('role-badge');
+
+            // ===== SIGNALING (SIMPLE) =====
+            // Dalam implementasi nyata, ini perlu signaling server.
+            // Untuk demo, kita gunakan pendekatan manual: copy paste offer/answer
+            // TAPI kita akan gunakan broadcast channel antar tab (simulasi)
+            // Atau lebih baik: kita gunakan Simple Peer dengan trick
+
+            // Karena tidak ada server signaling, kita gunakan LocalStorage sebagai
+            // signaling channel untuk demo (satu perangkat)
+            // Untuk multi-device, perlu WebSocket server.
+
+            // ===== FUNGSI =====
+
+            // Join sebagai role
+            window.joinAs = function(role) {
+                currentRole = role;
+                lobby.style.display = 'none';
+                appContainer.classList.add('active');
+
+                if (role === 'guru') {
+                    roleBadge.textContent = '👨‍🏫 Guru';
+                    roleBadge.className = 'role-badge guru';
+                    startBtn.style.display = 'flex';
+                    stopBtn.style.display = 'flex';
+                    // Tampilkan controls
+                    document.getElementById('controls').style.display = 'flex';
+                    // Auto start broadcast
+                    setTimeout(() => startScreenShare(), 500);
+                } else {
+                    roleBadge.textContent = '👨‍🎓 Siswa';
+                    roleBadge.className = 'role-badge siswa';
+                    startBtn.style.display = 'none';
+                    stopBtn.style.display = 'none';
+                    // Sembunyikan controls (hanya lock & fullscreen)
+                    document.querySelectorAll('#controls button:not(#fullscreen-btn):not(#lock-btn)').forEach(el => {
+                        if (el.id !== 'fullscreen-btn' && el.id !== 'lock-btn') {
+                            el.style.display = 'none';
+                        }
+                    });
+                    // Tunggu broadcast dari guru
+                    waitingMsg.style.display = 'block';
+                    // Auto fullscreen & lock untuk siswa
+                    setTimeout(() => enterFullscreenAndLock(), 800);
+                    // Mulai listen untuk broadcast
+                    listenForBroadcast();
+                }
+            };
+
+            // ===== GURU: START BROADCAST =====
+            async function startScreenShare() {
+                if (isSharing) return;
+                try {
+                    const stream = await navigator.mediaDevices.getDisplayMedia({
+                        video: {
+                            cursor: 'always',
+                            displaySurface: 'monitor'
+                        },
+                        audio: false
+                    });
+
+                    mediaStream = stream;
+                    video.srcObject = stream;
+                    await video.play();
+                    isSharing = true;
+                    waitingMsg.style.display = 'none';
+
+                    // Update status
+                    liveDot.className = 'live-dot';
+                    liveStatus.textContent = 'LIVE';
+                    startBtn.innerHTML = '<i class="fas fa-circle"></i> Broadcasting';
+                    startBtn.style.background = '#00d26a';
+                    startBtn.style.color = '#fff';
+
+                    // Broadcast ke semua siswa (simulasi)
+                    broadcastToStudents(stream);
+
+                    stream.getVideoTracks()[0].onended = function() {
+                        stopScreenShare();
+                    };
+
+                    setTimeout(() => enterFullscreenAndLock(), 500);
+
+                } catch (err) {
+                    console.error('Gagal share screen:', err);
+                    alert('Tidak bisa mengakses layar. Pastikan izin diberikan.\n' + err.message);
+                    // Kembali ke lobby
+                    window.location.reload();
+                }
+            }
+
+            // ===== GURU: BROADCAST KE SISWA (simulasi dengan BroadcastChannel) =====
+            function broadcastToStudents(stream) {
+                // Untuk demo, kita simpan stream di variabel global
+                // Siswa akan mengambil dari sini
+                window._broadcastStream = stream;
+
+                // Kirim sinyal melalui BroadcastChannel
+                try {
+                    const channel = new BroadcastChannel('broadcast_screen');
+                    // Kirim pesan bahwa broadcast tersedia
+                    channel.postMessage({
+                        type: 'broadcast_available',
+                        timestamp: Date.now()
+                    });
+
+                    // Listen untuk permintaan dari siswa
+                    channel.onmessage = function(e) {
+                        if (e.data.type === 'request_stream') {
+                            // Kirim balik info stream
+                            channel.postMessage({
+                                type: 'stream_ready',
+                                streamId: 'screen_share_' + Date.now()
+                            });
+                            // Siswa akan mengambil dari window._broadcastStream
+                            // atau kita kirim via peer
+                            connectToStudent(e.data.senderId);
+                        }
+                    };
+                } catch (e) {
+                    console.log('BroadcastChannel tidak tersedia, gunakan fallback');
+                }
+
+                // Simpan stream di global untuk diambil siswa
+                window._broadcastStream = stream;
+                window._isBroadcasting = true;
+
+                // Coba konek ke peer
+                setupPeerAsHost();
+            }
+
+            // ===== SISWA: LISTEN BROADCAST =====
+            function listenForBroadcast() {
+                // Cek apakah ada broadcast yang sedang berjalan
+                if (window._isBroadcasting && window._broadcastStream) {
+                    // Langsung ambil stream
+                    video.srcObject = window._broadcastStream;
+                    video.play().then(() => {
+                        waitingMsg.style.display = 'none';
+                        liveDot.className = 'live-dot';
+                        liveStatus.textContent = 'LIVE';
+                    }).catch(err => console.log('Gagal play:', err));
+                    return;
+                }
+
+                // Listen melalui BroadcastChannel
+                try {
+                    const channel = new BroadcastChannel('broadcast_screen');
+                    channel.onmessage = function(e) {
+                        if (e.data.type === 'broadcast_available') {
+                            // Minta stream
+                            channel.postMessage({
+                                type: 'request_stream',
+                                senderId: 'siswa_' + Date.now()
+                            });
+                        }
+                        if (e.data.type === 'stream_ready') {
+                            // Ambil stream dari global
+                            if (window._broadcastStream) {
+                                video.srcObject = window._broadcastStream;
+                                video.play().then(() => {
+                                    waitingMsg.style.display = 'none';
+                                    liveDot.className = 'live-dot';
+                                    liveStatus.textContent = 'LIVE';
+                                }).catch(err => console.log('Gagal play:', err));
+                            }
+                        }
+                    };
+
+                    // Kirim permintaan awal
+                    channel.postMessage({
+                        type: 'request_stream',
+                        senderId: 'siswa_' + Date.now()
+                    });
+
+                    // Jika dalam 3 detik tidak ada respon, coba cek global
+                    setTimeout(() => {
+                        if (window._broadcastStream && video.srcObject === null) {
+                            video.srcObject = window._broadcastStream;
+                            video.play().then(() => {
+                                waitingMsg.style.display = 'none';
+                                liveDot.className = 'live-dot';
+                                liveStatus.textContent = 'LIVE';
+                            }).catch(err => console.log('Gagal play:', err));
+                        }
+                    }, 3000);
+
+                } catch (e) {
+                    console.log('BroadcastChannel tidak tersedia');
+                    // Fallback: cek global setiap detik
+                    const checkInterval = setInterval(() => {
+                        if (window._broadcastStream && video.srcObject === null) {
+                            video.srcObject = window._broadcastStream;
+                            video.play().then(() => {
+                                waitingMsg.style.display = 'none';
+                                liveDot.className = 'live-dot';
+                                liveStatus.textContent = 'LIVE';
+                                clearInterval(checkInterval);
+                            }).catch(err => console.log('Gagal play:', err));
+                        }
+                    }, 1000);
+                }
+            }
+
+            // ===== STOP SHARING =====
+            function stopScreenShare() {
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(t => t.stop());
+                    mediaStream = null;
+                }
+                video.srcObject = null;
+                isSharing = false;
+                window._isBroadcasting = false;
+                window._broadcastStream = null;
+
+                startBtn.innerHTML = '<i class="fas fa-play"></i> Mulai Broadcast';
+                startBtn.style.background = '#4a7cf7';
+                startBtn.style.color = '#fff';
+                liveDot.className = 'live-dot off';
+                liveStatus.textContent = 'Offline';
+                waitingMsg.style.display = 'block';
+            }
+
+            // ===== FULLSCREEN & LOCK =====
+            function enterFullscreenAndLock() {
+                const el = document.documentElement;
+                if (!document.fullscreenElement) {
+                    el.requestFullscreen?.() || el.webkitRequestFullscreen?.() || el.msRequestFullscreen?.();
+                }
+                setTimeout(() => {
+                    isFullscreen = true;
+                    showLockdown();
+                }, 400);
+            }
+
+            function showLockdown() {
+                isLocked = true;
+                overlay.classList.add('active');
+                setTimeout(() => passwordInput.focus(), 100);
+                document.querySelector('.floating-controls').style.opacity = '0.3';
+                document.querySelector('.floating-controls').style.pointerEvents = 'none';
+            }
+
+            function hideLockdown() {
+                isLocked = false;
+                overlay.classList.remove('active');
+                document.querySelector('.floating-controls').style.opacity = '1';
+                document.querySelector('.floating-controls').style.pointerEvents = 'auto';
+                passwordInput.value = '';
+                errorDiv.textContent = '';
+            }
+
+            function attemptUnlock() {
+                const pass = passwordInput.value.trim();
+                if (pass === PASSWORD) {
+                    hideLockdown();
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen?.() || document.webkitExitFullscreen?.() || document.msExitFullscreen?.();
+                        isFullscreen = false;
+                    }
+                } else {
+                    errorDiv.textContent = '❌ Password salah!';
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                    setTimeout(() => { errorDiv.textContent = ''; }, 3000);
+                }
+            }
+
+            // ===== EVENT LISTENERS =====
+            startBtn.addEventListener('click', startScreenShare);
+
+            stopBtn.addEventListener('click', function() {
+                if (isSharing) stopScreenShare();
+            });
+
+            fullscreenBtn.addEventListener('click', function() {
+                if (!document.fullscreenElement) {
+                    enterFullscreenAndLock();
+                } else {
+                    showLockdown();
+                }
+            });
+
+            lockBtn.addEventListener('click', function() {
+                if (!isLocked) showLockdown();
+                else {
+                    overlay.classList.add('active');
+                    passwordInput.focus();
+                }
+            });
+
+            unlockBtn.addEventListener('click', attemptUnlock);
+
+            passwordInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    attemptUnlock();
+                }
+            });
+
+            // ===== BLOKIR ESCAPE & SHORTCUTS =====
+            document.addEventListener('keydown', function(e) {
+                if (isLocked && document.activeElement === passwordInput) {
+                    if (e.key === 'Escape') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+                    return;
+                }
+
+                if (e.key === 'Escape' || e.key === 'Esc') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                if (e.key === 'F11') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                if (e.ctrlKey || e.metaKey) {
+                    const blocked = ['w', 't', 'n', 'o', 'p', 'a', 's', 'q', 'e', 'r'];
+                    if (blocked.includes(e.key.toLowerCase())) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+                }
+
+                if (e.altKey && (e.key === 'F4' || e.key === 'Tab')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            }, true);
+
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // ===== SETUP PEER =====
+            function setupPeerAsHost() {
+                // Untuk koneksi peer-to-peer yang lebih stabil
+                // Gunakan Simple Peer dengan signaling via BroadcastChannel
+                try {
+                    const channel = new BroadcastChannel('peer_signaling');
+                    peer = new SimplePeer({
+                        initiator: true,
+                        trickle: false,
+                        stream: mediaStream
+                    });
+
+                    peer.on('signal', function(data) {
+                        channel.postMessage({
+                            type: 'signal',
+                            data: data
+                        });
+                    });
+
+                    peer.on('connect', function() {
+                        console.log('Peer connected');
+                        isConnected = true;
+                    });
+
+                    peer.on('stream', function(stream) {
+                        // Siswa akan menerima stream
+                        video.srcObject = stream;
+                        video.play().then(() => {
+                            waitingMsg.style.display = 'none';
+                            liveDot.className = 'live-dot';
+                            liveStatus.textContent = 'LIVE';
+                        }).catch(err => console.log('Gagal play:', err));
+                    });
+
+                    // Listen untuk sinyal dari siswa
+                    channel.onmessage = function(e) {
+                        if (e.data.type === 'signal') {
+                            peer.signal(e.data.data);
+                        }
+                    };
+                } catch (e) {
+                    console.log('Peer setup gagal, gunakan fallback');
+                }
+            }
+
+            // ===== INIT =====
+            console.log('BroadcastScreen siap!');
+            console.log('Password: admin123');
+
+            // Siswa auto connect jika ada broadcast
+            if (window._broadcastStream) {
+                video.srcObject = window._broadcastStream;
+                video.play().then(() => {
+                    waitingMsg.style.display = 'none';
+                    liveDot.className = 'live-dot';
+                    liveStatus.textContent = 'LIVE';
+                }).catch(err => console.log('Gagal play:', err));
+            }
+
+        })();
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</body>
+</html>
