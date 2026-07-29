@@ -326,15 +326,15 @@
             background: #2f3550;
         }
 
-        /* ===== LOCK OVERLAY (hanya untuk siswa) ===== */
+        /* ===== LOCK OVERLAY (popup password) ===== */
         #lock-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
             z-index: 999999;
             display: none;
             justify-content: center;
@@ -348,49 +348,59 @@
             display: flex;
         }
 
-        #lock-overlay .lock-icon {
+        .lock-box {
+            background: rgba(22, 27, 46, 0.95);
+            padding: 3rem 3rem 2.5rem;
+            border-radius: 2rem;
+            border: 1px solid #2f3550;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+        }
+
+        .lock-box .lock-icon {
             font-size: 4rem;
             color: #ffb347;
-            animation: pulse 1.5s ease-in-out infinite;
+            margin-bottom: 0.5rem;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-
-        #lock-overlay h2 {
+        .lock-box h2 {
             color: #fff;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 300;
+            margin-bottom: 0.3rem;
         }
 
-        #lock-overlay p {
+        .lock-box p {
             color: #8a93b5;
-            max-width: 400px;
-            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
         }
 
-        #lock-password-input {
-            padding: 14px 24px;
+        .lock-box input {
+            width: 100%;
+            padding: 14px 20px;
             font-size: 1.1rem;
             border: 2px solid #3a3f5c;
             border-radius: 50px;
             background: #1a1f2e;
             color: #fff;
-            width: 300px;
-            max-width: 90%;
             text-align: center;
             outline: none;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
         }
 
-        #lock-password-input:focus {
+        .lock-box input:focus {
             border-color: #ffb347;
+            box-shadow: 0 0 20px rgba(255, 179, 71, 0.15);
         }
 
-        #unlock-lock-btn {
-            padding: 12px 40px;
-            font-size: 1rem;
+        .lock-box .btn-unlock {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.05rem;
             border: none;
             border-radius: 50px;
             background: linear-gradient(135deg, #ffb347, #ff8a5c);
@@ -400,13 +410,26 @@
             font-weight: 600;
         }
 
-        #unlock-lock-btn:hover {
-            transform: scale(1.05);
+        .lock-box .btn-unlock:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(255, 179, 71, 0.3);
         }
 
-        #lock-error {
+        .lock-box .lock-error {
             color: #ff6b6b;
             min-height: 1.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .lock-box .password-hint {
+            color: #4a5a7a;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .lock-box .password-hint strong {
+            color: #ffb347;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -437,12 +460,13 @@
                 padding: 6px 12px;
                 font-size: 0.75rem;
             }
+            .lock-box {
+                padding: 2rem 1.5rem;
+            }
+            .lock-box h2 {
+                font-size: 1.3rem;
+            }
         }
-
-        /* ===== FULLSCREEN ===== */
-        :-webkit-full-screen #lock-overlay { display: flex !important; }
-        :-moz-full-screen #lock-overlay { display: flex !important; }
-        :fullscreen #lock-overlay { display: flex !important; }
     </style>
 </head>
 <body>
@@ -461,20 +485,22 @@
                 </button>
             </div>
             <div class="lobby-footer">
-                <i class="fas fa-wifi"></i> 1 WiFi · Real-time · Tanpa Kendala
+                <i class="fas fa-wifi"></i> 1 WiFi · Real-time · Preview Bebas
             </div>
         </div>
     </div>
 
-    <!-- ===== LOCK OVERLAY (khusus siswa) ===== -->
+    <!-- ===== LOCK OVERLAY (POPUP PASSWORD) ===== -->
     <div id="lock-overlay">
-        <div class="lock-icon">🔒</div>
-        <h2>Mode Fullscreen Aktif</h2>
-        <p>Masukkan password untuk keluar dari mode fullscreen</p>
-        <input type="password" id="lock-password-input" placeholder="Password..." autocomplete="off" />
-        <button id="unlock-lock-btn">Buka Kunci</button>
-        <div id="lock-error"></div>
-        <p style="color:#4a5a7a; font-size:0.75rem; margin-top:4px;">Password: <strong style="color:#ffb347;">siswa123</strong></p>
+        <div class="lock-box">
+            <div class="lock-icon">🔒</div>
+            <h2>Buka Kunci Layar</h2>
+            <p>Masukkan password untuk keluar dari fullscreen</p>
+            <input type="password" id="lock-password-input" placeholder="Masukkan password..." autocomplete="off" />
+            <button class="btn-unlock" id="unlock-lock-btn">Buka Kunci</button>
+            <div class="lock-error" id="lock-error"></div>
+            <div class="password-hint">Password: <strong>siswa123</strong></div>
+        </div>
     </div>
 
     <!-- ===== MAIN APP ===== -->
@@ -516,9 +542,6 @@
         <button id="lock-btn" style="color:#ffb347;">
             <i class="fas fa-lock"></i> Kunci Layar
         </button>
-        <button id="unlock-btn" style="color:#00d26a; display:none;">
-            <i class="fas fa-unlock"></i> Buka Kunci
-        </button>
     </div>
 
     <script>
@@ -542,7 +565,6 @@
             const stopBtn = document.getElementById('stop-share');
             const fullscreenBtn = document.getElementById('fullscreen-btn');
             const lockBtn = document.getElementById('lock-btn');
-            const unlockBtn = document.getElementById('unlock-btn');
             const lockOverlay = document.getElementById('lock-overlay');
             const lockPasswordInput = document.getElementById('lock-password-input');
             const unlockLockBtn = document.getElementById('unlock-lock-btn');
@@ -558,40 +580,30 @@
                 appContainer.classList.add('active');
 
                 if (role === 'guru') {
-                    // Guru: bebas, tidak ada lock
                     roleBadge.textContent = '👨‍🏫 Guru';
                     roleBadge.className = 'role-badge guru';
                     startBtn.style.display = 'flex';
                     stopBtn.style.display = 'flex';
                     fullscreenBtn.style.display = 'flex';
                     lockBtn.style.display = 'none';
-                    unlockBtn.style.display = 'none';
                     
-                    // Auto start broadcast
                     setTimeout(() => startScreenShare(), 600);
                 } else {
-                    // Siswa: lock & fullscreen
+                    // Siswa: preview bebas, tidak langsung dikunci
                     roleBadge.textContent = '👨‍🎓 Siswa';
                     roleBadge.className = 'role-badge siswa';
                     startBtn.style.display = 'none';
                     stopBtn.style.display = 'none';
                     fullscreenBtn.style.display = 'flex';
                     lockBtn.style.display = 'flex';
-                    unlockBtn.style.display = 'none';
                     
                     waitingMsg.style.display = 'block';
                     
-                    // Auto fullscreen untuk siswa
+                    // Auto fullscreen untuk siswa (tapi siswa bisa lihat preview dulu)
                     setTimeout(() => {
                         requestFullscreen();
-                        // Tampilkan tombol unlock setelah fullscreen
-                        setTimeout(() => {
-                            lockBtn.style.display = 'flex';
-                            unlockBtn.style.display = 'none';
-                        }, 500);
                     }, 800);
                     
-                    // Mulai listen broadcast
                     listenForBroadcast();
                 }
             };
@@ -621,11 +633,9 @@
                     startBtn.style.background = '#00d26a';
                     startBtn.style.color = '#fff';
 
-                    // Broadcast ke semua siswa
                     window._broadcastStream = stream;
                     window._isBroadcasting = true;
 
-                    // Kirim sinyal melalui BroadcastChannel
                     try {
                         const channel = new BroadcastChannel('broadcast_screen');
                         channel.postMessage({
@@ -667,7 +677,6 @@
 
             // ===== SISWA: LISTEN BROADCAST =====
             function listenForBroadcast() {
-                // Cek apakah ada broadcast yang sedang berjalan
                 if (window._isBroadcasting && window._broadcastStream) {
                     video.srcObject = window._broadcastStream;
                     video.play().then(() => {
@@ -678,11 +687,9 @@
                     return;
                 }
 
-                // Listen melalui BroadcastChannel
                 try {
                     const channel = new BroadcastChannel('broadcast_screen');
                     
-                    // Kirim permintaan
                     channel.postMessage({
                         type: 'request_stream',
                         senderId: 'siswa_' + Date.now()
@@ -690,7 +697,6 @@
 
                     channel.onmessage = function(e) {
                         if (e.data.type === 'broadcast_available' || e.data.type === 'stream_ready') {
-                            // Ambil stream dari global
                             if (window._broadcastStream) {
                                 video.srcObject = window._broadcastStream;
                                 video.play().then(() => {
@@ -702,7 +708,6 @@
                         }
                     };
 
-                    // Coba ambil stream setiap 2 detik
                     const checkInterval = setInterval(() => {
                         if (window._broadcastStream && video.srcObject === null) {
                             video.srcObject = window._broadcastStream;
@@ -715,12 +720,10 @@
                         }
                     }, 2000);
 
-                    // Stop checking setelah 30 detik
                     setTimeout(() => clearInterval(checkInterval), 30000);
 
                 } catch (e) {
                     console.log('BroadcastChannel tidak tersedia');
-                    // Fallback: cek global
                     const fallbackInterval = setInterval(() => {
                         if (window._broadcastStream && video.srcObject === null) {
                             video.srcObject = window._broadcastStream;
@@ -751,33 +754,32 @@
                 }
             }
 
-            // ===== LOCK / UNLOCK (hanya untuk siswa) =====
-            function showLock() {
+            // ===== LOCK / UNLOCK (popup password) =====
+            function showLockPopup() {
                 if (currentRole === 'guru') {
                     alert('Guru tidak perlu di-lock. Anda bebas bergerak.');
+                    return;
+                }
+                if (!isFullscreen) {
+                    alert('Masuk ke mode fullscreen terlebih dahulu.');
                     return;
                 }
                 isLocked = true;
                 lockOverlay.classList.add('active');
                 setTimeout(() => lockPasswordInput.focus(), 100);
-                // Sembunyikan tombol lock, tampilkan unlock
-                lockBtn.style.display = 'none';
-                unlockBtn.style.display = 'flex';
             }
 
-            function hideLock() {
+            function hideLockPopup() {
                 isLocked = false;
                 lockOverlay.classList.remove('active');
                 lockPasswordInput.value = '';
                 lockError.textContent = '';
-                lockBtn.style.display = 'flex';
-                unlockBtn.style.display = 'none';
             }
 
             function attemptUnlock() {
                 const pass = lockPasswordInput.value.trim();
                 if (pass === STUDENT_PASSWORD) {
-                    hideLock();
+                    hideLockPopup();
                     exitFullscreen();
                 } else {
                     lockError.textContent = '❌ Password salah! Coba lagi.';
@@ -800,18 +802,13 @@
                     if (currentRole === 'guru') {
                         exitFullscreen();
                     } else {
-                        // Siswa: show lock dulu
-                        showLock();
+                        // Siswa: munculkan popup password
+                        showLockPopup();
                     }
                 }
             });
 
-            lockBtn.addEventListener('click', showLock);
-
-            unlockBtn.addEventListener('click', function() {
-                // Coba buka kunci
-                showLock();
-            });
+            lockBtn.addEventListener('click', showLockPopup);
 
             unlockLockBtn.addEventListener('click', attemptUnlock);
 
@@ -824,20 +821,20 @@
 
             // ===== BLOKIR ESCAPE UNTUK SISWA =====
             document.addEventListener('keydown', function(e) {
-                // Jika siswa dan fullscreen, blokir escape
+                // Jika siswa dan fullscreen, blokir escape & tampilkan popup
                 if (currentRole === 'siswa' && isFullscreen) {
                     if (e.key === 'Escape' || e.key === 'Esc') {
                         e.preventDefault();
                         e.stopPropagation();
-                        // Tampilkan lock
+                        // Tampilkan popup password
                         if (!isLocked) {
-                            showLock();
+                            showLockPopup();
                         }
                         return false;
                     }
                 }
 
-                // Blokir F11
+                // Blokir F11 untuk semua
                 if (e.key === 'F11') {
                     e.preventDefault();
                     e.stopPropagation();
@@ -872,11 +869,12 @@
             // ===== FULLSCREEN CHANGE =====
             document.addEventListener('fullscreenchange', function() {
                 if (!document.fullscreenElement && currentRole === 'siswa' && !isLocked) {
-                    // Siswa keluar fullscreen tanpa lock, lock lagi
+                    // Siswa keluar fullscreen tanpa unlock, force kembali
                     setTimeout(() => {
                         if (!document.fullscreenElement && !isLocked) {
                             requestFullscreen();
-                            setTimeout(showLock, 300);
+                            // Tampilkan popup setelah force fullscreen
+                            setTimeout(showLockPopup, 300);
                         }
                     }, 100);
                 }
@@ -886,7 +884,6 @@
             console.log('📡 BroadcastScreen siap!');
             console.log('🔑 Password siswa: siswa123');
 
-            // Auto connect jika sudah ada broadcast
             if (window._broadcastStream) {
                 video.srcObject = window._broadcastStream;
                 video.play().then(() => {
