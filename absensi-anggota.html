@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fullscreen</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#111827;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    text-align:center;
+}
+
+h1{
+    margin-bottom:15px;
+}
+
+p{
+    opacity:.8;
+    margin-bottom:25px;
+}
+
+button{
+    padding:15px 35px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    background:#1d4ed8;
+    transform:scale(1.05);
+}
+
+.fullscreen{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Mode Full Screen</h1>
+    <p>Klik tombol di bawah untuk masuk ke mode layar penuh.</p>
+
+    <button onclick="goFullscreen()">
+        Masuk Full Screen
+    </button>
+</div>
+
+<script>
+async function goFullscreen(){
+    try{
+        if(document.documentElement.requestFullscreen){
+            await document.documentElement.requestFullscreen();
+        }else if(document.documentElement.webkitRequestFullscreen){
+            document.documentElement.webkitRequestFullscreen();
+        }else if(document.documentElement.msRequestFullscreen){
+            document.documentElement.msRequestFullscreen();
+        }
+    }catch(e){
+        alert("Browser tidak mengizinkan mode fullscreen.");
+    }
+}
+
+// Jika pengguna keluar dari fullscreen
+document.addEventListener("fullscreenchange",()=>{
+    if(!document.fullscreenElement){
+        console.log("Keluar dari fullscreen");
+    }
+});
+</script>
+
+</body>
+</html>
