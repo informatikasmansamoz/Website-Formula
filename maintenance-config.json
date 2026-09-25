@@ -1,9 +1,9 @@
 {
   "enabled": true,
   "message": "Website sedang dalam perbaikan. Kami akan segera kembali.",
-  "eta": "2025-03-01T08:00:00+07:00",
-  "allowPaths": ["maintenance.html", "login.html"],
+  "eta": "2026-11-01T08:00:00+07:00",
+  "allowPaths": ["maintenance.html", ""],
   "bypassKey": "formula-admin-2025",
   "allowLocalhost": true,
-  "progressPercent": 68
+  "progressPercent": 58
 }
