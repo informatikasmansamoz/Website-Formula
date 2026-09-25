@@ -2,160 +2,1226 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Halaman Tidak Ditemukan — FORMULA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#1A73E8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="description" content="FORMULA sedang dalam perbaikan. Kami akan segera kembali." />
+<title>Maintenance — FORMULA SMAN 1 Mojosari</title>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A73E8'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='56' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
 <style>
 :root {
-  --paper: #F7F6F3;
-  --ink: #14151A;
-  --ink-soft: #5B5D66;
-  --accent: #FF5A1F;
-  --accent-tint: #FFE7DA;
-  --line: #E2E0DA;
-  --f-display: 'Space Grotesk', sans-serif;
-  --f-mono: 'IBM Plex Mono', monospace;
+  --color-primary: #1A73E8;
+  --color-primary-dark: #1557B0;
+  --color-primary-light: #E8F0FE;
+  --color-secondary: #34A853;
+  --color-accent: #EA4335;
+  --color-warning: #FBBC04;
+  --color-dark: #0A0E1A;
+  --color-darker: #05070D;
+  --color-light: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --text-primary: #202124;
+  --text-secondary: #525252;
+  --text-muted: #737373;
+  --border-color: #E5E5E5;
+  --border-radius: 12px;
+  --border-radius-lg: 20px;
+  --border-radius-full: 9999px;
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-* { margin:0; padding:0; box-sizing:border-box; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
 body {
-  font-family: 'Inter', sans-serif;
-  background: var(--paper);
-  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px; line-height: 1.7;
+  color: white;
+  background: var(--color-dark);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
+}
+img, svg { display: block; max-width: 100%; height: auto; }
+a { color: white; text-decoration: none; transition: opacity var(--transition-base); }
+button { font-family: inherit; font-size: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading); font-weight: 700; line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: 4px; }
+::selection { background: var(--color-primary); color: white; }
+
+/* ============================================================
+   BACKGROUND — Animated gradient + grid + orbs
+   ============================================================ */
+.bg {
+  position: fixed; inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(26,115,232,0.28) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(52,168,83,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(124,77,255,0.15) 0%, transparent 60%),
+    linear-gradient(180deg, #0A0E1A 0%, #05070D 100%);
+}
+
+/* Grid overlay */
+.bg-grid {
+  position: absolute; inset: -50%;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: gridMove 25s linear infinite;
+  transform: perspective(600px) rotateX(0deg);
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+@keyframes gridMove {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(48px, 48px); }
+}
+
+/* Floating orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  pointer-events: none;
+  will-change: transform;
+}
+.orb-1 {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(26,115,232,0.7), transparent 70%);
+  top: 10%; left: 8%;
+  animation: orbFloat1 14s ease-in-out infinite;
+}
+.orb-2 {
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(52,168,83,0.65), transparent 70%);
+  bottom: 12%; right: 10%;
+  animation: orbFloat2 16s ease-in-out infinite;
+}
+.orb-3 {
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(124,77,255,0.55), transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: orbFloat3 20s ease-in-out infinite;
+}
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(60px, -40px) scale(1.15); }
+  66%      { transform: translate(-30px, 50px) scale(0.9); }
+}
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-70px, -50px) scale(1.2); }
+}
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%      { transform: translate(-40%, -60%) scale(1.25); }
+}
+
+/* Particles */
+.particles {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat linear infinite;
+  box-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) translateX(0);
+  }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% {
+    opacity: 0;
+    transform: translateY(-10vh) translateX(40px);
+  }
+}
+
+/* Scanlines (subtle) */
+.bg-scanlines {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgba(255,255,255,0.012) 2px,
+    rgba(255,255,255,0.012) 4px
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ============================================================
+   MAIN LAYOUT
+   ============================================================ */
+.page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-}
-.container {
-  max-width: 600px;
+  padding: 24px 20px;
   text-align: center;
 }
-.code {
-  font-family: var(--f-mono);
-  font-size: clamp(6rem, 20vw, 10rem);
-  font-weight: 700;
-  color: var(--accent);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  opacity: 0.15;
-  margin-bottom: -1.5rem;
+
+/* Logo */
+.logo {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--font-heading); font-weight: 800; font-size: 22px;
+  color: white;
+  margin-bottom: 32px;
+  animation: fadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-.icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  display: block;
+.logo-mark {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  display: grid; place-items: center;
+  color: white; font-weight: 800; font-size: 22px;
+  box-shadow:
+    0 8px 24px rgba(26,115,232,0.5),
+    0 0 0 1px rgba(255,255,255,0.08) inset;
+  position: relative;
+  overflow: hidden;
 }
-h1 {
-  font-family: var(--f-display);
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.8rem;
+.logo-mark::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%);
+  border-radius: inherit;
 }
-h1 span {
-  color: var(--accent);
+.logo-mark span { position: relative; z-index: 1; }
+.logo-text {
+  display: flex; flex-direction: column;
+  line-height: 1.1; text-align: left;
 }
-p {
-  color: var(--ink-soft);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  max-width: 44ch;
-  margin: 0 auto 2rem;
+.logo-text small {
+  font-family: var(--font-body);
+  font-size: 10.5px; font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 2px;
 }
-.btn {
-  font-weight: 600;
-  font-size: .9rem;
-  text-decoration: none;
+
+/* ============================================================
+   HERO — Animated Gear + Text
+   ============================================================ */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 720px;
+}
+
+/* Gear animation */
+.gear-wrap {
+  position: relative;
+  width: 200px; height: 200px;
+  display: grid;
+  place-items: center;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+@media (min-width: 640px) {
+  .gear-wrap { width: 240px; height: 240px; }
+}
+
+/* Glow ring behind gear */
+.gear-glow {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,115,232,0.35), transparent 60%);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50%      { transform: scale(1.15); opacity: 1; }
+}
+
+/* Rotating rings */
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(26,115,232,0.35);
+  animation: ringRotate 12s linear infinite;
+}
+.ring::before {
+  content: '';
+  position: absolute;
+  top: -4px; left: 50%;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 16px rgba(26,115,232,0.9);
+  transform: translateX(-50%);
+}
+.ring-2 {
+  inset: 18px;
+  border-color: rgba(52,168,83,0.35);
+  animation: ringRotate 8s linear infinite reverse;
+}
+.ring-2::before {
+  background: var(--color-secondary);
+  box-shadow: 0 0 16px rgba(52,168,83,0.9);
+}
+.ring-3 {
+  inset: 36px;
+  border-color: rgba(124,77,255,0.35);
+  animation: ringRotate 16s linear infinite;
+}
+.ring-3::before {
+  background: #7C4DFF;
+  box-shadow: 0 0 16px rgba(124,77,255,0.9);
+  top: 50%; left: -4px;
+  transform: translateY(-50%);
+}
+@keyframes ringRotate {
+  to { transform: rotate(360deg); }
+}
+
+/* Main gear */
+.gear-main {
+  position: relative;
+  z-index: 2;
+  width: 96px; height: 96px;
+  display: grid; place-items: center;
+  animation: gearSpin 8s linear infinite;
+  filter: drop-shadow(0 8px 24px rgba(26,115,232,0.5));
+}
+.gear-main svg {
+  width: 100%; height: 100%;
+  color: var(--color-primary);
+}
+@keyframes gearSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Small orbiting gear */
+.gear-small {
+  position: absolute;
+  z-index: 3;
+  width: 44px; height: 44px;
+  bottom: 20%; right: 18%;
+  display: grid; place-items: center;
+  animation: gearSpin 4s linear infinite reverse;
+  filter: drop-shadow(0 6px 16px rgba(52,168,83,0.5));
+}
+.gear-small svg {
+  width: 100%; height: 100%;
+  color: var(--color-secondary);
+}
+
+/* Pulsing dot center */
+.gear-center-dot {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: white;
+  z-index: 4;
+  box-shadow: 0 0 24px rgba(255,255,255,0.9);
+  animation: centerPulse 2s ease-in-out infinite;
+}
+@keyframes centerPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.3); opacity: 0.7; }
+}
+
+/* ============================================================
+   TEXT
+   ============================================================ */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.status-badge {
   display: inline-flex;
   align-items: center;
-  gap: .6rem;
-  padding: .75rem 1.8rem;
-  border: 1.5px solid var(--ink);
-  color: var(--ink);
-  transition: all .18s ease;
-  border-radius: 4px;
+  gap: 8px;
+  padding: 7px 16px;
+  background: rgba(251,188,4,0.12);
+  border: 1px solid rgba(251,188,4,0.35);
+  border-radius: var(--border-radius-full);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-warning);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
-.btn:hover {
-  background: var(--ink);
-  color: var(--paper);
+.status-badge .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--color-warning);
+  box-shadow: 0 0 12px rgba(251,188,4,0.9);
+  animation: dotPulse 1.5s ease-in-out infinite;
 }
-.btn-solid {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--ink);
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.4); opacity: 0.5; }
 }
-.btn-solid:hover {
-  background: #e0500f;
-  border-color: #e0500f;
+
+.hero-title {
+  font-size: clamp(30px, 6vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: white;
+  letter-spacing: -0.03em;
+  max-width: 640px;
 }
+.hero-title .gradient {
+  background: linear-gradient(135deg, #4285F4 0%, #34A853 50%, #7C4DFF 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradientShift 6s ease-in-out infinite;
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.hero-subtitle {
+  font-size: clamp(14px, 2vw, 17px);
+  line-height: 1.7;
+  color: rgba(255,255,255,0.65);
+  max-width: 520px;
+}
+
+/* ============================================================
+   COUNTDOWN
+   ============================================================ */
+.countdown {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 64px;
+  padding: 12px 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+}
+.countdown-item:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(26,115,232,0.4);
+  transform: translateY(-2px);
+}
+.countdown-value {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.countdown-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+@media (min-width: 480px) {
+  .countdown { gap: 16px; }
+  .countdown-item { min-width: 78px; padding: 14px 10px; }
+  .countdown-value { font-size: 30px; }
+}
+
+/* Separator */
+.countdown-sep {
+  align-self: center;
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.25);
+  padding-bottom: 16px;
+}
+@media (max-width: 479px) {
+  .countdown-sep { display: none; }
+}
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+.progress-wrap {
+  width: 100%;
+  max-width: 420px;
+  margin-top: 8px;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.progress-label span:last-child {
+  color: white;
+  font-family: var(--font-mono);
+}
+.progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1A73E8 0%, #4285F4 50%, #34A853 100%);
+  background-size: 200% 100%;
+  box-shadow:
+    0 0 16px rgba(26,115,232,0.6),
+    0 0 0 1px rgba(255,255,255,0.05) inset;
+  animation:
+    progressLoad 2s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards,
+    progressShimmer 3s linear infinite;
+  position: relative;
+}
+@keyframes progressLoad {
+  from { width: 0%; }
+  to   { width: 78%; }
+}
+@keyframes progressShimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ============================================================
+   INFO CARDS
+   ============================================================ */
+.info-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+  width: 100%;
+  max-width: 720px;
+  margin-bottom: 32px;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+}
+@media (min-width: 640px) {
+  .info-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.info-card {
+  padding: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+.info-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0.6;
+}
+.info-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(26,115,232,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+}
+.info-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+  background: rgba(26,115,232,0.15);
+  border: 1px solid rgba(26,115,232,0.3);
+}
+.info-card:nth-child(2) .info-icon {
+  background: rgba(52,168,83,0.15);
+  border-color: rgba(52,168,83,0.3);
+}
+.info-card:nth-child(3) .info-icon {
+  background: rgba(124,77,255,0.15);
+  border-color: rgba(124,77,255,0.3);
+}
+.info-title {
+  font-family: var(--font-heading);
+  font-size: 14px; font-weight: 700;
+  color: white;
+  margin-bottom: 4px;
+}
+.info-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   ACTIONS
+   ============================================================ */
 .actions {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
   flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  max-width: 520px;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
 }
-.divider {
-  width: 60px;
-  height: 2px;
-  background: var(--line);
-  margin: 2rem auto;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: var(--font-heading);
+  font-size: 14px; font-weight: 600;
+  border-radius: var(--border-radius-full);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  min-height: 46px;
+  user-select: none;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
 }
-.status {
-  font-family: var(--f-mono);
-  font-size: .72rem;
-  color: var(--ink-soft);
-  border: 1px solid var(--line);
-  padding: .3rem .8rem;
-  border-radius: 20px;
-  display: inline-block;
-  margin-top: 1.5rem;
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  color: white;
+  box-shadow: 0 8px 24px rgba(26,115,232,0.4);
 }
-.status-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #16A34A;
-  margin-right: .4rem;
-  animation: ping 2.4s ease-out infinite;
+.btn-primary:hover {
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(26,115,232,0.55);
 }
-@keyframes ping {
-  0% { box-shadow: 0 0 0 0 rgba(22,163,74,.45); }
-  70% { box-shadow: 0 0 0 6px rgba(22,163,74,0); }
-  100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.7s;
 }
-@media (max-width: 600px) {
-  .container { padding: 0 1rem; }
-  .code { font-size: clamp(4rem, 25vw, 6rem); }
-  .icon { font-size: 3rem; }
-  p { font-size: .95rem; }
-  .actions { flex-direction: column; align-items: center; }
-  .btn { width: 100%; justify-content: center; }
+.btn-primary:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-outline {
+  background: rgba(255,255,255,0.05);
+  color: white;
+  border-color: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.3);
+  color: white;
+  transform: translateY(-2px);
+}
+.btn-outline svg {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-outline:hover svg {
+  transform: rotate(180deg);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.page-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  padding: 0 20px;
+  animation: fadeIn 1.2s ease-out 1s both;
+}
+.page-footer a {
+  color: rgba(255,255,255,0.65);
+  font-weight: 600;
+}
+.page-footer a:hover {
+  color: white;
+}
+
+/* ============================================================
+   ENTRANCE ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+  .page { padding: 20px 16px 80px; }
+  .hero { gap: 24px; margin-bottom: 28px; }
+  .info-grid { margin-bottom: 24px; }
+  .actions { flex-direction: column; }
+  .btn { width: 100%; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .bg-grid, .orb, .particle, .ring, .gear-main, .gear-small {
+    animation: none !important;
+  }
+  .progress-fill { width: 78%; }
 }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="code">404</div>
-  <span class="icon">🔧</span>
-  <h1>Halaman <span>Sedang</span> Diperbaiki</h1>
-  <p>Maaf, halaman yang Anda cari sedang dalam proses perbaikan atau belum tersedia. Tim FORMULA sedang bekerja keras untuk menyajikan konten terbaik.</p>
-  
-  <div class="divider"></div>
-  
-  <div class="actions">
-    <a href="index.html" class="btn btn-solid">← Kembali ke Home</a>
-    <a href="classes.html" class="btn">Lihat Program Lain</a>
-  </div>
-  
-  <div class="status">
-    <span class="status-dot"></span> STATUS: MAINTENANCE
-  </div>
+<!-- ============================================================
+     BACKGROUND
+     ============================================================ -->
+<div class="bg" aria-hidden="true">
+  <div class="bg-grid"></div>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="particles" id="particles"></div>
+
+  <div class="bg-scanlines"></div>
 </div>
+
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
+<main class="page">
+
+  <!-- Logo -->
+  <div class="logo">
+    <div class="logo-mark"><span>F</span></div>
+    <div class="logo-text">
+      FORMULA
+      <small>SMAN 1 Mojosari</small>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+
+    <!-- Animated Gear -->
+    <div class="gear-wrap" aria-hidden="true">
+      <div class="gear-glow"></div>
+
+      <div class="ring"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+
+      <div class="gear-main">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+        </svg>
+      </div>
+
+      <div class="gear-small">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+        </svg>
+      </div>
+
+      <div class="gear-center-dot"></div>
+    </div>
+
+    <!-- Text -->
+    <div class="hero-text">
+      <div class="status-badge">
+        <span class="dot"></span>
+        <span>Sedang Dalam Perbaikan</span>
+      </div>
+
+      <h1 class="hero-title">
+        Kami Sedang <span class="gradient">Berkarya</span> untuk Pengalaman Lebih Baik
+      </h1>
+
+      <p class="hero-subtitle">
+        Platform FORMULA sedang dalam proses maintenance dan pengembangan.
+        Kami akan segera kembali dengan fitur-fitur baru yang lebih keren.
+      </p>
+
+      <!-- Countdown -->
+      <div class="countdown" id="countdown" role="timer" aria-label="Waktu tersisa">
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-days">00</span>
+          <span class="countdown-label">Hari</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-hours">00</span>
+          <span class="countdown-label">Jam</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-mins">00</span>
+          <span class="countdown-label">Menit</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-secs">00</span>
+          <span class="countdown-label">Detik</span>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>Progress Maintenance</span>
+          <span id="progressPercent">78%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Cards -->
+  <section class="info-grid">
+    <div class="info-card">
+      <div class="info-icon">🔧</div>
+      <div class="info-title">Peningkatan Sistem</div>
+      <div class="info-text">Kami sedang upgrade performa dan keamanan platform untuk pengalaman yang lebih baik.</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">✨</div>
+      <div class="info-title">Fitur Baru</div>
+      <div class="info-text">Beberapa fitur baru sedang dalam tahap pengembangan. Nantikan kehadirannya!</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">🛡️</div>
+      <div class="info-title">Data Tetap Aman</div>
+      <div class="info-text">Seluruh data anggota tetap aman dan tidak terpengaruh oleh proses maintenance ini.</div>
+    </div>
+  </section>
+
+  <!-- Actions -->
+  <section class="actions">
+    <button class="btn btn-primary" id="notifyBtn" type="button">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 01-3.46 0"/>
+      </svg>
+      <span id="notifyText">Beri Tahu Saya</span>
+    </button>
+
+    <button class="btn btn-outline" id="retryBtn" type="button">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10"/>
+        <polyline points="1 20 1 14 7 14"/>
+        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+      </svg>
+      Coba Lagi
+    </button>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="page-footer">
+  © 2025 FORMULA — SMAN 1 Mojosari ·
+  <a href="contact.html">Hubungi Kami</a> ·
+  <a href="index.html">Beranda</a>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     1. PARTICLES GENERATOR
+     ============================================================ */
+  const particlesContainer = document.getElementById('particles');
+  if (particlesContainer) {
+    const PARTICLE_COUNT = 30;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = document.createElement('span');
+      p.className = 'particle';
+
+      /* Random position, size, duration, delay */
+      const size = Math.random() * 3 + 1;
+      const left = Math.random() * 100;
+      const duration = Math.random() * 15 + 12; /* 12-27s */
+      const delay = Math.random() * 15;
+
+      p.style.left = left + '%';
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animationDuration = duration + 's';
+      p.style.animationDelay = delay + 's';
+
+      /* Randomize color */
+      const colors = [
+        'rgba(255,255,255,0.9)',
+        'rgba(26,115,232,0.9)',
+        'rgba(52,168,83,0.9)',
+        'rgba(124,77,255,0.9)'
+      ];
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+      particlesContainer.appendChild(p);
+    }
+  }
+
+  /* ============================================================
+     2. COUNTDOWN TIMER
+     ============================================================ */
+  const countdownEls = {
+    days: document.getElementById('cd-days'),
+    hours: document.getElementById('cd-hours'),
+    mins: document.getElementById('cd-mins'),
+    secs: document.getElementById('cd-secs')
+  };
+
+  /* Target date: 3 hari dari sekarang (bisa diganti manual) */
+  const TARGET = (() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 3);
+    d.setHours(9, 0, 0, 0);
+    return d.getTime();
+  })();
+
+  const pad = (n) => String(n).padStart(2, '0');
+
+  const updateCountdown = () => {
+    const now = Date.now();
+    let diff = TARGET - now;
+
+    if (diff <= 0) {
+      if (countdownEls.days) countdownEls.days.textContent = '00';
+      if (countdownEls.hours) countdownEls.hours.textContent = '00';
+      if (countdownEls.mins) countdownEls.mins.textContent = '00';
+      if (countdownEls.secs) countdownEls.secs.textContent = '00';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= days * 1000 * 60 * 60 * 24;
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * 1000 * 60 * 60;
+
+    const mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * 1000 * 60;
+
+    const secs = Math.floor(diff / 1000);
+
+    if (countdownEls.days) countdownEls.days.textContent = pad(days);
+    if (countdownEls.hours) countdownEls.hours.textContent = pad(hours);
+    if (countdownEls.mins) countdownEls.mins.textContent = pad(mins);
+    if (countdownEls.secs) countdownEls.secs.textContent = pad(secs);
+  };
+
+  updateCountdown();
+  const countdownInterval = setInterval(updateCountdown, 1000);
+
+  /* ============================================================
+     3. PROGRESS BAR ANIMATE
+     ============================================================ */
+  const progressFill = document.getElementById('progressFill');
+  const progressPercent = document.getElementById('progressPercent');
+
+  /* Animasi progress naik secara acak dari 78% ke 85% untuk feel "live" */
+  const BASE_PROGRESS = 78;
+  const MAX_PROGRESS = 85;
+
+  if (progressFill && progressPercent) {
+    let currentProgress = BASE_PROGRESS;
+
+    const animateProgress = () => {
+      /* Randomly increment between 0.1 - 0.5 */
+      currentProgress += Math.random() * 0.4;
+      if (currentProgress > MAX_PROGRESS) currentProgress = MAX_PROGRESS;
+
+      progressFill.style.transition = 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      progressFill.style.width = currentProgress + '%';
+      progressPercent.textContent = Math.round(currentProgress) + '%';
+    };
+
+    /* Delay sedikit biar animasi awal selesai */
+    setTimeout(() => {
+      setInterval(animateProgress, 4000);
+    }, 2500);
+  }
+
+  /* ============================================================
+     4. NOTIFY BUTTON
+     ============================================================ */
+  const notifyBtn = document.getElementById('notifyBtn');
+  const notifyText = document.getElementById('notifyText');
+
+  if (notifyBtn && notifyText) {
+    let isNotified = false;
+
+    notifyBtn.addEventListener('click', () => {
+      isNotified = !isNotified;
+
+      if (isNotified) {
+        notifyText.textContent = 'Kamu Akan Diberi Tahu ✓';
+        notifyBtn.style.background = 'linear-gradient(135deg, #34A853, #5BB974)';
+        notifyBtn.style.boxShadow = '0 8px 24px rgba(52,168,83,0.45)';
+
+        /* Reset setelah 3 detik */
+        setTimeout(() => {
+          notifyText.textContent = 'Beri Tahu Saya';
+          notifyBtn.style.background = '';
+          notifyBtn.style.boxShadow = '';
+          isNotified = false;
+        }, 3000);
+      }
+    });
+  }
+
+  /* ============================================================
+     5. RETRY BUTTON
+     ============================================================ */
+  const retryBtn = document.getElementById('retryBtn');
+
+  if (retryBtn) {
+    retryBtn.addEventListener('click', () => {
+      /* Animasi spin icon */
+      const svg = retryBtn.querySelector('svg');
+      if (svg) {
+        svg.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+        svg.style.transform = 'rotate(360deg)';
+
+        setTimeout(() => {
+          svg.style.transition = 'none';
+          svg.style.transform = 'rotate(0deg)';
+
+          /* Simulasi cek status: kalau masih maintenance */
+          setTimeout(() => {
+            /* Shake animation untuk feedback */
+            retryBtn.style.animation = 'none';
+            void retryBtn.offsetWidth;
+            retryBtn.style.animation = 'shake 0.5s';
+
+            /* Toast mini */
+            showToast('Masih dalam proses maintenance. Coba lagi nanti ya!');
+          }, 100);
+        }, 800);
+      } else {
+        showToast('Masih dalam proses maintenance. Coba lagi nanti ya!');
+      }
+    });
+  }
+
+  /* ============================================================
+     6. TOAST
+     ============================================================ */
+  const showToast = (message) => {
+    /* Hapus toast lama */
+    const old = document.querySelector('.toast-mini');
+    if (old) old.remove();
+
+    const toast = document.createElement('div');
+    toast.className = 'toast-mini';
+    toast.textContent = message;
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.95);
+      color: #202124;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 999px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 90vw;
+      text-align: center;
+    `;
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    });
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(20px)';
+      setTimeout(() => toast.remove(), 400);
+    }, 2800);
+  };
+
+  /* ============================================================
+     7. SHAKE ANIMATION (inject keyframes)
+     ============================================================ */
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  /* ============================================================
+     8. PARALLAX EFFECT (mouse move) — desktop only
+     ============================================================ */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const orbs = document.querySelectorAll('.orb');
+    const grid = document.querySelector('.bg-grid');
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+      orbs.forEach((orb, i) => {
+        const depth = (i + 1) * 12;
+        orb.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
+      });
+
+      if (grid) {
+        grid.style.transform = `perspective(600px) rotateX(0deg) translate(${x * 8}px, ${y * 8}px)`;
+      }
+    }, { passive: true });
+  }
+
+  /* ============================================================
+     9. PAGE VISIBILITY — pause countdown when tab hidden
+     ============================================================ */
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearInterval(countdownInterval);
+    } else {
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+  });
+
+  /* ============================================================
+     10. AUTO-REFRESH CHECK
+     ============================================================ */
+  /* Simulasi: setiap 60 detik, cek apakah maintenance sudah selesai.
+     Dalam implementasi nyata, ini panggilan API /health atau /status. */
+  const CHECK_INTERVAL = 60000;
+
+  setInterval(() => {
+    /* Simulasi: 5% chance maintenance selesai (untuk demo) */
+    /* Di production, ganti dengan fetch ke API status */
+    /*
+    fetch('/api/status')
+      .then(r => r.json())
+      .then(data => {
+        if (!data.maintenance) {
+          window.location.href = '/';
+        }
+      })
+      .catch(() => {});
+    */
+  }, CHECK_INTERVAL);
+
+  /* ============================================================
+     11. CONSOLE SIGNATURE
+     ============================================================ */
+  // console.log('%c🔧 FORMULA — Maintenance Mode', 'color:#1A73E8;font-size:14px;font-weight:bold');
+  // console.log('%cKami akan segera kembali!', 'color:#737373;font-size:12px');
+
+})();
+</script>
 
 </body>
 </html>
