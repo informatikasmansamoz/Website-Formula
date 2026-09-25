@@ -2,764 +2,1716 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FORMULA — SMAN 1 MOJOSARI</title>
-<meta name="description" content="Ekstrakurikuler Informatika dan Multimedia SMAN 1 Mojosari yang fokus pada pengembangan web, desain grafis, animasi, dan multimedia. Belajar dari proyek nyata, bukan slide presentasi." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="formula.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#1A73E8" />
+<meta name="description" content="FORMULA — Informatika dan Multimedia SMAN 1 Mojosari. Central Platform organisasi: profil, project, learning, event, dan komunitas." />
+<meta name="keywords" content="FORMULA, SMAN 1 Mojosari, Informatika, Multimedia, Ekstrakurikuler" />
+<title>FORMULA — Informatika & Multimedia SMAN 1 Mojosari</title>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A73E8'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='56' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
 <style>
-/* ============================================================
-   DESIGN TOKENS
-   Base: warm-grey paper, near-black ink, ONE accent —
-   signal-orange, lifted from the orange pair inside an
-   Ethernet cable. Numbering throughout mimics IP-address
-   notation instead of generic 01/02/03 — this is a network
-   club, so the club's own vernacular becomes the structure.
-   ============================================================ */
-:root{
-  --paper:      #F7F6F3;
-  --paper-2:    #FFFFFF;
-  --ink:        #14151A;
-  --ink-soft:   #5B5D66;
-  --ink-faint:  #9A9CA3;
-  --line:       #E2E0DA;
-  --line-strong:#CFCCC4;
-  --accent:     #FF5A1F;
-  --accent-tint:#FFE7DA;
-  --status:     #16A34A;
-
-  --f-display: 'Space Grotesk', sans-serif;
-  --f-body:    'Inter', sans-serif;
-  --f-mono:    'IBM Plex Mono', monospace;
-
-  --max: 1120px;
+:root {
+  --color-primary: #1A73E8;
+  --color-primary-dark: #1557B0;
+  --color-primary-light: #E8F0FE;
+  --color-secondary: #34A853;
+  --color-secondary-dark: #1E7E34;
+  --color-accent: #EA4335;
+  --color-warning: #FBBC04;
+  --color-dark: #202124;
+  --color-gray-900: #171717;
+  --color-gray-700: #404040;
+  --color-gray-600: #525252;
+  --color-gray-500: #737373;
+  --color-gray-400: #A3A3A3;
+  --color-gray-300: #D4D4D4;
+  --color-gray-200: #E5E5E5;
+  --color-gray-100: #F5F5F5;
+  --color-light: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --text-primary: #202124;
+  --text-secondary: #525252;
+  --text-muted: #737373;
+  --border-color: #E5E5E5;
+  --border-radius: 12px;
+  --border-radius-lg: 20px;
+  --border-radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.10);
+  --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --container-max: 1200px;
+  --container-pad: 20px;
+  --navbar-height: 68px;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-*{ margin:0; padding:0; box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
-body{
-  font-family: var(--f-body);
-  background: var(--paper);
-  color: var(--ink);
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background: var(--color-surface);
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
-a{ color:inherit; }
-img,svg{ display:block; }
-.wrap{ max-width:var(--max); margin:0 auto; padding:0 2rem; }
-.mono{ font-family:var(--f-mono); }
 
-/* eyebrow / IP-style section tag */
-.tag{
-  display:inline-flex; align-items:center; gap:.6rem;
-  font-family:var(--f-mono); font-size:.72rem; letter-spacing:.04em;
-  color: var(--accent); text-transform:uppercase;
-  margin-bottom:1rem;
-}
-.tag::before{ content:"//"; color: var(--line-strong); }
+img, svg { display: block; max-width: 100%; height: auto; }
+a { color: var(--color-primary); text-decoration: none; transition: color var(--transition-fast); }
+a:hover { color: var(--color-primary-dark); }
+button { font-family: inherit; font-size: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
 
-h1,h2,h3{ font-family:var(--f-display); letter-spacing:-0.01em; color:var(--ink); }
-
-/* ============================================================
-   NAV — SAMA PERSIS DENGAN HALAMAN ABOUT
-   ============================================================ */
-.nav{
-  position:sticky; top:0; z-index:50;
-  background: rgba(247,246,243,0.9);
-  backdrop-filter: blur(10px);
-  border-bottom:1px solid var(--line);
-}
-.nav-inner{
-  max-width:var(--max); margin:0 auto; padding: 1rem 2rem;
-  display:flex; align-items:center; justify-content:space-between;
-  position:relative;
-}
-.brand{ display:flex; align-items:center; gap:.7rem; text-decoration:none; }
-.brand .mark{
-  width:34px; height:34px;
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--f-mono); font-weight:500; font-size:.68rem;
-  color:var(--ink);
-  overflow:hidden;
-  border-radius:4px;
-  padding:0;
-}
-.brand .mark img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.brand .name{ font-family:var(--f-display); font-weight:700; font-size:.95rem; line-height:1.15; }
-.brand .sub{ font-family:var(--f-mono); font-size:.6rem; color:var(--ink-soft); letter-spacing:.05em; }
-
-.status-pill{
-  display:flex;
-  align-items:center; gap:.5rem;
-  font-family:var(--f-mono); font-size:.65rem; color:var(--ink-soft);
-  border:1px solid var(--line); padding:.3rem .7rem;
-}
-.status-dot{
-  width:6px; height:6px; border-radius:50%; background:var(--status);
-  box-shadow:0 0 0 0 rgba(22,163,74,.5);
-  animation: ping 2.4s ease-out infinite;
-}
-@keyframes ping{
-  0%{ box-shadow:0 0 0 0 rgba(22,163,74,.45); }
-  70%{ box-shadow:0 0 0 6px rgba(22,163,74,0); }
-  100%{ box-shadow:0 0 0 0 rgba(22,163,74,0); }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
 
-.nav-links{ display:flex; align-items:center; gap:1.9rem; }
-.nav-links a{
-  text-decoration:none; font-size:.85rem; color:var(--ink-soft);
-  position:relative; padding-bottom:2px;
-}
-.nav-links a:hover{ color:var(--ink); }
-.nav-links a.active{ color:var(--ink); }
-.nav-links a.active::after{
-  content:""; position:absolute; left:0; right:0; bottom:-4px; height:2px; background:var(--accent);
-}
-.nav-cta{ display:flex; align-items:center; gap:.9rem; }
-.btn{
-  font-family:var(--f-body); font-weight:600; font-size:.82rem;
-  text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
-  padding:.65rem 1.3rem; border:1.5px solid var(--ink); color:var(--ink);
-  transition: all .18s ease;
-}
-.btn:hover{ background:var(--ink); color:var(--paper); }
-.btn-solid{ background:var(--accent); border-color:var(--accent); color:var(--ink); }
-.btn-solid:hover{ background:#e0500f; border-color:#e0500f; color:var(--ink); }
-.btn-ghost{ border-color:transparent; padding:.65rem .4rem; }
-.btn-ghost:hover{ background:transparent; color:var(--ink); text-decoration:underline; }
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: 4px; }
+::selection { background: var(--color-primary); color: white; }
 
-.menu-toggle{ display:none; background:none; border:1px solid var(--ink); width:38px; height:38px; font-size:1.1rem; cursor:pointer; }
+/* ========== LAYOUT ========== */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
 
-:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.section { padding-block: clamp(48px, 8vw, 96px); }
 
-/* ============================================================
-   MOBILE NAV — SAMA PERSIS DENGAN HALAMAN ABOUT
-   ============================================================ */
-@media (max-width: 900px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--paper);
-    padding: 1.5rem 2rem;
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    gap: 0;
-    z-index: 100;
+.section-head { margin-bottom: 48px; }
+.section-head.text-center { text-align: center; }
+.section-head.text-center .section-sub { margin-inline: auto; }
+
+.section-label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 6px 14px;
+  border-radius: var(--border-radius-full);
+  margin-bottom: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.section-sub {
+  color: var(--text-secondary);
+  font-size: 17px;
+  max-width: 640px;
+}
+
+/* ========== BUTTONS ========== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--border-radius-full);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  min-height: 44px;
+  user-select: none;
+  text-decoration: none;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--color-primary); color: white; }
+.btn-primary:hover { background: var(--color-primary-dark); color: white; box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--text-primary); border-color: var(--border-color); }
+.btn-outline:hover { background: var(--color-light); border-color: var(--color-primary); color: var(--color-primary); }
+.btn-ghost { background: transparent; color: var(--text-primary); }
+.btn-ghost:hover { background: var(--color-light); }
+.btn-white { background: white; color: var(--color-primary); }
+.btn-white:hover { background: #f0f0f0; color: var(--color-primary-dark); }
+.btn-lg { padding: 14px 32px; font-size: 15px; min-height: 52px; }
+.btn-sm { padding: 8px 16px; font-size: 13px; min-height: 36px; }
+
+/* ========== NAVBAR ========== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-base);
+}
+.navbar.scrolled {
+  border-bottom-color: var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--navbar-height);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text-primary);
+}
+.nav-logo-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(26,115,232,0.35);
+}
+.nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.nav-logo-text small {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.nav-menu {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+.nav-link {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: var(--border-radius-full);
+  transition: all var(--transition-fast);
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.nav-toggle {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  color: var(--text-primary);
+}
+.nav-toggle:hover { background: var(--color-light); }
+.nav-toggle svg { width: 24px; height: 24px; }
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed;
+  inset: var(--navbar-height) 0 0 0;
+  background: white;
+  padding: 24px 20px;
+  transform: translateX(100%);
+  transition: transform var(--transition-base);
+  z-index: 490;
+  overflow-y: auto;
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a {
+  display: block;
+  padding: 14px 16px;
+  color: var(--text-primary);
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+}
+.mobile-menu a:hover, .mobile-menu a.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+.mobile-menu .mobile-cta {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  display: grid;
+  gap: 10px;
+}
+.mobile-menu .btn { width: 100%; }
+
+@media (min-width: 900px) {
+  .nav-menu { display: flex; }
+  .nav-toggle { display: none; }
+  .mobile-menu { display: none; }
+}
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  padding-block: clamp(48px, 10vw, 100px);
+  overflow: hidden;
+  background: linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(26,115,232,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -300px;
+  left: -200px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(52,168,83,0.10) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .hero-inner { grid-template-columns: 1.1fr 1fr; gap: 60px; }
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.hero-badge .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-secondary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(52,168,83,0.2);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.hero h1 {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+}
+.hero h1 .gradient {
+  background: linear-gradient(135deg, var(--color-primary), #4285F4 50%, var(--color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.hero-lead {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  max-width: 540px;
+}
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+.hero-meta-item strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+.hero-meta-item span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Hero visual */
+.hero-visual {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  max-width: 480px;
+  margin-inline: auto;
+  width: 100%;
+}
+.hero-visual-card {
+  position: absolute;
+  background: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: 18px;
+  border: 1px solid var(--border-color);
+}
+.hvc-1 {
+  top: 5%; left: 0;
+  width: 60%;
+  animation: float1 6s ease-in-out infinite;
+}
+.hvc-2 {
+  top: 30%; right: 0;
+  width: 55%;
+  animation: float2 7s ease-in-out infinite;
+}
+.hvc-3 {
+  bottom: 8%; left: 10%;
+  width: 70%;
+  animation: float1 8s ease-in-out infinite;
+}
+@keyframes float1 {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+@keyframes float2 {
+  0%,100% { transform: translateY(0) rotate(1deg); }
+  50% { transform: translateY(10px) rotate(-1deg); }
+}
+.hvc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.hvc-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  color: white;
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 14px;
+}
+.hvc-title { font-size: 13px; font-weight: 600; color: var(--text-primary); line-height: 1.2; }
+.hvc-sub { font-size: 11px; color: var(--text-muted); }
+.hvc-bar {
+  height: 8px;
+  background: var(--color-gray-100);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.hvc-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), #4285F4);
+  border-radius: 999px;
+}
+.hvc-stat { display: flex; gap: 16px; margin-top: 12px; }
+.hvc-stat-item strong { display: block; font-size: 18px; font-weight: 800; color: var(--text-primary); line-height: 1; }
+.hvc-stat-item span { font-size: 10px; color: var(--text-muted); }
+
+/* ========== STATISTIK BAR ========== */
+.stats-section {
+  background: var(--color-dark);
+  color: white;
+  padding-block: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.stats-section::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, rgba(26,115,232,0.25), transparent 70%);
+  pointer-events: none;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 24px;
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.stat-item { text-align: center; }
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, #fff, #A3C9FF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+
+/* ========== ABOUT PREVIEW ========== */
+.about-grid {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .about-grid { grid-template-columns: 1fr 1fr; }
+}
+.about-visual {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.about-visual-item {
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-lg);
+  display: grid;
+  place-items: center;
+  font-size: 42px;
+  font-weight: 800;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.about-visual-item:nth-child(1) { background: linear-gradient(135deg, #1A73E8, #4285F4); }
+.about-visual-item:nth-child(2) { background: linear-gradient(135deg, #34A853, #5BB974); margin-top: 24px; }
+.about-visual-item:nth-child(3) { background: linear-gradient(135deg, #EA4335, #F28B82); margin-top: -24px; }
+.about-visual-item:nth-child(4) { background: linear-gradient(135deg, #FBBC04, #FDD663); color: #202124; }
+.about-visual-item small {
+  position: absolute;
+  bottom: 12px; left: 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.9;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.about-list { display: grid; gap: 16px; margin-top: 24px; }
+.about-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+.about-list li svg {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  margin-top: 2px;
+  color: var(--color-secondary);
+}
+
+/* ========== PROGRAM CARDS ========== */
+.grid-3 {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+
+.program-card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 28px;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.program-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.program-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: grid; place-items: center;
+  font-size: 24px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+.program-card[data-color="green"] .program-icon { background: #E6F4EA; color: var(--color-secondary-dark); }
+.program-card[data-color="red"] .program-icon { background: #FCE8E6; color: #B31412; }
+.program-card[data-color="yellow"] .program-icon { background: #FEF7E0; color: #B8860B; }
+.program-card h3 { font-size: 18px; font-weight: 700; }
+.program-card p { font-size: 14px; line-height: 1.65; flex-grow: 1; }
+.program-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding-top: 14px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* ========== PROJECT CARDS ========== */
+.project-card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+}
+.project-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.project-cover {
+  aspect-ratio: 16/10;
+  background: linear-gradient(135deg, #1A73E8, #4285F4);
+  position: relative;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 42px;
+  font-weight: 800;
+}
+.project-cover[data-color="green"] { background: linear-gradient(135deg, #34A853, #5BB974); }
+.project-cover[data-color="red"] { background: linear-gradient(135deg, #EA4335, #F28B82); }
+.project-cover[data-color="purple"] { background: linear-gradient(135deg, #7C4DFF, #B39DFF); }
+.project-cover[data-color="orange"] { background: linear-gradient(135deg, #FBBC04, #FDD663); color: #202124; }
+.project-status {
+  position: absolute;
+  top: 12px; right: 12px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--border-radius-full);
+  background: rgba(255,255,255,0.95);
+  color: var(--color-primary);
+  backdrop-filter: blur(8px);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.project-status[data-status="development"] { color: var(--color-primary); }
+.project-status[data-status="completed"]  { color: var(--color-secondary-dark); }
+.project-status[data-status="planning"]   { color: #B8860B; }
+.project-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+.project-body h3 { font-size: 17px; font-weight: 700; }
+.project-body p { font-size: 13px; line-height: 1.6; flex-grow: 1; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.project-tag {
+  font-size: 11px;
+  padding: 3px 10px;
+  background: var(--color-gray-100);
+  color: var(--text-secondary);
+  border-radius: var(--border-radius-full);
+  font-weight: 500;
+}
+.project-progress {
+  margin-top: 6px;
+  height: 6px;
+  background: var(--color-gray-100);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.project-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), #4285F4);
+  border-radius: 999px;
+  transition: width 1s ease-out;
+}
+.project-progress-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ========== NEWS ========== */
+.grid-news {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) { .grid-news { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .grid-news { grid-template-columns: repeat(3, 1fr); } }
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+.news-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.news-thumb {
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #4285F4, #1A73E8);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 32px;
+}
+.news-thumb[data-color="green"] { background: linear-gradient(135deg, #5BB974, #34A853); }
+.news-thumb[data-color="orange"] { background: linear-gradient(135deg, #FDD663, #FBBC04); color: #202124; }
+.news-body { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
+.news-date {
+  font-size: 12px;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.news-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  flex-grow: 1;
+}
+.news-card p { font-size: 13px; line-height: 1.6; }
+
+/* ========== ACHIEVEMENTS ========== */
+.achievements-list { display: grid; gap: 16px; }
+@media (min-width: 768px) { .achievements-list { grid-template-columns: repeat(2, 1fr); } }
+
+.achievement-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  transition: all var(--transition-base);
+}
+.achievement-item:hover { border-color: var(--color-warning); box-shadow: var(--shadow-md); }
+.achievement-icon {
+  flex-shrink: 0;
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: #FEF7E0;
+  color: #B8860B;
+  display: grid; place-items: center;
+  font-size: 22px;
+}
+.achievement-icon[data-type="silver"] { background: #F0F0F0; color: #525252; }
+.achievement-icon[data-type="bronze"] { background: #FBEFE4; color: #8B5A2B; }
+.achievement-item h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.achievement-item p { font-size: 13px; line-height: 1.5; }
+.achievement-year {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+/* ========== GALLERY ========== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (min-width: 640px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 900px) { .gallery-grid { grid-template-columns: repeat(6, 1fr); } }
+
+.gallery-item {
+  aspect-ratio: 1;
+  border-radius: var(--border-radius);
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+.gallery-item:hover { transform: scale(1.03); box-shadow: var(--shadow-lg); }
+.gallery-item:nth-child(6n+1) { background: linear-gradient(135deg, #1A73E8, #4285F4); }
+.gallery-item:nth-child(6n+2) { background: linear-gradient(135deg, #34A853, #5BB974); }
+.gallery-item:nth-child(6n+3) { background: linear-gradient(135deg, #EA4335, #F28B82); }
+.gallery-item:nth-child(6n+4) { background: linear-gradient(135deg, #FBBC04, #FDD663); color: #202124; }
+.gallery-item:nth-child(6n+5) { background: linear-gradient(135deg, #7C4DFF, #B39DFF); }
+.gallery-item:nth-child(6n+6) { background: linear-gradient(135deg, #00ACC1, #4DD0E1); }
+
+.gallery-item.span-2 { grid-column: span 2; grid-row: span 2; }
+@media (min-width: 900px) {
+  .gallery-item.span-2 { grid-column: span 2; grid-row: span 2; }
+}
+
+/* ========== CTA ========== */
+.cta-section {
+  padding-block: clamp(48px, 8vw, 96px);
+}
+.cta-box {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #4285F4 60%, var(--color-secondary) 130%);
+  border-radius: var(--border-radius-lg);
+  padding: clamp(32px, 6vw, 64px);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-box::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -20%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  border-radius: 50%;
+}
+.cta-box::after {
+  content: '';
+  position: absolute;
+  bottom: -50%; right: -20%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+  border-radius: 50%;
+}
+.cta-box h2 {
+  color: white;
+  font-size: clamp(24px, 4vw, 40px);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+.cta-box p {
+  color: rgba(255,255,255,0.9);
+  font-size: 17px;
+  margin-bottom: 28px;
+  max-width: 560px;
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+}
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: var(--color-dark);
+  color: rgba(255,255,255,0.7);
+  padding-block: 60px 24px;
+  font-size: 14px;
+}
+.footer-grid {
+  display: grid;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+@media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; } }
+
+.footer-brand .nav-logo { color: white; margin-bottom: 16px; }
+.footer-brand .nav-logo-text small { color: rgba(255,255,255,0.5); }
+.footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a {
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7);
+  transition: all var(--transition-fast);
+}
+.footer-social a:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.footer h4 {
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
+}
+.footer ul li { margin-bottom: 10px; }
+.footer ul a {
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  transition: color var(--transition-fast);
+}
+.footer ul a:hover { color: white; }
+
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ========== SCROLL TO TOP ========== */
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-base);
+  z-index: 400;
+}
+.scroll-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.scroll-top:hover { background: var(--color-primary-dark); }
+
+/* ========== REVEAL ON SCROLL ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-
-  .nav-links.open {
-    display: flex;
-    animation: slideDown 0.3s ease forwards;
-  }
-
-  .nav-links a {
-    padding: 0.8rem 0;
-    border-bottom: 1px solid var(--line);
-    width: 100%;
-  }
-
-  .nav-cta {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
-    gap: 0.8rem;
-  }
-
-  .nav-cta.open {
-    display: flex;
-  }
-
-  .nav-cta .btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .status-pill {
-    display: flex !important;
-    justify-content: center;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  @keyframes slideDown {
-    from { 
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to { 
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero{ padding: 5.5rem 0 3rem; }
-.hero-top{
-  display:flex; align-items:center; justify-content:space-between;
-  margin-bottom:2.2rem; flex-wrap:wrap; gap:1rem;
-}
-.hero-top .addr{
-  font-family:var(--f-mono); font-size:.72rem; color:var(--ink-soft);
-  display:flex; align-items:center; gap:.6rem;
-}
-.hero h1{
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight:700; line-height:0.92; letter-spacing:-0.03em;
-}
-.hero h1 .dim{ color: var(--ink-faint); }
-.hero-sub{
-  font-family:var(--f-mono); font-size:.85rem; color:var(--ink-soft);
-  margin-top:1rem; letter-spacing:.02em;
-}
-.hero-copy{
-  font-size:1.05rem; color:var(--ink-soft); line-height:1.75;
-  max-width:44ch; margin-top:1.6rem;
-}
-.hero-actions{ display:flex; gap:1rem; margin-top:2.3rem; flex-wrap:wrap; }
-
-.stat-row{
-  display:flex; margin-top:3.5rem; border-top:1px solid var(--line);
-}
-.stat{
-  flex:1; padding:1.4rem 1.5rem 0; border-right:1px solid var(--line);
-}
-.stat:last-child{ border-right:none; }
-.stat .n{ font-family:var(--f-mono); font-size:1.9rem; font-weight:500; color:var(--ink); }
-.stat .l{ font-size:.78rem; color:var(--ink-soft); margin-top:.2rem; }
-
-/* marquee */
-.marquee{
-  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-  overflow:hidden; padding:.9rem 0; margin-top:0; white-space:nowrap;
-}
-.marquee-track{
-  display:inline-block; font-family:var(--f-mono); font-size:.78rem; color:var(--ink-soft);
-  animation: scroll 32s linear infinite;
-}
-.marquee-track span{ margin:0 1.4rem; }
-.marquee-track span.accent{ color:var(--accent); }
-@keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-@media (prefers-reduced-motion: reduce){
-  .marquee-track{ animation:none; }
-  .status-dot{ animation:none; }
-}
-
-/* ============================================================
-   SECTION GENERIC
-   ============================================================ */
-.section{ padding: 5.5rem 0; border-bottom:1px solid var(--line); }
-.section-head{ display:grid; grid-template-columns: 1fr 1.6fr; gap:3rem; margin-bottom:3rem; }
-.section-head h2{ font-size:clamp(1.7rem,3.4vw,2.3rem); font-weight:600; line-height:1.08; }
-.section-head p{ color:var(--ink-soft); line-height:1.7; max-width:46ch; align-self:end; }
-
-/* ---- About: row list ---- */
-.about-grid{ display:grid; grid-template-columns: 1fr 1.6fr; gap:3rem; }
-.about-sticky{ position:sticky; top:6rem; align-self:start; }
-.about-list{ display:flex; flex-direction:column; }
-.about-row{
-  display:grid; grid-template-columns: 90px 1fr 24px; align-items:center;
-  gap:1.5rem; padding:1.5rem 0; border-top:1px solid var(--line);
-  text-decoration:none; color:var(--ink);
-  transition: padding-left .18s ease;
-}
-.about-row:last-child{ border-bottom:1px solid var(--line); }
-.about-row:hover{ padding-left:.6rem; }
-.about-row .code{ font-family:var(--f-mono); font-size:.72rem; color:var(--accent); }
-.about-row h3{ font-size:1.05rem; font-weight:600; margin-bottom:.25rem; }
-.about-row span.d{ font-size:.85rem; color:var(--ink-soft); font-family:var(--f-body); font-weight:400; display:block; }
-.about-row .arrow{ font-size:1.1rem; color:var(--ink-faint); transition: transform .18s ease, color .18s; }
-.about-row:hover .arrow{ transform: translateX(3px); color:var(--accent); }
-
-/* ---- Tools: directory listing ---- */
-.dir{ display:grid; grid-template-columns: repeat(2, 1fr); gap:0; border-top:1px solid var(--line); border-left:1px solid var(--line); }
-.dir-cat{ padding:2rem; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
-.dir-cat .head{ display:flex; align-items:baseline; gap:.6rem; margin-bottom:1.1rem; }
-.dir-cat .head .code{ font-family:var(--f-mono); font-size:.68rem; color:var(--accent); border:1px solid var(--accent-tint); background:var(--accent-tint); padding:.15rem .45rem; }
-.dir-cat h3{ font-size:1.02rem; font-weight:600; }
-.dir-items{ display:flex; flex-wrap:wrap; gap:.5rem .7rem; }
-.dir-items span{
-  font-family:var(--f-mono); font-size:.76rem; color:var(--ink-soft);
-  padding-bottom:1px; border-bottom:1px dashed var(--line-strong);
-}
-.dir-items span:hover{ color:var(--ink); border-bottom-color:var(--accent); }
-
-/* ---- Timeline: git-log style ---- */
-.log{ position:relative; padding-left:2.2rem; }
-.log::before{ content:""; position:absolute; left:5px; top:.4rem; bottom:.4rem; width:1px; background:var(--line-strong); }
-.log-entry{ position:relative; padding-bottom:2.6rem; }
-.log-entry:last-child{ padding-bottom:0; }
-.log-entry::before{
-  content:""; position:absolute; left:-2.2rem; top:.35rem;
-  width:11px; height:11px; border-radius:50%; background:var(--paper); border:2px solid var(--ink);
-}
-.log-entry.now::before{ border-color:var(--accent); background:var(--accent); }
-.log-meta{ font-family:var(--f-mono); font-size:.7rem; color:var(--accent); margin-bottom:.4rem; display:block; }
-.log-entry h3{ font-size:1.08rem; font-weight:600; margin-bottom:.4rem; }
-.log-entry p{ color:var(--ink-soft); font-size:.9rem; line-height:1.65; max-width:60ch; }
-
-/* ---- Benefits: numbered rows ---- */
-.benefit-row{
-  display:grid; grid-template-columns: 70px 1fr; gap:1.5rem;
-  padding:1.7rem 0; border-top:1px solid var(--line);
-}
-.benefit-row:last-child{ border-bottom:1px solid var(--line); }
-.benefit-row .idx{ font-family:var(--f-mono); font-size:.8rem; color:var(--ink-faint); padding-top:.15rem; }
-.benefit-row h3{ font-size:1.05rem; font-weight:600; margin-bottom:.35rem; }
-.benefit-row p{ color:var(--ink-soft); font-size:.9rem; line-height:1.65; max-width:56ch; }
-
-/* ---- FAQ accordion ---- */
-.faq-item{ border-top:1px solid var(--line); }
-.faq-item:last-child{ border-bottom:1px solid var(--line); }
-.faq-q{
-  width:100%; text-align:left; background:none; border:none; cursor:pointer;
-  display:flex; align-items:center; justify-content:space-between; gap:1rem;
-  padding:1.3rem 0; font-family:var(--f-body); font-size:.98rem; font-weight:600; color:var(--ink);
-}
-.faq-q .sym{ font-family:var(--f-mono); color:var(--accent); font-size:1rem; flex-shrink:0; }
-.faq-a{ max-height:0; overflow:hidden; transition: max-height .25s ease; }
-.faq-a p{ padding:0 0 1.3rem; color:var(--ink-soft); font-size:.9rem; line-height:1.7; max-width:62ch; }
-.faq-item.open .faq-a{ max-height:220px; }
-
-/* ---- CTA banner ---- */
-.cta{ padding:5rem 0; text-align:center; }
-.cta h2{ font-size:clamp(1.8rem,4vw,2.6rem); font-weight:600; margin-bottom:1rem; }
-.cta p{ color:var(--ink-soft); margin-bottom:2rem; }
-.cta .actions{ display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
-
-/* ---- Collaboration ---- */
-.collab{
-  padding:4rem 0;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  overflow:hidden;
-  background:var(--paper-2);
-}
-.collab .collab-label{
-  text-align:center;
-  font-family:var(--f-mono);
-  font-size:.72rem;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--ink-faint);
-  margin-bottom:2rem;
-}
-.collab-track-wrap{
-  overflow:hidden;
-  position:relative;
-}
-.collab-track{
-  display:flex;
-  gap:3rem;
-  animation: scrollCollab 28s linear infinite;
-  width:max-content;
-}
-.collab-track .collab-item{
-  flex-shrink:0;
-  width:100px;
-  height:100px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:1rem;
-  transition: all .2s ease;
-}
-.collab-track .collab-item:hover{
-  border-color:var(--accent);
-  transform:scale(1.04);
-}
-.collab-track .collab-item img{
-  max-width:150%;
-  max-height:150%;
-  object-fit:contain;
-}
-@keyframes scrollCollab{
-  0%{ transform:translateX(0); }
-  100%{ transform:translateX(-50%); }
-}
-@media (prefers-reduced-motion: reduce){
-  .collab-track{ animation:none; flex-wrap:wrap; justify-content:center; gap:2rem; }
-  .collab-track .collab-item{ width:80px; height:80px; }
-}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-footer{ background:var(--ink); color:rgba(247,246,243,0.55); padding: 3rem 0 1.5rem; }
-.f-inner{ max-width:var(--max); margin:0 auto; padding:0 2rem; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2.5rem; }
-footer h4{ font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase; letter-spacing:.1em; color:rgba(247,246,243,0.3); margin-bottom:.9rem; }
-footer a{ display:block; text-decoration:none; color:rgba(247,246,243,0.55); font-size:.85rem; margin-bottom:.5rem; }
-footer a:hover{ color:var(--accent); }
-footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,243,0.4); }
-.f-bottom{ max-width:var(--max); margin:2rem auto 0; padding:1.2rem 2rem 0; border-top:1px solid rgba(247,246,243,0.1); display:flex; justify-content:space-between; font-family:var(--f-mono); font-size:.68rem; color:rgba(247,246,243,0.25); flex-wrap:wrap; gap:.5rem; }
-
-/* ============================================================
-   HERO LOAD-IN (single orchestrated moment)
-   ============================================================ */
-.reveal{ opacity:0; transform:translateY(14px); animation: rise .6s ease forwards; }
-.reveal.d1{ animation-delay:.05s; }
-.reveal.d2{ animation-delay:.15s; }
-.reveal.d3{ animation-delay:.25s; }
-.reveal.d4{ animation-delay:.35s; }
-@keyframes rise{ to{ opacity:1; transform:translateY(0); } }
-@media (prefers-reduced-motion: reduce){ .reveal{ animation:none; opacity:1; transform:none; } }
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 900px){
-  .about-grid, .section-head{ grid-template-columns:1fr; }
-  .about-sticky{ position:static; }
-  .dir{ grid-template-columns:1fr; }
-  .dir-cat{ border-right:none; }
-  .stat-row{ flex-wrap:wrap; }
-  .stat{ flex:1 1 50%; border-right:none; border-bottom:1px solid var(--line); padding-bottom:1.2rem; }
-  .f-inner{ grid-template-columns:1fr; }
-  .collab-track .collab-item{ width:70px; height:70px; }
-}
-
-@media (max-width: 600px) {
-  .hero h1{ font-size: clamp(2.2rem, 10vw, 3.5rem); }
-  .wrap{ padding:0 1.2rem; }
-  .nav-inner{ padding: 0.8rem 1.2rem; }
+  .reveal { opacity: 1; transform: none; }
 }
 </style>
-<script src="maintenance-guard.js"></script>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="brand">
-      <div class="mark"><img src="formula.png" alt="FORMULA Logo" /></div>
-      <div>
-        <div class="name">FORMULA</div>
-        <div class="sub">SMAN 1 MOJOSARI</div>
-      </div>
+<!-- =========================================================
+     NAVBAR
+     ========================================================= -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-mark">F</span>
+      <span class="nav-logo-text">
+        FORMULA
+        <small>SMAN 1 Mojosari</small>
+      </span>
     </a>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html" class="active">Home</a>
-      <a href="about.html">About</a>
-      <a href="news.html">News</a>
-      <a href="classes.html">Classes</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="nav-cta" id="navCta">
-      <div class="status-pill"><span class="status-dot"></span> STATUS: ONLINE</div>
-      <a href="login.html" class="btn btn-ghost">Masuk</a>
-      <a href="https://forms.gle/XmqEwsEDootfEceB7" class="btn btn-solid">Daftar</a>
-    </div>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
-  </div>
-</nav>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="hero-top reveal d1">
-      <span class="addr mono">10.0.0.0 <span style="color:var(--line-strong)">/</span> node: Smozar-01</span>
-      <span class="addr mono"><span class="status-dot" style="display:inline-block"></span> status: online</span>
-    </div>
+    <nav class="nav-menu" aria-label="Navigasi utama">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="programs.html" class="nav-link">Programs</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="news.html" class="nav-link">News</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
 
-    <h1 class="reveal d2">FORMULA<br/><span class="dim">Informatika &amp; Multimedia</span></h1>
-    <div class="hero-sub reveal d2">SMAN 1 Mojosari — Mojokerto</div>
-
-    <p class="hero-copy reveal d3">
-      Ekskul buat siswa yang mau ngerti ngoding, desain grafis, animasi, dan multimedia bukan dari slide,
-      tapi dari proyek yang benar-benar dikerjakan dan dipublikasikan.
-    </p>
-
-    <div class="hero-actions reveal d3">
-      <a href="classes.html" class="btn">Lihat Program</a>
-      <a href="https://forms.gle/XmqEwsEDootfEceB7" class="btn btn-solid">Bergabung Sekarang →</a>
-    </div>
-
-    <div class="stat-row reveal d4">
-      <div class="stat"><div class="n">80+</div><div class="l">Anggota aktif</div></div>
-      <div class="stat"><div class="n">02</div><div class="l">Program unggulan</div></div>
-      <div class="stat"><div class="n">2023</div><div class="l">Tahun berdiri</div></div>
-    </div>
-  </div>
-
-  <div class="marquee">
-    <div class="marquee-track">
-      <span>WEB DEVELOPMENT</span><span class="accent">◆</span><span>DESAIN GRAFIS</span><span class="accent">◆</span><span>ANIMASI &amp; MULTIMEDIA</span><span class="accent">◆</span><span>UI/UX DESIGN</span><span class="accent">◆</span><span>PROGRAMMING</span><span class="accent">◆</span><span>FOTOGRAFI &amp; VIDEOGRAFI</span><span class="accent">◆</span><span>DIGITAL MARKETING</span><span class="accent">◆</span>
-      <span>WEB DEVELOPMENT</span><span class="accent">◆</span><span>DESAIN GRAFIS</span><span class="accent">◆</span><span>ANIMASI &amp; MULTIMEDIA</span><span class="accent">◆</span><span>UI/UX DESIGN</span><span class="accent">◆</span><span>PROGRAMMING</span><span class="accent">◆</span><span>FOTOGRAFI &amp; VIDEOGRAFI</span><span class="accent">◆</span><span>DIGITAL MARKETING</span><span class="accent">◆</span>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm" style="display:none" data-desktop>Login</a>
+      <a href="register.html" class="btn btn-primary btn-sm" style="display:none" data-desktop>Join Us</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
     </div>
   </div>
 </header>
 
-<!-- ============ ABOUT ============ -->
-<section class="section" id="about">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-sticky">
-        <div class="tag">10.0.0.1 — tentang</div>
-        <h2 style="font-size:clamp(1.7rem,3.4vw,2.3rem); font-weight:600; line-height:1.1; margin-bottom:1.2rem;">Ekstrakurikuler.</h2>
-        <p style="color:var(--ink-soft); line-height:1.75; margin-bottom:1.6rem;">
-          FORMULA dibentuk buat jawab satu masalah: banyak anak IT hafal teori tapi belum pernah bikin proyek nyata.
-          Di sini, anggota langsung bikin website, desain logo, animasi, sampai produksi konten multimedia.
-        </p>
-        <a href="about.html" class="btn">Kenal Lebih Jauh →</a>
-      </div>
-      <div class="about-list">
-        <a href="classes.html" class="about-row">
-          <span class="code">[WEB]</span>
-          <div><h3>Web Development</h3><span class="d">HTML, CSS, JavaScript, dan framework modern.</span></div>
-          <span class="arrow">→</span>
-        </a>
-        <a href="classes.html" class="about-row">
-          <span class="code">[DES]</span>
-          <div><h3>Desain Grafis</h3><span class="d">Logo, branding, poster, dan ilustrasi digital.</span></div>
-          <span class="arrow">→</span>
-        </a>
-        <a href="classes.html" class="about-row">
-          <span class="code">[ANI]</span>
-          <div><h3>Animasi &amp; Multimedia</h3><span class="d">Motion graphic, video editing, dan konten interaktif.</span></div>
-          <span class="arrow">→</span>
-        </a>
-        <a href="classes.html" class="about-row">
-          <span class="code">[UIX]</span>
-          <div><h3>UI/UX Design</h3><span class="d">Perancangan antarmuka dan pengalaman pengguna.</span></div>
-          <span class="arrow">→</span>
-        </a>
-      </div>
-    </div>
+<!-- Mobile menu -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Menu mobile">
+  <a href="index.html" class="active">Home</a>
+  <a href="about.html">About</a>
+  <a href="programs.html">Programs</a>
+  <a href="projects.html">Projects</a>
+  <a href="news.html">News</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="achievements.html">Achievements</a>
+  <a href="alumni.html">Alumni</a>
+  <a href="contact.html">Contact</a>
+  <div class="mobile-cta">
+    <a href="login.html" class="btn btn-outline">Login</a>
+    <a href="register.html" class="btn btn-primary">Join FORMULA</a>
   </div>
-</section>
+</nav>
 
-<!-- ============ TOOLS (directory listing) ============ -->
-<section class="section" id="tools">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">10.0.0.2 — tools</div>
-      <h2>Perangkat &amp; teknologi yang benar-benar dipakai industri</h2>
-      <p>Dari software desain sampai framework modern — semuanya dipraktikkan, bukan cuma dibaca.</p>
-    </div>
-    <div class="dir">
-      <div class="dir-cat">
-        <div class="head"><span class="code mono">~/design</span><h3>Desain &amp; Visual</h3></div>
-        <div class="dir-items"><span>figma</span><span>photoshop</span><span>illustrator</span><span>canva</span><span>after-effects</span></div>
-      </div>
-      <div class="dir-cat">
-        <div class="head"><span class="code mono">~/web-dev</span><h3>Web Development</h3></div>
-        <div class="dir-items"><span>html-css-js</span><span>react</span><span>vue</span><span>tailwind</span><span>bootstrap</span></div>
-      </div>
-      <div class="dir-cat">
-        <div class="head"><span class="code mono">~/multimedia</span><h3>Multimedia</h3></div>
-        <div class="dir-items"><span>premiere-pro</span><span>audacity</span><span>blender</span><span>photoshop</span><span>lightroom</span></div>
-      </div>
-      <div class="dir-cat">
-        <div class="head"><span class="code mono">~/dev-tools</span><h3>Developer Tools</h3></div>
-        <div class="dir-items"><span>vscode</span><span>git-github</span><span>nodejs</span><span>docker</span><span>postman</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+<main>
 
-<!-- ============ TIMELINE (git-log style) ============ -->
-<section class="section" id="jadwal">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">10.0.0.3 — siklus</div>
-      <h2>Satu tahun ajaran, enam tahap perkembangan</h2>
-      <p>Bukan kurikulum acak — tiap tahap dibangun di atas kemampuan yang didapat sebelumnya.</p>
-    </div>
-    <div class="log">
-      <div class="log-entry">
-        <span class="log-meta mono">sem.1 · bulan 01–02</span>
-        <h3>Fundamental &amp; Hardware Fix</h3>
-        <p>Onboarding anggota baru, troubleshooting perangkat, dan pengenalan lab FORMULA.</p>
-      </div>
-      <div class="log-entry">
-        <span class="log-meta mono">sem.1 · bulan 03–04</span>
-        <h3>Desain Grafis &amp; Visual Branding</h3>
-        <p>Praktik desain logo, poster, dan identitas visual dengan tools profesional.</p>
-      </div>
-      <div class="log-entry">
-        <span class="log-meta mono">sem.1 · bulan 05–06</span>
-        <h3>Web Development &amp; UI/UX</h3>
-        <p>Pembuatan website statis dan dinamis, serta perancangan antarmuka pengguna.</p>
-      </div>
-      <div class="log-entry">
-        <span class="log-meta mono">sem.2 · bulan 07–08</span>
-        <h3>Animasi &amp; Multimedia</h3>
-        <p>Motion graphic, video editing, dan produksi konten interaktif.</p>
-      </div>
-      <div class="log-entry">
-        <span class="log-meta mono">sem.2 · bulan 09–10</span>
-        <h3>Programming &amp; Database</h3>
-        <p>Logika pemrograman, dasar database, dan pengembangan aplikasi sederhana.</p>
-      </div>
-      <div class="log-entry now">
-        <span class="log-meta mono">sem.2 · bulan 11–12</span>
-        <h3>Final Project &amp; Portfolio</h3>
-        <p>Integrasi materi ke proyek nyata dan persiapan portofolio.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ BENEFITS ============ -->
-<section class="section" id="benefit">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">10.0.0.4 — kenapa formula</div>
-      <h2>lima alasan anggota kami bertahan sampai lulus</h2>
-      <p>&nbsp;</p>
-    </div>
-    <div>
-      <div class="benefit-row"><span class="idx mono">01</span><div><h3>Pengalaman nyata</h3><p>Langsung bikin website, desain logo, dan produksi konten — bukan simulasi di atas kertas.</p></div></div>
-      <div class="benefit-row"><span class="idx mono">02</span><div><h3>Portofolio kuat</h3><p>Setiap proyek jadi bukti nyata kemampuan — dari desain sampai publikasi.</p></div></div>
-      <div class="benefit-row"><span class="idx mono">03</span><div><h3>Siap industri kreatif</h3><p>Pembinaan menuju karier di bidang kreatif digital dan teknologi.</p></div></div>
-      <div class="benefit-row"><span class="idx mono">04</span><div><h3>Komunitas solid</h3><p>Terhubung dengan alumni dan anggota FORMULA yang tersebar di kampus dan industri kreatif.</p></div></div>
-      <div class="benefit-row"><span class="idx mono">05</span><div><h3>Mentor berpengalaman</h3><p>Dibimbing guru dan pengurus yang sudah berkarier di industri kreatif &amp; teknologi.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section class="section" id="faq" style="border-bottom:none;">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">10.0.0.5 — faq</div>
-      <h2>Pertanyaan umum</h2>
-      <p>Belum ketemu jawabannya? <a href="contact.html" style="color:var(--accent); text-decoration:underline;">Hubungi kami langsung.</a></p>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q">Apa itu FORMULA? <span class="sym">+</span></button>
-        <div class="faq-a"><p>FORMULA adalah ekskul Informatika dan Multimedia di SMAN 1 Mojosari yang fokus pada pengembangan web, desain grafis, animasi, dan multimedia — lewat pelatihan dan proyek nyata.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Kapan saya bisa bergabung? <span class="sym">+</span></button>
-        <div class="faq-a"><p>Pendaftaran dibuka setiap awal tahun ajaran, tapi anggota baru tetap bisa gabung di tengah semester dengan Izin Pak Wawan.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Siapa yang boleh bergabung? <span class="sym">+</span></button>
-        <div class="faq-a"><p>Semua siswa SMAN 1 Mojosari, tanpa harus punya latar belakang IT atau desain sebelumnya — materi dimulai dari dasar.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Kapan dan di mana kegiatan berlangsung? <span class="sym">+</span></button>
-        <div class="faq-a"><p>Setiap Kamis, pukul 15.30–17.00 WIB, di Lab Komputer SMAN 1 Mojosari.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ COLLABORATION ============ -->
-<section class="collab" id="collaboration">
-  <div class="wrap">
-    <div class="collab-label">Collaboration</div>
-    <div class="collab-track-wrap">
-      <div class="collab-track">
-        <div class="collab-item"><img src="Jagoan-hosting.png" alt="Collaboration 2" /></div>
-        <div class="collab-item"><img src="download.jpeg" alt="Collaboration 3" /></div>
-        <div class="collab-item"><img src="Jagoan-hosting.png" alt="Collaboration 2" /></div>
-        <div class="collab-item"><img src="download.jpeg" alt="Collaboration 3" /></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="wrap">
-    <div class="tag" style="justify-content:center;">10.0.0.6 — gabung</div>
-    <h2>Siap bikin karya yang sesungguhnya?</h2>
-    <p>Isi formulir, dan kami hubungi kamu sebelum sesi Kamis berikutnya.</p>
-    <div class="actions">
-      <a href="classes.html" class="btn">Lihat Semua Program</a>
-      <a href="https://forms.gle/XmqEwsEDootfEceB7" class="btn btn-solid">Bergabung Sekarang →</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="f-inner">
-    <div>
-      <div style="display:flex; align-items:center; gap:.7rem; margin-bottom:1rem;">
-        <div class="mark" style="border-color:rgba(247,246,243,.3); color:#F7F6F3; overflow:hidden; border-radius:4px; padding:0;">
-          <img src="formula.png" alt="FORMULA Logo" style="width:25%;height:25%;object-fit:cover;" />
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span>Open Recruitment 2027 — Segera Dibuka</span>
         </div>
-        <div style="color:#F7F6F3; font-family:var(--f-display); font-weight:700; font-size:.95rem;">FORMULA</div>
+        <h1>
+          Wadah Kreatif <span class="gradient">Informatika</span> & <span class="gradient">Multimedia</span> SMAN 1 Mojosari
+        </h1>
+        <p class="hero-lead">
+          FORMULA adalah ekosistem digital tempat siswa belajar, berkarya, dan berkolaborasi
+          di bidang teknologi, desain, dan multimedia. Dari coding sampai sinematografi —
+          semua ada di sini.
+        </p>
+        <div class="hero-cta">
+          <a href="register.html" class="btn btn-primary btn-lg">
+            Gabung Sekarang
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="projects.html" class="btn btn-outline btn-lg">Lihat Project</a>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <strong data-counter="120">0</strong>
+            <span>Anggota Aktif</span>
+          </div>
+          <div class="hero-meta-item">
+            <strong data-counter="45">0</strong>
+            <span>Project Selesai</span>
+          </div>
+          <div class="hero-meta-item">
+            <strong data-counter="28">0</strong>
+            <span>Prestasi</span>
+          </div>
+        </div>
       </div>
-      <p>Komunitas teknologi Informatika dan Multimedia — mencetak talenta kreatif digital unggul dari SMAN 1 Mojosari.</p>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-card hvc-1">
+          <div class="hvc-head">
+            <div class="hvc-avatar">R</div>
+            <div>
+              <div class="hvc-title">Reza A.</div>
+              <div class="hvc-sub">Web Dev • Angkatan 2023</div>
+            </div>
+          </div>
+          <div class="hvc-bar"><span style="width:78%"></span></div>
+          <div style="font-size:11px;color:#737373;margin-top:6px;">Progress: 78%</div>
+        </div>
+
+        <div class="hero-visual-card hvc-2">
+          <div class="hvc-head">
+            <div class="hvc-avatar" style="background:linear-gradient(135deg,#34A853,#5BB974)">S</div>
+            <div>
+              <div class="hvc-title">Sari M.</div>
+              <div class="hvc-sub">UI/UX Design</div>
+            </div>
+          </div>
+          <div class="hvc-bar"><span style="width:92%;background:linear-gradient(90deg,#34A853,#5BB974)"></span></div>
+          <div style="font-size:11px;color:#737373;margin-top:6px;">Progress: 92%</div>
+        </div>
+
+        <div class="hero-visual-card hvc-3">
+          <div style="font-size:12px;font-weight:600;color:#525252;margin-bottom:8px;">Statistik Organisasi</div>
+          <div class="hvc-stat">
+            <div class="hvc-stat-item"><strong>12</strong><span>PROJECT</span></div>
+            <div class="hvc-stat-item"><strong>6</strong><span>EVENT</span></div>
+            <div class="hvc-stat-item"><strong>94%</strong><span>ATTEND</span></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-      <h4>Navigasi</h4>
-      <a href="index.html">Home</a>
-      <a href="about.html">Tentang</a>
-      <a href="gallery.html">Galeri</a>
-      <a href="contact.html">Kontak</a>
+  </section>
+
+  <!-- =========================================================
+       STATISTIK
+       ========================================================= -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-value" data-counter="120">0</div>
+          <div class="stat-label">Anggota Aktif</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-value" data-counter="45">0</div>
+          <div class="stat-label">Project Selesai</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-value" data-counter="28">0</div>
+          <div class="stat-label">Prestasi Diraih</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-value" data-counter="15">0</div>
+          <div class="stat-label">Tahun Berkarya</div>
+        </div>
+      </div>
     </div>
-    <div>
-      <h4>Program</h4>
-      <a href="web-development.html">Web Development</a>
-      <a href="desain-grafis.html">Desain Grafis</a>
-      <a href="classes.html">Semua Program →</a>
+  </section>
+
+  <!-- =========================================================
+       ABOUT PREVIEW
+       ========================================================= -->
+  <section class="section">
+    <div class="container about-grid">
+      <div class="reveal">
+        <span class="section-label">Tentang Kami</span>
+        <h2 class="section-title">Lebih dari Sekadar Ekstrakurikuler</h2>
+        <p class="section-sub" style="margin-bottom:0">
+          FORMULA adalah komunitas siswa yang passionate di bidang informatika dan multimedia.
+          Kami membangun skill, karakter, dan portofolio sejak di bangku sekolah.
+        </p>
+        <ul class="about-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Pembelajaran terstruktur dari dasar hingga mahir</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Project nyata, bukan sekadar teori di kelas</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Mentoring dari kakak tingkat & alumni</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Portofolio digital yang bisa dibawa sampai kuliah</span>
+          </li>
+        </ul>
+        <div style="margin-top:32px">
+          <a href="about.html" class="btn btn-primary">
+            Selengkapnya
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="about-visual reveal">
+        <div class="about-visual-item">
+          <span>💻</span>
+          <small>Programming</small>
+        </div>
+        <div class="about-visual-item">
+          <span>🎨</span>
+          <small>Design</small>
+        </div>
+        <div class="about-visual-item">
+          <span>🎬</span>
+          <small>Video</small>
+        </div>
+        <div class="about-visual-item">
+          <span>📸</span>
+          <small>Photo</small>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="f-bottom">
-    <span>© 2026 FORMULA · SMAN 1 MOJOSARI</span>
-    <span>NODE: MOJOSARI-01 / STATUS: ONLINE</span>
+  </section>
+
+  <!-- =========================================================
+       PROGRAM UNGGULAN
+       ========================================================= -->
+  <section class="section" style="background: var(--color-light)">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-label">Program Unggulan</span>
+        <h2 class="section-title">Apa yang Kami Kerjakan</h2>
+        <p class="section-sub">Program kerja FORMULA dirancang untuk mengasah skill teknis dan soft skill anggota.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="program-card reveal">
+          <div class="program-icon">💻</div>
+          <h3>Web Development</h3>
+          <p>Belajar membangun website modern dari nol — HTML, CSS, JavaScript, hingga framework populer.</p>
+          <div class="program-meta">📅 Setiap Sabtu • 4 Pertemuan</div>
+        </article>
+
+        <article class="program-card reveal" data-color="green">
+          <div class="program-icon">🎨</div>
+          <h3>Graphic Design</h3>
+          <p>Menguasai tools desain seperti Figma, Photoshop, dan Illustrator untuk kebutuhan digital maupun cetak.</p>
+          <div class="program-meta">📅 Setiap Minggu • 3 Pertemuan</div>
+        </article>
+
+        <article class="program-card reveal" data-color="red">
+          <div class="program-icon">🎬</div>
+          <h3>Video Editing</h3>
+          <p>Produksi video dari pra-produksi, shooting, editing, hingga color grading dengan Premiere & After Effects.</p>
+          <div class="program-meta">📅 Bulanan • 2 Sesi</div>
+        </article>
+
+        <article class="program-card reveal" data-color="yellow">
+          <div class="program-icon">📸</div>
+          <h3>Photography</h3>
+          <p>Teknik dasar fotografi, komposisi, lighting, dan editing untuk kebutuhan dokumentasi maupun artistik.</p>
+          <div class="program-meta">📅 Bulanan • Hunting Foto</div>
+        </article>
+
+        <article class="program-card reveal">
+          <div class="program-icon">🤖</div>
+          <h3>AI & Data</h3>
+          <p>Pengenalan kecerdasan buatan, machine learning dasar, dan pemanfaatan AI untuk produktivitas.</p>
+          <div class="program-meta">📅 Semester • 6 Sesi</div>
+        </article>
+
+        <article class="program-card reveal" data-color="green">
+          <div class="program-icon">🌐</div>
+          <h3>Networking</h3>
+          <p>Dasar jaringan komputer, konfigurasi, dan troubleshooting untuk kebutuhan sekolah maupun lomba.</p>
+          <div class="program-meta">📅 Semester • 5 Sesi</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PROJECT TERBARU
+       ========================================================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-label">Project Terbaru</span>
+        <h2 class="section-title">Karya Nyata Anggota</h2>
+        <p class="section-sub">Setiap project dikerjakan oleh tim lintas divisi dengan pendampingan pengurus.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="project-card reveal">
+          <div class="project-cover">
+            <span>Web</span>
+            <span class="project-status" data-status="development">Development</span>
+          </div>
+          <div class="project-body">
+            <h3>Website Profil Sekolah</h3>
+            <p>Website resmi profil SMAN 1 Mojosari dengan CMS untuk pengelolaan konten.</p>
+            <div class="project-tags">
+              <span class="project-tag">Next.js</span>
+              <span class="project-tag">Supabase</span>
+            </div>
+            <div class="project-progress"><span style="width:65%"></span></div>
+            <div class="project-progress-text"><span>Progress</span><span>65%</span></div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-cover" data-color="green">
+            <span>App</span>
+            <span class="project-status" data-status="completed">Completed</span>
+          </div>
+          <div class="project-body">
+            <h3>Aplikasi Absensi QR</h3>
+            <p>Sistem absensi berbasis QR code untuk kegiatan ekstrakurikuler dan event sekolah.</p>
+            <div class="project-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">Firebase</span>
+            </div>
+            <div class="project-progress"><span style="width:100%"></span></div>
+            <div class="project-progress-text"><span>Progress</span><span>100%</span></div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-cover" data-color="purple">
+            <span>Film</span>
+            <span class="project-status" data-status="planning">Planning</span>
+          </div>
+          <div class="project-body">
+            <h3>Film Pendek Sekolah</h3>
+            <p>Produksi film pendek bertema kehidupan sekolah, dikerjakan oleh divisi multimedia.</p>
+            <div class="project-tags">
+              <span class="project-tag">Premiere</span>
+              <span class="project-tag">After Effects</span>
+            </div>
+            <div class="project-progress"><span style="width:25%"></span></div>
+            <div class="project-progress-text"><span>Progress</span><span>25%</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div style="text-align:center;margin-top:40px">
+        <a href="projects.html" class="btn btn-outline btn-lg">
+          Lihat Semua Project
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       BERITA TERBARU
+       ========================================================= -->
+  <section class="section" style="background: var(--color-light)">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-label">Berita & Kegiatan</span>
+        <h2 class="section-title">Update Terbaru</h2>
+        <p class="section-sub">Ikuti kegiatan, pengumuman, dan cerita terbaru dari FORMULA.</p>
+      </div>
+
+      <div class="grid-news">
+        <article class="news-card reveal">
+          <div class="news-thumb">📰</div>
+          <div class="news-body">
+            <div class="news-date">12 Januari 2025</div>
+            <h3>Workshop Web Development Batch 2 Resmi Dibuka</h3>
+            <p>Program pelatihan intensif selama 4 minggu untuk anggota baru dan umum.</p>
+          </div>
+        </article>
+
+        <article class="news-card reveal">
+          <div class="news-thumb" data-color="green">🏆</div>
+          <div class="news-body">
+            <div class="news-date">08 Januari 2025</div>
+            <h3>Tim FORMULA Raih Juara 2 Lomba UI/UX Nasional</h3>
+            <p>Kompetisi tingkat nasional yang diikuti lebih dari 200 tim dari seluruh Indonesia.</p>
+          </div>
+        </article>
+
+        <article class="news-card reveal">
+          <div class="news-thumb" data-color="orange">🎬</div>
+          <div class="news-body">
+            <div class="news-date">03 Januari 2025</div>
+            <h3>Produksi Film Pendek "Jeda" Memasuki Tahap Editing</h3>
+            <p>Project kolaborasi divisi multimedia yang melibatkan 15 anggota aktif.</p>
+          </div>
+        </article>
+      </div>
+
+      <div style="text-align:center;margin-top:40px">
+        <a href="news.html" class="btn btn-outline btn-lg">
+          Baca Semua Berita
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ACHIEVEMENTS
+       ========================================================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-label">Prestasi</span>
+        <h2 class="section-title">Pencapaian Terbaru</h2>
+        <p class="section-sub">Bukti nyata dari kerja keras anggota FORMULA di berbagai kompetisi.</p>
+      </div>
+
+      <div class="achievements-list">
+        <div class="achievement-item reveal">
+          <div class="achievement-icon" data-type="gold">🏆</div>
+          <div>
+            <h4>Juara 2 UI/UX Design Competition</h4>
+            <p>Tingkat Nasional — Universitas Brawijaya</p>
+            <div class="achievement-year">2025</div>
+          </div>
+        </div>
+
+        <div class="achievement-item reveal">
+          <div class="achievement-icon" data-type="gold">🥇</div>
+          <div>
+            <h4>Juara 1 Web Design Competition</h4>
+            <p>Tingkat Provinsi — Jawa Timur</p>
+            <div class="achievement-year">2024</div>
+          </div>
+        </div>
+
+        <div class="achievement-item reveal">
+          <div class="achievement-icon" data-type="silver">🥈</div>
+          <div>
+            <h4>Juara 2 Film Pendek Pelajar</h4>
+            <p>Tingkat Kabupaten — Mojokerto</p>
+            <div class="achievement-year">2024</div>
+          </div>
+        </div>
+
+        <div class="achievement-item reveal">
+          <div class="achievement-icon" data-type="bronze">🥉</div>
+          <div>
+            <h4>Juara 3 Poster Design</h4>
+            <p>Tingkat Kabupaten — Mojokerto</p>
+            <div class="achievement-year">2023</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:40px">
+        <a href="achievements.html" class="btn btn-outline btn-lg">
+          Lihat Semua Prestasi
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       GALLERY
+       ========================================================= -->
+  <section class="section" style="background: var(--color-light)">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-label">Galeri</span>
+        <h2 class="section-title">Momen & Dokumentasi</h2>
+        <p class="section-sub">Jejak kegiatan FORMULA dalam gambar — dari workshop hingga hunting foto.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item span-2">📸</div>
+        <div class="gallery-item">🎨</div>
+        <div class="gallery-item">💻</div>
+        <div class="gallery-item">🎬</div>
+        <div class="gallery-item">🏆</div>
+        <div class="gallery-item">🌐</div>
+        <div class="gallery-item">🤖</div>
+        <div class="gallery-item">📷</div>
+        <div class="gallery-item">🎞️</div>
+        <div class="gallery-item">🖥️</div>
+        <div class="gallery-item">🎤</div>
+        <div class="gallery-item">🎯</div>
+      </div>
+
+      <div style="text-align:center;margin-top:40px">
+        <a href="gallery.html" class="btn btn-outline btn-lg">
+          Lihat Galeri Lengkap
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CTA
+       ========================================================= -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box reveal">
+        <h2>Siap Jadi Bagian dari FORMULA?</h2>
+        <p>Bergabunglah dengan ratusan siswa kreatif SMAN 1 Mojosari. Belajar, berkarya, dan bertumbuh bersama kami.</p>
+        <div class="cta-actions">
+          <a href="register.html" class="btn btn-white btn-lg">
+            Daftar Sekarang
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="contact.html" class="btn btn-ghost btn-lg" style="color:white;border:1.5px solid rgba(255,255,255,0.4)">Hubungi Kami</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <span class="nav-logo-mark">F</span>
+          <span class="nav-logo-text" style="color:white">
+            FORMULA
+            <small>SMAN 1 Mojosari</small>
+          </span>
+        </a>
+        <p>Informatika & Multimedia SMAN 1 Mojosari. Wadah kreatif siswa untuk belajar, berkarya, dan berkolaborasi.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
+          </a>
+          <a href="#" aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Organisasi</h4>
+        <ul>
+          <li><a href="about.html">Tentang FORMULA</a></li>
+          <li><a href="about.html#struktur">Struktur</a></li>
+          <li><a href="about.html#divisi">Divisi</a></li>
+          <li><a href="programs.html">Program</a></li>
+          <li><a href="alumni.html">Alumni</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Konten</h4>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="news.html">Berita</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="achievements.html">Prestasi</a></li>
+          <li><a href="members.html">Anggota</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Akun</h4>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Daftar Anggota</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="contact.html">Kontak</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 FORMULA — SMAN 1 Mojosari. All rights reserved.</span>
+      <span>Dibuat dengan ❤️ oleh anggota FORMULA</span>
+    </div>
   </div>
 </footer>
 
+<!-- Scroll to top -->
+<button class="scroll-top" id="scrollTop" aria-label="Kembali ke atas">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
 <script>
-  // FAQ accordion
-  document.querySelectorAll('.faq-item').forEach(function(item){
-    item.querySelector('.faq-q').addEventListener('click', function(){
-      var wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(function(o){
-        o.classList.remove('open');
-        o.querySelector('.sym').textContent = '+';
+(function () {
+  'use strict';
+
+  /* ============================================================
+     1. NAVBAR — scroll effect
+     ============================================================ */
+  const navbar = document.getElementById('navbar');
+  const onScroll = () => {
+    if (!navbar) return;
+    navbar.classList.toggle('scrolled', window.scrollY > 8);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ============================================================
+     2. MOBILE MENU toggle
+     ============================================================ */
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (navToggle && mobileMenu) {
+    navToggle.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
       });
-      if(!wasOpen){
-        item.classList.add('open');
-        item.querySelector('.sym').textContent = '−';
-      }
+    });
+  }
+
+  /* ============================================================
+     3. COUNTER ANIMATION (stats)
+     ============================================================ */
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+  const animateCounter = (el) => {
+    const target = parseInt(el.getAttribute('data-counter'), 10) || 0;
+    const duration = 1600;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      el.textContent = Math.round(easeOut(p) * target).toLocaleString('id-ID');
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString('id-ID');
+    };
+    requestAnimationFrame(step);
+  };
+
+  /* ============================================================
+     4. REVEAL ON SCROLL + trigger counter
+     ============================================================ */
+  const revealEls = document.querySelectorAll('.reveal');
+  const counterEls = document.querySelectorAll('[data-counter]');
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach((el) => io.observe(el));
+
+    const ioCounter = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        animateCounter(entry.target);
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+
+    counterEls.forEach((el) => ioCounter.observe(el));
+  } else {
+    // fallback
+    revealEls.forEach((el) => el.classList.add('in'));
+    counterEls.forEach((el) => {
+      el.textContent = (parseInt(el.getAttribute('data-counter'), 10) || 0).toLocaleString('id-ID');
+    });
+  }
+
+  /* ============================================================
+     5. SCROLL TO TOP button
+     ============================================================ */
+  const scrollTopBtn = document.getElementById('scrollTop');
+  if (scrollTopBtn) {
+    const toggleBtn = () => {
+      scrollTopBtn.classList.toggle('show', window.scrollY > 400);
+    };
+    window.addEventListener('scroll', toggleBtn, { passive: true });
+    toggleBtn();
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* ============================================================
+     6. NAV ACTIVE STATE (mark current page)
+     ============================================================ */
+  const currentPage = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  document.querySelectorAll('.nav-link, .mobile-menu a').forEach((link) => {
+    const href = (link.getAttribute('href') || '').toLowerCase();
+    if (href === currentPage) link.classList.add('active');
+  });
+
+  /* ============================================================
+     7. PROJECT PROGRESS BAR — animate width on view
+     ============================================================ */
+  const progressBars = document.querySelectorAll('.project-progress span');
+  if ('IntersectionObserver' in window) {
+    const ioBar = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const bar = entry.target;
+        const w = bar.style.width || '0%';
+        bar.style.width = '0%';
+        requestAnimationFrame(() => {
+          bar.style.transition = 'width 1.2s cubic-bezier(0.4,0,0.2,1)';
+          bar.style.width = w;
+        });
+        obs.unobserve(bar);
+      });
+    }, { threshold: 0.4 });
+    progressBars.forEach((b) => ioBar.observe(b));
+  }
+
+  /* ============================================================
+     8. SMOOTH ANCHOR LINK (in-page)
+     ============================================================ */
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (!id || id === '#' || id.length < 2) return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
     });
   });
 
-  // Navbar toggle - SAMA PERSIS DENGAN HALAMAN ABOUT
-  document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    const navCta = document.getElementById('navCta');
-
-    menuToggle.addEventListener('click', function() {
-      navLinks.classList.toggle('open');
-      navCta.classList.toggle('open');
-      this.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
-      this.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+  /* ============================================================
+     9. SHOW DESKTOP-ONLY ACTIONS (Login / Join)
+     ============================================================ */
+  const desktopActions = document.querySelectorAll('[data-desktop]');
+  const showDesktop = () => {
+    const isDesktop = window.matchMedia('(min-width: 900px)').matches;
+    desktopActions.forEach((el) => {
+      el.style.display = isDesktop ? 'inline-flex' : 'none';
     });
+  };
+  showDesktop();
+  window.addEventListener('resize', showDesktop, { passive: true });
 
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.nav-inner')) {
-        navLinks.classList.remove('open');
-        navCta.classList.remove('open');
-        menuToggle.textContent = '☰';
-        menuToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  });
+  /* ============================================================
+     10. LOG — konfirmasi script loaded
+     ============================================================ */
+  // console.log('%cFORMULA • Home loaded ✔', 'color:#1A73E8;font-weight:bold;');
+
+})();
 </script>
 
 </body>
