@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#1A73E8" />
+<meta name="description" content="Daftar lengkap fitur CBT School Enterprise — platform ujian berbasis komputer." />
+<title>Fitur CBT School Enterprise — Daftar Lengkap</title>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A73E8'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='52' font-weight='bold' fill='white' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --color-primary: #1A73E8;
+  --color-primary-dark: #1557B0;
+  --color-primary-light: #E8F0FE;
+  --color-secondary: #34A853;
+  --color-secondary-dark: #1E7E34;
+  --color-accent: #EA4335;
+  --color-warning: #FBBC04;
+  --color-purple: #7C4DFF;
+  --color-cyan: #00ACC1;
+  --color-pink: #E91E63;
+  --color-orange: #FF6D00;
+  --color-dark: #202124;
+  --color-gray-700: #404040;
+  --color-gray-600: #525252;
+  --color-gray-500: #737373;
+  --color-gray-400: #A3A3A3;
+  --color-gray-300: #D4D4D4;
+  --color-gray-200: #E5E5E5;
+  --color-gray-100: #F5F5F5;
+  --color-light: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --text-primary: #202124;
+  --text-secondary: #525252;
+  --text-muted: #737373;
+  --border-color: #E5E5E5;
+  --border-radius: 12px;
+  --border-radius-lg: 20px;
+  --border-radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.10);
+  --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --container-max: 1200px;
+  --container-pad: 20px;
+  --navbar-height: 68px;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body); font-size: 16px; line-height: 1.7;
+  color: var(--text-primary); background: var(--color-surface);
+  overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; height: auto; }
+a { color: var(--color-primary); text-decoration: none; transition: color var(--transition-fast); }
+a:hover { color: var(--color-primary-dark); }
+button { font-family: inherit; font-size: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading); font-weight: 700; line-height: 1.25;
+  letter-spacing: -0.02em; color: var(--text-primary);
+}
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: 4px; }
+::selection { background: var(--color-primary); color: white; }
+
+.container { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--container-pad); }
+.section { padding-block: clamp(32px, 5vw, 64px); }
+
+/* ========== NAVBAR ========== */
+.navbar {
+  position: sticky; top: 0; z-index: 500;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-base);
+}
+.navbar.scrolled { border-bottom-color: var(--border-color); box-shadow: var(--shadow-sm); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: var(--navbar-height); gap: 16px; }
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-heading); font-weight: 800; font-size: 18px;
+  color: var(--text-primary); flex-shrink: 0;
+}
+.nav-logo-mark {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  display: grid; place-items: center; color: white; font-weight: 800; font-size: 17px;
+  box-shadow: 0 4px 12px rgba(26,115,232,0.35);
+}
+.nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.nav-logo-text small {
+  font-family: var(--font-body); font-size: 9.5px; font-weight: 500;
+  color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase;
+}
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 18px;
+  font-family: var(--font-heading); font-size: 13px; font-weight: 600;
+  border-radius: var(--border-radius-full); border: 1.5px solid transparent;
+  cursor: pointer; transition: all var(--transition-base);
+  white-space: nowrap; min-height: 40px; user-select: none; text-decoration: none;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--color-primary); color: white; }
+.btn-primary:hover { background: var(--color-primary-dark); color: white; box-shadow: var(--shadow-md); }
+.btn-outline { background: transparent; color: var(--text-primary); border-color: var(--border-color); }
+.btn-outline:hover { background: var(--color-light); border-color: var(--color-primary); color: var(--color-primary); }
+.btn-sm { padding: 7px 14px; font-size: 12px; min-height: 34px; }
+
+/* ========== PAGE HEADER ========== */
+.page-header {
+  padding-block: clamp(40px, 6vw, 72px);
+  background: linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 100%);
+  position: relative; overflow: hidden; text-align: center;
+}
+.page-header::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(26,115,232,0.15), transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.page-header::after {
+  content: ''; position: absolute; bottom: -300px; left: -200px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(52,168,83,0.10), transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.page-header-inner { position: relative; z-index: 1; }
+.badge-header {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--border-radius-full);
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.03em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.badge-header .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(26,115,232,0.2);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.page-header h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+  line-height: 1.1;
+}
+.page-header h1 .gradient {
+  background: linear-gradient(135deg, var(--color-primary), #4285F4 50%, var(--color-secondary));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.page-header p {
+  font-size: clamp(15px, 2vw, 17px);
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+/* ========== STATS BAR ========== */
+.stats-bar {
+  display: grid; gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 32px;
+  max-width: 720px;
+  margin-inline: auto;
+}
+@media (min-width: 640px) { .stats-bar { grid-template-columns: repeat(4, 1fr); } }
+.stat-mini {
+  padding: 16px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+.stat-mini-value {
+  font-family: var(--font-heading);
+  font-size: 22px; font-weight: 800;
+  line-height: 1; margin-bottom: 4px;
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.stat-mini-label {
+  font-size: 11px; font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+
+/* ========== TOOLBAR ========== */
+.toolbar {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-bottom: 20px;
+}
+@media (min-width: 768px) {
+  .toolbar { flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; }
+}
+.search-bar { position: relative; flex: 1; max-width: 100%; }
+@media (min-width: 768px) { .search-bar { max-width: 420px; } }
+.search-bar input {
+  width: 100%;
+  padding: 12px 42px 12px 42px;
+  font-size: 14px;
+  border-radius: var(--border-radius-full);
+  border: 1.5px solid var(--border-color);
+  background: white;
+  color: var(--text-primary);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+.search-bar input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(26,115,232,0.10);
+}
+.search-bar .search-icon {
+  position: absolute; left: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted); pointer-events: none;
+}
+.search-bar .clear-btn {
+  position: absolute; right: 8px; top: 50%;
+  transform: translateY(-50%);
+  width: 30px; height: 30px; border-radius: 50%;
+  display: none; place-items: center;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+.search-bar .clear-btn:hover { background: var(--color-gray-100); color: var(--text-primary); }
+.search-bar .clear-btn.show { display: grid; }
+
+.toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.toolbar-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 14px;
+  font-size: 13px; font-weight: 600;
+  border-radius: var(--border-radius-full);
+  background: white;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  min-height: 40px;
+}
+.toolbar-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.toolbar-btn svg { width: 14px; height: 14px; }
+
+/* ========== CATEGORY CHIPS ========== */
+.category-scroll {
+  overflow-x: auto;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-300) transparent;
+}
+.category-scroll::-webkit-scrollbar { height: 6px; }
+.category-scroll::-webkit-scrollbar-thumb { background: var(--color-gray-300); border-radius: 3px; }
+.category-chips {
+  display: flex; gap: 8px;
+  min-width: max-content;
+  padding-inline: 2px;
+}
+.cat-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  font-size: 13px; font-weight: 600;
+  border-radius: var(--border-radius-full);
+  background: white;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  min-height: 38px;
+  white-space: nowrap;
+}
+.cat-chip:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.cat-chip.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(26,115,232,0.25);
+}
+.cat-chip .emoji { font-size: 15px; }
+.cat-chip .count {
+  font-size: 11px; font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--color-gray-100);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.cat-chip.active .count { background: rgba(255,255,255,0.25); color: white; }
+
+/* ========== RESULT INFO ========== */
+.result-info {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 16px;
+  font-size: 13px; color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.result-info strong { color: var(--text-primary); font-weight: 700; }
+.result-info .reset-link {
+  color: var(--color-primary); font-weight: 600;
+  font-size: 13px;
+}
+.result-info .reset-link:hover { text-decoration: underline; }
+
+/* ========== FEATURE CATEGORY BLOCK ========== */
+.category-block {
+  margin-bottom: 24px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  background: white;
+  overflow: hidden;
+  transition: all var(--transition-base);
+  scroll-margin-top: 80px;
+}
+.category-block.hidden { display: none; }
+
+.cat-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 22px;
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--transition-fast);
+  position: relative;
+}
+.cat-header:hover { background: var(--color-light); }
+.cat-header::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--cat-color, var(--color-primary));
+}
+
+.cat-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  font-size: 22px;
+  background: var(--cat-bg, var(--color-primary-light));
+  color: var(--cat-color, var(--color-primary));
+  flex-shrink: 0;
+}
+.cat-title-wrap { flex: 1; min-width: 0; }
+.cat-title {
+  font-family: var(--font-heading);
+  font-size: 17px; font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+.cat-desc {
+  font-size: 13px; color: var(--text-muted);
+  line-height: 1.5;
+}
+.cat-meta {
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0;
+}
+.cat-count {
+  font-size: 12px; font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--color-gray-100);
+  color: var(--text-secondary);
+  min-width: 44px; text-align: center;
+}
+.cat-chev {
+  width: 24px; height: 24px;
+  color: var(--text-muted);
+  transition: transform var(--transition-base);
+  flex-shrink: 0;
+}
+.category-block.open .cat-chev { transform: rotate(180deg); }
+
+.cat-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.category-block.open .cat-body { max-height: 20000px; }
+.cat-body-inner {
+  padding: 0 22px 20px;
+  border-top: 1px solid var(--border-color);
+  margin-top: 0;
+  padding-top: 20px;
+}
+
+/* ========== FEATURE LIST ========== */
+.feature-list {
+  display: grid; gap: 8px;
+}
+.feature-list.two-col { grid-template-columns: 1fr; }
+@media (min-width: 768px) { .feature-list.two-col { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .feature-list.two-col { grid-template-columns: 1fr 1fr 1fr; } }
+
+.feature-item {
+  display: flex; gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--color-light);
+  transition: all var(--transition-fast);
+  align-items: flex-start;
+  border: 1px solid transparent;
+}
+.feature-item:hover {
+  background: white;
+  border-color: var(--border-color);
+  transform: translateX(3px);
+  box-shadow: var(--shadow-sm);
+}
+.feature-bullet {
+  width: 20px; height: 20px;
+  border-radius: 6px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.feature-bullet svg { width: 12px; height: 12px; }
+.feature-bullet.green  { background: #E6F4EA; color: var(--color-secondary-dark); }
+.feature-bullet.yellow { background: #FEF7E0; color: #B8860B; }
+.feature-bullet.red    { background: #FCE8E6; color: #B31412; }
+.feature-bullet.purple { background: #F3E8FF; color: var(--color-purple); }
+.feature-bullet.cyan   { background: #E0F7FA; color: #00838F; }
+.feature-bullet.pink   { background: #FCE4EC; color: #C2185B; }
+.feature-bullet.orange { background: #FFF3E0; color: #E65100; }
+
+.feature-content { flex: 1; min-width: 0; }
+.feature-name {
+  font-size: 13.5px; font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: 2px;
+}
+.feature-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.feature-tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.feature-tag.new { background: #E6F4EA; color: var(--color-secondary-dark); }
+.feature-tag.hot { background: #FCE8E6; color: #B31412; }
+.feature-tag.pro { background: #F3E8FF; color: var(--color-purple); }
+
+/* ========== EMPTY STATE ========== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  display: none;
+}
+.empty-state.show { display: block; }
+.empty-state .emoji { font-size: 56px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 18px; margin-bottom: 8px; }
+.empty-state p { color: var(--text-muted); font-size: 14px; }
+.empty-state button {
+  margin-top: 16px;
+  color: var(--color-primary); font-weight: 600;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-primary);
+  transition: all var(--transition-fast);
+}
+.empty-state button:hover {
+  background: var(--color-primary); color: white;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  margin-top: 60px;
+  padding: 40px 0 24px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.footer strong { color: var(--text-primary); font-weight: 700; }
+.footer a { color: var(--color-primary); font-weight: 600; }
+
+/* ========== FLOATING ACTION ========== */
+.fab {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--color-primary); color: white;
+  display: grid; place-items: center;
+  box-shadow: 0 10px 30px rgba(26,115,232,0.35);
+  opacity: 0; visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-base);
+  z-index: 400;
+}
+.fab.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.fab:hover { background: var(--color-primary-dark); transform: translateY(-2px); }
+
+/* ========== REVEAL ========== */
+.reveal {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-mark">C</span>
+      <span class="nav-logo-text">
+        CBT School
+        <small>Enterprise Edition</small>
+      </span>
+    </a>
+    <div class="nav-actions">
+      <button class="btn btn-outline btn-sm" id="expandAllBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg>
+        Buka Semua
+      </button>
+      <button class="btn btn-primary btn-sm" id="collapseAllBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+        Tutup Semua
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="container page-header-inner">
+    <div class="badge-header">
+      <span class="dot"></span>
+      <span>Dokumentasi Fitur Lengkap</span>
+    </div>
+    <h1>Fitur <span class="gradient">CBT School Enterprise</span></h1>
+    <p>Platform ujian berbasis komputer dengan anti-cheat, multi-role, dan fitur enterprise untuk sekolah.</p>
+
+    <div class="stats-bar">
+      <div class="stat-mini">
+        <div class="stat-mini-value" id="statCategories">0</div>
+        <div class="stat-mini-label">Kategori</div>
+      </div>
+      <div class="stat-mini">
+        <div class="stat-mini-value" id="statFeatures">0</div>
+        <div class="stat-mini-label">Total Fitur</div>
+      </div>
+      <div class="stat-mini">
+        <div class="stat-mini-value">4</div>
+        <div class="stat-mini-label">Role</div>
+      </div>
+      <div class="stat-mini">
+        <div class="stat-mini-value">v2.0</div>
+        <div class="stat-mini-label">Versi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section" style="padding-top: 24px;">
+  <div class="container">
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="search-bar">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="search" id="searchInput" placeholder="Cari fitur... (misal: anti-cheat, QR, essay)" aria-label="Cari fitur" />
+        <button class="clear-btn" id="clearSearch" aria-label="Hapus pencarian">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="toolbar-actions">
+        <button class="toolbar-btn" id="printBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print
+        </button>
+        <button class="toolbar-btn" id="topBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+          Ke Atas
+        </button>
+      </div>
+    </div>
+
+    <!-- CATEGORY CHIPS -->
+    <div class="category-scroll">
+      <div class="category-chips" id="categoryChips">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- RESULT INFO -->
+    <div class="result-info">
+      <span>Menampilkan <strong id="visibleFeatures">0</strong> dari <strong id="totalFeatures">0</strong> fitur</span>
+      <a href="#" class="reset-link" id="resetFilter">Reset filter</a>
+    </div>
+
+    <!-- FEATURE CATEGORIES -->
+    <div id="categoriesContainer">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" id="emptyState">
+      <div class="emoji">🔍</div>
+      <h3>Tidak ada fitur ditemukan</h3>
+      <p>Coba ubah kata kunci atau reset filter.</p>
+      <button type="button" id="emptyReset">Reset Filter</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <strong>CBT School Enterprise</strong><br>
+    Dokumentasi fitur lengkap — <span id="footerDate"></span><br>
+    <span style="opacity:0.7;font-size:12px;margin-top:8px;display:inline-block">Total <strong id="footerTotal">0</strong> fitur terdaftar</span>
+  </div>
+</footer>
+
+<!-- FAB -->
+<button class="fab" id="fabTop" aria-label="Kembali ke atas">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     DATA — SEMUA FITUR CBT SCHOOL ENTERPRISE
+     ============================================================ */
+  const DATA = [
+    {
+      id: 'auth',
+      title: 'Login & Autentikasi',
+      emoji: '🔐',
+      color: '#1A73E8',
+      bg: '#E8F0FE',
+      desc: 'Sistem login multi-role dengan QR, device lock, dan session recovery',
+      items: [
+        { name: 'Login Siswa (manual username/password)', desc: 'Siswa masuk dengan kredensial yang diberikan admin' },
+        { name: 'Login Siswa via QR Code', desc: 'Scan QR dari kartu siswa untuk masuk cepat' },
+        { name: 'Login Guru (auto-format ke email @teacher.domain)', desc: 'Username guru otomatis dikonversi ke email domain sekolah' },
+        { name: 'Login Pengawas (auto-format ke email @pengawas.domain)', desc: 'Sama seperti guru, pengawas punya domain email sendiri' },
+        { name: 'Login Admin via pintu rahasia (klik logo sekolah 5x)', desc: 'Akses tersembunyi untuk admin — klik logo 5 kali' },
+        { name: 'Login Admin via QR Code', desc: 'QR khusus admin dengan format terenkripsi', tag: 'pro' },
+        { name: 'Modal "ADMIN ACCESS" khusus admin', desc: 'Modal konfirmasi sebelum masuk sebagai admin' },
+        { name: 'Device Lock (1 akun 1 device, anti multi-login)', desc: 'Mencegah 1 akun dipakai di banyak perangkat', tag: 'hot' },
+        { name: 'Modal "Login Terkunci" jika device beda', desc: 'Notifikasi kalau akun dibuka di device lain' },
+        { name: 'Session recovery otomatis (auto-login saat refresh)', desc: 'Tidak perlu login ulang saat refresh halaman' },
+        { name: 'Logout bersih (hapus sessionStorage + Supabase token)', desc: 'Logout aman tanpa sisa token' },
+        { name: 'Notifikasi error login', desc: 'Pesan jelas kalau login gagal' },
+        { name: 'Validasi role ketat (siswa/guru/pengawas/admin terpisah)', desc: 'Setiap role punya halaman sendiri' },
+        { name: 'Format QR: cbtauth::student::, cbtauth::admin_pw::, cbtauth::admin::', desc: 'Format prefix QR untuk validasi' },
+        { name: 'Konfigurasi izin QR per role', desc: 'Admin bisa atur siapa yang boleh login via QR' },
+        { name: 'Mode Demo (kredensial demo otomatis tampil)', desc: 'Untuk uji coba tanpa setup penuh' }
+      ]
+    },
+    {
+      id: 'siswa',
+      title: 'Fitur Siswa',
+      emoji: '👨‍🎓',
+      color: '#34A853',
+      bg: '#E6F4EA',
+      desc: 'Halaman ujian lengkap dengan berbagai tipe soal dan navigasi',
+      items: [
+        { name: 'Halaman Biodata Siswa (konfirmasi data)', desc: 'Siswa cek data sebelum ujian' },
+        { name: 'Foto profil siswa (upload/auto)', desc: 'Foto profil dari data siswa' },
+        { name: 'Daftar ujian tersedia (filter kelas/jurusan/jadwal)', desc: 'Hanya ujian sesuai kelas yang muncul' },
+        { name: 'Status ujian: Berlangsung / Akan Datang / Selesai', desc: 'Indikator visual status ujian' },
+        { name: 'Countdown timer "Mulai dalam X jam"', desc: 'Timer hitung mundur sebelum ujian mulai' },
+        { name: 'Info sesi ujian (nama, nomor, waktu)', desc: 'Detail sesi ujian yang diikuti' },
+        { name: 'Konfirmasi tes sebelum mulai', desc: 'Modal konfirmasi sebelum ujian dimulai' },
+        { name: 'Modal "SECURE EXAM MODE" konfirmasi anti-cheat', desc: 'Peringatan mode aman sebelum ujian' },
+        { name: 'Halaman pengerjaan ujian', desc: 'Interface utama pengerjaan soal' },
+        { name: 'Timer ujian hitung mundur', desc: 'Sisa waktu ujian tampil terus' },
+        { name: 'Progress bar penyelesaian (%)', desc: 'Visual progress pengerjaan' },
+        { name: 'Nomor soal aktif', desc: 'Indikator soal yang sedang dikerjakan' },
+        { name: 'Tombol navigasi: Sebelumnya / Berikutnya / Selesai', desc: 'Navigasi antar soal' },
+        { name: 'Tombol "Ragu-ragu" (tandai soal)', desc: 'Tandai soal untuk direview nanti' },
+        { name: 'Modal navigasi soal (grid nomor)', desc: 'Lihat semua nomor soal sekaligus' },
+        { name: 'Status soal: Sudah / Ragu-ragu / Belum / Sekarang', desc: 'Warna beda per status soal' },
+        { name: 'Auto-save jawaban ke DB', desc: 'Jawaban tersimpan otomatis', tag: 'hot' },
+        { name: 'Indikator status simpan', desc: 'Tersimpan / Menyimpan / Gagal' },
+        { name: 'Tombol "Perbarui Soal" (refresh soal)', desc: 'Refresh soal dari server saat ujian' },
+        { name: 'Mode tema: Terang / Sepia / Gelap', desc: 'Pilihan tema untuk kenyamanan mata' },
+        { name: 'Tipe soal: Pilihan Ganda', desc: 'Soal PG standar' },
+        { name: 'Tipe soal: PG Kompleks (multi-jawaban)', desc: 'PG dengan banyak jawaban benar' },
+        { name: 'Tipe soal: Menjodohkan (matching)', desc: 'Soal menjodohkan pasangan' },
+        { name: 'Tipe soal: Benar/Salah (true/false)', desc: 'Soal benar-salah' },
+        { name: 'Tipe soal: Essay / Uraian', desc: 'Soal jawaban panjang' },
+        { name: 'Soal dengan gambar', desc: 'Soal bisa menyertakan gambar' },
+        { name: 'Soal dengan audio (listening)', desc: 'Soal listening dengan audio' },
+        { name: 'Soal dengan video', desc: 'Soal dengan media video' },
+        { name: 'Opsi jawaban dengan gambar', desc: 'Pilihan jawaban bisa berupa gambar' },
+        { name: 'Mode acak soal (randomizeQuestions)', desc: 'Urutan soal diacak per siswa' },
+        { name: 'Mode acak jawaban (randomizeAnswers)', desc: 'Urutan jawaban diacak' },
+        { name: 'Batas soal ditampilkan (questionsToDisplay)', desc: 'Batas jumlah soal yang ditampilkan' },
+        { name: 'Halaman selesai ujian', desc: 'Halaman konfirmasi setelah selesai' },
+        { name: 'Tampilkan nilai akhir (jika diaktifkan admin)', desc: 'Nilai muncul kalau admin izinkan' },
+        { name: 'Kategori nilai', desc: 'Sangat Baik / Baik / Cukup / Perlu Peningkatan' }
+      ]
+    },
+    {
+      id: 'anticheat',
+      title: 'Anti-Cheat (Secure Exam Mode)',
+      emoji: '🛡️',
+      color: '#EA4335',
+      bg: '#FCE8E6',
+      desc: 'Sistem keamanan ujian untuk mencegah kecurangan',
+      items: [
+        { name: 'Deteksi keluar fullscreen', desc: 'Peringatan kalau siswa keluar layar penuh', tag: 'hot' },
+        { name: 'Deteksi pindah tab/aplikasi (visibilitychange)', desc: 'Deteksi kalau siswa pindah tab' },
+        { name: 'Deteksi window blur/focus', desc: 'Deteksi kalau window kehilangan fokus' },
+        { name: 'Deteksi keluar dari mode layar penuh', desc: 'Peringatan keluar fullscreen' },
+        { name: 'Blokir screenshot (PrintScreen, Cmd+Shift+3/4/5)', desc: 'Cegah screenshot di berbagai platform' },
+        { name: 'Blokir Ctrl+P (print)', desc: 'Cegah print soal' },
+        { name: 'Blokir Ctrl+C/A/V/X (copy/paste)', desc: 'Cegah copy-paste jawaban' },
+        { name: 'Blokir F12 (devtools)', desc: 'Cegah buka developer tools' },
+        { name: 'Blokir Ctrl+Shift+I/J/C (devtools)', desc: 'Shortcut devtools diblokir' },
+        { name: 'Blokir klik kanan (contextmenu)', desc: 'Klik kanan diblokir' },
+        { name: 'Blokir copy/cut/paste event', desc: 'Event clipboard diblokir' },
+        { name: 'Blokir getDisplayMedia (screen capture)', desc: 'Cegah screen sharing/capture' },
+        { name: 'Blokir paste file dari clipboard', desc: 'Cegah paste file' },
+        { name: 'Modal peringatan pelanggaran', desc: 'Notifikasi pelanggaran ke siswa' },
+        { name: 'Counter pelanggaran (violations)', desc: 'Hitung jumlah pelanggaran' },
+        { name: 'Batas pelanggaran → diskualifikasi otomatis', desc: 'Diskualifikasi jika melebihi batas', tag: 'hot' },
+        { name: 'Modal "ANDA DIDISKUALIFIKASI"', desc: 'Modal besar saat siswa didiskualifikasi' },
+        { name: 'Modal "Mode Ujian Terkunci"', desc: 'Wajib fullscreen untuk lanjut' },
+        { name: 'Banner "SECURE EXAM MODE AKTIF"', desc: 'Banner tanda mode aman aktif' },
+        { name: 'Blocker screenshot (overlay hitam)', desc: 'Overlay hitam saat screenshot terdeteksi' },
+        { name: 'Print protection (media print disembunyikan)', desc: 'Halaman print kosong' },
+        { name: 'Timer grace period 7 detik', desc: 'Waktu sebelum diskualifikasi otomatis' },
+        { name: 'Sinkronisasi pelanggaran ke DB realtime', desc: 'Pelanggaran langsung terkirim ke server' }
+      ]
+    },
+    {
+      id: 'jaringan',
+      title: 'Mode Jaringan Ujian',
+      emoji: '🎯',
+      color: '#00ACC1',
+      bg: '#E0F7FA',
+      desc: 'Mode offline dan online untuk ujian dengan deteksi koneksi',
+      items: [
+        { name: 'Mode Offline (blokir internet saat ujian)', desc: 'Ujian jalan tanpa internet', tag: 'pro' },
+        { name: 'Mode Online (LAN/WAN)', desc: 'Ujian via jaringan lokal atau internet' },
+        { name: 'Deteksi koneksi internet otomatis', desc: 'Cek koneksi setiap beberapa detik' },
+        { name: 'Modal "INTERNET TERDETEKSI!"', desc: 'Peringatan kalau ada internet di mode offline' },
+        { name: 'Tombol "Periksa Ulang Koneksi"', desc: 'Cek ulang koneksi manual' },
+        { name: 'Panduan matikan internet (Android/iPhone/Laptop)', desc: 'Panduan lengkap untuk siswa' },
+        { name: 'Polling koneksi otomatis (15 detik & 45 detik)', desc: 'Cek koneksi berkala' },
+        { name: 'Cek ke google.com/generate_204, gstatic.com', desc: 'Endpoint cek koneksi' }
+      ]
+    },
+    {
+      id: 'guru',
+      title: 'Fitur Guru',
+      emoji: '👨‍🏫',
+      color: '#7C4DFF',
+      bg: '#F3E8FF',
+      desc: 'Dashboard guru untuk kelola soal, jadwal, dan analisa',
+      items: [
+        { name: 'Dashboard guru (statistik: paket soal, total soal, jadwal)', desc: 'Overview data guru' },
+        { name: 'Menu Beranda Guru', desc: 'Halaman utama guru' },
+        { name: 'Menu Bank Soal', desc: 'Kelola soal ujian' },
+        { name: 'Menu Jadwal Ujian', desc: 'Lihat jadwal ujian' },
+        { name: 'Menu Rekapitulasi Nilai', desc: 'Lihat rekap nilai siswa' },
+        { name: 'Menu Analisa Soal', desc: 'Analisa tingkat kesulitan soal' },
+        { name: 'Menu Analisa Jawaban', desc: 'Analisa jawaban siswa per soal' },
+        { name: 'Menu Token Ujian (read-only)', desc: 'Lihat token ujian (tidak bisa ubah)' },
+        { name: 'Sidebar guru (tema hijau/teal)', desc: 'Tampilan khusus guru' },
+        { name: 'Header guru', desc: 'Header dengan profil guru' },
+        { name: 'Tombol Logout', desc: 'Keluar dengan aman' }
+      ]
+    },
+    {
+      id: 'admin-dashboard',
+      title: 'Admin — Dashboard',
+      emoji: '👑',
+      color: '#FBBC04',
+      bg: '#FEF7E0',
+      desc: 'Dashboard utama admin dengan statistik dan chart',
+      items: [
+        { name: 'Statistik: Total Siswa', desc: 'Jumlah total siswa terdaftar' },
+        { name: 'Statistik: Total Guru', desc: 'Jumlah total guru' },
+        { name: 'Statistik: Total Admin', desc: 'Jumlah total admin' },
+        { name: 'Statistik: Total Pengawas', desc: 'Jumlah total pengawas' },
+        { name: 'Statistik: Mata Pelajaran', desc: 'Jumlah mapel' },
+        { name: 'Statistik: Jadwal Ujian', desc: 'Jumlah jadwal aktif' },
+        { name: 'Statistik: Total Soal', desc: 'Jumlah soal di bank soal' },
+        { name: 'Statistik: Sesi Aktif', desc: 'Jumlah sesi ujian aktif' },
+        { name: 'Kartu QR Code Admin', desc: 'QR untuk login cepat' },
+        { name: 'Kartu "Pengawas & Ruangan Ujian"', desc: 'Info pengawas per ruangan' },
+        { name: 'Daftar Mata Pelajaran Ujian', desc: 'Kartu berwarna per mapel' },
+        { name: 'Tombol "Tambah Mapel"', desc: 'Tambah mata pelajaran baru' },
+        { name: 'Preview kartu ujian (flip card)', desc: 'Preview kartu dengan flip animation' },
+        { name: 'Deskripsi soal (mudah/sedang/sulit)', desc: 'Breakdown tingkat kesulitan' },
+        { name: 'Tombol "Lihat Soal" & "Nilai"', desc: 'Akses cepat ke soal dan nilai' },
+        { name: 'Distribusi Siswa per Jurusan (chart)', desc: 'Bar chart distribusi jurusan' },
+        { name: 'Kinerja Kelulusan (donut chart)', desc: 'Donut chart tingkat kelulusan' },
+        { name: 'Penyelesaian Ujian (progress circle)', desc: 'Progress penyelesaian ujian' },
+        { name: 'Live updates badge', desc: 'Badge update realtime' }
+      ]
+    },
+    {
+      id: 'admin-master',
+      title: 'Admin — Data Master',
+      emoji: '🗂️',
+      color: '#00ACC1',
+      bg: '#E0F7FA',
+      desc: 'Kelola data kelas, jurusan, dan tipe ujian',
+      items: [
+        { name: 'Manajemen Kelas (CRUD)', desc: 'Tambah/edit/hapus kelas' },
+        { name: 'Manajemen Jurusan (CRUD)', desc: 'Tambah/edit/hapus jurusan' },
+        { name: 'Manajemen Tipe Ujian (CRUD)', desc: 'Kelola tipe ujian (PTS/PAS/dll)' },
+        { name: 'Kartu kelas berwarna gradient', desc: 'Visual kelas dengan warna berbeda' },
+        { name: 'Count siswa per kelas', desc: 'Jumlah siswa per kelas' },
+        { name: 'Drawer detail siswa per kelas', desc: 'Lihat siswa per kelas' },
+        { name: 'Mode "Pilih untuk Gabung"', desc: 'Pilih kelas untuk digabung' },
+        { name: 'Fitur "Gabungkan Data"', desc: 'Merge master data' },
+        { name: 'Edit kelas/jurusan', desc: 'Ubah data master' },
+        { name: 'Hapus kelas/jurusan', desc: 'Hapus data master' },
+        { name: 'KKM per jurusan', desc: 'Set KKM tiap jurusan' }
+      ]
+    },
+    {
+      id: 'admin-user',
+      title: 'Admin — Manajemen User',
+      emoji: '👥',
+      color: '#1A73E8',
+      bg: '#E8F0FE',
+      desc: 'Kelola user dengan import massal dan generate otomatis',
+      items: [
+        { name: 'Tab Siswa / Guru / Admin', desc: 'Pisah user per role' },
+        { name: 'CRUD user lengkap', desc: 'Tambah/edit/hapus user' },
+        { name: 'Foto profil user (auto-compress 200x200)', desc: 'Upload foto dengan compress otomatis' },
+        { name: 'Generate username otomatis (NISN@domain)', desc: 'Username dari NISN + domain' },
+        { name: 'Khusus guru: username & password manual', desc: 'Guru atur sendiri' },
+        { name: 'Khusus guru: tampilkan password_text', desc: 'Lihat password guru' },
+        { name: 'Role selector (student/teacher/admin)', desc: 'Pilih role user' },
+        { name: 'Filter by pencarian (nama/NISN/username)', desc: 'Cari user cepat' },
+        { name: 'Import massal dari CSV/Excel/Google Sheet', desc: 'Import banyak user sekaligus', tag: 'hot' },
+        { name: 'Download template CSV/Excel', desc: 'Template import' },
+        { name: 'Sinkronisasi Google Sheet', desc: 'Sync dari Google Sheet' },
+        { name: 'Preview data sebelum import', desc: 'Lihat data sebelum import' },
+        { name: 'Validasi data import', desc: 'Cek header & field wajib' },
+        { name: 'Deteksi duplikat username', desc: 'Cegah duplikat' },
+        { name: 'Batch import (50 data per batch)', desc: 'Import bertahap' },
+        { name: 'Progress bar import', desc: 'Lihat progress import' },
+        { name: 'Retry otomatis (3x)', desc: 'Coba lagi kalau gagal' },
+        { name: 'Repair login guru (repair_teacher_logins)', desc: 'Perbaiki login guru error' },
+        { name: 'Reset password user', desc: 'Reset password user' },
+        { name: 'Hapus user', desc: 'Hapus akun user' },
+        { name: 'Suspend/unsuspend user', desc: 'Nonaktifkan sementara' },
+        { name: 'Edit foto & biodata', desc: 'Update data user' },
+        { name: 'Auto compress gambar', desc: 'Compress otomatis' },
+        { name: 'Preview validasi (baru/update/error)', desc: 'Cek validasi sebelum commit' }
+      ]
+    },
+    {
+      id: 'admin-pengawas',
+      title: 'Admin — Pengawas & Ruangan',
+      emoji: '🧑‍💼',
+      color: '#34A853',
+      bg: '#E6F4EA',
+      desc: 'Kelola akun pengawas dan pembagian ruangan ujian',
+      items: [
+        { name: 'Tab Akun Pengawas', desc: 'Kelola akun pengawas' },
+        { name: 'Tab Ruangan Ujian', desc: 'Kelola ruangan' },
+        { name: 'Tab Penugasan Ruangan', desc: 'Assign pengawas ke ruangan' },
+        { name: 'CRUD akun pengawas', desc: 'Tambah/edit/hapus pengawas' },
+        { name: 'Password manual pengawas', desc: 'Set password manual' },
+        { name: 'Auto email @pengawas.domain', desc: 'Email otomatis' },
+        { name: 'CRUD ruangan ujian', desc: 'Nama, kapasitas, keterangan' },
+        { name: 'Assign peserta ke ruangan', desc: 'Bagi peserta ke ruangan' },
+        { name: 'Nomor meja otomatis', desc: 'Nomor meja digenerate' },
+        { name: 'Assign pengawas ke ruangan', desc: 'Tugaskan pengawas' },
+        { name: 'Cabut pengawas dari ruangan', desc: 'Hapus penugasan' },
+        { name: 'Hapus peserta dari ruangan', desc: 'Keluarkan peserta' },
+        { name: 'Filter siswa per kelas (tag)', desc: 'Filter siswa per kelas' },
+        { name: 'Pencarian nama/NISN', desc: 'Cari siswa' },
+        { name: 'Pilih semua siswa', desc: 'Bulk select' },
+        { name: 'Exclude siswa (dikecualikan)', desc: 'Kecualikan siswa tertentu' },
+        { name: 'Warning siswa tidak ikut ujian', desc: 'Peringatan siswa tidak ikut' }
+      ]
+    },
+    {
+      id: 'admin-soal',
+      title: 'Admin — Bank Soal',
+      emoji: '📚',
+      color: '#7C4DFF',
+      bg: '#F3E8FF',
+      desc: 'Bank soal lengkap dengan WYSIWYG editor dan import multi-format',
+      items: [
+        { name: 'Card mapel berwarna gradient', desc: 'Visual per mata pelajaran' },
+        { name: 'CRUD paket ujian', desc: 'Kelola paket soal' },
+        { name: 'Token ujian otomatis (6 karakter)', desc: 'Token digenerate' },
+        { name: 'Kategori ujian (event)', desc: 'Kategorisasi ujian' },
+        { name: 'Info paket: nama, mapel, durasi, jumlah, KKM', desc: 'Detail paket' },
+        { name: 'Mode acak soal & jawaban', desc: 'Randomize' },
+        { name: 'Batas soal ditampilkan', desc: 'Set batas jumlah soal' },
+        { name: 'Tambah soal manual (semua tipe)', desc: 'Input soal manual' },
+        { name: 'Editor soal WYSIWYG', desc: 'Editor rich text', tag: 'hot' },
+        { name: 'Toolbar format: Bold, Italic, Underline, Strike', desc: 'Format teks' },
+        { name: 'Toolbar: warna teks, highlight', desc: 'Warna teks' },
+        { name: 'Toolbar: superscript, subscript', desc: 'Format pangkat' },
+        { name: 'Toolbar: align', desc: 'Kiri/tengah/kanan/justify' },
+        { name: 'Toolbar: list', desc: 'Ordered/unordered list' },
+        { name: 'Toolbar: indent/outdent', desc: 'Indentasi' },
+        { name: 'Toolbar: undo/redo', desc: 'Undo/redo' },
+        { name: 'Insert gambar ke soal (auto-compress)', desc: 'Gambar dengan compress' },
+        { name: 'Insert audio ke soal (maks 10 MB)', desc: 'Soal audio' },
+        { name: 'Insert video ke soal (maks 50 MB)', desc: 'Soal video' },
+        { name: 'Template rumus: Pecahan a/b', desc: 'Insert pecahan' },
+        { name: 'Template rumus: Akar √', desc: 'Insert akar' },
+        { name: 'Template rumus: Akar ke-n', desc: 'Insert akar ke-n' },
+        { name: 'Template rumus: Pangkat xⁿ', desc: 'Insert pangkat' },
+        { name: 'Template rumus: Indeks xₙ', desc: 'Insert indeks' },
+        { name: 'Template rumus: Mutlak |x|', desc: 'Insert nilai mutlak' },
+        { name: 'Template rumus: log basis', desc: 'Insert log' },
+        { name: 'Template rumus: lim', desc: 'Insert limit' },
+        { name: 'Template rumus: Integral', desc: 'Insert integral' },
+        { name: 'Template rumus: Sigma', desc: 'Insert sigma' },
+        { name: 'Template rumus: Vektor', desc: 'Insert vektor' },
+        { name: 'Template rumus: Matriks 2×2', desc: 'Insert matriks' },
+        { name: 'Template rumus: Kombinasi Cₙ', desc: 'Insert kombinasi' },
+        { name: 'Template rumus: Permutasi Pₙ', desc: 'Insert permutasi' },
+        { name: 'Panel simbol matematika', desc: 'Dasar/Yunani/Kalkulus/Himpunan/Geometri/Panah' },
+        { name: 'Bobot soal (weight)', desc: 'Set bobot soal' },
+        { name: 'Kesulitan soal', desc: 'Easy/Medium/Hard' },
+        { name: 'Level kognitif', desc: 'L1/L2/L3' },
+        { name: 'Topik soal', desc: 'Kategorisasi topik' },
+        { name: 'Mode penilaian PGK', desc: 'Parsial/Strict' },
+        { name: 'Penalti per opsi salah (PGK)', desc: 'Penalti jika salah pilih' },
+        { name: 'Poin manual per opsi', desc: 'Untuk PGK/B-S/Matching' },
+        { name: 'Preview soal (seperti tampilan siswa)', desc: 'Preview real' },
+        { name: 'Edit soal', desc: 'Edit soal' },
+        { name: 'Hapus soal', desc: 'Hapus soal' },
+        { name: 'Hapus paket ujian + file gambar', desc: 'Cleanup storage' },
+        { name: 'Export PDF bank soal', desc: 'Export ke PDF' },
+        { name: 'Import Excel (.xlsx)', desc: 'Template universal SMP/SMA' },
+        { name: 'Import Notepad (.txt)', desc: 'Semua tipe soal' },
+        { name: 'Import Word (.docx)', desc: 'Parsing tabel + OMML ke LaTeX' },
+        { name: 'Preview import', desc: 'Status baru/update/error' },
+        { name: 'Deteksi kolom wajib', desc: 'Validasi header' },
+        { name: 'Deteksi duplikat', desc: 'Cegah duplikat soal' },
+        { name: 'Import via RPC admin_import_questions', desc: 'Import via RPC' },
+        { name: 'Kirim bank soal ke guru lain', desc: 'Share bank soal' },
+        { name: 'Filter pencarian soal', desc: 'Cari soal' },
+        { name: 'Filter kesulitan', desc: 'Filter tingkat kesulitan' },
+        { name: 'Refresh soal dari DB', desc: 'Reload soal' }
+      ]
+    },
+    {
+      id: 'admin-jadwal',
+      title: 'Admin — Jadwal Ujian',
+      emoji: '📅',
+      color: '#EA4335',
+      bg: '#FCE8E6',
+      desc: 'Kelola jadwal ujian dengan kalender dan peserta',
+      items: [
+        { name: 'Tampilan Kalender', desc: 'Jadwal dalam bentuk kalender' },
+        { name: 'Tampilan Daftar (list)', desc: 'Jadwal dalam bentuk list' },
+        { name: 'Create jadwal ujian', desc: 'Buat jadwal baru' },
+        { name: 'Edit jadwal ujian', desc: 'Ubah jadwal' },
+        { name: 'Hapus jadwal ujian', desc: 'Hapus jadwal' },
+        { name: 'Pilih mapel', desc: 'Pilih mata pelajaran' },
+        { name: 'Set waktu mulai', desc: 'Atur waktu mulai' },
+        { name: 'Set waktu selesai', desc: 'Atur waktu selesai' },
+        { name: 'DateTimePicker custom', desc: 'Kalender + jam AM/PM' },
+        { name: 'Pilih kelas/jurusan', desc: 'Checkbox multi' },
+        { name: 'Pilih semua kelas', desc: 'Bulk select kelas' },
+        { name: 'Pencarian kelas', desc: 'Cari kelas' },
+        { name: 'Nomor sesi', desc: 'Set nomor sesi' },
+        { name: 'Nama sesi', desc: 'Set nama sesi' },
+        { name: 'Pilih peserta ujian (exclude siswa)', desc: 'Pilih peserta' },
+        { name: 'Pilih semua peserta', desc: 'Bulk select peserta' },
+        { name: 'Pencarian peserta', desc: 'Cari peserta' },
+        { name: 'Group peserta per kelas', desc: 'Kelompokkan peserta per kelas' },
+        { name: 'Warning siswa tidak ikut', desc: 'Peringatan siswa tidak ikut' },
+        { name: 'Status jadwal', desc: 'Berlangsung / Akan Datang / Selesai' },
+        { name: 'Warna status di kalender', desc: 'Warna beda per status' },
+        { name: 'Klik jadwal untuk edit', desc: 'Klik untuk edit' },
+        { name: 'Modal konfirmasi hapus', desc: 'Konfirmasi hapus' }
+      ]
+    },
+    {
+      id: 'admin-ubk',
+      title: 'Admin — Pemantauan Ujian (UBK)',
+      emoji: '📡',
+      color: '#7C4DFF',
+      bg: '#F3E8FF',
+      desc: 'Pantau ujian realtime dengan berbagai aksi per siswa',
+      items: [
+        { name: 'Tab "Pantau Progres Ujian"', desc: 'Lihat progres siswa' },
+        { name: 'Tab "Status Login / Device"', desc: 'Status login & device' },
+        { name: 'Mode Kartu (card view)', desc: 'Tampilan kartu' },
+        { name: 'Mode Daftar (list view, ringkas)', desc: 'Tampilan list' },
+        { name: 'Statistik: Sedang Ujian / Selesai / Pelanggaran / Device Terkunci', desc: 'Ringkasan ujian' },
+        { name: 'Filter pencarian nama/NISN', desc: 'Cari siswa' },
+        { name: 'Filter tanggal', desc: 'Filter by tanggal' },
+        { name: 'Filter status', desc: 'Semua/Mengerjakan/Selesai/Diskualifikasi/Melanggar' },
+        { name: 'Filter mapel', desc: 'Filter by mapel' },
+        { name: 'Filter kelas', desc: 'Filter by kelas' },
+        { name: 'Filter "Ujian Berlangsung"', desc: 'Hanya jadwal aktif' },
+        { name: 'Live badge', desc: 'Badge realtime' },
+        { name: 'Refresh manual', desc: 'Refresh manual' },
+        { name: 'Auto-refresh 15 detik', desc: 'Auto refresh' },
+        { name: 'Realtime subscription (Supabase channel)', desc: 'Realtime real', tag: 'hot' },
+        { name: 'Card siswa: foto, nama, mapel, status', desc: 'Kartu detail siswa' },
+        { name: 'Progress bar per siswa', desc: 'Progress per siswa' },
+        { name: 'Nomor soal aktif', desc: 'Soal yang sedang dikerjakan' },
+        { name: 'Sisa waktu (timer)', desc: 'Sisa waktu ujian' },
+        { name: 'Counter pelanggaran', desc: 'Jumlah pelanggaran' },
+        { name: 'Device ID', desc: 'ID device siswa' },
+        { name: 'Login terakhir', desc: 'Waktu login terakhir' },
+        { name: 'Aksi: Lanjutkan Ujian', desc: 'Lanjutkan ujian siswa' },
+        { name: 'Aksi: Reset Device', desc: 'Reset device' },
+        { name: 'Aksi: Tambah Waktu (+5/+10/+15/+30 menit)', desc: 'Tambah waktu' },
+        { name: 'Aksi: Selesaikan Ujian', desc: 'Selesaikan ujian' },
+        { name: 'Aksi: Buka Kembali Ujian', desc: 'Buka kembali ujian' },
+        { name: 'Aksi: Mulai dari Awal (reset)', desc: 'Reset ujian' },
+        { name: 'Aksi: Diskualifikasi', desc: 'Diskualifikasi siswa' },
+        { name: 'Aksi: Suspend Akses', desc: 'Suspend akses' },
+        { name: 'Aksi: Aktifkan Kembali', desc: 'Aktifkan kembali' },
+        { name: 'Bulk action: Pilih semua', desc: 'Pilih semua siswa' },
+        { name: 'Bulk action: +10 Menit', desc: 'Tambah waktu massal' },
+        { name: 'Bulk action: Lanjutkan Terpilih', desc: 'Lanjutkan siswa terpilih' },
+        { name: 'Bulk action: Finish Terpilih', desc: 'Selesaikan siswa terpilih' },
+        { name: 'Bulk action: Reset Device Terpilih', desc: 'Reset device terpilih' },
+        { name: 'Bulk action: Hentikan Semua Sesi', desc: 'Hentikan semua' },
+        { name: 'Bulk action: Lanjutkan Semua', desc: 'Lanjutkan semua' },
+        { name: 'Bulk action: Reset Semua Device', desc: 'Reset semua device' },
+        { name: 'Modal konfirmasi aksi', desc: 'Semua aksi dengan konfirmasi' },
+        { name: 'Pagination', desc: '12/24/48/semua baris' }
+      ]
+    },
+    {
+      id: 'admin-cetak-doc',
+      title: 'Admin — Cetak Dokumen',
+      emoji: '🖨️',
+      color: '#00ACC1',
+      bg: '#E0F7FA',
+      desc: 'Cetak berita acara dan daftar hadir peserta ujian',
+      items: [
+        { name: 'Pilih tipe dokumen: Daftar Hadir', desc: 'Cetak daftar hadir' },
+        { name: 'Pilih tipe dokumen: Berita Acara', desc: 'Cetak berita acara' },
+        { name: 'Filter mapel (wajib)', desc: 'Pilih mapel' },
+        { name: 'Filter kelas', desc: 'Filter kelas' },
+        { name: 'Input ruang', desc: 'Input nomor ruang' },
+        { name: 'Input sesi', desc: 'Input sesi' },
+        { name: 'Input nama proktor', desc: 'Nama proktor' },
+        { name: 'Input NIP proktor', desc: 'NIP proktor' },
+        { name: 'Input nama pengawas', desc: 'Nama pengawas' },
+        { name: 'Input NIP pengawas', desc: 'NIP pengawas' },
+        { name: 'Input nama penanggung jawab', desc: 'PJ' },
+        { name: 'Input catatan kejadian', desc: 'Catatan kejadian' },
+        { name: 'Verifikasi kehadiran peserta', desc: 'Checkbox kehadiran' },
+        { name: 'Pilih semua / kosongkan kehadiran', desc: 'Bulk select' },
+        { name: 'Indicator online/offline siswa', desc: 'Status online' },
+        { name: 'Statistik: total, hadir, tidak hadir', desc: 'Ringkasan' },
+        { name: 'Daftar nama tidak hadir otomatis', desc: 'Auto list' },
+        { name: 'Edit KOP manual', desc: 'Edit KOP' },
+        { name: 'Pilih ukuran kertas A4/F4', desc: 'Pilih ukuran' },
+        { name: 'Pilih tanggal cetak', desc: 'Tanggal cetak' },
+        { name: 'Preview dokumen live', desc: 'Preview live' },
+        { name: 'Print langsung', desc: 'Print' },
+        { name: 'Download PDF (html2pdf)', desc: 'Download PDF' },
+        { name: 'Download Excel (.xlsx)', desc: 'Download Excel' },
+        { name: 'Tanda tangan kepala sekolah', desc: 'Gambar TTD' },
+        { name: 'Stempel sekolah', desc: 'Gambar stempel' },
+        { name: 'Tabel daftar hadir', desc: '15 baris kosong + peserta' },
+        { name: 'Nomor peserta otomatis', desc: 'Nomor otomatis' },
+        { name: 'Kolom tanda tangan', desc: 'Kolom TTD' },
+        { name: 'KOP surat lengkap', desc: 'Logo kiri, logo kanan, alamat' }
+      ]
+    },
+    {
+      id: 'admin-cetak-kartu',
+      title: 'Admin — Cetak Kartu',
+      emoji: '🎫',
+      color: '#FBBC04',
+      bg: '#FEF7E0',
+      desc: 'Cetak kartu ujian dengan QR code per role',
+      items: [
+        { name: 'Cetak Kartu Siswa (12 per halaman)', desc: 'Kartu siswa', tag: 'hot' },
+        { name: 'Cetak Kartu Admin', desc: 'Kartu admin' },
+        { name: 'Cetak Kartu Guru', desc: 'Kartu guru' },
+        { name: 'Cetak Kartu Pengawas', desc: 'Kartu pengawas' },
+        { name: 'Filter kelas', desc: 'Filter by kelas' },
+        { name: 'Pencarian nama/NISN', desc: 'Cari siswa' },
+        { name: 'Pilih jumlah per halaman', desc: '6/12/semua' },
+        { name: 'Pagination kartu', desc: 'Navigasi halaman' },
+        { name: 'QR Code per kartu', desc: 'QR login cepat' },
+        { name: 'QR Code dengan logo tengah', desc: 'QR dengan logo' },
+        { name: 'Foto siswa/guru/pengawas', desc: 'Foto di kartu' },
+        { name: 'Nama, NISN, kelas, jurusan', desc: 'Data di kartu' },
+        { name: 'Username & password siswa', desc: 'Kredensial di kartu' },
+        { name: 'Info guru/pengawas', desc: 'Jabatan/mapel' },
+        { name: 'KOP mini di kartu', desc: 'KOP mini' },
+        { name: 'Desain gradient per role', desc: 'Warna beda per role' },
+        { name: 'Tanda tangan kepala sekolah', desc: 'TTD di kartu siswa' },
+        { name: 'Stempel sekolah', desc: 'Stempel' },
+        { name: 'Pilih ukuran kertas A4/F4', desc: 'A4/F4' },
+        { name: 'Print browser', desc: 'Print' },
+        { name: 'Download PDF (html2pdf)', desc: 'Download PDF' },
+        { name: 'Preview kartu real-time', desc: 'Preview live' },
+        { name: 'Tombol "Buat QR" per user', desc: 'Generate QR' },
+        { name: 'Tombol "Buat QR untuk Semua"', desc: 'Bulk QR' },
+        { name: 'Tombol "Download PDF" per kartu', desc: 'Download per kartu' },
+        { name: 'Tombol "Download Semua" (batch)', desc: 'Download semua' },
+        { name: 'Tombol "Print" per kartu', desc: 'Print per kartu' },
+        { name: 'Generate password QR otomatis', desc: '8 karakter' },
+        { name: 'Simpan password QR ke DB', desc: 'Simpan ke qr_login_password' }
+      ]
+    },
+    {
+      id: 'admin-rekap',
+      title: 'Admin — Rekapitulasi Nilai',
+      emoji: '📊',
+      color: '#1A73E8',
+      bg: '#E8F0FE',
+      desc: 'Rekap nilai siswa dengan chart dan export',
+      items: [
+        { name: 'Card per mapel (gradient)', desc: 'Kartu per mapel' },
+        { name: 'Donut chart persentase rata-rata', desc: 'Donut chart' },
+        { name: 'Statistik: peserta, rata-rata, max, min', desc: 'Statistik lengkap' },
+        { name: 'Tombol "Detail Rinci"', desc: 'Detail nilai' },
+        { name: 'Filter kelas', desc: 'Filter kelas' },
+        { name: 'Filter mapel', desc: 'Filter mapel' },
+        { name: 'Tabel nilai siswa', desc: 'Tabel lengkap' },
+        { name: 'Kolom: Nama, NISN, Kelas, Nilai, Status', desc: 'Kolom tabel' },
+        { name: 'Status: Lulus / Tidak Lulus / Belum / Diskualifikasi', desc: 'Status siswa' },
+        { name: 'Indikator warna status', desc: 'Warna status' },
+        { name: 'Tombol "Hitung" (recalculate)', desc: 'Hitung ulang' },
+        { name: 'Tombol "PDF" (print browser)', desc: 'Export PDF' },
+        { name: 'Tombol "Excel"', desc: 'Export Excel' },
+        { name: 'Tombol "Koreksi Essay"', desc: 'Koreksi essay' },
+        { name: 'KKM per mapel', desc: 'Set KKM' },
+        { name: 'Ringkasan lengkap', desc: 'Rata-rata, max, min, kelulusan' },
+        { name: 'Auto-filter di Excel', desc: 'Excel dengan filter' },
+        { name: 'Freeze pane di Excel', desc: 'Freeze header' },
+        { name: 'Header KOP di Excel', desc: 'KOP di Excel' },
+        { name: 'Footer timestamp', desc: 'Timestamp' }
+      ]
+    },
+    {
+      id: 'admin-koreksi',
+      title: 'Admin — Koreksi Essay',
+      emoji: '✍️',
+      color: '#E91E63',
+      bg: '#FCE4EC',
+      desc: 'Koreksi jawaban essay siswa dengan rubrik',
+      items: [
+        { name: 'Daftar siswa dengan jawaban essay', desc: 'List siswa essay' },
+        { name: 'Counter jawaban belum dinilai', desc: 'Jumlah belum dinilai' },
+        { name: 'Panduan perhitungan nilai essay', desc: 'Rumus nilai' },
+        { name: 'Per siswa: nama, NISN, kelas', desc: 'Info siswa' },
+        { name: 'Nilai sekarang (MC)', desc: 'Nilai saat ini' },
+        { name: 'Per soal: pertanyaan, bobot', desc: 'Detail soal' },
+        { name: 'Jawaban siswa', desc: 'Biru' },
+        { name: 'Kunci jawaban / rubrik', desc: 'Hijau' },
+        { name: 'Tombol "Benar (100)"', desc: 'Beri nilai penuh' },
+        { name: 'Tombol "Salah (0)"', desc: 'Beri nilai 0' },
+        { name: 'Input nilai parsial (0–100)', desc: 'Nilai manual' },
+        { name: 'Kontribusi poin per soal', desc: 'Kontribusi' },
+        { name: 'Ringkasan kontribusi essay', desc: 'Ringkasan' },
+        { name: 'Tombol "Simpan & Hitung Ulang"', desc: 'Simpan + hitung' },
+        { name: 'Auto-recalculate', desc: 'Hitung otomatis' },
+        { name: 'Warning nilai essay lebih rendah', desc: 'Peringatan' }
+      ]
+    },
+    {
+      id: 'admin-analisa-soal',
+      title: 'Admin — Analisa Soal',
+      emoji: '🔬',
+      color: '#7C4DFF',
+      bg: '#F3E8FF',
+      desc: 'Analisa tingkat kesulitan soal dan distribusi jawaban',
+      items: [
+        { name: 'Pilih ujian', desc: 'Pilih ujian' },
+        { name: 'Statistik: peserta, soal, mudah/sedang/sulit', desc: 'Statistik lengkap' },
+        { name: 'Per soal: pertanyaan, gambar', desc: 'Detail soal' },
+        { name: 'Tingkat kesulitan (% benar)', desc: 'Persentase benar' },
+        { name: 'Kategori: Mudah / Sedang / Sulit', desc: 'Kategori' },
+        { name: 'Distribusi jawaban per opsi (bar chart)', desc: 'Bar chart distribusi' },
+        { name: 'Highlight jawaban benar', desc: 'Hijau' },
+        { name: 'Counter siswa per opsi', desc: 'Jumlah siswa' },
+        { name: 'Persentase per opsi', desc: 'Persen' },
+        { name: 'Partisipasi siswa', desc: 'Untuk essay/B-S/matching' },
+        { name: 'Download Excel', desc: 'Export Excel' },
+        { name: 'Header statistik di Excel', desc: 'KOP Excel' },
+        { name: 'Legenda warna di Excel', desc: 'Legend warna' },
+        { name: 'Kategori warna', desc: 'Hijau/kuning/merah' }
+      ]
+    },
+    {
+      id: 'admin-analisa-jawaban',
+      title: 'Admin — Analisa Jawaban Siswa',
+      emoji: '🧮',
+      color: '#00ACC1',
+      bg: '#E0F7FA',
+      desc: 'Matrix jawaban siswa per soal dengan color coding',
+      items: [
+        { name: 'Pilih ujian', desc: 'Pilih ujian' },
+        { name: 'Filter kelas', desc: 'Filter kelas' },
+        { name: 'Statistik: siswa, soal, rata-rata, lulus', desc: 'Statistik' },
+        { name: 'Panduan membaca tabel', desc: 'Panduan' },
+        { name: 'Legenda warna', desc: 'Benar PG/Salah PG/B-S/Essay/Kosong' },
+        { name: 'Rumus perhitungan nilai', desc: 'PG, B-S, Essay' },
+        { name: 'Tabel matrix: siswa × soal', desc: 'Matrix' },
+        { name: 'Baris kunci jawaban', desc: 'Kunci' },
+        { name: 'Kolom S1–Sn', desc: 'Kolom soal' },
+        { name: 'Warna sel', desc: 'Hijau/merah/abu/biru' },
+        { name: 'Hover untuk baca essay', desc: 'Hover detail' },
+        { name: 'Kolom Benar (jumlah)', desc: 'Jumlah benar' },
+        { name: 'Kolom % (persentase)', desc: 'Persentase' },
+        { name: 'Footer: % benar per soal', desc: 'Footer' },
+        { name: 'Kategori warna', desc: 'Hijau ≥67 / kuning 34–66 / merah <34' },
+        { name: 'Download Excel', desc: 'Export' },
+        { name: 'Freeze pane di Excel', desc: 'Freeze' },
+        { name: 'Legend warna di Excel', desc: 'Legend' }
+      ]
+    },
+    {
+      id: 'admin-backup',
+      title: 'Admin — Backup & Restore',
+      emoji: '💾',
+      color: '#EA4335',
+      bg: '#FCE8E6',
+      desc: 'Backup data lengkap dan restore dari file',
+      items: [
+        { name: 'Backup Penuh (semua data)', desc: 'Backup lengkap' },
+        { name: 'Info backup terakhir', desc: 'Info terakhir' },
+        { name: 'Restore dari Backup (.json)', desc: 'Restore' },
+        { name: 'Validasi file backup', desc: 'Validasi' },
+        { name: 'Modal konfirmasi restore', desc: 'Ketik "SAYA YAKIN"' },
+        { name: 'Hapus Data Permanen (per modul)', desc: 'Hapus per modul' },
+        { name: 'Checkbox: Users, Tests, MasterData, Announcements, Schedules', desc: 'Pilih modul' },
+        { name: 'Modal konfirmasi hapus', desc: 'Ketik "HAPUS DATA"' },
+        { name: 'List data yang akan dihapus', desc: 'Preview' },
+        { name: 'Progress overlay saat restore', desc: 'Progress' },
+        { name: 'Auto-refresh setelah restore', desc: 'Auto refresh' },
+        { name: 'Mode demo: backup/restore terbatas', desc: 'Demo' }
+      ]
+    },
+    {
+      id: 'admin-konfig',
+      title: 'Admin — Konfigurasi',
+      emoji: '⚙️',
+      color: '#525252',
+      bg: '#F5F5F5',
+      desc: 'Konfigurasi lengkap aplikasi, tampilan, dan keamanan',
+      items: [
+        { name: 'Tab Tampilan & Umum', desc: 'Tab umum' },
+        { name: 'Tab Pengaturan Kartu', desc: 'Tab kartu' },
+        { name: 'Tab Metode Login', desc: 'Tab login' },
+        { name: 'Tab Keamanan Ujian', desc: 'Tab keamanan' },
+        { name: 'Tab Mode Online', desc: 'Tab online' },
+        { name: 'Tab Akun & Password', desc: 'Tab akun' },
+        { name: 'Input nama sekolah', desc: 'Terkunci jika lisensi aktif' },
+        { name: 'Input jenis kegiatan ujian', desc: 'Dropdown + custom' },
+        { name: 'Input tahun ajaran', desc: 'Tahun ajaran' },
+        { name: 'Input KOP header 1', desc: 'KOP 1' },
+        { name: 'Input KOP header 2', desc: 'KOP 2' },
+        { name: 'Input alamat sekolah', desc: 'Alamat' },
+        { name: 'Input kabupaten/kota', desc: 'Kab/kota' },
+        { name: 'Input kode wilayah', desc: 'Kode wilayah' },
+        { name: 'Input kode sekolah', desc: 'Kode sekolah' },
+        { name: 'Upload logo kiri', desc: 'Logo pemerintah' },
+        { name: 'Upload logo kanan', desc: 'Logo sekolah' },
+        { name: 'Input warna tema utama', desc: 'Color picker' },
+        { name: 'Input domain email sekolah', desc: 'Domain email' },
+        { name: 'Input IP server VHD', desc: 'IP server' },
+        { name: 'Pilih zona waktu', desc: 'WIB/WITA/WIT' },
+        { name: 'Pilih mode jaringan', desc: 'Offline/Online' },
+        { name: 'Toggle anti-cheat', desc: 'On/off anti-cheat' },
+        { name: 'Input batas pelanggaran', desc: 'Batas pelanggaran' },
+        { name: 'Toggle tampilkan nilai setelah ujian', desc: 'Show nilai' },
+        { name: 'Toggle login manual siswa', desc: 'On/off' },
+        { name: 'Toggle login QR siswa', desc: 'On/off' },
+        { name: 'Toggle login manual admin', desc: 'On/off' },
+        { name: 'Toggle login QR admin', desc: 'On/off' },
+        { name: 'Sinkronisasi password QR admin', desc: 'Sync QR' },
+        { name: 'Input tanggal terbit kartu', desc: 'Tanggal' },
+        { name: 'Input nama kepala sekolah', desc: 'Nama' },
+        { name: 'Input NIP kepala sekolah', desc: 'NIP' },
+        { name: 'Upload tanda tangan digital', desc: 'PNG' },
+        { name: 'Upload stempel sekolah', desc: 'PNG' },
+        { name: 'Cloudflare Tunnel (Mode Online)', desc: 'Tunnel' },
+        { name: 'Status tunnel', desc: 'Aktif/tidak' },
+        { name: 'Pilih mode: Quick / Named', desc: 'Pilih' },
+        { name: 'Input token Cloudflare', desc: 'Token' },
+        { name: 'Panduan Cloudflare Tunnel', desc: '6 langkah' },
+        { name: 'Copy URL tunnel', desc: 'Copy' },
+        { name: 'Tombol "Aktifkan Tunnel"', desc: 'Aktifkan' },
+        { name: 'Cek status tunnel (polling 3 detik)', desc: 'Polling' },
+        { name: 'Ubah password admin', desc: 'Ubah password' },
+        { name: 'Reset password siswa', desc: 'Via Google Sheet' }
+      ]
+    },
+    {
+      id: 'admin-token',
+      title: 'Admin — Token Ujian',
+      emoji: '🔑',
+      color: '#FBBC04',
+      bg: '#FEF7E0',
+      desc: 'Kelola token ujian dengan mode auto/manual',
+      items: [
+        { name: 'Token ujian aktif', desc: 'Display besar' },
+        { name: 'Status sistem token', desc: 'Aktif/Nonaktif' },
+        { name: 'Mode token: Auto Generate', desc: 'Auto' },
+        { name: 'Mode token: Manual', desc: 'Manual' },
+        { name: 'Input interval auto', desc: '1–120 menit' },
+        { name: 'Countdown perbarui token', desc: 'Countdown' },
+        { name: 'Generate token baru sekarang', desc: 'Generate' },
+        { name: 'Toggle sistem token aktif', desc: 'On/off' },
+        { name: 'Simpan pengaturan token', desc: 'Save' },
+        { name: 'Info cara kerja token global', desc: 'Info' },
+        { name: 'Read-only mode', desc: 'Untuk guru/pengawas' }
+      ]
+    },
+    {
+      id: 'admin-audit',
+      title: 'Admin — Audit Log',
+      emoji: '📝',
+      color: '#525252',
+      bg: '#F5F5F5',
+      desc: 'Log semua aktivitas sistem dengan filter',
+      items: [
+        { name: 'Statistik: total entri, ukuran tabel, log tertua', desc: 'Statistik' },
+        { name: 'Auto-cleanup info', desc: '02:00 WIB, 90 hari' },
+        { name: 'Hapus log manual', desc: 'Pilih batas hari' },
+        { name: 'Hapus semua log', desc: 'Hapus semua' },
+        { name: 'Modal konfirmasi hapus log', desc: 'Konfirmasi' },
+        { name: 'Filter pencarian', desc: 'Pengguna/deskripsi/tabel' },
+        { name: 'Filter aksi', desc: 'INSERT/UPDATE/DELETE/LOGIN/AUTO_SUBMIT' },
+        { name: 'Filter hari', desc: '7/14/30/90 hari' },
+        { name: 'Tabel log', desc: 'Waktu, user, aksi, tabel, deskripsi, detail' },
+        { name: 'Expand detail', desc: 'Before/after JSON' },
+        { name: 'Pagination', desc: 'Navigasi' },
+        { name: 'Refresh manual', desc: 'Refresh' }
+      ]
+    },
+    {
+      id: 'admin-lisensi',
+      title: 'Admin — Lisensi & Update',
+      emoji: '🎫',
+      color: '#7C4DFF',
+      bg: '#F3E8FF',
+      desc: 'Sistem lisensi, update OTA, dan hardware ID',
+      items: [
+        { name: 'Info lisensi (terlisensi/demo)', desc: 'Info' },
+        { name: 'Nama sekolah, NPSN, versi', desc: 'Detail' },
+        { name: 'Update Sistem', desc: 'Check queue' },
+        { name: 'Info versi terpasang', desc: 'Versi' },
+        { name: 'Status online/offline', desc: 'Status' },
+        { name: 'Daftar update tersedia', desc: 'Queue' },
+        { name: 'Status per update', desc: 'Pending/running/done/error/skipped' },
+        { name: 'Progress bar per update', desc: 'Progress' },
+        { name: 'SQL migration indicator', desc: 'Indicator' },
+        { name: 'Release notes per versi', desc: 'Notes' },
+        { name: 'Tombol "Install" per versi', desc: 'Install' },
+        { name: 'Tombol "Mulai Update (semua)"', desc: 'Update semua' },
+        { name: 'Tombol "Coba Ulang"', desc: 'Retry' },
+        { name: 'Tombol "Muat Ulang Halaman"', desc: 'Reload' },
+        { name: 'Auto-backup sebelum update', desc: 'Auto backup' },
+        { name: 'Riwayat Update (timeline)', desc: 'Timeline' },
+        { name: 'Status: completed/failed/started/rolled_back', desc: 'Status' },
+        { name: 'Info DB migration', desc: 'Info' },
+        { name: 'Tombol "Masukkan Lisensi Resmi"', desc: 'Aktivasi' },
+        { name: 'Reset Lisensi', desc: 'Reset' },
+        { name: 'Modal konfirmasi reset lisensi', desc: 'Konfirmasi' },
+        { name: 'Aktivasi lisensi via key', desc: 'Key' },
+        { name: 'Info HWID', desc: 'Hardware ID' },
+        { name: 'Modal "Akses Ditolak!"', desc: 'Lisensi ganda' },
+        { name: 'Cek update otomatis (30 menit)', desc: 'Auto check' },
+        { name: 'Notifikasi update di pojok kanan bawah', desc: 'Notif' },
+        { name: 'Progress download update', desc: 'Progress' },
+        { name: 'Auto-reload setelah update', desc: 'Auto reload' }
+      ]
+    },
+    {
+      id: 'chart',
+      title: 'Chart & Visualisasi',
+      emoji: '📈',
+      color: '#34A853',
+      bg: '#E6F4EA',
+      desc: 'Visualisasi data dengan chart dan progress bar',
+      items: [
+        { name: 'Bar chart distribusi siswa per jurusan', desc: 'Bar chart' },
+        { name: 'Donut chart kinerja kelulusan', desc: 'Donut' },
+        { name: 'Progress circle penyelesaian ujian', desc: 'Circle' },
+        { name: 'Donut chart rata-rata per mapel', desc: 'Donut per mapel' },
+        { name: 'Progress bar penyelesaian (%)', desc: 'Progress' },
+        { name: 'Progress bar per soal', desc: 'Per soal' },
+        { name: 'Progress bar import', desc: 'Import' }
+      ]
+    },
+    {
+      id: 'uiux',
+      title: 'UI / UX',
+      emoji: '🎨',
+      color: '#E91E63',
+      bg: '#FCE4EC',
+      desc: 'Pengalaman pengguna dengan animasi dan responsive design',
+      items: [
+        { name: 'Responsive (mobile & desktop)', desc: 'Adaptif' },
+        { name: 'Sidebar collapsible (mobile)', desc: 'Sidebar' },
+        { name: 'Header dengan profil user', desc: 'Header' },
+        { name: 'Footer copyright', desc: 'Footer' },
+        { name: 'Toast notification', desc: 'Sukses/error' },
+        { name: 'Modal konfirmasi', desc: 'Dengan ketik teks' },
+        { name: 'Loading spinner', desc: 'Spinner' },
+        { name: 'Skeleton loading', desc: 'Skeleton' },
+        { name: 'Empty state', desc: 'Belum ada data' },
+        { name: 'Error state', desc: 'Gagal memuat' },
+        { name: 'Dark mode', desc: 'Siswa' },
+        { name: 'Sepia mode', desc: 'Siswa' },
+        { name: 'Card hover effects', desc: 'Hover' },
+        { name: 'Gradient backgrounds', desc: 'Gradient' },
+        { name: 'Animation fade-in, scale-up, slide-in', desc: 'Animasi' },
+        { name: 'Blob animation', desc: 'Blob' },
+        { name: 'Progress stripes animation', desc: 'Stripes' },
+        { name: 'Hologram scan animation', desc: 'Hologram' },
+        { name: 'Font handwriting', desc: 'Berita acara' },
+        { name: 'Font serif', desc: 'Print dokumen' }
+      ]
+    },
+    {
+      id: 'teknis',
+      title: 'Fitur Teknis',
+      emoji: '🔧',
+      color: '#525252',
+      bg: '#F5F5F5',
+      desc: 'Backend, RPC, storage, dan integrasi Supabase',
+      items: [
+        { name: 'Supabase backend (DB, Auth, Storage, Realtime)', desc: 'Backend', tag: 'pro' },
+        { name: 'Realtime subscription (student_exam_sessions)', desc: 'Realtime' },
+        { name: 'Realtime subscription (users)', desc: 'Realtime' },
+        { name: 'Realtime subscription (admin actions)', desc: 'Realtime' },
+        { name: 'Auto-refresh token', desc: 'Auto' },
+        { name: 'Batch import (50 data/batch)', desc: 'Batch' },
+        { name: 'Retry otomatis (3x, exponential backoff)', desc: 'Retry' },
+        { name: 'Auto-compress gambar', desc: 'Compress' },
+        { name: 'Upload ke Supabase Storage', desc: 'question_assets, config_assets' },
+        { name: 'Hapus file storage saat hapus soal', desc: 'Cleanup' },
+        { name: 'RPC: create_exam_session, submit_exam, sync_time_left', desc: 'RPC' },
+        { name: 'RPC: admin_import_users, admin_import_questions', desc: 'RPC' },
+        { name: 'RPC: admin_upsert_user, admin_delete_user', desc: 'RPC' },
+        { name: 'RPC: admin_reset_device_login, reset_exam_session', desc: 'RPC' },
+        { name: 'RPC: admin_force_finish_exam, admin_force_finish_bulk', desc: 'RPC' },
+        { name: 'RPC: admin_suspend_student, admin_restore_data, admin_mass_delete', desc: 'RPC' },
+        { name: 'RPC: repair_teacher_logins, auto_upsert_classes, auto_upsert_majors', desc: 'RPC' },
+        { name: 'RPC: get_audit_log, cleanup_audit_log, log_update_started, log_update_finished', desc: 'RPC' },
+        { name: 'RPC: verify_client_license, sync_license_data', desc: 'RPC' },
+        { name: 'RPC: seed_demo_data, seed_demo_pengawas', desc: 'RPC' },
+        { name: 'RPC: admin_update_email_domain', desc: 'RPC' },
+        { name: 'RPC: db_keepalive', desc: 'RPC' },
+        { name: 'API: /api/updater/status', desc: 'API' },
+        { name: 'API: /api/updater/apply', desc: 'API' },
+        { name: 'API: /api/updater/tunnel-status', desc: 'API' },
+        { name: 'API: /api/updater/tunnel-start', desc: 'API' },
+        { name: 'API: /api/updater/tunnel-stop', desc: 'API' },
+        { name: 'API: /api/updater/patch-db', desc: 'API' },
+        { name: 'localStorage keys', desc: 'device_hwid, cbt_theme_pref, dll' },
+        { name: 'sessionStorage keys', desc: 'cbt_admin_session, dll' },
+        { name: 'Anti-cheat browser APIs', desc: 'Fullscreen, Visibility, Keyboard, Clipboard, getDisplayMedia' },
+        { name: 'PWA-ready (meta tags OG, Twitter Card)', desc: 'PWA' },
+        { name: 'Zero CDN (semua library di-bundle Vite)', desc: 'Zero CDN' }
+      ]
+    },
+    {
+      id: 'format-import',
+      title: 'Format Import Soal',
+      emoji: '📥',
+      color: '#1A73E8',
+      bg: '#E8F0FE',
+      desc: 'Import soal dari berbagai format file',
+      items: [
+        { name: 'Excel (.xlsx)', desc: 'Template universal' },
+        { name: 'Notepad (.txt)', desc: 'Template lengkap' },
+        { name: 'Word (.docx)', desc: 'Parsing tabel' },
+        { name: 'CSV (.csv)', desc: 'Via Google Sheet' },
+        { name: 'Google Sheet', desc: 'Sinkronisasi via URL' }
+      ]
+    },
+    {
+      id: 'format-export',
+      title: 'Format Export',
+      emoji: '📤',
+      color: '#34A853',
+      bg: '#E6F4EA',
+      desc: 'Export data ke berbagai format',
+      items: [
+        { name: 'PDF (html2pdf / print browser)', desc: 'PDF' },
+        { name: 'Excel (.xlsx)', desc: 'Analisa, rekap, absen, berita acara' },
+        { name: 'JSON (backup)', desc: 'Backup' },
+        { name: 'CSV (template import)', desc: 'Template' }
+      ]
+    },
+    {
+      id: 'fitur-cetak',
+      title: 'Fitur Cetak',
+      emoji: '🖨️',
+      color: '#525252',
+      bg: '#F5F5F5',
+      desc: 'Semua dokumen yang bisa dicetak',
+      items: [
+        { name: 'Kartu siswa (12 per halaman)', desc: 'Kartu siswa' },
+        { name: 'Kartu admin', desc: 'Kartu admin' },
+        { name: 'Kartu guru', desc: 'Kartu guru' },
+        { name: 'Kartu pengawas', desc: 'Kartu pengawas' },
+        { name: 'Daftar hadir peserta', desc: 'Daftar hadir' },
+        { name: 'Berita acara ujian', desc: 'Berita acara' },
+        { name: 'Rekap nilai', desc: 'Rekap' },
+        { name: 'Analisa soal', desc: 'Analisa' },
+        { name: 'Analisa jawaban', desc: 'Analisa' },
+        { name: 'Bank soal PDF', desc: 'Bank soal' }
+      ]
+    },
+    {
+      id: 'database',
+      title: 'Database Tables',
+      emoji: '🗄️',
+      color: '#7C4DFF',
+      bg: '#F3E8FF',
+      desc: 'Struktur database yang digunakan',
+      items: [
+        { name: 'users', desc: 'Data user' },
+        { name: 'tests', desc: 'Data ujian' },
+        { name: 'questions', desc: 'Data soal' },
+        { name: 'schedules', desc: 'Data jadwal' },
+        { name: 'student_exam_sessions', desc: 'Sesi ujian siswa' },
+        { name: 'student_answers', desc: 'Jawaban siswa' },
+        { name: 'master_classes', desc: 'Data kelas' },
+        { name: 'master_majors', desc: 'Data jurusan' },
+        { name: 'master_exam_types', desc: 'Data tipe ujian' },
+        { name: 'app_config', desc: 'Konfigurasi aplikasi' },
+        { name: 'announcements', desc: 'Pengumuman' },
+        { name: 'exam_token_settings', desc: 'Pengaturan token' },
+        { name: 'ruangan_ujian', desc: 'Data ruangan' },
+        { name: 'peserta_ruangan', desc: 'Peserta per ruangan' },
+        { name: 'pengawas_ruangan', desc: 'Pengawas per ruangan' },
+        { name: 'app_versions', desc: 'Versi aplikasi' },
+        { name: 'update_audit_log', desc: 'Log update' },
+        { name: 'audit_log', desc: 'Log audit' },
+        { name: 'Storage: question_assets', desc: 'Aset soal' },
+        { name: 'Storage: config_assets', desc: 'Aset konfigurasi' }
+      ]
+    },
+    {
+      id: 'demo',
+      title: 'Fitur Demo',
+      emoji: '🎭',
+      color: '#FBBC04',
+      bg: '#FEF7E0',
+      desc: 'Mode demo untuk uji coba tanpa lisensi',
+      items: [
+        { name: 'Mode demo (tanpa lisensi)', desc: 'Demo mode' },
+        { name: 'Kredensial demo siswa (32 akun)', desc: '32 akun' },
+        { name: 'Kredensial demo guru', desc: 'Demo guru' },
+        { name: 'Token demo', desc: 'Token demo' },
+        { name: 'Banner "MODE DEMO AKTIF"', desc: 'Banner' },
+        { name: 'Fitur terkunci di demo', desc: 'Locked' },
+        { name: 'List fitur tersedia di demo', desc: 'Available' },
+        { name: 'List fitur terkunci di demo', desc: 'Locked' }
+      ]
+    },
+    {
+      id: 'networking',
+      title: 'Fitur Networking',
+      emoji: '🌐',
+      color: '#00ACC1',
+      bg: '#E0F7FA',
+      desc: 'Koneksi jaringan dan tunneling',
+      items: [
+        { name: 'Mode offline', desc: 'Blokir internet' },
+        { name: 'Mode online', desc: 'LAN/WAN' },
+        { name: 'Cloudflare Tunnel (Quick)', desc: 'Quick tunnel' },
+        { name: 'Cloudflare Tunnel (Named)', desc: 'Named tunnel' },
+        { name: 'Zero Trust', desc: 'Zero trust' },
+        { name: 'URL publik tunnel', desc: 'URL' },
+        { name: 'Copy URL tunnel', desc: 'Copy' },
+        { name: 'Status tunnel real-time', desc: 'Status' },
+        { name: 'Systemd service cbt-updater', desc: 'Systemd' }
+      ]
+    }
+  ];
+
+  /* ============================================================
+     HELPERS
+     ============================================================ */
+  const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const bulletColors = ['primary', 'green', 'purple', 'yellow', 'cyan', 'red', 'pink', 'orange'];
+
+  const iconCheck = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  const iconChev = '<svg class="cat-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+
+  const tagLabel = { new: 'Baru', hot: 'Hot', pro: 'Pro' };
+
+  /* ============================================================
+     RENDER CATEGORIES
+     ============================================================ */
+  const categoriesContainer = document.getElementById('categoriesContainer');
+  const categoryChips = document.getElementById('categoryChips');
+  const searchInput = document.getElementById('searchInput');
+  const clearSearch = document.getElementById('clearSearch');
+  const visibleFeatures = document.getElementById('visibleFeatures');
+  const totalFeatures = document.getElementById('totalFeatures');
+  const emptyState = document.getElementById('emptyState');
+
+  let totalCount = 0;
+  DATA.forEach((cat) => { totalCount += cat.items.length; });
+  document.getElementById('statCategories').textContent = DATA.length;
+  document.getElementById('statFeatures').textContent = totalCount;
+  document.getElementById('footerTotal').textContent = totalCount;
+  totalFeatures.textContent = totalCount;
+
+  /* Render category chips */
+  let chipsHTML = '<button class="cat-chip active" data-filter="all"><span class="emoji">📋</span>Semua<span class="count">' + totalCount + '</span></button>';
+  DATA.forEach((cat) => {
+    chipsHTML += '<button class="cat-chip" data-filter="' + cat.id + '"><span class="emoji">' + cat.emoji + '</span>' + cat.title + '<span class="count">' + cat.items.length + '</span></button>';
+  });
+  categoryChips.innerHTML = chipsHTML;
+
+  /* Render categories */
+  let html = '';
+  DATA.forEach((cat, ci) => {
+    const itemHTML = cat.items.map((item, ii) => {
+      const bColor = bulletColors[(ci + ii) % bulletColors.length];
+      const tag = item.tag ? '<span class="feature-tag ' + item.tag + '">' + (tagLabel[item.tag] || item.tag) + '</span>' : '';
+      const desc = item.desc ? '<div class="feature-desc">' + item.desc + '</div>' : '';
+      return (
+        '<div class="feature-item" data-search="' + (item.name + ' ' + (item.desc || '')).toLowerCase().replace(/"/g, '&quot;') + '">' +
+          '<div class="feature-bullet ' + bColor + '">' + iconCheck + '</div>' +
+          '<div class="feature-content">' +
+            '<div class="feature-name">' + item.name + tag + '</div>' +
+            desc +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+
+    html +=
+      '<div class="category-block open" data-cat="' + cat.id + '" id="cat-' + cat.id + '" style="--cat-color:' + cat.color + ';--cat-bg:' + cat.bg + '">' +
+        '<div class="cat-header" role="button" tabindex="0" aria-expanded="true">' +
+          '<div class="cat-icon">' + cat.emoji + '</div>' +
+          '<div class="cat-title-wrap">' +
+            '<div class="cat-title">' + cat.title + '</div>' +
+            '<div class="cat-desc">' + cat.desc + '</div>' +
+          '</div>' +
+          '<div class="cat-meta">' +
+            '<span class="cat-count">' + cat.items.length + '</span>' +
+            iconChev +
+          '</div>' +
+        '</div>' +
+        '<div class="cat-body">' +
+          '<div class="cat-body-inner">' +
+            '<div class="feature-list two-col">' + itemHTML + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  });
+  categoriesContainer.innerHTML = html;
+
+  /* ============================================================
+     ACCORDION TOGGLE
+     ============================================================ */
+  document.querySelectorAll('.cat-header').forEach((header) => {
+    const toggle = () => {
+      const block = header.closest('.category-block');
+      const isOpen = block.classList.toggle('open');
+      header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    };
+    header.addEventListener('click', toggle);
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+
+  /* Expand / collapse all */
+  document.getElementById('expandAllBtn').addEventListener('click', () => {
+    document.querySelectorAll('.category-block').forEach((b) => {
+      if (!b.classList.contains('hidden')) b.classList.add('open');
+    });
+  });
+  document.getElementById('collapseAllBtn').addEventListener('click', () => {
+    document.querySelectorAll('.category-block').forEach((b) => b.classList.remove('open'));
+  });
+
+  /* ============================================================
+     FILTER + SEARCH
+     ============================================================ */
+  let activeFilter = 'all';
+  let searchQuery = '';
+
+  const applyFilter = () => {
+    const q = searchQuery.toLowerCase().trim();
+    let visible = 0;
+
+    DATA.forEach((cat) => {
+      const block = document.querySelector('.category-block[data-cat="' + cat.id + '"]');
+      if (!block) return;
+
+      const matchCat = activeFilter === 'all' || activeFilter === cat.id;
+
+      /* Per item match */
+      let catVisible = 0;
+      block.querySelectorAll('.feature-item').forEach((item) => {
+        const text = item.getAttribute('data-search') || '';
+        const match = !q || text.indexOf(q) !== -1;
+        item.style.display = match ? '' : 'none';
+        if (match) catVisible++;
+      });
+
+      if (matchCat && catVisible > 0) {
+        block.classList.remove('hidden');
+        block.classList.add('open');
+        visible += catVisible;
+      } else {
+        block.classList.add('hidden');
+      }
+    });
+
+    visibleFeatures.textContent = visible;
+    emptyState.classList.toggle('show', visible === 0);
+  };
+
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value || '';
+    clearSearch.classList.toggle('show', !!searchQuery);
+    applyFilter();
+  });
+  clearSearch.addEventListener('click', () => {
+    searchInput.value = '';
+    searchQuery = '';
+    clearSearch.classList.remove('show');
+    applyFilter();
+  });
+
+  /* Chips */
+  categoryChips.addEventListener('click', (e) => {
+    const chip = e.target.closest('.cat-chip');
+    if (!chip) return;
+    categoryChips.querySelectorAll('.cat-chip').forEach((c) => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.getAttribute('data-filter') || 'all';
+    applyFilter();
+  });
+
+  /* Reset */
+  const resetFilter = () => {
+    activeFilter = 'all';
+    searchQuery = '';
+    searchInput.value = '';
+    clearSearch.classList.remove('show');
+    categoryChips.querySelectorAll('.cat-chip').forEach((c) => {
+      c.classList.toggle('active', c.getAttribute('data-filter') === 'all');
+    });
+    document.querySelectorAll('.category-block').forEach((b) => {
+      b.classList.remove('hidden');
+      b.classList.add('open');
+    });
+    document.querySelectorAll('.feature-item').forEach((i) => i.style.display = '');
+    visibleFeatures.textContent = totalCount;
+    emptyState.classList.remove('show');
+  };
+  document.getElementById('resetFilter').addEventListener('click', (e) => {
+    e.preventDefault();
+    resetFilter();
+  });
+  document.getElementById('emptyReset').addEventListener('click', resetFilter);
+
+  /* Init */
+  visibleFeatures.textContent = totalCount;
+
+  /* ============================================================
+     NAVBAR SCROLL + FAB
+     ============================================================ */
+  const navbar = document.getElementById('navbar');
+  const fab = document.getElementById('fabTop');
+  const onScroll = () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 8);
+    fab.classList.toggle('show', window.scrollY > 400);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  fab.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  document.getElementById('topBtn').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* Print */
+  document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+  /* Footer date */
+  const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const now = new Date();
+  document.getElementById('footerDate').textContent = 'Diperbarui ' + now.getDate() + ' ' + bulan[now.getMonth()] + ' ' + now.getFullYear();
+
+})();
+</script>
+
+</body>
+</html>
