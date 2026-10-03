@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link id="dynamic-favicon" rel="icon" type="image/png" href="https://res.cloudinary.com/dt1nrarpq/image/upload/v1764669751/KEMENDIKBUD_dzld50.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title id="page-title">CBT School Online</title>
+    <meta name="title" id="meta-title" content="CBT School Online">
+    <meta name="description" content="Sistem Ujian Sekolah Terintegrasi Berbasis Komputer & Smartphone. Aman, Cepat, dan Terpercaya." />
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" id="og-url" content="" />
+    <meta property="og:title" id="og-title" content="CBT School Online" />
+    <meta property="og:description" content="Sistem Ujian Sekolah Berbasis Komputer. Aman, Cepat, dan Terpercaya." />
+    <meta property="og:image" id="og-image" content="" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:site_name" id="og-site-name" content="CBT School Online" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" id="tw-title" content="CBT School Online" />
+    <meta name="twitter:description" content="Sistem Ujian Sekolah Berbasis Komputer. Aman, Cepat, dan Terpercaya." />
+    <meta name="twitter:image" id="tw-image" content="" />
+
+    <!--
+      ============================================================
+      VHD OFFLINE EDITION — ZERO CDN
+      
+      Semua library sudah di-bundle oleh Vite (npm):
+      ✅ Tailwind CSS    → via PostCSS (index.css)
+      ✅ html5-qrcode    → via npm import di QRScannerModal.tsx
+      ✅ html2pdf.js     → via npm import di ExamCards & PrintDocuments
+      ✅ React           → via npm
+      ✅ Supabase        → via npm
+      
+      Tidak ada CDN external = 100% offline setelah build
+      ============================================================
+    -->
+
+    <style>
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont,
+                     'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      }
+      .font-serif-print {
+        font-family: 'Times New Roman', Times, serif;
+      }
+      
+      @keyframes fade-in {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      @keyframes scale-up {
+        0% { transform: scale(0.95); opacity: 0.8; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      .animate-fade-in {
+        animation: fade-in 0.2s ease-out forwards;
+      }
+      .animate-scale-up {
+        animation: scale-up 0.2s ease-out forwards;
+      }
+      @keyframes slide-in-right {
+        from { transform: translateX(100%); opacity: 0; }
+        to   { transform: translateX(0);    opacity: 1; }
+      }
+      .animate-slide-in-right {
+        animation: slide-in-right 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      }
+      
+      @media print {
+        @page {
+          margin: 0 !important;
+          size: auto;
+        }
+        html, body {
+          width: 100%;
+          height: 100%;
+          margin: 0 !important;
+          padding: 0 !important;
+          background-color: white !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          color-adjust: exact !important;
+        }
+        body > *:not(.print-container-root) {
+          display: none !important;
+        }
+        .print-container-root {
+          display: block !important;
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          height: auto !important;
+          z-index: 9999 !important;
+          background-color: white !important;
+        }
+        .print-container-root * {
+          visibility: visible !important;
+        }
+        .no-print, header, aside, footer, nav, button, .admin-sidebar {
+          display: none !important;
+        }
+        .page-break {
+          page-break-before: always !important;
+          -moz-column-break-before: page !important;
+               break-before: page !important;
+        }
+        tr, td, th, .card-item {
+          page-break-inside: avoid !important;
+          -moz-column-break-inside: avoid !important;
+               break-inside: avoid !important;
+        }
+      }
+      
+      @keyframes progress {
+        0%   { width: 0%;   left: 0%;   }
+        50%  { width: 50%;  left: 25%;  }
+        100% { width: 100%; left: 100%; }
+      }
+      .animate-progress {
+        position: absolute;
+        animation: progress 2s ease-in-out infinite;
+      }
+      .font-handwriting { font-family: 'Courier New', Courier, monospace; }
+    </style>
+    <script type="module" crossorigin src="/assets/index-BQzd8rTc.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-icons-DuTDrIin.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-react-jOlSsrrq.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-supabase-CNtoDnIX.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-docs-DpeikAQO.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-Cc2BBoyH.css">
+  </head>
+  <body class="bg-gray-50">
+    <div id="root"></div>
+  </body>
+</html>
