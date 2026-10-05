@@ -4,7 +4,7 @@
 
 <br/>
 
-**🚀 Central Platform / Digital Ecosystem untuk Organisasi Ekstrakurikuler Modern**
+**Central Platform / Digital Ecosystem untuk Organisasi Ekstrakurikuler Modern**
 
 Website profil + dashboard organisasi + manajemen anggota + project management + learning platform + documentation center — **semua dalam satu ekosistem.**
 
