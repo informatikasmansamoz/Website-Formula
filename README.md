@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1A73E8,50:4285F4,100:34A853&height=200&section=header&text=FORMULA&fontSize=80&fontAlignY=38&desc=Informatika%20%26%20Multimedia%20SMAN%201%20Mojosari&descAlignY=58&descSize=18&fontColor=ffffff" width="100%"/>
+<img src="formula.png" width="100%"/>
 
 <br/>
 
