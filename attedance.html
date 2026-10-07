@@ -1,0 +1,2219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#1A73E8" />
+<title>FORMULA Attendance — Sistem Registrasi & Absensi</title>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A73E8'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='56' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --color-primary: #1A73E8;
+  --color-primary-dark: #1557B0;
+  --color-primary-light: #E8F0FE;
+  --color-primary-soft: #F0F6FF;
+  --color-secondary: #34A853;
+  --color-secondary-dark: #1E7E34;
+  --color-secondary-light: #E6F4EA;
+  --color-accent: #EA4335;
+  --color-accent-dark: #C5221F;
+  --color-accent-light: #FCE8E6;
+  --color-warning: #FBBC04;
+  --color-warning-dark: #B8860B;
+  --color-warning-light: #FEF7E0;
+  --color-purple: #7C4DFF;
+  --color-purple-light: #F3E8FF;
+  --color-dark: #202124;
+  --color-gray-700: #404040;
+  --color-gray-600: #525252;
+  --color-gray-500: #737373;
+  --color-gray-400: #A3A3A3;
+  --color-gray-300: #D4D4D4;
+  --color-gray-200: #E5E5E5;
+  --color-gray-100: #F5F5F5;
+  --color-light: #F8F9FA;
+  --text-primary: #202124;
+  --text-secondary: #525252;
+  --text-muted: #737373;
+  --bg-body: #F8F9FA;
+  --bg-overlay: rgba(15,20,30,0.6);
+  --border-color: #E5E5E5;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.10);
+  --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
+  --shadow-primary: 0 8px 24px rgba(26,115,232,0.35);
+  --shadow-success: 0 8px 24px rgba(52,168,83,0.35);
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --transition-fast: 150ms cubic-bezier(0.4,0,0.2,1);
+  --transition-base: 220ms cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-primary);
+  background: var(--bg-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; height: auto; }
+a { color: var(--color-primary); text-decoration: none; }
+button { font-family: inherit; font-size: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; }
+input, select, textarea { font-family: inherit; font-size: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: 4px; }
+body.modal-open { overflow: hidden; }
+
+.container { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: 20px; }
+.hidden { display: none !important; }
+.text-center { text-align: center; }
+.mono { font-family: var(--font-mono); }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1; }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; }
+.mt-2 { margin-top: 8px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
+.mb-2 { margin-bottom: 8px; } .mb-4 { margin-bottom: 16px; }
+
+/* ICON SYSTEM — SVG via mask-image */
+.icon {
+  display: inline-block;
+  width: 18px; height: 18px;
+  background-color: currentColor;
+  -webkit-mask-size: contain; mask-size: contain;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center; mask-position: center;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.icon-sm { width: 14px; height: 14px; }
+.icon-lg { width: 22px; height: 22px; }
+.icon-xl { width: 28px; height: 28px; }
+
+.icon-check { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); }
+.icon-x { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E"); }
+.icon-search { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E"); }
+.icon-logout { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4'/%3E%3Cpolyline points='16 17 21 12 16 7'/%3E%3Cline x1='21' y1='12' x2='9' y2='12'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4'/%3E%3Cpolyline points='16 17 21 12 16 7'/%3E%3Cline x1='21' y1='12' x2='9' y2='12'/%3E%3C/svg%3E"); }
+.icon-print { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 6 2 18 2 18 9'/%3E%3Cpath d='M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2'/%3E%3Crect x='6' y='14' width='12' height='8'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 6 2 18 2 18 9'/%3E%3Cpath d='M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2'/%3E%3Crect x='6' y='14' width='12' height='8'/%3E%3C/svg%3E"); }
+.icon-user { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E"); }
+.icon-users { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E"); }
+.icon-clock { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='12 6 12 12 16 14'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='12 6 12 12 16 14'/%3E%3C/svg%3E"); }
+.icon-map-pin { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E"); }
+.icon-package { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='16.5' y1='9.4' x2='7.5' y2='4.21'/%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='16.5' y1='9.4' x2='7.5' y2='4.21'/%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'/%3E%3C/svg%3E"); }
+.icon-settings { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E"); }
+.icon-lock { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='11' width='18' height='11' rx='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='11' width='18' height='11' rx='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E"); }
+.icon-info { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='16' x2='12' y2='12'/%3E%3Cline x1='12' y1='8' x2='12.01' y2='8'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='16' x2='12' y2='12'/%3E%3Cline x1='12' y1='8' x2='12.01' y2='8'/%3E%3C/svg%3E"); }
+.icon-alert { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'/%3E%3Cline x1='12' y1='9' x2='12' y2='13'/%3E%3Cline x1='12' y1='17' x2='12.01' y2='17'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'/%3E%3Cline x1='12' y1='9' x2='12' y2='13'/%3E%3Cline x1='12' y1='17' x2='12.01' y2='17'/%3E%3C/svg%3E"); }
+.icon-fingerprint { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4'/%3E%3Cpath d='M5 19.5C5.5 18 6 15 6 12c0-.7.12-1.37.34-2'/%3E%3Cpath d='M17.29 21.02c.12-.6.43-2.3.5-3.02'/%3E%3Cpath d='M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4'/%3E%3Cpath d='M8.65 22c.21-.66.45-1.32.57-2'/%3E%3Cpath d='M14 13.12c0 2.38 0 6.38-1 8.88'/%3E%3Cpath d='M2 16h.01'/%3E%3Cpath d='M21.8 16c.2-2 .131-5.354 0-6'/%3E%3Cpath d='M9 6.8a6 6 0 0 1 9 5.2v2'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4'/%3E%3Cpath d='M5 19.5C5.5 18 6 15 6 12c0-.7.12-1.37.34-2'/%3E%3Cpath d='M17.29 21.02c.12-.6.43-2.3.5-3.02'/%3E%3Cpath d='M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4'/%3E%3Cpath d='M8.65 22c.21-.66.45-1.32.57-2'/%3E%3Cpath d='M14 13.12c0 2.38 0 6.38-1 8.88'/%3E%3Cpath d='M2 16h.01'/%3E%3Cpath d='M21.8 16c.2-2 .131-5.354 0-6'/%3E%3Cpath d='M9 6.8a6 6 0 0 1 9 5.2v2'/%3E%3C/svg%3E"); }
+.icon-qr { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='5' height='5'/%3E%3Crect x='16' y='3' width='5' height='5'/%3E%3Crect x='3' y='16' width='5' height='5'/%3E%3Cpath d='M21 16h-3a2 2 0 0 0-2 2v3'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='5' height='5'/%3E%3Crect x='16' y='3' width='5' height='5'/%3E%3Crect x='3' y='16' width='5' height='5'/%3E%3Cpath d='M21 16h-3a2 2 0 0 0-2 2v3'/%3E%3C/svg%3E"); }
+.icon-play { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpolygon points='5 3 19 12 5 21'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpolygon points='5 3 19 12 5 21'/%3E%3C/svg%3E"); }
+.icon-pause { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Crect x='6' y='4' width='4' height='16'/%3E%3Crect x='14' y='4' width='4' height='16'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Crect x='6' y='4' width='4' height='16'/%3E%3Crect x='14' y='4' width='4' height='16'/%3E%3C/svg%3E"); }
+.icon-stop { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Crect x='5' y='5' width='14' height='14'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Crect x='5' y='5' width='14' height='14'/%3E%3C/svg%3E"); }
+.icon-save { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z'/%3E%3Cpolyline points='17 21 17 13 7 13 7 21'/%3E%3Cpolyline points='7 3 7 8 15 8'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z'/%3E%3Cpolyline points='17 21 17 13 7 13 7 21'/%3E%3Cpolyline points='7 3 7 8 15 8'/%3E%3C/svg%3E"); }
+.icon-pie-chart { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.21 15.89A10 10 0 1 1 8 2.83'/%3E%3Cpath d='M22 12A10 10 0 0 0 12 2v10z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.21 15.89A10 10 0 1 1 8 2.83'/%3E%3Cpath d='M22 12A10 10 0 0 0 12 2v10z'/%3E%3C/svg%3E"); }
+.icon-grid { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='7'/%3E%3Crect x='14' y='3' width='7' height='7'/%3E%3Crect x='14' y='14' width='7' height='7'/%3E%3Crect x='3' y='14' width='7' height='7'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='7'/%3E%3Crect x='14' y='3' width='7' height='7'/%3E%3Crect x='14' y='14' width='7' height='7'/%3E%3Crect x='3' y='14' width='7' height='7'/%3E%3C/svg%3E"); }
+
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 11px 20px;
+  font-family: var(--font-heading); font-size: 14px; font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap; min-height: 44px;
+  user-select: none; text-decoration: none;
+}
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+.btn-primary { background: var(--color-primary); color: white; }
+.btn-primary:hover:not(:disabled) { background: var(--color-primary-dark); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.btn-secondary { background: var(--color-secondary); color: white; }
+.btn-secondary:hover:not(:disabled) { background: var(--color-secondary-dark); }
+.btn-danger { background: var(--color-accent); color: white; }
+.btn-danger:hover:not(:disabled) { background: var(--color-accent-dark); }
+.btn-outline { background: white; color: var(--text-primary); border-color: var(--border-color); }
+.btn-outline:hover:not(:disabled) { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-soft); }
+.btn-ghost { background: transparent; color: var(--text-secondary); }
+.btn-ghost:hover:not(:disabled) { background: var(--color-gray-100); color: var(--text-primary); }
+.btn-sm { padding: 7px 14px; font-size: 12.5px; min-height: 36px; border-radius: var(--radius-sm); }
+.btn-lg { padding: 14px 28px; font-size: 15px; min-height: 52px; border-radius: var(--radius-lg); }
+.btn-block { width: 100%; }
+
+/* BADGES */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px;
+  font-size: 11px; font-weight: 700;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.badge-primary { background: var(--color-primary-light); color: var(--color-primary); }
+.badge-success { background: var(--color-secondary-light); color: var(--color-secondary-dark); }
+.badge-warning { background: var(--color-warning-light); color: var(--color-warning-dark); }
+.badge-danger  { background: var(--color-accent-light); color: var(--color-accent-dark); }
+
+/* CARDS */
+.card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.card + .card { margin-top: 16px; }
+.card-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.card-title {
+  font-size: 16px; font-weight: 700;
+  display: flex; align-items: center; gap: 8px;
+}
+.card-title .icon { color: var(--color-primary); }
+.card-sub {
+  font-size: 14px; color: var(--text-muted);
+  margin-top: 2px; line-height: 1.55;
+}
+
+/* FORM */
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block; font-size: 13px; font-weight: 600;
+  color: var(--text-primary); margin-bottom: 6px;
+}
+.form-control {
+  width: 100%; padding: 11px 14px;
+  font-size: 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: white; color: var(--text-primary);
+  transition: all var(--transition-fast);
+  outline: none; min-height: 44px;
+}
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(26,115,232,0.10);
+}
+.form-hint {
+  font-size: 11.5px; color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* STATS */
+.stats-grid {
+  display: grid; gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 20px;
+}
+@media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+.stat {
+  background: white; border: 1px solid var(--border-color);
+  border-radius: var(--radius-md); padding: 16px;
+  transition: all var(--transition-base);
+  position: relative; overflow: hidden;
+}
+.stat::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--color-primary); opacity: 0;
+  transition: opacity var(--transition-base);
+}
+.stat:hover::before { opacity: 1; }
+.stat:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.stat[data-color="green"]::before  { background: var(--color-secondary); }
+.stat[data-color="yellow"]::before { background: var(--color-warning); }
+.stat[data-color="purple"]::before { background: var(--color-purple); }
+.stat-icon {
+  width: 40px; height: 40px; border-radius: var(--radius-sm);
+  display: grid; place-items: center;
+  background: var(--color-primary-light); color: var(--color-primary);
+  margin-bottom: 12px;
+}
+.stat-icon .icon { width: 20px; height: 20px; }
+.stat[data-color="green"] .stat-icon  { background: var(--color-secondary-light); color: var(--color-secondary-dark); }
+.stat[data-color="yellow"] .stat-icon { background: var(--color-warning-light); color: var(--color-warning-dark); }
+.stat[data-color="purple"] .stat-icon { background: var(--color-purple-light); color: var(--color-purple); }
+.stat-value {
+  font-family: var(--font-heading); font-size: 26px; font-weight: 800;
+  line-height: 1; color: var(--text-primary); margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 11.5px; color: var(--text-muted); font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+
+/* TABS */
+.tabs {
+  display: flex; gap: 4px; padding: 4px;
+  background: var(--color-gray-100);
+  border-radius: var(--radius-full);
+  margin-bottom: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: 1;
+  padding: 9px 16px;
+  font-family: var(--font-heading);
+  font-size: 13px; font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  min-height: 38px;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px;
+}
+.tab:hover:not(.active) { color: var(--text-primary); }
+.tab.active {
+  background: white; color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+.tab .icon { width: 15px; height: 15px; }
+.tab .count {
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 999px;
+  background: var(--color-gray-200); color: var(--text-muted);
+  line-height: 1.4;
+}
+.tab.active .count {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeUp 0.35s ease-out; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* TOOLBAR */
+.toolbar {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 16px; align-items: center;
+}
+.toolbar .search { flex: 1; min-width: 200px; position: relative; }
+.toolbar .search input {
+  width: 100%;
+  padding: 9px 14px 9px 36px;
+  font-size: 13.5px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-full);
+  outline: none; transition: all var(--transition-fast);
+  background: white;
+}
+.toolbar .search input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(26,115,232,0.10);
+}
+.toolbar .search .icon-search {
+  position: absolute; left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  width: 16px; height: 16px;
+}
+
+/* TABLE */
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: white;
+}
+.table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px; min-width: 720px;
+}
+.table th {
+  text-align: left; padding: 12px 14px;
+  background: var(--color-light);
+  font-weight: 700; font-size: 11.5px;
+  color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+.table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+.table tr:last-child td { border-bottom: none; }
+.table tbody tr:hover td { background: var(--color-light); }
+.table .mono { font-family: var(--font-mono); font-size: 12px; }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed; inset: 0;
+  z-index: 900;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+  display: grid; place-items: center;
+  padding: 20px; overflow-y: auto;
+}
+.modal-overlay.open { opacity: 1; visibility: visible; }
+.modal {
+  background: white;
+  border-radius: var(--radius-xl);
+  width: 100%; max-width: 520px;
+  max-height: calc(100vh - 40px);
+  display: flex; flex-direction: column; overflow: hidden;
+  transform: scale(0.96) translateY(10px);
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-xl);
+}
+.modal-overlay.open .modal { transform: scale(1) translateY(0); }
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.modal-header h3 { font-size: 16px; font-weight: 700; }
+.modal-close {
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  display: grid; place-items: center;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+.modal-close:hover { background: var(--color-gray-100); color: var(--text-primary); }
+.modal-body {
+  padding: 24px; overflow-y: auto;
+  font-size: 15px; color: var(--text-secondary);
+  line-height: 1.7;
+}
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  display: flex; justify-content: flex-end;
+  gap: 8px; flex-wrap: wrap;
+}
+
+/* TOAST */
+.toast-wrap {
+  position: fixed; top: 16px; right: 16px;
+  z-index: 1000;
+  display: flex; flex-direction: column;
+  gap: 8px;
+  max-width: calc(100vw - 32px);
+  pointer-events: none;
+}
+.toast {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 16px;
+  background: var(--color-dark); color: white;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  box-shadow: var(--shadow-lg);
+  min-width: 260px; max-width: 380px;
+  animation: toastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: auto;
+  line-height: 1.5;
+}
+.toast.removing { animation: toastOut 0.25s ease forwards; }
+.toast .icon { flex-shrink: 0; margin-top: 2px; }
+.toast-body { flex: 1; }
+.toast-success { background: var(--color-secondary); }
+.toast-error   { background: var(--color-accent); }
+.toast-warning { background: var(--color-warning-dark); }
+.toast-info    { background: var(--color-primary); }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(30px) scale(0.95); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes toastOut {
+  to { opacity: 0; transform: translateX(30px); }
+}
+
+/* EMPTY STATE */
+.empty-state { text-align: center; padding: 56px 24px; }
+.empty-state .empty-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--color-gray-100); color: var(--text-muted);
+  display: grid; place-items: center;
+  margin: 0 auto 16px;
+}
+.empty-state .empty-icon .icon { width: 28px; height: 28px; }
+.empty-state h3 { font-size: 16px; margin-bottom: 6px; color: var(--text-primary); }
+.empty-state p { font-size: 14px; color: var(--text-muted); max-width: 360px; margin: 0 auto; line-height: 1.6; }
+
+/* SPINNER */
+.spinner {
+  width: 16px; height: 16px;
+  border: 2.5px solid rgba(255,255,255,0.35);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block; flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-bar {
+  width: 200px; height: 4px;
+  background: var(--color-gray-200);
+  border-radius: 999px;
+  margin: 0 auto; overflow: hidden;
+}
+.loading-bar > span {
+  display: block; height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--color-primary), #4285F4);
+  border-radius: 999px;
+  animation: loadProgress 1.5s ease-in-out infinite;
+}
+@keyframes loadProgress {
+  0%   { width: 0%; }
+  50%  { width: 70%; }
+  100% { width: 100%; }
+}
+
+/* SCREENS */
+.screen {
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  padding: 20px; overflow-y: auto;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 10;
+}
+.screen.active { opacity: 1; visibility: visible; z-index: 20; }
+.screen-inner { width: 100%; max-width: 480px; }
+
+#screenLoading {
+  background: linear-gradient(135deg, #F8FAFF 0%, #FFFFFF 50%, #F0F7FF 100%);
+}
+.loading-box { text-align: center; }
+.loading-logo {
+  width: 72px; height: 72px; border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  color: white;
+  display: grid; place-items: center;
+  font-family: var(--font-heading);
+  font-weight: 800; font-size: 32px;
+  margin: 0 auto 20px;
+  box-shadow: var(--shadow-primary);
+  animation: pulseLogo 2s ease-in-out infinite;
+}
+@keyframes pulseLogo {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+.loading-box h2 { font-size: 18px; margin-bottom: 8px; }
+.loading-box p { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+
+#screenLogin {
+  background: linear-gradient(135deg, #F8FAFF 0%, #FFFFFF 100%);
+}
+.login-card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 40px 32px;
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+}
+.login-logo {
+  width: 64px; height: 64px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  color: white;
+  display: grid; place-items: center;
+  font-family: var(--font-heading);
+  font-weight: 800; font-size: 28px;
+  margin: 0 auto 20px;
+  box-shadow: var(--shadow-primary);
+}
+.login-card h1 { font-size: 24px; margin-bottom: 6px; }
+.login-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+.login-notice {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 16px;
+  background: var(--color-primary-light);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: var(--color-primary-dark);
+  margin-bottom: 20px;
+  line-height: 1.55;
+  text-align: left;
+}
+.login-notice .icon { flex-shrink: 0; margin-top: 2px; }
+.login-notice strong { font-family: var(--font-mono); font-size: 12.5px; }
+
+.error-box {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 16px;
+  background: var(--color-accent-light);
+  border: 1px solid #F5C6C2;
+  border-radius: var(--radius-md);
+  color: var(--color-accent-dark);
+  font-size: 13px;
+  margin-top: 16px;
+  text-align: left;
+  line-height: 1.55;
+}
+.error-box .icon { flex-shrink: 0; margin-top: 2px; }
+.login-footer {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 28px;
+}
+
+/* APP SHELL */
+#app { display: none; min-height: 100vh; flex-direction: column; }
+#app.active { display: flex; }
+
+.app-header {
+  position: sticky; top: 0;
+  z-index: 300;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border-color);
+}
+.app-header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px; gap: 16px;
+}
+.app-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 800; font-size: 16px;
+}
+.app-brand-mark {
+  width: 34px; height: 34px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  color: white;
+  display: grid; place-items: center;
+  font-size: 15px; font-weight: 800;
+}
+.app-brand-text {
+  display: flex; flex-direction: column;
+  line-height: 1.1;
+}
+.app-brand-text small {
+  font-family: var(--font-body);
+  font-size: 9.5px; font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.app-user { display: flex; align-items: center; gap: 10px; }
+.app-user-info {
+  display: none; text-align: right;
+  line-height: 1.25;
+}
+@media (min-width: 640px) { .app-user-info { display: block; } }
+.app-user-info .name {
+  font-size: 13px; font-weight: 700;
+}
+.app-user-info .email {
+  font-size: 11px; color: var(--text-muted);
+}
+.app-user-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  color: white;
+  display: grid; place-items: center;
+  font-size: 13px; font-weight: 700;
+  flex-shrink: 0;
+}
+.app-user-btn {
+  width: 38px; height: 38px;
+  border-radius: var(--radius-sm);
+  display: grid; place-items: center;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+.app-user-btn:hover { background: var(--color-gray-100); color: var(--text-primary); }
+
+.app-main { flex: 1; padding: 24px 0 60px; }
+
+/* CHECK-IN CTA */
+.cta-checkin { text-align: center; padding: 48px 24px; }
+.cta-checkin-icon {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  color: white;
+  display: grid; place-items: center;
+  margin: 0 auto 20px;
+  box-shadow: var(--shadow-primary);
+  animation: pulseCta 3s ease-in-out infinite;
+}
+.cta-checkin-icon .icon { width: 36px; height: 36px; }
+@keyframes pulseCta {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+.cta-checkin h2 { font-size: 20px; margin-bottom: 8px; }
+.cta-checkin p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 440px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+.cta-checkin .btn { min-width: 240px; }
+
+/* ASSIGNMENT RESULT */
+.assignment-result {
+  background: linear-gradient(135deg, #E6F4EA 0%, #F0F9FF 100%);
+  border: 1.5px solid var(--color-secondary);
+  border-radius: var(--radius-xl);
+  padding: 36px 28px;
+  text-align: center;
+  animation: resultIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes resultIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.result-success-icon {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-secondary), #5BB974);
+  color: white;
+  display: grid; place-items: center;
+  margin: 0 auto 20px;
+  box-shadow: var(--shadow-success);
+}
+.result-success-icon .icon { width: 36px; height: 36px; }
+.assignment-result h3 {
+  font-size: 20px; margin-bottom: 6px;
+  color: var(--color-secondary-dark);
+  font-weight: 800;
+}
+.assignment-result > p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+.batch-display {
+  display: inline-block;
+  padding: 14px 28px;
+  background: white;
+  border-radius: var(--radius-md);
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+.batch-display .label {
+  font-size: 11px; color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em; font-weight: 700;
+  margin-bottom: 6px;
+}
+.batch-display .value {
+  font-family: var(--font-heading);
+  font-size: 32px; font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1;
+}
+.assignment-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+@media (min-width: 480px) { .assignment-details { gap: 12px; } }
+.detail-item {
+  padding: 14px;
+  background: white;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+.detail-item .label {
+  font-size: 10.5px; color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em; font-weight: 700;
+  margin-bottom: 4px;
+  display: flex; align-items: center; gap: 4px;
+}
+.detail-item .label .icon { width: 11px; height: 11px; }
+.detail-item .value {
+  font-family: var(--font-heading);
+  font-size: 15px; font-weight: 700;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+/* STUDENT CARD */
+.card-preview-wrap {
+  display: flex; justify-content: center;
+  padding: 24px 16px;
+  background: var(--color-gray-100);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+.student-card {
+  width: 85.6mm; height: 54mm;
+  background: white;
+  border-radius: 3mm;
+  padding: 4mm;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  font-family: var(--font-body);
+  font-size: 8pt;
+  color: var(--color-dark);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3mm;
+  position: relative;
+  overflow: hidden;
+  border: 0.5pt solid #ddd;
+  flex-shrink: 0;
+}
+.student-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 8mm;
+  background: linear-gradient(90deg, var(--color-primary), #4285F4);
+}
+.card-left {
+  padding-top: 9mm;
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+.card-header-mini {
+  display: flex; align-items: center; gap: 2mm;
+  margin-bottom: 2mm;
+}
+.card-header-mini img { width: 6mm; height: 6mm; object-fit: contain; }
+.card-header-mini .school {
+  font-family: var(--font-heading);
+  font-weight: 800; font-size: 7pt; line-height: 1.1;
+}
+.card-header-mini .event {
+  font-size: 5.5pt; color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.card-name {
+  font-family: var(--font-heading);
+  font-weight: 800; font-size: 11pt;
+  line-height: 1.15;
+  margin-bottom: 1mm;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-class {
+  font-size: 7pt;
+  color: var(--text-muted);
+  margin-bottom: 2mm;
+}
+.card-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5mm 3mm;
+  margin-top: auto;
+}
+.card-info-item .label {
+  font-size: 5.5pt;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em; font-weight: 700;
+}
+.card-info-item .value {
+  font-family: var(--font-heading);
+  font-size: 8pt; font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.15;
+}
+.card-info-item .value.seat { color: var(--color-accent); }
+.card-right {
+  padding-top: 9mm;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.card-qr {
+  width: 22mm; height: 22mm;
+  border-radius: 1mm;
+  background: white;
+  padding: 1mm;
+  border: 0.3pt solid #ddd;
+}
+.card-qr canvas, .card-qr img { width: 100%; height: 100%; }
+.card-id {
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  color: var(--text-muted);
+  margin-top: 1mm;
+  text-align: center;
+  max-width: 22mm;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* HISTORY & AUDIT */
+.history-item, .audit-item {
+  padding: 14px;
+  background: var(--color-light);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+}
+.history-item:hover, .audit-item:hover {
+  background: white;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+.history-item .title { font-weight: 700; font-size: 14px; }
+.history-item .meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.audit-item .audit-header {
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 12px;
+  flex-wrap: wrap; margin-bottom: 4px;
+}
+.audit-item .audit-header strong { font-weight: 700; }
+.audit-item .audit-time { font-size: 11.5px; color: var(--text-muted); }
+.audit-item .audit-target {
+  font-size: 11.5px; color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* PRINT */
+@page { size: A4; margin: 10mm; }
+@media print {
+  body { background: white !important; }
+  .app-header, .tabs, .btn, .toast-wrap, .modal-overlay,
+  .card-actions, .screen, .no-print {
+    display: none !important;
+  }
+  .app-main { padding: 0 !important; }
+  .card { border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
+  .card-preview-wrap { background: transparent !important; padding: 0 !important; }
+  .student-card { box-shadow: none !important; page-break-inside: avoid; break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- LOADING -->
+<div class="screen active" id="screenLoading">
+  <div class="loading-box">
+    <div class="loading-logo">F</div>
+    <h2>FORMULA Attendance</h2>
+    <p>Memuat sistem...</p>
+    <div class="loading-bar"><span></span></div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="screen" id="screenLogin">
+  <div class="screen-inner">
+    <div class="login-card">
+      <div class="login-logo">F</div>
+      <h1>Masuk ke Sistem</h1>
+      <p class="login-sub">FORMULA Attendance — SMAN 1 Mojosari</p>
+
+      <div class="login-notice">
+        <span class="icon icon-lock"></span>
+        <span>Hanya akun dengan domain <strong>@sma1mojosari.sch.id</strong> yang dapat login.</span>
+      </div>
+
+      <button id="btnLogin" class="btn btn-primary btn-lg btn-block">
+        <span class="icon icon-lock"></span>
+        <span id="btnLoginText">Masuk dengan Akun Sekolah</span>
+        <span id="btnLoginLoader" class="spinner" hidden></span>
+      </button>
+
+      <div class="error-box" id="errorBox" hidden></div>
+
+      <p class="login-footer">© 2026 FORMULA SMAN 1 Mojosari</p>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header class="app-header">
+    <div class="container app-header-inner">
+      <div class="app-brand">
+        <span class="app-brand-mark">F</span>
+        <span class="app-brand-text">
+          FORMULA
+          <small>Attendance</small>
+        </span>
+      </div>
+      <div class="app-user">
+        <div class="app-user-info">
+          <div class="name" id="userName">—</div>
+          <div class="email" id="userEmail">—</div>
+        </div>
+        <div class="app-user-avatar" id="userAvatar">—</div>
+        <button class="app-user-btn" id="btnLogout" aria-label="Logout">
+          <span class="icon icon-logout"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div class="container">
+
+      <div class="tabs" id="mainTabs">
+        <button class="tab active" data-tab="checkin">
+          <span class="icon icon-qr"></span>
+          <span>Absensi</span>
+        </button>
+        <button class="tab" data-tab="history">
+          <span class="icon icon-clock"></span>
+          <span>Riwayat</span>
+        </button>
+        <button class="tab hidden" data-tab="admin" id="tabAdminBtn">
+          <span class="icon icon-settings"></span>
+          <span>Admin</span>
+          <span class="count" id="adminCount">0</span>
+        </button>
+      </div>
+
+      <!-- CHECKIN -->
+      <div class="tab-panel active" data-panel="checkin">
+        <div id="checkinNotYet">
+          <div class="card cta-checkin">
+            <div class="cta-checkin-icon">
+              <span class="icon icon-fingerprint"></span>
+            </div>
+            <h2>Absensi Peserta</h2>
+            <p>
+              Tekan tombol di bawah untuk melakukan absensi kegiatan.
+              Batch dan kursi akan ditentukan otomatis oleh sistem
+              berdasarkan urutan absensi (first-come-first-served).
+            </p>
+            <button class="btn btn-primary btn-lg" id="btnCheckin">
+              <span class="icon icon-check"></span>
+              <span id="btnCheckinText">ABSEN SEKARANG</span>
+              <span id="btnCheckinLoader" class="spinner" hidden></span>
+            </button>
+          </div>
+        </div>
+
+        <div id="checkinDone" hidden>
+          <div class="assignment-result">
+            <div class="result-success-icon">
+              <span class="icon icon-check"></span>
+            </div>
+            <h3>Absensi Berhasil!</h3>
+            <p>Kartu peserta Anda sudah tersedia.</p>
+
+            <div class="batch-display">
+              <div class="label">Anda Mendapatkan</div>
+              <div class="value" id="assignBatch">—</div>
+            </div>
+
+            <div class="assignment-details">
+              <div class="detail-item">
+                <div class="label">
+                  <span class="icon icon-map-pin"></span>
+                  Nomor Kursi
+                </div>
+                <div class="value" id="assignSeat">—</div>
+              </div>
+              <div class="detail-item">
+                <div class="label">
+                  <span class="icon icon-grid"></span>
+                  Ruangan
+                </div>
+                <div class="value" id="assignRoom">—</div>
+              </div>
+              <div class="detail-item">
+                <div class="label">
+                  <span class="icon icon-clock"></span>
+                  Waktu Absen
+                </div>
+                <div class="value" id="assignTime" style="font-size:12px">—</div>
+              </div>
+              <div class="detail-item">
+                <div class="label">
+                  <span class="icon icon-qr"></span>
+                  ID Assignment
+                </div>
+                <div class="value mono" id="assignId" style="font-size:11px">—</div>
+              </div>
+            </div>
+
+            <button class="btn btn-secondary btn-lg" id="btnShowCard">
+              <span class="icon icon-qr"></span>
+              Tampilkan Kartu Peserta
+            </button>
+          </div>
+        </div>
+
+        <div id="cardPreviewWrap" hidden>
+          <div class="card mt-4">
+            <div class="card-header">
+              <div>
+                <div class="card-title">
+                  <span class="icon icon-qr"></span>
+                  Kartu Peserta
+                </div>
+                <div class="card-sub">Kartu ini wajib dibawa saat kegiatan</div>
+              </div>
+            </div>
+
+            <div class="card-preview-wrap">
+              <div class="student-card" id="studentCard">
+                <div class="card-left">
+                  <div class="card-header-mini">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A73E8'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='56' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" alt="Logo"/>
+                    <div>
+                      <div class="school">SMAN 1 MOJOSARI</div>
+                      <div class="event" id="cardEventName">FORMULA Attendance</div>
+                    </div>
+                  </div>
+                  <div class="card-name" id="cardName">—</div>
+                  <div class="card-class" id="cardClass">—</div>
+                  <div class="card-info-grid">
+                    <div class="card-info-item">
+                      <div class="label">Batch</div>
+                      <div class="value" id="cardBatch">—</div>
+                    </div>
+                    <div class="card-info-item">
+                      <div class="label">Kursi</div>
+                      <div class="value seat" id="cardSeat">—</div>
+                    </div>
+                    <div class="card-info-item">
+                      <div class="label">Ruangan</div>
+                      <div class="value" id="cardRoom">—</div>
+                    </div>
+                    <div class="card-info-item">
+                      <div class="label">No. Peserta</div>
+                      <div class="value" id="cardNumber">—</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-right">
+                  <div class="card-qr" id="cardQr"></div>
+                  <div class="card-id" id="cardId">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 flex gap-2 card-actions" style="flex-wrap:wrap">
+              <button class="btn btn-primary" id="btnPrintCard">
+                <span class="icon icon-print"></span>
+                Print Kartu
+              </button>
+              <button class="btn btn-outline" id="btnHideCard">Sembunyikan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY -->
+      <div class="tab-panel" data-panel="history">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <span class="icon icon-clock"></span>
+                Riwayat Absensi Anda
+              </div>
+              <div class="card-sub">Daftar absensi yang pernah Anda lakukan</div>
+            </div>
+          </div>
+          <div id="historyList">
+            <div class="empty-state">
+              <div class="empty-icon">
+                <span class="icon icon-clock icon-xl"></span>
+              </div>
+              <h3>Belum ada riwayat</h3>
+              <p>Riwayat absensi akan muncul di sini.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN -->
+      <div class="tab-panel" data-panel="admin">
+
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-icon"><span class="icon icon-users"></span></div>
+            <div class="stat-value" id="statAssigned">0</div>
+            <div class="stat-label">Peserta Absen</div>
+          </div>
+          <div class="stat" data-color="green">
+            <div class="stat-icon"><span class="icon icon-package"></span></div>
+            <div class="stat-value" id="statBatches">0</div>
+            <div class="stat-label">Batch Terisi</div>
+          </div>
+          <div class="stat" data-color="yellow">
+            <div class="stat-icon"><span class="icon icon-grid"></span></div>
+            <div class="stat-value" id="statSeats">0</div>
+            <div class="stat-label">Kursi Terpakai</div>
+          </div>
+          <div class="stat" data-color="purple">
+            <div class="stat-icon"><span class="icon icon-pie-chart"></span></div>
+            <div class="stat-value" id="statCapacity">0</div>
+            <div class="stat-label">Total Kapasitas</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <span class="icon icon-settings"></span>
+                Konfigurasi Batch
+              </div>
+              <div class="card-sub">Atur jumlah batch aktif dan kapasitas per batch</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="inputBatchCount">Jumlah Batch Aktif</label>
+            <input type="number" id="inputBatchCount" class="form-control" min="1" max="64" value="8" />
+            <div class="form-hint">Maksimal 64 batch.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="inputBatchCapacity">Kapasitas per Batch</label>
+            <input type="number" id="inputBatchCapacity" class="form-control" min="1" max="500" value="20" />
+            <div class="form-hint">Jumlah peserta per batch.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="inputRoom">Ruangan</label>
+            <input type="text" id="inputRoom" class="form-control" placeholder="Contoh: Ruang A" value="Ruang A" />
+          </div>
+
+          <button class="btn btn-primary" id="btnSaveConfig">
+            <span class="icon icon-save"></span>
+            Simpan Konfigurasi
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <span class="icon icon-play"></span>
+                Status Sesi
+              </div>
+              <div class="card-sub">Buka, jeda, atau tutup sesi absensi</div>
+            </div>
+          </div>
+
+          <div class="flex gap-2" style="flex-wrap:wrap">
+            <button class="btn btn-secondary btn-sm" data-status="OPEN">
+              <span class="icon icon-play"></span>
+              Buka
+            </button>
+            <button class="btn btn-outline btn-sm" data-status="PAUSED">
+              <span class="icon icon-pause"></span>
+              Jeda
+            </button>
+            <button class="btn btn-danger btn-sm" data-status="CLOSED">
+              <span class="icon icon-stop"></span>
+              Tutup
+            </button>
+          </div>
+
+          <div class="mt-4">
+            Status saat ini:
+            <span class="badge badge-primary" id="sessionStatusBadge">OPEN</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <span class="icon icon-users"></span>
+                Daftar Peserta
+              </div>
+              <div class="card-sub">Monitoring real-time peserta yang sudah absen</div>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="search">
+              <span class="icon icon-search"></span>
+              <input type="search" id="adminSearch" placeholder="Cari nama, email, batch..." />
+            </div>
+            <button class="btn btn-outline btn-sm" id="btnPrintAll">
+              <span class="icon icon-print"></span>
+              Print Semua Kartu
+            </button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>Kelas</th>
+                  <th>Batch</th>
+                  <th>Kursi</th>
+                  <th>Waktu Absen</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="adminTableBody">
+                <tr>
+                  <td colspan="8">
+                    <div class="empty-state">
+                      <div class="empty-icon">
+                        <span class="icon icon-users icon-xl"></span>
+                      </div>
+                      <h3>Belum ada peserta</h3>
+                      <p>Data peserta akan muncul di sini secara real-time.</p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <span class="icon icon-info"></span>
+                Audit Log
+              </div>
+              <div class="card-sub">Catatan semua perubahan penting</div>
+            </div>
+          </div>
+
+          <div id="auditLogList">
+            <div class="empty-state">
+              <div class="empty-icon">
+                <span class="icon icon-info icon-xl"></span>
+              </div>
+              <h3>Belum ada log</h3>
+              <p>Aktivitas admin akan tercatat di sini.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Konfirmasi</h3>
+      <button class="modal-close" id="modalClose" aria-label="Tutup">
+        <span class="icon icon-x"></span>
+      </button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="modalCancel">Batal</button>
+      <button class="btn btn-primary" id="modalConfirm">Konfirmasi</button>
+    </div>
+  </div>
+</div>
+
+<!-- QRCode -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+<!-- APP SCRIPT -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, setDoc, updateDoc,
+  collection, addDoc, query, where, orderBy, limit, getDocs,
+  onSnapshot, serverTimestamp, runTransaction, increment
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyBjjlYcQo0bqOKoozWIfsLjGllewGpS2SU",
+  authDomain: "attedance-formula-cbt.firebaseapp.com",
+  databaseURL: "https://attedance-formula-cbt-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "attedance-formula-cbt",
+  storageBucket: "attedance-formula-cbt.firebasestorage.app",
+  messagingSenderId: "64186014829",
+  appId: "1:64186014829:web:c7bb872bbdf44a8149b364",
+  measurementId: "G-P6NF31SJKR"
+};
+
+const ALLOWED_DOMAIN = "sma1mojosari.sch.id";
+const DEFAULT_SESSION_ID = "FORMULA-2026-01";
+const MAX_BATCHES = 64;
+const SEATS_PER_ROW = 20;
+const ROW_LETTERS = "ABCDEFGH";
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+/* STATE */
+let CURRENT_USER = null;
+let CURRENT_USER_DATA = null;
+let CURRENT_SESSION = null;
+let CURRENT_ASSIGNMENT = null;
+let UNSUB_ASSIGNMENT = null;
+let UNSUB_SESSION = null;
+let UNSUB_ADMIN = null;
+let UNSUB_AUDIT = null;
+let ADMIN_CACHE = [];
+let ADMIN_SEARCH = "";
+let MODAL_RESOLVER = null;
+
+/* UTILS */
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => Array.from(document.querySelectorAll(s));
+
+const escapeHtml = (s) => {
+  if (s == null) return "";
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+};
+
+const formatDate = (ts) => {
+  if (!ts) return "—";
+  let d;
+  if (ts.toDate) d = ts.toDate();
+  else if (ts.seconds) d = new Date(ts.seconds * 1000);
+  else d = new Date(ts);
+  const bulan = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(d.getDate())} ${bulan[d.getMonth()]} ${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+};
+
+const initialFromName = (name) => {
+  if (!name) return "?";
+  return name.trim().charAt(0).toUpperCase();
+};
+
+const showScreen = (id) => {
+  $$(".screen").forEach((s) => s.classList.remove("active"));
+  const el = document.getElementById(id);
+  if (el) el.classList.add("active");
+};
+
+/* TOAST */
+const TOAST_ICONS = {
+  success: '<span class="icon icon-check"></span>',
+  error:   '<span class="icon icon-x"></span>',
+  warning: '<span class="icon icon-alert"></span>',
+  info:    '<span class="icon icon-info"></span>'
+};
+
+const showToast = (msg, type = "info", duration = 3500) => {
+  const wrap = $("#toastWrap");
+  if (!wrap) return;
+  const t = document.createElement("div");
+  t.className = "toast toast-" + type;
+  t.innerHTML = (TOAST_ICONS[type] || TOAST_ICONS.info) + '<div class="toast-body">' + msg + '</div>';
+  wrap.appendChild(t);
+  setTimeout(() => {
+    t.classList.add("removing");
+    setTimeout(() => t.remove(), 300);
+  }, duration);
+};
+
+/* MODAL */
+const showConfirm = (title, body, confirmText = "Konfirmasi") => {
+  return new Promise((resolve) => {
+    $("#modalTitle").textContent = title;
+    $("#modalBody").innerHTML = '<p style="font-size:14px;line-height:1.7;color:var(--text-secondary)">' + body + '</p>';
+    $("#modalConfirm").textContent = confirmText;
+    $("#modal").classList.add("open");
+    document.body.classList.add("modal-open");
+    MODAL_RESOLVER = (val) => {
+      $("#modal").classList.remove("open");
+      document.body.classList.remove("modal-open");
+      MODAL_RESOLVER = null;
+      resolve(val);
+    };
+  });
+};
+
+$("#modalConfirm").addEventListener("click", () => MODAL_RESOLVER && MODAL_RESOLVER(true));
+$("#modalCancel").addEventListener("click", () => MODAL_RESOLVER && MODAL_RESOLVER(false));
+$("#modalClose").addEventListener("click", () => MODAL_RESOLVER && MODAL_RESOLVER(false));
+$("#modal").addEventListener("click", (e) => {
+  if (e.target === $("#modal")) MODAL_RESOLVER && MODAL_RESOLVER(false);
+});
+
+/* LOADING → LOGIN */
+setTimeout(() => showScreen("screenLogin"), 1200);
+
+/* LOGIN */
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
+
+$("#btnLogin").addEventListener("click", async () => {
+  const btn = $("#btnLogin");
+  const text = $("#btnLoginText");
+  const loader = $("#btnLoginLoader");
+  const errBox = $("#errorBox");
+
+  btn.disabled = true;
+  text.textContent = "Memproses...";
+  loader.hidden = false;
+  errBox.hidden = true;
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    if (!user.email || !user.email.endsWith("@" + ALLOWED_DOMAIN)) {
+      await signOut(auth);
+      throw new Error("DOMAIN_NOT_ALLOWED");
+    }
+
+    const userRef = doc(db, "users", user.uid);
+    const snap = await getDoc(userRef);
+
+    if (!snap.exists()) {
+      const newUserData = {
+        uid: user.uid,
+        email: user.email,
+        name: user.displayName || user.email.split("@")[0],
+        kelas: "-",
+        role: "PESERTA",
+        active: true,
+        createdAt: serverTimestamp()
+      };
+      await setDoc(userRef, newUserData);
+      CURRENT_USER_DATA = { ...newUserData };
+    } else {
+      CURRENT_USER_DATA = snap.data();
+    }
+
+    CURRENT_USER = user;
+    const isAdmin = ["SUPER_ADMIN","ADMIN","OPERATOR","VIEWER"].includes(CURRENT_USER_DATA.role);
+    startApp(isAdmin);
+
+  } catch (err) {
+    const messages = {
+      DOMAIN_NOT_ALLOWED: "Gunakan akun sekolah untuk melanjutkan.",
+      "auth/popup-closed-by-user": "Login dibatalkan.",
+      "auth/popup-blocked": "Popup diblokir browser. Aktifkan popup lalu coba lagi.",
+      "auth/network-request-failed": "Koneksi bermasalah. Coba lagi.",
+      "auth/unauthorized-domain": "Domain belum diizinkan Firebase. Hubungi admin."
+    };
+    const msg = messages[err.message] || "Login gagal. Silakan coba lagi.";
+    errBox.innerHTML = '<span class="icon icon-alert"></span><span>' + msg + '</span>';
+    errBox.hidden = false;
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    text.textContent = "Masuk dengan Akun Sekolah";
+    loader.hidden = true;
+  }
+});
+
+/* LOGOUT */
+$("#btnLogout").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    CURRENT_USER = null;
+    CURRENT_USER_DATA = null;
+    CURRENT_ASSIGNMENT = null;
+    cleanupListeners();
+    $("#app").classList.remove("active");
+    showScreen("screenLogin");
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+/* AUTH STATE */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    $("#app").classList.remove("active");
+    showScreen("screenLogin");
+    return;
+  }
+  if (!user.email || !user.email.endsWith("@" + ALLOWED_DOMAIN)) {
+    await signOut(auth);
+    showScreen("screenLogin");
+    return;
+  }
+  CURRENT_USER = user;
+  const snap = await getDoc(doc(db, "users", user.uid));
+  if (!snap.exists()) {
+    await signOut(auth);
+    showScreen("screenLogin");
+    return;
+  }
+  CURRENT_USER_DATA = snap.data();
+  const isAdmin = ["SUPER_ADMIN","ADMIN","OPERATOR","VIEWER"].includes(CURRENT_USER_DATA.role);
+  startApp(isAdmin);
+});
+
+/* START APP */
+const startApp = async (isAdmin) => {
+  $("#app").classList.add("active");
+  $("#userName").textContent = CURRENT_USER_DATA.name || "User";
+  $("#userEmail").textContent = CURRENT_USER_DATA.email;
+  $("#userAvatar").textContent = initialFromName(CURRENT_USER_DATA.name);
+
+  if (isAdmin) $("#tabAdminBtn").classList.remove("hidden");
+  else $("#tabAdminBtn").classList.add("hidden");
+
+  await loadSession();
+  checkMyAssignment();
+  loadMyHistory();
+
+  if (isAdmin) {
+    loadAdminStats();
+    loadAdminAssignments();
+    loadAuditLog();
+  }
+};
+
+/* SESSION */
+const loadSession = async () => {
+  const sessionRef = doc(db, "sessions", DEFAULT_SESSION_ID);
+  const snap = await getDoc(sessionRef);
+
+  if (!snap.exists()) {
+    const data = {
+      sessionId: DEFAULT_SESSION_ID,
+      name: "FORMULA Attendance 2026",
+      status: "OPEN",
+      totalBatches: 8,
+      capacityPerBatch: 20,
+      room: "Ruang A",
+      createdAt: serverTimestamp()
+    };
+    await setDoc(sessionRef, data);
+    CURRENT_SESSION = data;
+
+    for (let i = 1; i <= 8; i++) {
+      const bid = String(i).padStart(2, "0");
+      await setDoc(doc(db, "sessions", DEFAULT_SESSION_ID, "batches", bid), {
+        batchId: bid,
+        label: "Batch " + bid,
+        capacity: 20,
+        filled: 0,
+        room: "Ruang A",
+        active: true,
+        createdAt: serverTimestamp()
+      });
+    }
+  } else {
+    CURRENT_SESSION = snap.data();
+  }
+
+  $("#inputBatchCount").value = CURRENT_SESSION.totalBatches || 8;
+  $("#inputBatchCapacity").value = CURRENT_SESSION.capacityPerBatch || 20;
+  $("#inputRoom").value = CURRENT_SESSION.room || "Ruang A";
+  updateSessionBadge(CURRENT_SESSION.status || "OPEN");
+
+  if (UNSUB_SESSION) UNSUB_SESSION();
+  UNSUB_SESSION = onSnapshot(sessionRef, (s) => {
+    if (s.exists()) {
+      CURRENT_SESSION = s.data();
+      updateSessionBadge(CURRENT_SESSION.status || "OPEN");
+    }
+  });
+};
+
+const updateSessionBadge = (status) => {
+  const el = $("#sessionStatusBadge");
+  if (!el) return;
+  el.textContent = status;
+  el.className = "badge " + (
+    status === "OPEN"   ? "badge-success" :
+    status === "PAUSED" ? "badge-warning" :
+    status === "CLOSED" ? "badge-danger"  : "badge-primary"
+  );
+};
+
+/* MY ASSIGNMENT */
+const checkMyAssignment = () => {
+  if (UNSUB_ASSIGNMENT) UNSUB_ASSIGNMENT();
+
+  const q = query(
+    collection(db, "sessions", DEFAULT_SESSION_ID, "assignments"),
+    where("userId", "==", CURRENT_USER.uid),
+    where("status", "in", ["ASSIGNED", "LOCKED"])
+  );
+
+  UNSUB_ASSIGNMENT = onSnapshot(q, (snap) => {
+    if (!snap.empty) {
+      const assign = { id: snap.docs[0].id, ...snap.docs[0].data() };
+      showAssignment(assign);
+    } else {
+      showNotYet();
+    }
+  });
+};
+
+const showNotYet = () => {
+  $("#checkinNotYet").hidden = false;
+  $("#checkinDone").hidden = true;
+  $("#cardPreviewWrap").hidden = true;
+};
+
+const showAssignment = async (assign) => {
+  CURRENT_ASSIGNMENT = assign;
+  $("#checkinNotYet").hidden = true;
+  $("#checkinDone").hidden = false;
+
+  $("#assignBatch").textContent = assign.batchId ? ("Batch " + assign.batchId) : "—";
+  $("#assignSeat").textContent = assign.seatId || "—";
+  $("#assignRoom").textContent = assign.room || "—";
+  $("#assignTime").textContent = formatDate(assign.assignedAt);
+  $("#assignId").textContent = assign.id ? assign.id.slice(0, 12) + "..." : "—";
+
+  await updateCard(assign);
+};
+
+const updateCard = async (assign) => {
+  $("#cardName").textContent = assign.name || CURRENT_USER_DATA.name || "—";
+  $("#cardClass").textContent = "Kelas " + (assign.kelas || CURRENT_USER_DATA.kelas || "-");
+  $("#cardBatch").textContent = "Batch " + (assign.batchId || "—");
+  $("#cardSeat").textContent = assign.seatId || "—";
+  $("#cardRoom").textContent = assign.room || "—";
+  $("#cardNumber").textContent = assign.number ? String(assign.number).padStart(3, "0") : "—";
+  $("#cardId").textContent = assign.id ? assign.id.slice(0, 14) : "—";
+  $("#cardEventName").textContent = (CURRENT_SESSION && CURRENT_SESSION.name) || "FORMULA Attendance";
+
+  const qrEl = $("#cardQr");
+  qrEl.innerHTML = "";
+  const payload = JSON.stringify({
+    a: assign.id, u: assign.userId,
+    b: assign.batchId, s: assign.seatId
+  });
+
+  try {
+    const canvas = document.createElement("canvas");
+    await QRCode.toCanvas(canvas, payload, {
+      width: 200, margin: 1,
+      color: { dark: "#202124", light: "#FFFFFF" }
+    });
+    qrEl.appendChild(canvas);
+  } catch (e) {
+    qrEl.textContent = "QR Error";
+  }
+};
+
+/* CHECK-IN */
+$("#btnCheckin").addEventListener("click", async () => {
+  const btn = $("#btnCheckin");
+  const text = $("#btnCheckinText");
+  const loader = $("#btnCheckinLoader");
+
+  const confirmed = await showConfirm(
+    "Konfirmasi Absensi",
+    "Setelah absen, batch dan kursi Anda akan ditentukan otomatis dan TIDAK dapat diubah. Lanjutkan?",
+    "Ya, Absen Sekarang"
+  );
+  if (!confirmed) return;
+
+  btn.disabled = true;
+  text.textContent = "Memproses absensi...";
+  loader.hidden = false;
+
+  try {
+    const sessionSnap = await getDoc(doc(db, "sessions", DEFAULT_SESSION_ID));
+    if (!sessionSnap.exists()) throw new Error("SESSION_NOT_FOUND");
+    const session = sessionSnap.data();
+
+    if (session.status === "CLOSED") throw new Error("SESSION_CLOSED");
+    if (session.status === "PAUSED") throw new Error("SESSION_PAUSED");
+    if (session.status !== "OPEN") throw new Error("SESSION_NOT_OPEN");
+
+    const existingQ = query(
+      collection(db, "sessions", DEFAULT_SESSION_ID, "assignments"),
+      where("userId", "==", CURRENT_USER.uid),
+      where("status", "in", ["ASSIGNED", "LOCKED"])
+    );
+    const existingSnap = await getDocs(existingQ);
+    if (!existingSnap.empty) throw new Error("ALREADY_ASSIGNED");
+
+    const assignRef = doc(collection(db, "sessions", DEFAULT_SESSION_ID, "assignments"));
+    const assignmentId = assignRef.id;
+
+    await runTransaction(db, async (tx) => {
+      const batchesRef = collection(db, "sessions", DEFAULT_SESSION_ID, "batches");
+      const batchesSnap = await getDocs(batchesRef);
+      if (batchesSnap.empty) throw new Error("NO_BATCHES");
+
+      const batches = [];
+      batchesSnap.forEach((d) => {
+        batches.push({ id: d.id, ref: d.ref, ...d.data() });
+      });
+      batches.sort((a, b) => a.batchId.localeCompare(b.batchId));
+
+      let targetBatch = null;
+      for (const b of batches) {
+        if (!b.active) continue;
+        if (b.filled < b.capacity) { targetBatch = b; break; }
+      }
+      if (!targetBatch) throw new Error("ALL_BATCHES_FULL");
+
+      const batchSnap = await tx.get(targetBatch.ref);
+      if (!batchSnap.exists()) throw new Error("BATCH_NOT_FOUND");
+      const batchData = batchSnap.data();
+      if (batchData.filled >= batchData.capacity) throw new Error("RACE_BATCH_FULL");
+
+      const nextNumber = batchData.filled + 1;
+      const rowIndex = Math.floor((nextNumber - 1) / SEATS_PER_ROW);
+      const colIndex = ((nextNumber - 1) % SEATS_PER_ROW) + 1;
+      const rowLetter = ROW_LETTERS[rowIndex] || "Z";
+      const seatId = rowLetter + String(colIndex).padStart(2, "0");
+
+      tx.update(targetBatch.ref, { filled: increment(1) });
+
+      tx.set(assignRef, {
+        userId: CURRENT_USER.uid,
+        email: CURRENT_USER_DATA.email,
+        name: CURRENT_USER_DATA.name,
+        kelas: CURRENT_USER_DATA.kelas || "-",
+        batchId: batchData.batchId,
+        seatId: seatId,
+        room: batchData.room || session.room || "Ruang A",
+        number: nextNumber,
+        assignedAt: serverTimestamp(),
+        status: "ASSIGNED"
+      });
+    });
+
+    await addAuditLog("ABSEN", "assignments/" + assignmentId, null, {
+      userId: CURRENT_USER.uid, batchId: "auto", seatId: "auto"
+    });
+
+    showToast("Absensi berhasil! Batch dan kursi sudah ditentukan.", "success", 5000);
+
+  } catch (err) {
+    const msgs = {
+      SESSION_CLOSED: "Sesi absensi sudah ditutup.",
+      SESSION_PAUSED: "Absensi sementara dijeda oleh administrator.",
+      SESSION_NOT_OPEN: "Sesi absensi belum dibuka.",
+      SESSION_NOT_FOUND: "Sesi tidak ditemukan. Hubungi admin.",
+      ALREADY_ASSIGNED: "Anda sudah melakukan absensi.",
+      ALL_BATCHES_FULL: "Semua batch sudah penuh. Hubungi administrator.",
+      RACE_BATCH_FULL: "Terjadi konflik. Silakan coba lagi.",
+      NO_BATCHES: "Belum ada batch yang tersedia.",
+      BATCH_NOT_FOUND: "Batch tidak ditemukan.",
+      "permission-denied": "Akses ditolak. Hubungi admin."
+    };
+    showToast(msgs[err.message] || "Absensi gagal diproses. Silakan coba kembali.", "error", 5000);
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    text.textContent = "ABSEN SEKARANG";
+    loader.hidden = true;
+  }
+});
+
+/* CARD ACTIONS */
+$("#btnShowCard").addEventListener("click", () => {
+  $("#cardPreviewWrap").hidden = false;
+  setTimeout(() => $("#cardPreviewWrap").scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+});
+$("#btnHideCard").addEventListener("click", () => { $("#cardPreviewWrap").hidden = true; });
+$("#btnPrintCard").addEventListener("click", () => window.print());
+
+/* TABS */
+$("#mainTabs").addEventListener("click", (e) => {
+  const tab = e.target.closest(".tab");
+  if (!tab) return;
+  const name = tab.getAttribute("data-tab");
+
+  $$(".tab").forEach((t) => t.classList.remove("active"));
+  tab.classList.add("active");
+
+  $$(".tab-panel").forEach((p) => p.classList.remove("active"));
+  const panel = document.querySelector('.tab-panel[data-panel="' + name + '"]');
+  if (panel) panel.classList.add("active");
+
+  if (name === "history") loadMyHistory();
+  if (name === "admin") {
+    loadAdminStats();
+    loadAdminAssignments();
+    loadAuditLog();
+  }
+});
+
+/* HISTORY */
+const loadMyHistory = async () => {
+  try {
+    const q = query(
+      collection(db, "sessions", DEFAULT_SESSION_ID, "assignments"),
+      where("userId", "==", CURRENT_USER.uid),
+      orderBy("assignedAt", "desc")
+    );
+    const snap = await getDocs(q);
+    const wrap = $("#historyList");
+
+    if (snap.empty) {
+      wrap.innerHTML = '<div class="empty-state"><div class="empty-icon"><span class="icon icon-clock icon-xl"></span></div><h3>Belum ada riwayat</h3><p>Riwayat absensi akan muncul di sini.</p></div>';
+      return;
+    }
+
+    let html = '<div style="display:grid;gap:10px">';
+    snap.forEach((d) => {
+      const a = d.data();
+      html += '<div class="history-item"><div class="flex justify-between items-center gap-3" style="flex-wrap:wrap"><div><div class="title">Batch ' + a.batchId + ' • Kursi ' + a.seatId + '</div><div class="meta">' + escapeHtml(a.room || "—") + ' • ' + formatDate(a.assignedAt) + '</div></div><span class="badge badge-success">' + a.status + '</span></div></div>';
+    });
+    html += '</div>';
+    wrap.innerHTML = html;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+/* ADMIN STATS */
+const loadAdminStats = async () => {
+  try {
+    const snap = await getDocs(collection(db, "sessions", DEFAULT_SESSION_ID, "batches"));
+    let totalCapacity = 0;
+    let totalFilled = 0;
+    let batchesFilled = 0;
+
+    snap.forEach((d) => {
+      const b = d.data();
+      totalCapacity += b.capacity || 0;
+      totalFilled += b.filled || 0;
+      if (b.filled > 0) batchesFilled++;
+    });
+
+    $("#statAssigned").textContent = totalFilled;
+    $("#statBatches").textContent = batchesFilled;
+    $("#statSeats").textContent = totalFilled;
+    $("#statCapacity").textContent = totalCapacity;
+    $("#adminCount").textContent = totalFilled;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+/* ADMIN ASSIGNMENTS */
+const loadAdminAssignments = () => {
+  if (UNSUB_ADMIN) UNSUB_ADMIN();
+
+  const q = query(
+    collection(db, "sessions", DEFAULT_SESSION_ID, "assignments"),
+    orderBy("assignedAt", "desc")
+  );
+
+  UNSUB_ADMIN = onSnapshot(q, (snap) => {
+    ADMIN_CACHE = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    renderAdminTable();
+  }, (err) => {
+    console.error("Admin listener:", err);
+  });
+};
+
+const renderAdminTable = () => {
+  const tbody = $("#adminTableBody");
+  const term = ADMIN_SEARCH.toLowerCase().trim();
+
+  const filtered = ADMIN_CACHE.filter((a) => {
+    if (!term) return true;
+    const text = [a.name, a.email, a.batchId, a.seatId, a.kelas, a.room].join(" ").toLowerCase();
+    return text.includes(term);
+  });
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div class="empty-icon"><span class="icon icon-users icon-xl"></span></div><h3>Belum ada peserta</h3><p>Data peserta akan muncul di sini secara real-time.</p></div></td></tr>';
+    return;
+  }
+
+  let html = "";
+  filtered.forEach((a, i) => {
+    html += '<tr><td>' + (i + 1) + '</td><td><strong>' + escapeHtml(a.name || "—") + '</strong></td><td class="mono">' + escapeHtml(a.email || "—") + '</td><td>' + escapeHtml(a.kelas || "—") + '</td><td><span class="badge badge-primary">Batch ' + (a.batchId || "—") + '</span></td><td><span class="badge badge-warning">' + (a.seatId || "—") + '</span></td><td style="font-size:12px">' + formatDate(a.assignedAt) + '</td><td><span class="badge badge-success">' + (a.status || "ASSIGNED") + '</span></td></tr>';
+  });
+  tbody.innerHTML = html;
+};
+
+$("#adminSearch").addEventListener("input", (e) => {
+  ADMIN_SEARCH = e.target.value || "";
+  renderAdminTable();
+});
+
+/* AUDIT LOG */
+const loadAuditLog = () => {
+  if (UNSUB_AUDIT) UNSUB_AUDIT();
+
+  const q = query(
+    collection(db, "sessions", DEFAULT_SESSION_ID, "auditLogs"),
+    orderBy("timestamp", "desc"),
+    limit(50)
+  );
+
+  UNSUB_AUDIT = onSnapshot(q, (snap) => {
+    const wrap = $("#auditLogList");
+    if (snap.empty) {
+      wrap.innerHTML = '<div class="empty-state"><div class="empty-icon"><span class="icon icon-info icon-xl"></span></div><h3>Belum ada log</h3><p>Aktivitas admin akan tercatat di sini.</p></div>';
+      return;
+    }
+    let html = '<div style="display:grid;gap:8px">';
+    snap.forEach((d) => {
+      const l = d.data();
+      html += '<div class="audit-item"><div class="audit-header"><strong>' + escapeHtml(l.actorEmail || "—") + ' — ' + escapeHtml(l.action || "—") + '</strong><span class="audit-time">' + formatDate(l.timestamp) + '</span></div><div class="audit-target">' + escapeHtml(l.targetId || "") + '</div></div>';
+    });
+    html += '</div>';
+    wrap.innerHTML = html;
+  }, (err) => {
+    console.error("Audit listener:", err);
+  });
+};
+
+/* SAVE CONFIG */
+$("#btnSaveConfig").addEventListener("click", async () => {
+  const count = parseInt($("#inputBatchCount").value, 10);
+  const capacity = parseInt($("#inputBatchCapacity").value, 10);
+  const room = $("#inputRoom").value.trim() || "Ruang A";
+
+  if (!count || count < 1 || count > MAX_BATCHES) {
+    showToast("Jumlah batch harus antara 1 – 64.", "warning");
+    return;
+  }
+  if (!capacity || capacity < 1) {
+    showToast("Kapasitas harus lebih dari 0.", "warning");
+    return;
+  }
+
+  const confirmed = await showConfirm(
+    "Konfirmasi Perubahan",
+    "Ubah konfigurasi menjadi " + count + " batch, kapasitas " + capacity + ", ruangan \"" + room + "\". Perubahan kapasitas dapat memengaruhi assignment peserta berikutnya. Lanjutkan?",
+    "Ya, Simpan"
+  );
+  if (!confirmed) return;
+
+  try {
+    const sessionRef = doc(db, "sessions", DEFAULT_SESSION_ID);
+    const before = CURRENT_SESSION;
+
+    await updateDoc(sessionRef, {
+      totalBatches: count,
+      capacityPerBatch: capacity,
+      room: room
+    });
+
+    const batchColl = collection(db, "sessions", DEFAULT_SESSION_ID, "batches");
+    for (let i = 1; i <= count; i++) {
+      const bid = String(i).padStart(2, "0");
+      const bRef = doc(batchColl, bid);
+      const bSnap = await getDoc(bRef);
+      if (!bSnap.exists()) {
+        await setDoc(bRef, {
+          batchId: bid,
+          label: "Batch " + bid,
+          capacity: capacity,
+          filled: 0,
+          room: room,
+          active: true,
+          createdAt: serverTimestamp()
+        });
+      } else {
+        await updateDoc(bRef, { capacity, room });
+      }
+    }
+
+    await addAuditLog("UPDATE_CONFIG", "sessions/" + DEFAULT_SESSION_ID,
+      { totalBatches: before.totalBatches, capacity: before.capacityPerBatch, room: before.room },
+      { totalBatches: count, capacity, room }
+    );
+
+    showToast("Konfigurasi berhasil disimpan.", "success");
+    loadAdminStats();
+  } catch (e) {
+    console.error(e);
+    showToast("Gagal menyimpan konfigurasi.", "error");
+  }
+});
+
+/* SESSION STATUS */
+$$("[data-status]").forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    const status = btn.getAttribute("data-status");
+    const labels = { OPEN: "Buka", PAUSED: "Jeda", CLOSED: "Tutup" };
+
+    const confirmed = await showConfirm(
+      "Konfirmasi " + labels[status],
+      'Yakin ingin mengubah status sesi menjadi "' + status + '"?',
+      "Ya, Ubah"
+    );
+    if (!confirmed) return;
+
+    try {
+      await updateDoc(doc(db, "sessions", DEFAULT_SESSION_ID), { status });
+      await addAuditLog("CHANGE_STATUS", "sessions/" + DEFAULT_SESSION_ID, CURRENT_SESSION.status, status);
+      showToast("Status sesi diubah menjadi " + status + ".", "success");
+    } catch (e) {
+      console.error(e);
+      showToast("Gagal mengubah status sesi.", "error");
+    }
+  });
+});
+
+/* PRINT ALL — menggunakan string concat, TIDAK pakai template literal untuk </script> */
+$("#btnPrintAll").addEventListener("click", async () => {
+  if (ADMIN_CACHE.length === 0) {
+    showToast("Belum ada peserta untuk dicetak.", "warning");
+    return;
+  }
+
+  const w = window.open("", "_blank");
+  if (!w) {
+    showToast("Popup diblokir. Aktifkan popup untuk print.", "warning");
+    return;
+  }
+
+  showToast("Menyiapkan kartu untuk dicetak...", "info");
+
+  const cards = [];
+  for (const a of ADMIN_CACHE) {
+    const payload = JSON.stringify({ a: a.id, u: a.userId, b: a.batchId, s: a.seatId });
+    let qr = "";
+    try { qr = await QRCode.toDataURL(payload, { width: 200, margin: 1 }); } catch (e) {}
+    cards.push({ ...a, qr });
+  }
+
+  const LOGO = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A73E8'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='56' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E";
+  const eventName = (CURRENT_SESSION && CURRENT_SESSION.name) || "FORMULA Attendance";
+
+  let cardsHtml = "";
+  for (const c of cards) {
+    cardsHtml +=
+      '<div class="student-card">' +
+        '<div class="card-left">' +
+          '<div class="card-header-mini">' +
+            '<img src="' + LOGO + '" />' +
+            '<div>' +
+              '<div class="school">SMAN 1 MOJOSARI</div>' +
+              '<div class="event">' + escapeHtml(eventName) + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card-name">' + escapeHtml(c.name || "—") + '</div>' +
+          '<div class="card-class">Kelas ' + escapeHtml(c.kelas || "-") + '</div>' +
+          '<div class="card-info-grid">' +
+            '<div class="card-info-item"><div class="label">Batch</div><div class="value">Batch ' + (c.batchId || "—") + '</div></div>' +
+            '<div class="card-info-item"><div class="label">Kursi</div><div class="value seat">' + (c.seatId || "—") + '</div></div>' +
+            '<div class="card-info-item"><div class="label">Ruangan</div><div class="value">' + escapeHtml(c.room || "—") + '</div></div>' +
+            '<div class="card-info-item"><div class="label">No. Peserta</div><div class="value">' + String(c.number || 0).padStart(3, "0") + '</div></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="card-right">' +
+          '<img class="card-qr" src="' + c.qr + '" alt="QR" />' +
+          '<div class="card-id">' + c.id.slice(0, 14) + '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  const css =
+    "@page { size: A4; margin: 10mm; }" +
+    "* { box-sizing: border-box; margin: 0; padding: 0; }" +
+    "body { font-family: Arial, sans-serif; background: white; }" +
+    ".print-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4mm; }" +
+    ".student-card { width: 100%; height: 54mm; background: white; border-radius: 3mm; padding: 4mm; font-size: 8pt; color: #202124; display: grid; grid-template-columns: 1fr auto; gap: 3mm; position: relative; overflow: hidden; border: 0.5pt solid #ccc; page-break-inside: avoid; }" +
+    ".student-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8mm; background: linear-gradient(90deg, #1A73E8, #4285F4); }" +
+    ".card-left { padding-top: 9mm; display: flex; flex-direction: column; min-width: 0; }" +
+    ".card-header-mini { display: flex; align-items: center; gap: 2mm; margin-bottom: 2mm; }" +
+    ".card-header-mini img { width: 6mm; height: 6mm; }" +
+    ".card-header-mini .school { font-weight: 800; font-size: 7pt; line-height: 1.1; }" +
+    ".card-header-mini .event { font-size: 5.5pt; color: #666; text-transform: uppercase; }" +
+    ".card-name { font-weight: 800; font-size: 11pt; line-height: 1.1; margin-bottom: 1mm; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }" +
+    ".card-class { font-size: 7pt; color: #666; margin-bottom: 2mm; }" +
+    ".card-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5mm 3mm; margin-top: auto; }" +
+    ".card-info-item .label { font-size: 5.5pt; color: #666; text-transform: uppercase; font-weight: 600; }" +
+    ".card-info-item .value { font-size: 8pt; font-weight: 800; color: #1A73E8; line-height: 1.1; }" +
+    ".card-info-item .value.seat { color: #EA4335; }" +
+    ".card-right { padding-top: 9mm; display: flex; flex-direction: column; align-items: center; justify-content: center; }" +
+    ".card-qr { width: 22mm; height: 22mm; background: white; padding: 1mm; border: 0.3pt solid #ddd; }" +
+    ".card-id { font-family: monospace; font-size: 5pt; color: #666; margin-top: 1mm; text-align: center; max-width: 22mm; overflow: hidden; text-overflow: ellipsis; }";
+
+  const scriptTagOpen = "<scr" + "ipt>";
+  const scriptTagClose = "</scr" + "ipt>";
+  const scriptContent = "window.onload = function(){ setTimeout(function(){ window.print(); }, 300); };";
+
+  const fullHtml =
+    "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Print Semua Kartu</title>" +
+    "<style>" + css + "</style></head><body>" +
+    "<div class='print-grid'>" + cardsHtml + "</div>" +
+    scriptTagOpen + scriptContent + scriptTagClose +
+    "</body></html>";
+
+  w.document.write(fullHtml);
+  w.document.close();
+});
+
+/* AUDIT HELPER */
+const addAuditLog = async (action, targetId, oldValue, newValue) => {
+  try {
+    await addDoc(collection(db, "sessions", DEFAULT_SESSION_ID, "auditLogs"), {
+      actorId: CURRENT_USER.uid,
+      actorEmail: CURRENT_USER_DATA.email,
+      action: action,
+      targetId: targetId,
+      oldValue: oldValue || null,
+      newValue: newValue || null,
+      timestamp: serverTimestamp()
+    });
+  } catch (e) {
+    console.error("Audit log error:", e);
+  }
+};
+
+/* CLEANUP */
+const cleanupListeners = () => {
+  if (UNSUB_ASSIGNMENT) { UNSUB_ASSIGNMENT(); UNSUB_ASSIGNMENT = null; }
+  if (UNSUB_SESSION) { UNSUB_SESSION(); UNSUB_SESSION = null; }
+  if (UNSUB_ADMIN) { UNSUB_ADMIN(); UNSUB_ADMIN = null; }
+  if (UNSUB_AUDIT) { UNSUB_AUDIT(); UNSUB_AUDIT = null; }
+};
+
+console.log("%cFORMULA Attendance%c v2.0 — Firebase: attedance-formula-cbt",
+  "background:#1A73E8;color:white;padding:4px 10px;border-radius:4px;font-weight:bold",
+  "color:#1A73E8;font-weight:600");
+</script>
+
+</body>
+</html>
