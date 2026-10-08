@@ -8,17 +8,14 @@
 <meta name="keywords" content="FORMULA, SMAN 1 Mojosari, Informatika, Multimedia, Ekstrakurikuler" />
 <title>FORMULA — Informatika & Multimedia SMAN 1 Mojosari</title>
 
-
-
-  <!-- Open Graph untuk WhatsApp & sosial media -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Official Website Formula SMAN 1 Mojosari" />
-  <meta property="og:description" content="Driven By Innovation" />
-  <meta property="og:image" content="https://formula-sman1mojosari.my.id/formula.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:url" content="https://formula-sman1mojosari.my.id/" />
-  <meta property="og:site_name" content="Formula" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Official Website Formula SMAN 1 Mojosari" />
+<meta property="og:description" content="Driven By Innovation" />
+<meta property="og:image" content="https://formula-sman1mojosari.my.id/formula.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://formula-sman1mojosari.my.id/" />
+<meta property="og:site_name" content="Formula" />
 
 <link rel="icon" type="image/png" href="formula.png" />
 <link rel="apple-touch-icon" href="formula.png" />
@@ -26,6 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
 <style>
 :root {
   --color-primary: #1A73E8;
@@ -35,6 +33,8 @@
   --color-secondary-dark: #1E7E34;
   --color-accent: #EA4335;
   --color-warning: #FBBC04;
+  --color-purple: #7C4DFF;
+  --color-cyan: #00ACC1;
   --color-dark: #202124;
   --color-gray-900: #171717;
   --color-gray-700: #404040;
@@ -57,6 +57,7 @@
   --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
   --shadow-lg: 0 10px 30px rgba(0,0,0,0.10);
   --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
+  --shadow-glow-primary: 0 8px 30px rgba(26,115,232,0.35);
   --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --container-max: 1200px;
@@ -64,6 +65,7 @@
   --navbar-height: 68px;
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -78,6 +80,7 @@ body {
   background: var(--color-surface);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 img, svg { display: block; max-width: 100%; height: auto; }
@@ -97,7 +100,42 @@ h1, h2, h3, h4, h5, h6 {
 :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: 4px; }
 ::selection { background: var(--color-primary); color: white; }
 
-/* ========== LAYOUT ========== */
+/* ============================================================
+   ICON SYSTEM — SVG masks, no emoji
+   ============================================================ */
+.icon {
+  display: inline-block;
+  width: 20px; height: 20px;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center; mask-position: center;
+  -webkit-mask-size: contain; mask-size: contain;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.icon-sm { width: 16px; height: 16px; }
+.icon-lg { width: 24px; height: 24px; }
+.icon-xl { width: 28px; height: 28px; }
+.icon-2xl { width: 36px; height: 36px; }
+
+.icon-code { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'/%3E%3Cpolyline points='8 6 2 12 8 18'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'/%3E%3Cpolyline points='8 6 2 12 8 18'/%3E%3C/svg%3E"); }
+.icon-palette { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='13.5' cy='6.5' r='.5'/%3E%3Ccircle cx='17.5' cy='10.5' r='.5'/%3E%3Ccircle cx='8.5' cy='7.5' r='.5'/%3E%3Ccircle cx='6.5' cy='12.5' r='.5'/%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='13.5' cy='6.5' r='.5'/%3E%3Ccircle cx='17.5' cy='10.5' r='.5'/%3E%3Ccircle cx='8.5' cy='7.5' r='.5'/%3E%3Ccircle cx='6.5' cy='12.5' r='.5'/%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z'/%3E%3C/svg%3E"); }
+.icon-video { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='23 7 16 12 23 17 23 7'/%3E%3Crect x='1' y='5' width='15' height='14' rx='2' ry='2'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='23 7 16 12 23 17 23 7'/%3E%3Crect x='1' y='5' width='15' height='14' rx='2' ry='2'/%3E%3C/svg%3E"); }
+.icon-camera { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z'/%3E%3Ccircle cx='12' cy='13' r='4'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z'/%3E%3Ccircle cx='12' cy='13' r='4'/%3E%3C/svg%3E"); }
+.icon-cpu { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='2'/%3E%3Crect x='9' y='9' width='6' height='6'/%3E%3Cline x1='9' y1='1' x2='9' y2='4'/%3E%3Cline x1='15' y1='1' x2='15' y2='4'/%3E%3Cline x1='9' y1='20' x2='9' y2='23'/%3E%3Cline x1='15' y1='20' x2='15' y2='23'/%3E%3Cline x1='20' y1='9' x2='23' y2='9'/%3E%3Cline x1='20' y1='14' x2='23' y2='14'/%3E%3Cline x1='1' y1='9' x2='4' y2='9'/%3E%3Cline x1='1' y1='14' x2='4' y2='14'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='2'/%3E%3Crect x='9' y='9' width='6' height='6'/%3E%3Cline x1='9' y1='1' x2='9' y2='4'/%3E%3Cline x1='15' y1='1' x2='15' y2='4'/%3E%3Cline x1='9' y1='20' x2='9' y2='23'/%3E%3Cline x1='15' y1='20' x2='15' y2='23'/%3E%3Cline x1='20' y1='9' x2='23' y2='9'/%3E%3Cline x1='20' y1='14' x2='23' y2='14'/%3E%3Cline x1='1' y1='9' x2='4' y2='9'/%3E%3Cline x1='1' y1='14' x2='4' y2='14'/%3E%3C/svg%3E"); }
+.icon-globe { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z'/%3E%3C/svg%3E"); }
+.icon-rocket { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z'/%3E%3Cpath d='M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z'/%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0'/%3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z'/%3E%3Cpath d='M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z'/%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0'/%3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5'/%3E%3C/svg%3E"); }
+.icon-trophy { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9H4.5a2.5 2.5 0 010-5H6'/%3E%3Cpath d='M18 9h1.5a2.5 2.5 0 000-5H18'/%3E%3Cpath d='M4 22h16'/%3E%3Cpath d='M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22'/%3E%3Cpath d='M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22'/%3E%3Cpath d='M18 2H6v7a6 6 0 0012 0V2z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9H4.5a2.5 2.5 0 010-5H6'/%3E%3Cpath d='M18 9h1.5a2.5 2.5 0 000-5H18'/%3E%3Cpath d='M4 22h16'/%3E%3Cpath d='M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22'/%3E%3Cpath d='M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22'/%3E%3Cpath d='M18 2H6v7a6 6 0 0012 0V2z'/%3E%3C/svg%3E"); }
+.icon-medal { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='15' r='7'/%3E%3Cpolyline points='8.21 13.89 7 23 12 20 17 23 15.79 13.88'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='15' r='7'/%3E%3Cpolyline points='8.21 13.89 7 23 12 20 17 23 15.79 13.88'/%3E%3C/svg%3E"); }
+.icon-star { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/%3E%3C/svg%3E"); }
+.icon-calendar { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E"); }
+.icon-arrow-right { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E"); }
+.icon-check { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); }
+.icon-chevron-up { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'/%3E%3C/svg%3E"); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
 .container {
   width: 100%;
   max-width: var(--container-max);
@@ -105,7 +143,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-inline: var(--container-pad);
 }
 
-.section { padding-block: clamp(48px, 8vw, 96px); }
+.section { padding-block: clamp(48px, 8vw, 96px); position: relative; }
 
 .section-head { margin-bottom: 48px; }
 .section-head.text-center { text-align: center; }
@@ -136,7 +174,9 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 640px;
 }
 
-/* ========== BUTTONS ========== */
+/* ============================================================
+   BUTTONS
+   ============================================================ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -154,20 +194,47 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 44px;
   user-select: none;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
 }
+.btn .icon { transition: transform var(--transition-base); }
+.btn:hover .icon-arrow-right { transform: translateX(3px); }
 .btn:active { transform: scale(0.97); }
-.btn-primary { background: var(--color-primary); color: white; }
-.btn-primary:hover { background: var(--color-primary-dark); color: white; box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  color: white;
+  box-shadow: 0 4px 14px rgba(26,115,232,0.3);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+}
+.btn-primary:hover {
+  color: white;
+  box-shadow: var(--shadow-glow-primary);
+  transform: translateY(-2px);
+  background-position: 100% 50%;
+}
 .btn-outline { background: transparent; color: var(--text-primary); border-color: var(--border-color); }
-.btn-outline:hover { background: var(--color-light); border-color: var(--color-primary); color: var(--color-primary); }
+.btn-outline:hover {
+  background: var(--color-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
 .btn-ghost { background: transparent; color: var(--text-primary); }
 .btn-ghost:hover { background: var(--color-light); }
 .btn-white { background: white; color: var(--color-primary); }
-.btn-white:hover { background: #f0f0f0; color: var(--color-primary-dark); }
+.btn-white:hover {
+  background: #f0f0f0;
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
 .btn-lg { padding: 14px 32px; font-size: 15px; min-height: 52px; }
 .btn-sm { padding: 8px 16px; font-size: 13px; min-height: 36px; }
 
-/* ========== NAVBAR ========== */
+/* ============================================================
+   NAVBAR
+   ============================================================ */
 .navbar {
   position: sticky;
   top: 0;
@@ -230,6 +297,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-secondary);
   border-radius: var(--border-radius-full);
   transition: all var(--transition-fast);
+  position: relative;
 }
 .nav-link:hover, .nav-link.active {
   color: var(--color-primary);
@@ -243,18 +311,18 @@ h1, h2, h3, h4, h5, h6 {
   height: 42px;
   border-radius: 10px;
   color: var(--text-primary);
+  transition: background var(--transition-fast);
 }
 .nav-toggle:hover { background: var(--color-light); }
 .nav-toggle svg { width: 24px; height: 24px; }
 
-/* Mobile menu */
 .mobile-menu {
   position: fixed;
   inset: var(--navbar-height) 0 0 0;
   background: white;
   padding: 24px 20px;
   transform: translateX(100%);
-  transition: transform var(--transition-base);
+  transition: transform var(--transition-slow);
   z-index: 490;
   overflow-y: auto;
 }
@@ -286,7 +354,9 @@ h1, h2, h3, h4, h5, h6 {
   .mobile-menu { display: none; }
 }
 
-/* ========== HERO ========== */
+/* ============================================================
+   HERO
+   ============================================================ */
 .hero {
   position: relative;
   padding-block: clamp(48px, 10vw, 100px);
@@ -303,6 +373,7 @@ h1, h2, h3, h4, h5, h6 {
   background: radial-gradient(circle, rgba(26,115,232,0.15) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
+  animation: floatBlob 14s ease-in-out infinite;
 }
 .hero::after {
   content: '';
@@ -314,6 +385,11 @@ h1, h2, h3, h4, h5, h6 {
   background: radial-gradient(circle, rgba(52,168,83,0.10) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
+  animation: floatBlob 18s ease-in-out infinite reverse;
+}
+@keyframes floatBlob {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%     { transform: translate(-30px, 30px) scale(1.08); }
 }
 .hero-inner {
   position: relative;
@@ -360,10 +436,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 .hero h1 .gradient {
   background: linear-gradient(135deg, var(--color-primary), #4285F4 50%, var(--color-secondary));
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  animation: gradientMove 6s ease infinite;
+}
+@keyframes gradientMove {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
 }
 .hero-lead {
   font-size: 17px;
@@ -398,7 +480,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-muted);
 }
 
-/* Hero visual */
 .hero-visual {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -413,22 +494,11 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--shadow-xl);
   padding: 18px;
   border: 1px solid var(--border-color);
+  transition: transform var(--transition-slow);
 }
-.hvc-1 {
-  top: 5%; left: 0;
-  width: 60%;
-  animation: float1 6s ease-in-out infinite;
-}
-.hvc-2 {
-  top: 30%; right: 0;
-  width: 55%;
-  animation: float2 7s ease-in-out infinite;
-}
-.hvc-3 {
-  bottom: 8%; left: 10%;
-  width: 70%;
-  animation: float1 8s ease-in-out infinite;
-}
+.hvc-1 { top: 5%; left: 0; width: 60%; animation: float1 6s ease-in-out infinite; }
+.hvc-2 { top: 30%; right: 0; width: 55%; animation: float2 7s ease-in-out infinite; }
+.hvc-3 { bottom: 8%; left: 10%; width: 70%; animation: float1 8s ease-in-out infinite; }
 @keyframes float1 {
   0%,100% { transform: translateY(0) rotate(-1deg); }
   50% { transform: translateY(-12px) rotate(1deg); }
@@ -465,7 +535,9 @@ h1, h2, h3, h4, h5, h6 {
 .hvc-stat-item strong { display: block; font-size: 18px; font-weight: 800; color: var(--text-primary); line-height: 1; }
 .hvc-stat-item span { font-size: 10px; color: var(--text-muted); }
 
-/* ========== STATISTIK BAR ========== */
+/* ============================================================
+   STATS BAR
+   ============================================================ */
 .stats-section {
   background: var(--color-dark);
   color: white;
@@ -481,6 +553,11 @@ h1, h2, h3, h4, h5, h6 {
   width: 800px; height: 400px;
   background: radial-gradient(ellipse, rgba(26,115,232,0.25), transparent 70%);
   pointer-events: none;
+  animation: glowPulse 6s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%,100% { opacity: 0.7; }
+  50%     { opacity: 1; }
 }
 .stats-grid {
   display: grid;
@@ -510,7 +587,9 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
 
-/* ========== ABOUT PREVIEW ========== */
+/* ============================================================
+   ABOUT
+   ============================================================ */
 .about-grid {
   display: grid;
   gap: 48px;
@@ -529,12 +608,20 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--border-radius-lg);
   display: grid;
   place-items: center;
-  font-size: 42px;
-  font-weight: 800;
   color: white;
   position: relative;
   overflow: hidden;
+  transition: transform var(--transition-slow);
 }
+.about-visual-item:hover { transform: translateY(-6px) rotate(-2deg); }
+.about-visual-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 50%);
+  pointer-events: none;
+}
+.about-visual-item .icon { width: 52px; height: 52px; position: relative; z-index: 1; }
 .about-visual-item:nth-child(1) { background: linear-gradient(135deg, #1A73E8, #4285F4); }
 .about-visual-item:nth-child(2) { background: linear-gradient(135deg, #34A853, #5BB974); margin-top: 24px; }
 .about-visual-item:nth-child(3) { background: linear-gradient(135deg, #EA4335, #F28B82); margin-top: -24px; }
@@ -548,6 +635,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.9;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  z-index: 1;
 }
 .about-list { display: grid; gap: 16px; margin-top: 24px; }
 .about-list li {
@@ -557,14 +645,16 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 15px;
   color: var(--text-secondary);
 }
-.about-list li svg {
+.about-list li .icon {
   flex-shrink: 0;
   width: 22px; height: 22px;
   margin-top: 2px;
   color: var(--color-secondary);
 }
 
-/* ========== PROGRAM CARDS ========== */
+/* ============================================================
+   PROGRAM CARDS
+   ============================================================ */
 .grid-3 {
   display: grid;
   gap: 24px;
@@ -585,19 +675,33 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   overflow: hidden;
 }
+.program-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), #4285F4);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
+}
+.program-card:hover::before { transform: scaleX(1); }
 .program-card:hover {
   border-color: var(--color-primary);
   box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }
 .program-icon {
   width: 52px; height: 52px;
   border-radius: 14px;
   display: grid; place-items: center;
-  font-size: 24px;
   background: var(--color-primary-light);
   color: var(--color-primary);
+  transition: transform var(--transition-base);
 }
+.program-card:hover .program-icon { transform: scale(1.1) rotate(-5deg); }
+.program-icon .icon { width: 26px; height: 26px; }
 .program-card[data-color="green"] .program-icon { background: #E6F4EA; color: var(--color-secondary-dark); }
 .program-card[data-color="red"] .program-icon { background: #FCE8E6; color: #B31412; }
 .program-card[data-color="yellow"] .program-icon { background: #FEF7E0; color: #B8860B; }
@@ -612,8 +716,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 14px;
   border-top: 1px solid var(--border-color);
 }
+.program-meta .icon { width: 14px; height: 14px; }
 
-/* ========== PROJECT CARDS ========== */
+/* ============================================================
+   PROJECT CARDS
+   ============================================================ */
 .project-card {
   background: white;
   border: 1px solid var(--border-color);
@@ -626,7 +733,7 @@ h1, h2, h3, h4, h5, h6 {
 .project-card:hover {
   border-color: var(--color-primary);
   box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }
 .project-cover {
   aspect-ratio: 16/10;
@@ -638,11 +745,20 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-size: 42px;
   font-weight: 800;
+  overflow: hidden;
+}
+.project-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.2), transparent 60%);
+  pointer-events: none;
 }
 .project-cover[data-color="green"] { background: linear-gradient(135deg, #34A853, #5BB974); }
 .project-cover[data-color="red"] { background: linear-gradient(135deg, #EA4335, #F28B82); }
 .project-cover[data-color="purple"] { background: linear-gradient(135deg, #7C4DFF, #B39DFF); }
 .project-cover[data-color="orange"] { background: linear-gradient(135deg, #FBBC04, #FDD663); color: #202124; }
+.project-cover .icon { width: 56px; height: 56px; position: relative; z-index: 1; }
 .project-status {
   position: absolute;
   top: 12px; right: 12px;
@@ -655,6 +771,7 @@ h1, h2, h3, h4, h5, h6 {
   backdrop-filter: blur(8px);
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  z-index: 2;
 }
 .project-status[data-status="development"] { color: var(--color-primary); }
 .project-status[data-status="completed"]  { color: var(--color-secondary-dark); }
@@ -682,8 +799,14 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   height: 100%;
   background: linear-gradient(90deg, var(--color-primary), #4285F4);
+  background-size: 200% 100%;
   border-radius: 999px;
   transition: width 1s ease-out;
+  animation: shimmer 2.4s linear infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 .project-progress-text {
   display: flex;
@@ -693,7 +816,9 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 4px;
 }
 
-/* ========== NEWS ========== */
+/* ============================================================
+   NEWS
+   ============================================================ */
 .grid-news {
   display: grid;
   gap: 24px;
@@ -713,15 +838,24 @@ h1, h2, h3, h4, h5, h6 {
   transition: all var(--transition-base);
   cursor: pointer;
 }
-.news-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.news-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-lg); transform: translateY(-6px); }
 .news-thumb {
   aspect-ratio: 16/9;
   background: linear-gradient(135deg, #4285F4, #1A73E8);
   display: grid;
   place-items: center;
   color: white;
-  font-size: 32px;
+  overflow: hidden;
+  position: relative;
 }
+.news-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.2), transparent 60%);
+  pointer-events: none;
+}
+.news-thumb .icon { width: 44px; height: 44px; position: relative; z-index: 1; }
 .news-thumb[data-color="green"] { background: linear-gradient(135deg, #5BB974, #34A853); }
 .news-thumb[data-color="orange"] { background: linear-gradient(135deg, #FDD663, #FBBC04); color: #202124; }
 .news-body { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
@@ -740,7 +874,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 .news-card p { font-size: 13px; line-height: 1.6; }
 
-/* ========== ACHIEVEMENTS ========== */
+/* ============================================================
+   ACHIEVEMENTS
+   ============================================================ */
 .achievements-list { display: grid; gap: 16px; }
 @media (min-width: 768px) { .achievements-list { grid-template-columns: repeat(2, 1fr); } }
 
@@ -753,7 +889,11 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--border-radius);
   transition: all var(--transition-base);
 }
-.achievement-item:hover { border-color: var(--color-warning); box-shadow: var(--shadow-md); }
+.achievement-item:hover {
+  border-color: var(--color-warning);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
 .achievement-icon {
   flex-shrink: 0;
   width: 48px; height: 48px;
@@ -761,8 +901,8 @@ h1, h2, h3, h4, h5, h6 {
   background: #FEF7E0;
   color: #B8860B;
   display: grid; place-items: center;
-  font-size: 22px;
 }
+.achievement-icon .icon { width: 26px; height: 26px; }
 .achievement-icon[data-type="silver"] { background: #F0F0F0; color: #525252; }
 .achievement-icon[data-type="bronze"] { background: #FBEFE4; color: #8B5A2B; }
 .achievement-item h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
@@ -774,7 +914,9 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 6px;
 }
 
-/* ========== GALLERY ========== */
+/* ============================================================
+   GALLERY
+   ============================================================ */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -788,14 +930,24 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--border-radius);
   display: grid;
   place-items: center;
-  font-size: 28px;
   color: white;
   cursor: pointer;
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
 }
-.gallery-item:hover { transform: scale(1.03); box-shadow: var(--shadow-lg); }
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+.gallery-item:hover { transform: scale(1.04); box-shadow: var(--shadow-lg); z-index: 2; }
+.gallery-item:hover::after { opacity: 1; }
+.gallery-item .icon { width: 32px; height: 32px; position: relative; z-index: 1; }
 .gallery-item:nth-child(6n+1) { background: linear-gradient(135deg, #1A73E8, #4285F4); }
 .gallery-item:nth-child(6n+2) { background: linear-gradient(135deg, #34A853, #5BB974); }
 .gallery-item:nth-child(6n+3) { background: linear-gradient(135deg, #EA4335, #F28B82); }
@@ -808,18 +960,20 @@ h1, h2, h3, h4, h5, h6 {
   .gallery-item.span-2 { grid-column: span 2; grid-row: span 2; }
 }
 
-/* ========== CTA ========== */
-.cta-section {
-  padding-block: clamp(48px, 8vw, 96px);
-}
+/* ============================================================
+   CTA
+   ============================================================ */
+.cta-section { padding-block: clamp(48px, 8vw, 96px); }
 .cta-box {
   background: linear-gradient(135deg, var(--color-primary) 0%, #4285F4 60%, var(--color-secondary) 130%);
+  background-size: 200% 200%;
   border-radius: var(--border-radius-lg);
   padding: clamp(32px, 6vw, 64px);
   color: white;
   text-align: center;
   position: relative;
   overflow: hidden;
+  animation: gradientMove 8s ease infinite;
 }
 .cta-box::before {
   content: '';
@@ -862,12 +1016,15 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
 }
 
-/* ========== FOOTER ========== */
+/* ============================================================
+   FOOTER
+   ============================================================ */
 .footer {
   background: var(--color-dark);
   color: rgba(255,255,255,0.7);
   padding-block: 60px 24px;
   font-size: 14px;
+  position: relative;
 }
 .footer-grid {
   display: grid;
@@ -891,7 +1048,8 @@ h1, h2, h3, h4, h5, h6 {
 .footer-social a:hover {
   background: var(--color-primary);
   color: white;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(26,115,232,0.4);
 }
 
 .footer h4 {
@@ -920,8 +1078,15 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: rgba(255,255,255,0.5);
 }
+.footer-bottom .heart { color: var(--color-accent); display: inline-block; animation: heartbeat 1.4s ease-in-out infinite; }
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.15); }
+}
 
-/* ========== SCROLL TO TOP ========== */
+/* ============================================================
+   SCROLL TO TOP
+   ============================================================ */
 .scroll-top {
   position: fixed;
   bottom: 24px;
@@ -929,11 +1094,11 @@ h1, h2, h3, h4, h5, h6 {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
   color: white;
   display: grid;
   place-items: center;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-glow-primary);
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
@@ -945,22 +1110,33 @@ h1, h2, h3, h4, h5, h6 {
   visibility: visible;
   transform: translateY(0);
 }
-.scroll-top:hover { background: var(--color-primary-dark); }
+.scroll-top:hover {
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  transform: translateY(-3px) scale(1.05);
+}
+.scroll-top .icon { width: 22px; height: 22px; }
 
-/* ========== REVEAL ON SCROLL ========== */
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .reveal.in {
   opacity: 1;
   transform: translateY(0);
 }
+.reveal.delay-1 { transition-delay: 0.05s; }
+.reveal.delay-2 { transition-delay: 0.10s; }
+.reveal.delay-3 { transition-delay: 0.15s; }
+.reveal.delay-4 { transition-delay: 0.20s; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
@@ -970,18 +1146,16 @@ h1, h2, h3, h4, h5, h6 {
 </head>
 <body>
 
-<!-- =========================================================
-     NAVBAR
-     ========================================================= -->
+<!-- NAVBAR -->
 <header class="navbar" id="navbar">
   <div class="container nav-inner">
     <a href="index.html" class="nav-logo">
-  <img src="formula.png" alt="Logo FORMULA" width="38" height="38" style="border-radius:10px;object-fit:cover" />
-  <span class="nav-logo-text">
-    FORMULA
-    <small>SMAN 1 Mojosari</small>
-  </span>
-</a>
+      <img src="formula.png" alt="Logo FORMULA" width="38" height="38" style="border-radius:10px;object-fit:cover" />
+      <span class="nav-logo-text">
+        FORMULA
+        <small>SMAN 1 Mojosari</small>
+      </span>
+    </a>
 
     <nav class="nav-menu" aria-label="Navigasi utama">
       <a href="index.html" class="nav-link active">Home</a>
@@ -1007,7 +1181,7 @@ h1, h2, h3, h4, h5, h6 {
   </div>
 </header>
 
-<!-- Mobile menu -->
+<!-- MOBILE MENU -->
 <nav class="mobile-menu" id="mobileMenu" aria-label="Menu mobile">
   <a href="index.html" class="active">Home</a>
   <a href="about.html">About</a>
@@ -1026,9 +1200,7 @@ h1, h2, h3, h4, h5, h6 {
 
 <main>
 
-  <!-- =========================================================
-       HERO
-       ========================================================= -->
+  <!-- HERO -->
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-content">
@@ -1047,13 +1219,13 @@ h1, h2, h3, h4, h5, h6 {
         <div class="hero-cta">
           <a href="register.html" class="btn btn-primary btn-lg">
             Gabung Sekarang
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <span class="icon icon-sm icon-arrow-right"></span>
           </a>
           <a href="projects.html" class="btn btn-outline btn-lg">Lihat Project</a>
         </div>
         <div class="hero-meta">
           <div class="hero-meta-item">
-            <strong data-counter="70+">0</strong>
+            <strong data-counter="70">0</strong>
             <span>Anggota Aktif</span>
           </div>
           <div class="hero-meta-item">
@@ -1070,7 +1242,7 @@ h1, h2, h3, h4, h5, h6 {
       <div class="hero-visual" aria-hidden="true">
         <div class="hero-visual-card hvc-1">
           <div class="hvc-head">
-            <div class="hvc-avatar">R</div>
+            <div class="hvc-avatar">N</div>
             <div>
               <div class="hvc-title">Nalendra P.</div>
               <div class="hvc-sub">Game Dev • Angkatan 2024</div>
@@ -1082,9 +1254,9 @@ h1, h2, h3, h4, h5, h6 {
 
         <div class="hero-visual-card hvc-2">
           <div class="hvc-head">
-            <div class="hvc-avatar" style="background:linear-gradient(135deg,#34A853,#5BB974)">S</div>
+            <div class="hvc-avatar" style="background:linear-gradient(135deg,#34A853,#5BB974)">A</div>
             <div>
-              <div class="hvc-title">Andika.</div>
+              <div class="hvc-title">Andika</div>
               <div class="hvc-sub">Web Dev</div>
             </div>
           </div>
@@ -1104,14 +1276,12 @@ h1, h2, h3, h4, h5, h6 {
     </div>
   </section>
 
-  <!-- =========================================================
-       STATISTIK
-       ========================================================= -->
+  <!-- STATISTIK -->
   <section class="stats-section">
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item reveal">
-          <div class="stat-value" data-counter="70+">0</div>
+          <div class="stat-value" data-counter="70">0</div>
           <div class="stat-label">Anggota Aktif</div>
         </div>
         <div class="stat-item reveal">
@@ -1130,9 +1300,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
   </section>
 
-  <!-- =========================================================
-       ABOUT PREVIEW
-       ========================================================= -->
+  <!-- ABOUT PREVIEW -->
   <section class="section">
     <div class="container about-grid">
       <div class="reveal">
@@ -1144,54 +1312,52 @@ h1, h2, h3, h4, h5, h6 {
         </p>
         <ul class="about-list">
           <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="icon icon-check"></span>
             <span>Pembelajaran terstruktur dari dasar hingga mahir</span>
           </li>
           <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="icon icon-check"></span>
             <span>Project nyata, bukan sekadar teori di kelas</span>
           </li>
           <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Mentoring dari kakak tingkat & alumni</span>
+            <span class="icon icon-check"></span>
+            <span>Mentoring dari kakak tingkat &amp; alumni</span>
           </li>
           <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="icon icon-check"></span>
             <span>Portofolio digital yang bisa dibawa sampai kuliah</span>
           </li>
         </ul>
         <div style="margin-top:32px">
           <a href="about.html" class="btn btn-primary">
             Selengkapnya
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <span class="icon icon-sm icon-arrow-right"></span>
           </a>
         </div>
       </div>
 
       <div class="about-visual reveal">
         <div class="about-visual-item">
-          <span>💻</span>
+          <span class="icon icon-code"></span>
           <small>Programming</small>
         </div>
         <div class="about-visual-item">
-          <span>🎨</span>
+          <span class="icon icon-palette"></span>
           <small>Design</small>
         </div>
         <div class="about-visual-item">
-          <span>🎬</span>
+          <span class="icon icon-video"></span>
           <small>Video</small>
         </div>
         <div class="about-visual-item">
-          <span>📸</span>
+          <span class="icon icon-camera"></span>
           <small>Photo</small>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       PROGRAM UNGGULAN
-       ========================================================= -->
+  <!-- PROGRAM UNGGULAN -->
   <section class="section" style="background: var(--color-light)">
     <div class="container">
       <div class="section-head text-center">
@@ -1202,53 +1368,69 @@ h1, h2, h3, h4, h5, h6 {
 
       <div class="grid-3">
         <article class="program-card reveal">
-          <div class="program-icon">💻</div>
+          <div class="program-icon"><span class="icon icon-code"></span></div>
           <h3>Web Development</h3>
           <p>Belajar membangun website modern dari nol — HTML, CSS, JavaScript, hingga framework populer.</p>
-          <div class="program-meta">📅 Setiap Sabtu • 4 Pertemuan</div>
+          <div class="program-meta">
+            <span class="icon icon-calendar"></span>
+            <span>Setiap Sabtu • 4 Pertemuan</span>
+          </div>
         </article>
 
-        <article class="program-card reveal" data-color="green">
-          <div class="program-icon">🎨</div>
+        <article class="program-card reveal delay-1" data-color="green">
+          <div class="program-icon"><span class="icon icon-palette"></span></div>
           <h3>Graphic Design</h3>
           <p>Menguasai tools desain seperti Figma, Photoshop, dan Illustrator untuk kebutuhan digital maupun cetak.</p>
-          <div class="program-meta">📅 Setiap Minggu • 3 Pertemuan</div>
+          <div class="program-meta">
+            <span class="icon icon-calendar"></span>
+            <span>Setiap Minggu • 3 Pertemuan</span>
+          </div>
         </article>
 
-        <article class="program-card reveal" data-color="red">
-          <div class="program-icon">🎬</div>
+        <article class="program-card reveal delay-2" data-color="red">
+          <div class="program-icon"><span class="icon icon-video"></span></div>
           <h3>Video Editing</h3>
-          <p>Produksi video dari pra-produksi, shooting, editing, hingga color grading dengan Premiere & After Effects.</p>
-          <div class="program-meta">📅 Bulanan • 2 Sesi</div>
+          <p>Produksi video dari pra-produksi, shooting, editing, hingga color grading dengan Premiere &amp; After Effects.</p>
+          <div class="program-meta">
+            <span class="icon icon-calendar"></span>
+            <span>Bulanan • 2 Sesi</span>
+          </div>
         </article>
 
         <article class="program-card reveal" data-color="yellow">
-          <div class="program-icon">📸</div>
+          <div class="program-icon"><span class="icon icon-camera"></span></div>
           <h3>Photography</h3>
           <p>Teknik dasar fotografi, komposisi, lighting, dan editing untuk kebutuhan dokumentasi maupun artistik.</p>
-          <div class="program-meta">📅 Bulanan • Hunting Foto</div>
+          <div class="program-meta">
+            <span class="icon icon-calendar"></span>
+            <span>Bulanan • Hunting Foto</span>
+          </div>
         </article>
 
-        <article class="program-card reveal">
-          <div class="program-icon">🤖</div>
-          <h3>AI & Data</h3>
+        <article class="program-card reveal delay-1">
+          <div class="program-icon"><span class="icon icon-cpu"></span></div>
+          <h3>AI &amp; Data</h3>
           <p>Pengenalan kecerdasan buatan, machine learning dasar, dan pemanfaatan AI untuk produktivitas.</p>
-          <div class="program-meta">📅 Semester • 6 Sesi</div>
+          <div class="program-meta">
+            <span class="icon icon-calendar"></span>
+            <span>Semester • 6 Sesi</span>
+          </div>
         </article>
 
-        <article class="program-card reveal" data-color="green">
-          <div class="program-icon">🌐</div>
+        <article class="program-card reveal delay-2" data-color="green">
+          <div class="program-icon"><span class="icon icon-globe"></span></div>
           <h3>Networking</h3>
           <p>Dasar jaringan komputer, konfigurasi, dan troubleshooting untuk kebutuhan sekolah maupun lomba.</p>
-          <div class="program-meta">📅 Semester • 5 Sesi</div>
+          <div class="program-meta">
+            <span class="icon icon-calendar"></span>
+            <span>Semester • 5 Sesi</span>
+          </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       PROJECT TERBARU
-       ========================================================= -->
+  <!-- PROJECT TERBARU -->
   <section class="section">
     <div class="container">
       <div class="section-head text-center">
@@ -1260,7 +1442,7 @@ h1, h2, h3, h4, h5, h6 {
       <div class="grid-3">
         <article class="project-card reveal">
           <div class="project-cover">
-            <span>Web</span>
+            <span class="icon icon-code"></span>
             <span class="project-status" data-status="development">Development</span>
           </div>
           <div class="project-body">
@@ -1275,9 +1457,9 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card reveal delay-1">
           <div class="project-cover" data-color="green">
-            <span>App</span>
+            <span class="icon icon-cpu"></span>
             <span class="project-status" data-status="completed">Completed</span>
           </div>
           <div class="project-body">
@@ -1292,9 +1474,9 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card reveal delay-2">
           <div class="project-cover" data-color="purple">
-            <span>Film</span>
+            <span class="icon icon-video"></span>
             <span class="project-status" data-status="planning">Planning</span>
           </div>
           <div class="project-body">
@@ -1313,26 +1495,24 @@ h1, h2, h3, h4, h5, h6 {
       <div style="text-align:center;margin-top:40px">
         <a href="projects.html" class="btn btn-outline btn-lg">
           Lihat Semua Project
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span class="icon icon-sm icon-arrow-right"></span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       BERITA TERBARU
-       ========================================================= -->
+  <!-- BERITA TERBARU -->
   <section class="section" style="background: var(--color-light)">
     <div class="container">
       <div class="section-head text-center">
-        <span class="section-label">Berita & Kegiatan</span>
+        <span class="section-label">Berita &amp; Kegiatan</span>
         <h2 class="section-title">Update Terbaru</h2>
         <p class="section-sub">Ikuti kegiatan, pengumuman, dan cerita terbaru dari FORMULA.</p>
       </div>
 
       <div class="grid-news">
         <article class="news-card reveal">
-          <div class="news-thumb">📰</div>
+          <div class="news-thumb"><span class="icon icon-star"></span></div>
           <div class="news-body">
             <div class="news-date">12 Januari 2025</div>
             <h3>Workshop Web Development Batch 2 Resmi Dibuka</h3>
@@ -1340,8 +1520,8 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </article>
 
-        <article class="news-card reveal">
-          <div class="news-thumb" data-color="green">🏆</div>
+        <article class="news-card reveal delay-1">
+          <div class="news-thumb" data-color="green"><span class="icon icon-trophy"></span></div>
           <div class="news-body">
             <div class="news-date">08 Januari 2025</div>
             <h3>Tim FORMULA Raih Juara 2 Lomba UI/UX Nasional</h3>
@@ -1349,8 +1529,8 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </article>
 
-        <article class="news-card reveal">
-          <div class="news-thumb" data-color="orange">🎬</div>
+        <article class="news-card reveal delay-2">
+          <div class="news-thumb" data-color="orange"><span class="icon icon-video"></span></div>
           <div class="news-body">
             <div class="news-date">03 Januari 2025</div>
             <h3>Produksi Film Pendek "Jeda" Memasuki Tahap Editing</h3>
@@ -1362,15 +1542,13 @@ h1, h2, h3, h4, h5, h6 {
       <div style="text-align:center;margin-top:40px">
         <a href="news.html" class="btn btn-outline btn-lg">
           Baca Semua Berita
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span class="icon icon-sm icon-arrow-right"></span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       ACHIEVEMENTS
-       ========================================================= -->
+  <!-- ACHIEVEMENTS -->
   <section class="section">
     <div class="container">
       <div class="section-head text-center">
@@ -1381,7 +1559,7 @@ h1, h2, h3, h4, h5, h6 {
 
       <div class="achievements-list">
         <div class="achievement-item reveal">
-          <div class="achievement-icon" data-type="gold">🏆</div>
+          <div class="achievement-icon" data-type="gold"><span class="icon icon-trophy"></span></div>
           <div>
             <h4>Juara 2 UI/UX Design Competition</h4>
             <p>Tingkat Nasional — Universitas Brawijaya</p>
@@ -1389,8 +1567,8 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </div>
 
-        <div class="achievement-item reveal">
-          <div class="achievement-icon" data-type="gold">🥇</div>
+        <div class="achievement-item reveal delay-1">
+          <div class="achievement-icon" data-type="gold"><span class="icon icon-medal"></span></div>
           <div>
             <h4>Juara 1 Web Design Competition</h4>
             <p>Tingkat Provinsi — Jawa Timur</p>
@@ -1399,7 +1577,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
 
         <div class="achievement-item reveal">
-          <div class="achievement-icon" data-type="silver">🥈</div>
+          <div class="achievement-icon" data-type="silver"><span class="icon icon-medal"></span></div>
           <div>
             <h4>Juara 2 Film Pendek Pelajar</h4>
             <p>Tingkat Kabupaten — Mojokerto</p>
@@ -1407,8 +1585,8 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </div>
 
-        <div class="achievement-item reveal">
-          <div class="achievement-icon" data-type="bronze">🥉</div>
+        <div class="achievement-item reveal delay-1">
+          <div class="achievement-icon" data-type="bronze"><span class="icon icon-medal"></span></div>
           <div>
             <h4>Juara 3 Poster Design</h4>
             <p>Tingkat Kabupaten — Mojokerto</p>
@@ -1420,50 +1598,46 @@ h1, h2, h3, h4, h5, h6 {
       <div style="text-align:center;margin-top:40px">
         <a href="achievements.html" class="btn btn-outline btn-lg">
           Lihat Semua Prestasi
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span class="icon icon-sm icon-arrow-right"></span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       GALLERY
-       ========================================================= -->
+  <!-- GALLERY -->
   <section class="section" style="background: var(--color-light)">
     <div class="container">
       <div class="section-head text-center">
         <span class="section-label">Galeri</span>
-        <h2 class="section-title">Momen & Dokumentasi</h2>
+        <h2 class="section-title">Momen &amp; Dokumentasi</h2>
         <p class="section-sub">Jejak kegiatan FORMULA dalam gambar — dari workshop hingga hunting foto.</p>
       </div>
 
       <div class="gallery-grid">
-        <div class="gallery-item span-2">📸</div>
-        <div class="gallery-item">🎨</div>
-        <div class="gallery-item">💻</div>
-        <div class="gallery-item">🎬</div>
-        <div class="gallery-item">🏆</div>
-        <div class="gallery-item">🌐</div>
-        <div class="gallery-item">🤖</div>
-        <div class="gallery-item">📷</div>
-        <div class="gallery-item">🎞️</div>
-        <div class="gallery-item">🖥️</div>
-        <div class="gallery-item">🎤</div>
-        <div class="gallery-item">🎯</div>
+        <div class="gallery-item span-2"><span class="icon icon-camera"></span></div>
+        <div class="gallery-item"><span class="icon icon-palette"></span></div>
+        <div class="gallery-item"><span class="icon icon-code"></span></div>
+        <div class="gallery-item"><span class="icon icon-video"></span></div>
+        <div class="gallery-item"><span class="icon icon-trophy"></span></div>
+        <div class="gallery-item"><span class="icon icon-globe"></span></div>
+        <div class="gallery-item"><span class="icon icon-cpu"></span></div>
+        <div class="gallery-item"><span class="icon icon-camera"></span></div>
+        <div class="gallery-item"><span class="icon icon-video"></span></div>
+        <div class="gallery-item"><span class="icon icon-code"></span></div>
+        <div class="gallery-item"><span class="icon icon-star"></span></div>
+        <div class="gallery-item"><span class="icon icon-rocket"></span></div>
       </div>
 
       <div style="text-align:center;margin-top:40px">
         <a href="gallery.html" class="btn btn-outline btn-lg">
           Lihat Galeri Lengkap
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span class="icon icon-sm icon-arrow-right"></span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================
-       CTA
-       ========================================================= -->
+  <!-- CTA -->
   <section class="cta-section">
     <div class="container">
       <div class="cta-box reveal">
@@ -1472,7 +1646,7 @@ h1, h2, h3, h4, h5, h6 {
         <div class="cta-actions">
           <a href="register.html" class="btn btn-white btn-lg">
             Daftar Sekarang
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <span class="icon icon-sm icon-arrow-right"></span>
           </a>
           <a href="contact.html" class="btn btn-ghost btn-lg" style="color:white;border:1.5px solid rgba(255,255,255,0.4)">Hubungi Kami</a>
         </div>
@@ -1482,21 +1656,19 @@ h1, h2, h3, h4, h5, h6 {
 
 </main>
 
-<!-- =========================================================
-     FOOTER
-     ========================================================= -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="nav-logo">
-  <img src="formula.png" alt="Logo FORMULA" width="38" height="38" style="border-radius:10px;object-fit:cover" />
-  <span class="nav-logo-text">
-    FORMULA
-    <small>SMAN 1 Mojosari</small>
-  </span>
-</a>
-        <p>Informatika & Multimedia SMAN 1 Mojosari. Wadah kreatif siswa untuk belajar, berkarya, dan berkolaborasi.</p>
+          <img src="formula.png" alt="Logo FORMULA" width="38" height="38" style="border-radius:10px;object-fit:cover" />
+          <span class="nav-logo-text">
+            FORMULA
+            <small>SMAN 1 Mojosari</small>
+          </span>
+        </a>
+        <p>Informatika &amp; Multimedia SMAN 1 Mojosari. Wadah kreatif siswa untuk belajar, berkarya, dan berkolaborasi.</p>
         <div class="footer-social">
           <a href="#" aria-label="Instagram">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
@@ -1548,23 +1720,21 @@ h1, h2, h3, h4, h5, h6 {
 
     <div class="footer-bottom">
       <span>© 2025 FORMULA — SMAN 1 Mojosari. All rights reserved.</span>
-      <span>Dibuat dengan ❤️ oleh anggota FORMULA</span>
+      <span>Dibuat dengan <span class="heart">❤</span> oleh anggota FORMULA</span>
     </div>
   </div>
 </footer>
 
-<!-- Scroll to top -->
+<!-- SCROLL TOP -->
 <button class="scroll-top" id="scrollTop" aria-label="Kembali ke atas">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  <span class="icon icon-chevron-up"></span>
 </button>
 
 <script>
 (function () {
   'use strict';
 
-  /* ============================================================
-     1. NAVBAR — scroll effect
-     ============================================================ */
+  /* NAVBAR scroll effect */
   const navbar = document.getElementById('navbar');
   const onScroll = () => {
     if (!navbar) return;
@@ -1573,9 +1743,7 @@ h1, h2, h3, h4, h5, h6 {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ============================================================
-     2. MOBILE MENU toggle
-     ============================================================ */
+  /* MOBILE MENU */
   const navToggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
   if (navToggle && mobileMenu) {
@@ -1593,11 +1761,8 @@ h1, h2, h3, h4, h5, h6 {
     });
   }
 
-  /* ============================================================
-     3. COUNTER ANIMATION (stats)
-     ============================================================ */
+  /* COUNTER ANIMATION */
   const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-
   const animateCounter = (el) => {
     const target = parseInt(el.getAttribute('data-counter'), 10) || 0;
     const duration = 1600;
@@ -1611,9 +1776,7 @@ h1, h2, h3, h4, h5, h6 {
     requestAnimationFrame(step);
   };
 
-  /* ============================================================
-     4. REVEAL ON SCROLL + trigger counter
-     ============================================================ */
+  /* REVEAL + COUNTER */
   const revealEls = document.querySelectorAll('.reveal');
   const counterEls = document.querySelectorAll('[data-counter]');
 
@@ -1625,7 +1788,6 @@ h1, h2, h3, h4, h5, h6 {
         obs.unobserve(entry.target);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
     revealEls.forEach((el) => io.observe(el));
 
     const ioCounter = new IntersectionObserver((entries, obs) => {
@@ -1635,19 +1797,15 @@ h1, h2, h3, h4, h5, h6 {
         obs.unobserve(entry.target);
       });
     }, { threshold: 0.5 });
-
     counterEls.forEach((el) => ioCounter.observe(el));
   } else {
-    // fallback
     revealEls.forEach((el) => el.classList.add('in'));
     counterEls.forEach((el) => {
       el.textContent = (parseInt(el.getAttribute('data-counter'), 10) || 0).toLocaleString('id-ID');
     });
   }
 
-  /* ============================================================
-     5. SCROLL TO TOP button
-     ============================================================ */
+  /* SCROLL TOP */
   const scrollTopBtn = document.getElementById('scrollTop');
   if (scrollTopBtn) {
     const toggleBtn = () => {
@@ -1660,18 +1818,14 @@ h1, h2, h3, h4, h5, h6 {
     });
   }
 
-  /* ============================================================
-     6. NAV ACTIVE STATE (mark current page)
-     ============================================================ */
+  /* ACTIVE NAV */
   const currentPage = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   document.querySelectorAll('.nav-link, .mobile-menu a').forEach((link) => {
     const href = (link.getAttribute('href') || '').toLowerCase();
     if (href === currentPage) link.classList.add('active');
   });
 
-  /* ============================================================
-     7. PROJECT PROGRESS BAR — animate width on view
-     ============================================================ */
+  /* PROGRESS BAR ANIMATE */
   const progressBars = document.querySelectorAll('.project-progress span');
   if ('IntersectionObserver' in window) {
     const ioBar = new IntersectionObserver((entries, obs) => {
@@ -1690,9 +1844,7 @@ h1, h2, h3, h4, h5, h6 {
     progressBars.forEach((b) => ioBar.observe(b));
   }
 
-  /* ============================================================
-     8. SMOOTH ANCHOR LINK (in-page)
-     ============================================================ */
+  /* SMOOTH ANCHOR */
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
       const id = a.getAttribute('href');
@@ -1705,9 +1857,7 @@ h1, h2, h3, h4, h5, h6 {
     });
   });
 
-  /* ============================================================
-     9. SHOW DESKTOP-ONLY ACTIONS (Login / Join)
-     ============================================================ */
+  /* DESKTOP-ONLY ACTIONS */
   const desktopActions = document.querySelectorAll('[data-desktop]');
   const showDesktop = () => {
     const isDesktop = window.matchMedia('(min-width: 900px)').matches;
@@ -1717,11 +1867,6 @@ h1, h2, h3, h4, h5, h6 {
   };
   showDesktop();
   window.addEventListener('resize', showDesktop, { passive: true });
-
-  /* ============================================================
-     10. LOG — konfirmasi script loaded
-     ============================================================ */
-  // console.log('%cFORMULA • Home loaded ✔', 'color:#1A73E8;font-weight:bold;');
 
 })();
 </script>
