@@ -2,601 +2,1538 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About — FORMULA SMAN 1 MOJOSARI</title>
-<meta name="description" content="Tentang FORMULA — ekstrakurikuler Informatika dan Multimedia SMAN 1 Mojosari. Visi, misi, dan nilai-nilai yang kami pegang." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#1A73E8" />
+<meta name="description" content="Tentang FORMULA — Informatika & Multimedia SMAN 1 Mojosari. Sejarah, visi misi, struktur organisasi, dan divisi." />
+<title>About — FORMULA SMAN 1 Mojosari</title>
+
+<link rel="icon" type="image/png" href="formula.png" />
+<link rel="apple-touch-icon" href="formula.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
 <style>
 /* ============================================================
-   DESIGN TOKENS — SAME AS MAIN
+   DESIGN TOKENS — SAMA DENGAN INDEX.HTML
    ============================================================ */
-:root{
-  --paper:      #F7F6F3;
-  --paper-2:    #FFFFFF;
-  --ink:        #14151A;
-  --ink-soft:   #5B5D66;
-  --ink-faint:  #9A9CA3;
-  --line:       #E2E0DA;
-  --line-strong:#CFCCC4;
-  --accent:     #FF5A1F;
-  --accent-tint:#FFE7DA;
-  --status:     #16A34A;
-
-  --f-display: 'Space Grotesk', sans-serif;
-  --f-body:    'Inter', sans-serif;
-  --f-mono:    'IBM Plex Mono', monospace;
-
-  --max: 1120px;
+:root {
+  --color-primary: #1A73E8;
+  --color-primary-dark: #1557B0;
+  --color-primary-light: #E8F0FE;
+  --color-secondary: #34A853;
+  --color-secondary-dark: #1E7E34;
+  --color-accent: #EA4335;
+  --color-warning: #FBBC04;
+  --color-purple: #7C4DFF;
+  --color-dark: #202124;
+  --color-gray-700: #404040;
+  --color-gray-600: #525252;
+  --color-gray-500: #737373;
+  --color-gray-400: #A3A3A3;
+  --color-gray-300: #D4D4D4;
+  --color-gray-200: #E5E5E5;
+  --color-gray-100: #F5F5F5;
+  --color-light: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --text-primary: #202124;
+  --text-secondary: #525252;
+  --text-muted: #737373;
+  --border-color: #E5E5E5;
+  --border-radius: 12px;
+  --border-radius-lg: 20px;
+  --border-radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.10);
+  --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
+  --shadow-glow-primary: 0 8px 30px rgba(26,115,232,0.35);
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --container-max: 1200px;
+  --container-pad: 20px;
+  --navbar-height: 68px;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-*{ margin:0; padding:0; box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
-body{
-  font-family: var(--f-body);
-  background: var(--paper);
-  color: var(--ink);
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background: var(--color-surface);
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-a{ color:inherit; text-decoration:none; }
-img,svg{ display:block; }
-.wrap{ max-width:var(--max); margin:0 auto; padding:0 2rem; }
-.mono{ font-family:var(--f-mono); }
 
-/* eyebrow / IP-style section tag */
-.tag{
-  display:inline-flex; align-items:center; gap:.6rem;
-  font-family:var(--f-mono); font-size:.72rem; letter-spacing:.04em;
-  color: var(--accent); text-transform:uppercase;
-  margin-bottom:1rem;
+img, svg { display: block; max-width: 100%; height: auto; }
+a { color: var(--color-primary); text-decoration: none; transition: color var(--transition-fast); }
+a:hover { color: var(--color-primary-dark); }
+button { font-family: inherit; font-size: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
-.tag::before{ content:"//"; color: var(--line-strong); }
 
-h1,h2,h3{ font-family:var(--f-display); letter-spacing:-0.01em; color:var(--ink); }
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: 4px; }
+::selection { background: var(--color-primary); color: white; }
 
 /* ============================================================
-   NAV — FIXED
+   ICON SYSTEM — SVG masks, no emoji
    ============================================================ */
-.nav{
-  position:sticky; top:0; z-index:50;
-  background: rgba(247,246,243,0.9);
-  backdrop-filter: blur(10px);
-  border-bottom:1px solid var(--line);
+.icon {
+  display: inline-block;
+  width: 20px; height: 20px;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center; mask-position: center;
+  -webkit-mask-size: contain; mask-size: contain;
+  flex-shrink: 0;
+  vertical-align: middle;
+  transition: transform .25s var(--transition-slow);
 }
-.nav-inner{
-  max-width:var(--max); margin:0 auto; padding: 1rem 2rem;
-  display:flex; align-items:center; justify-content:space-between;
-  position:relative;
-}
-.brand{ display:flex; align-items:center; gap:.7rem; text-decoration:none; }
-.brand .mark{
-  width:34px; height:34px;
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--f-mono); font-weight:500; font-size:.68rem;
-  color:var(--ink);
-  overflow:hidden;
-  border-radius:4px;
-  padding:0;
-}
-.brand .mark img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.brand .name{ font-family:var(--f-display); font-weight:700; font-size:.95rem; line-height:1.15; }
-.brand .sub{ font-family:var(--f-mono); font-size:.6rem; color:var(--ink-soft); letter-spacing:.05em; }
+.icon-sm { width: 16px; height: 16px; }
+.icon-lg { width: 24px; height: 24px; }
+.icon-xl { width: 32px; height: 32px; }
 
-.status-pill{
-  display:flex;
-  align-items:center; gap:.5rem;
-  font-family:var(--f-mono); font-size:.65rem; color:var(--ink-soft);
-  border:1px solid var(--line); padding:.3rem .7rem;
-}
-.status-dot{
-  width:6px; height:6px; border-radius:50%; background:var(--status);
-  box-shadow:0 0 0 0 rgba(22,163,74,.5);
-  animation: ping 2.4s ease-out infinite;
-}
-@keyframes ping{
-  0%{ box-shadow:0 0 0 0 rgba(22,163,74,.45); }
-  70%{ box-shadow:0 0 0 6px rgba(22,163,74,0); }
-  100%{ box-shadow:0 0 0 0 rgba(22,163,74,0); }
-}
-
-.nav-links{ display:flex; align-items:center; gap:1.9rem; }
-.nav-links a{
-  text-decoration:none; font-size:.85rem; color:var(--ink-soft);
-  position:relative; padding-bottom:2px;
-}
-.nav-links a:hover{ color:var(--ink); }
-.nav-links a.active{ color:var(--ink); }
-.nav-links a.active::after{
-  content:""; position:absolute; left:0; right:0; bottom:-4px; height:2px; background:var(--accent);
-}
-.nav-cta{ display:flex; align-items:center; gap:.9rem; }
-.btn{
-  font-family:var(--f-body); font-weight:600; font-size:.82rem;
-  text-decoration:none; display:inline-flex; align-items:center; gap:.5rem;
-  padding:.65rem 1.3rem; border:1.5px solid var(--ink); color:var(--ink);
-  transition: all .18s ease;
-}
-.btn:hover{ background:var(--ink); color:var(--paper); }
-.btn-solid{ background:var(--accent); border-color:var(--accent); color:var(--ink); }
-.btn-solid:hover{ background:#e0500f; border-color:#e0500f; color:var(--ink); }
-.btn-ghost{ border-color:transparent; padding:.65rem .4rem; }
-.btn-ghost:hover{ background:transparent; color:var(--ink); text-decoration:underline; }
-
-.menu-toggle{ display:none; background:none; border:1px solid var(--ink); width:38px; height:38px; font-size:1.1rem; cursor:pointer; }
-
-:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.icon-check { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); }
+.icon-arrow-right { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E"); }
+.icon-wrench { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E"); }
+.icon-users { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='9' cy='7' r='4'/%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'/%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'/%3E%3C/svg%3E"); }
+.icon-folder { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z'/%3E%3C/svg%3E"); }
+.icon-leaf { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 014 13c0-5 3-9 15-11-1 4-1 9-4 13-2 2-4 4-4 5z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 014 13c0-5 3-9 15-11-1 4-1 9-4 13-2 2-4 4-4 5z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6'/%3E%3C/svg%3E"); }
+.icon-code { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'/%3E%3Cpolyline points='8 6 2 12 8 18'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='16 18 22 12 16 6'/%3E%3Cpolyline points='8 6 2 12 8 18'/%3E%3C/svg%3E"); }
+.icon-palette { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='13.5' cy='6.5' r='.5'/%3E%3Ccircle cx='17.5' cy='10.5' r='.5'/%3E%3Ccircle cx='8.5' cy='7.5' r='.5'/%3E%3Ccircle cx='6.5' cy='12.5' r='.5'/%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='13.5' cy='6.5' r='.5'/%3E%3Ccircle cx='17.5' cy='10.5' r='.5'/%3E%3Ccircle cx='8.5' cy='7.5' r='.5'/%3E%3Ccircle cx='6.5' cy='12.5' r='.5'/%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z'/%3E%3C/svg%3E"); }
+.icon-video { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='23 7 16 12 23 17 23 7'/%3E%3Crect x='1' y='5' width='15' height='14' rx='2' ry='2'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='23 7 16 12 23 17 23 7'/%3E%3Crect x='1' y='5' width='15' height='14' rx='2' ry='2'/%3E%3C/svg%3E"); }
+.icon-camera { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z'/%3E%3Ccircle cx='12' cy='13' r='4'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z'/%3E%3Ccircle cx='12' cy='13' r='4'/%3E%3C/svg%3E"); }
+.icon-globe { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z'/%3E%3C/svg%3E"); }
+.icon-cpu { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='2'/%3E%3Crect x='9' y='9' width='6' height='6'/%3E%3Cline x1='9' y1='1' x2='9' y2='4'/%3E%3Cline x1='15' y1='1' x2='15' y2='4'/%3E%3Cline x1='9' y1='20' x2='9' y2='23'/%3E%3Cline x1='15' y1='20' x2='15' y2='23'/%3E%3Cline x1='20' y1='9' x2='23' y2='9'/%3E%3Cline x1='20' y1='14' x2='23' y2='14'/%3E%3Cline x1='1' y1='9' x2='4' y2='9'/%3E%3Cline x1='1' y1='14' x2='4' y2='14'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='2'/%3E%3Crect x='9' y='9' width='6' height='6'/%3E%3Cline x1='9' y1='1' x2='9' y2='4'/%3E%3Cline x1='15' y1='1' x2='15' y2='4'/%3E%3Cline x1='9' y1='20' x2='9' y2='23'/%3E%3Cline x1='15' y1='20' x2='15' y2='23'/%3E%3Cline x1='20' y1='9' x2='23' y2='9'/%3E%3Cline x1='20' y1='14' x2='23' y2='14'/%3E%3Cline x1='1' y1='9' x2='4' y2='9'/%3E%3Cline x1='1' y1='14' x2='4' y2='14'/%3E%3C/svg%3E"); }
+.icon-calendar { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E"); }
+.icon-target { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Ccircle cx='12' cy='12' r='6'/%3E%3Ccircle cx='12' cy='12' r='2'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Ccircle cx='12' cy='12' r='6'/%3E%3Ccircle cx='12' cy='12' r='2'/%3E%3C/svg%3E"); }
+.icon-rocket { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z'/%3E%3Cpath d='M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z'/%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0'/%3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z'/%3E%3Cpath d='M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z'/%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0'/%3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5'/%3E%3C/svg%3E"); }
+.icon-briefcase { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='20' height='14' rx='2'/%3E%3Cpath d='M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='20' height='14' rx='2'/%3E%3Cpath d='M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16'/%3E%3C/svg%3E"); }
+.icon-chevron-up { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'/%3E%3C/svg%3E"); }
 
 /* ============================================================
-   MOBILE NAV — FIXED (no duplicates)
+   LAYOUT
    ============================================================ */
-@media (max-width: 900px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--paper);
-    padding: 1.5rem 2rem;
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    gap: 0;
-    z-index: 100;
-  }
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+.section { padding-block: clamp(48px, 8vw, 96px); position: relative; }
 
-  .nav-links.open {
-    display: flex;
-    animation: slideDown 0.3s ease forwards;
-  }
+.section-head { margin-bottom: 48px; }
+.section-head.text-center { text-align: center; }
+.section-head.text-center .section-sub { margin-inline: auto; }
 
-  .nav-links a {
-    padding: 0.8rem 0;
-    border-bottom: 1px solid var(--line);
-    width: 100%;
-  }
+.section-label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 6px 14px;
+  border-radius: var(--border-radius-full);
+  margin-bottom: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.section-title {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.section-sub {
+  color: var(--text-secondary);
+  font-size: 17px;
+  max-width: 640px;
+}
 
-  .nav-cta {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
-    gap: 0.8rem;
-  }
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--border-radius-full);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  min-height: 44px;
+  user-select: none;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.btn .icon { transition: transform var(--transition-base); }
+.btn:hover .icon-arrow-right { transform: translateX(3px); }
+.btn:active { transform: scale(0.97); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  color: white;
+  box-shadow: 0 4px 14px rgba(26,115,232,0.3);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+}
+.btn-primary:hover {
+  color: white;
+  box-shadow: var(--shadow-glow-primary);
+  transform: translateY(-2px);
+  background-position: 100% 50%;
+}
+.btn-outline { background: transparent; color: var(--text-primary); border-color: var(--border-color); }
+.btn-outline:hover {
+  background: var(--color-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+.btn-ghost { background: transparent; color: var(--text-primary); }
+.btn-ghost:hover { background: var(--color-light); }
+.btn-white { background: white; color: var(--color-primary); }
+.btn-white:hover { background: #f0f0f0; color: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.btn-lg { padding: 14px 32px; font-size: 15px; min-height: 52px; }
+.btn-sm { padding: 8px 16px; font-size: 13px; min-height: 36px; }
 
-  .nav-cta.open {
-    display: flex;
-  }
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-base);
+}
+.navbar.scrolled {
+  border-bottom-color: var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--navbar-height);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text-primary);
+}
+.nav-logo-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(26,115,232,0.35);
+}
+.nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.nav-logo-text small {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.nav-menu { display: none; align-items: center; gap: 4px; }
+.nav-link {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: var(--border-radius-full);
+  transition: all var(--transition-fast);
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.nav-toggle {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  color: var(--text-primary);
+  transition: background var(--transition-fast);
+}
+.nav-toggle:hover { background: var(--color-light); }
+.nav-toggle svg { width: 24px; height: 24px; }
 
-  .nav-cta .btn {
-    width: 100%;
-    justify-content: center;
-  }
+.mobile-menu {
+  position: fixed;
+  inset: var(--navbar-height) 0 0 0;
+  background: white;
+  padding: 24px 20px;
+  transform: translateX(100%);
+  transition: transform var(--transition-slow);
+  z-index: 490;
+  overflow-y: auto;
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a {
+  display: block;
+  padding: 14px 16px;
+  color: var(--text-primary);
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+}
+.mobile-menu a:hover, .mobile-menu a.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+.mobile-menu .mobile-cta {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  display: grid;
+  gap: 10px;
+}
+.mobile-menu .btn { width: 100%; }
 
-  .status-pill {
-    display: flex !important;
-    justify-content: center;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  @keyframes slideDown {
-    from { 
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to { 
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+@media (min-width: 900px) {
+  .nav-menu { display: flex; }
+  .nav-toggle { display: none; }
+  .mobile-menu { display: none; }
 }
 
 /* ============================================================
    PAGE HEADER
    ============================================================ */
-.page-header{
-  padding: 5rem 0 3rem;
-  border-bottom:1px solid var(--line);
+.page-header {
+  padding-block: clamp(60px, 10vw, 100px);
+  background: linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 100%);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
 }
-.page-header h1{
-  font-size: clamp(3rem, 8vw, 5.5rem);
-  font-weight:700; line-height:0.92; letter-spacing:-0.03em;
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(26,115,232,0.15), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatBlob 14s ease-in-out infinite;
 }
-.page-header h1 .dim{ color: var(--ink-faint); }
-.page-header .subhead{
-  font-family:var(--f-mono); font-size:.85rem; color:var(--ink-soft);
-  margin-top:1rem; letter-spacing:.02em;
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -300px;
+  left: -200px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(52,168,83,0.10), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatBlob 18s ease-in-out infinite reverse;
 }
-.page-header p{
-  font-size:1.05rem; color:var(--ink-soft); line-height:1.75;
-  max-width:56ch; margin-top:1.2rem;
+@keyframes floatBlob {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%     { transform: translate(-30px, 30px) scale(1.08); }
+}
+.page-header-inner { position: relative; z-index: 1; }
+
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  padding: 6px 14px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-full);
+  box-shadow: var(--shadow-sm);
+}
+.breadcrumb a { color: var(--text-muted); }
+.breadcrumb a:hover { color: var(--color-primary); }
+.breadcrumb span.sep { opacity: 0.5; }
+
+.page-header h1 {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.03em;
+}
+.page-header h1 .gradient {
+  background: linear-gradient(135deg, var(--color-primary), #4285F4 50%, var(--color-secondary));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradientMove 6s ease infinite;
+}
+@keyframes gradientMove {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
+.page-header p {
+  font-size: 17px;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin-inline: auto;
 }
 
 /* ============================================================
-   ABOUT CONTENT
+   STORY SECTION
    ============================================================ */
-.section{ padding: 4.5rem 0; border-bottom:1px solid var(--line); }
-.section:last-of-type{ border-bottom:none; }
+.story-grid {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+}
+@media (min-width: 900px) { .story-grid { grid-template-columns: 1fr 1fr; } }
 
-.section-head{
-  display:grid; grid-template-columns: 1fr 1.6fr; gap:3rem;
-  margin-bottom:2.5rem;
+.story-content p {
+  margin-bottom: 16px;
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--text-secondary);
 }
-.section-head h2{
-  font-size:clamp(1.7rem,3.4vw,2.3rem);
-  font-weight:600; line-height:1.08;
+.story-content p:last-child { margin-bottom: 0; }
+.story-content p strong { color: var(--text-primary); font-weight: 700; }
+
+.story-visual {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: var(--border-radius-lg);
+  background: linear-gradient(135deg, #1A73E8 0%, #4285F4 50%, #34A853 130%);
+  display: grid;
+  place-items: center;
+  color: white;
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
 }
-.section-head p{
-  color:var(--ink-soft); line-height:1.7; max-width:46ch; align-self:end;
+.story-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.2), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.15), transparent 40%);
+}
+.story-visual-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 32px;
+}
+.story-visual-text .big {
+  font-family: var(--font-heading);
+  font-size: clamp(64px, 10vw, 96px);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -0.04em;
+}
+.story-visual-text .label {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.9;
 }
 
-/* Vision & Mission */
-.visi-misi{
-  display:grid; grid-template-columns: 1fr 1.6fr; gap:3rem;
-}
-.visi-card{
-  background:var(--ink); color:var(--paper);
-  padding:2.5rem 2.2rem; border-radius:8px;
-}
-.visi-card .tag{ color:var(--accent); }
-.visi-card .tag::before{ color:rgba(255,255,255,.2); }
-.visi-card h3{
-  color:var(--paper); font-size:1.2rem; font-weight:600;
-  margin-bottom:.8rem; letter-spacing:-0.01em;
-}
-.visi-card p{ color:rgba(247,246,243,0.7); line-height:1.75; font-size:.95rem; }
-.misi-list{ display:flex; flex-direction:column; gap:.2rem; }
-.misi-item{
-  display:grid; grid-template-columns: 28px 1fr; gap:1rem;
-  padding:1.1rem 0; border-bottom:1px solid var(--line);
-}
-.misi-item:last-child{ border-bottom:none; }
-.misi-item .num{
-  font-family:var(--f-mono); font-size:.72rem; color:var(--accent);
-  padding-top:.1rem;
-}
-.misi-item p{ color:var(--ink-soft); line-height:1.6; font-size:.92rem; }
+/* ============================================================
+   VISI MISI
+   ============================================================ */
+.vm-grid { display: grid; gap: 24px; }
+@media (min-width: 768px) { .vm-grid { grid-template-columns: 1fr 1fr; } }
 
-/* Values */
-.values-grid{
-  display:grid; grid-template-columns: repeat(2, 1fr); gap:1.5rem;
+.vm-card {
+  padding: 32px;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  background: white;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-base);
 }
-.value-card{
-  background:var(--paper-2);
-  border:1px solid var(--line);
-  border-radius:8px;
-  padding:1.8rem 1.5rem;
-  transition: all .2s ease;
+.vm-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: linear-gradient(180deg, var(--color-primary), #4285F4);
 }
-.value-card:hover{
-  border-color:var(--accent);
-  box-shadow:0 8px 24px rgba(255,90,31,.06);
+.vm-card[data-type="misi"]::before {
+  background: linear-gradient(180deg, var(--color-secondary), #5BB974);
 }
-.value-card .icon{ font-size:1.8rem; margin-bottom:.7rem; display:block; }
-.value-card h3{ font-size:1.05rem; font-weight:600; margin-bottom:.5rem; }
-.value-card p{ color:var(--ink-soft); font-size:.88rem; line-height:1.65; }
+.vm-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.vm-card h3 {
+  font-size: 20px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.vm-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  display: grid;
+  place-items: center;
+}
+.vm-icon .icon { width: 22px; height: 22px; }
+.vm-card[data-type="misi"] .vm-icon { background: #E6F4EA; color: var(--color-secondary-dark); }
+.vm-card p { font-size: 15px; line-height: 1.8; color: var(--text-secondary); }
 
-/* Team / Struktur */
-.team-grid{
-  display:grid; grid-template-columns: repeat(3, 1fr); gap:1.5rem;
+.misi-list { display: grid; gap: 12px; }
+.misi-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
 }
-.team-card{
-  background:var(--paper-2);
-  border:1px solid var(--line);
-  border-radius:8px;
-  padding:1.8rem 1.5rem;
-  text-align:center;
-  transition: all .2s ease;
+.misi-list li .icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  color: var(--color-secondary);
 }
-.team-card:hover{ border-color:var(--accent); transform:translateY(-2px); }
-.team-card .avatar{
-  width:80px; height:80px;
-  border-radius:50%;
-  overflow:hidden;
-  margin:0 auto .8rem;
-  background:var(--accent-tint);
-  border:3px solid var(--line);
-  transition: border-color 0.2s ease;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
+/* ============================================================
+   NILAI / VALUES
+   ============================================================ */
+.values-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
 }
-.team-card:hover .avatar{ border-color:var(--accent); }
-.team-card .avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+@media (min-width: 640px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .values-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.value-card {
+  padding: 28px 24px;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  background: white;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
 }
-.team-card h3{ font-size:1rem; font-weight:600; }
-.team-card .role{
-  font-family:var(--f-mono); font-size:.68rem;
-  color:var(--accent); margin-top:.2rem;
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), #4285F4);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
 }
-.team-card p{ color:var(--ink-soft); font-size:.82rem; margin-top:.6rem; line-height:1.6; }
+.value-card:hover::before { transform: scaleX(1); }
+.value-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+}
+.value-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  transition: all var(--transition-base);
+}
+.value-card:hover .value-icon { transform: scale(1.1) rotate(-5deg); }
+.value-icon .icon { width: 26px; height: 26px; }
+.value-card[data-color="green"] .value-icon { background: #E6F4EA; color: var(--color-secondary-dark); }
+.value-card[data-color="red"] .value-icon { background: #FCE8E6; color: #B31412; }
+.value-card[data-color="yellow"] .value-icon { background: #FEF7E0; color: #B8860B; }
+.value-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.value-card p { font-size: 14px; line-height: 1.65; color: var(--text-secondary); }
+
+/* ============================================================
+   DIVISI
+   ============================================================ */
+.divisi-grid {
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 640px) { .divisi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .divisi-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.divisi-card {
+  padding: 28px;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  background: white;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+.divisi-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.divisi-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  transition: all var(--transition-base);
+}
+.divisi-card:hover .divisi-icon { transform: scale(1.08) rotate(-4deg); }
+.divisi-icon .icon { width: 28px; height: 28px; }
+.divisi-card[data-color="green"] .divisi-icon { background: #E6F4EA; color: var(--color-secondary-dark); }
+.divisi-card[data-color="red"] .divisi-icon { background: #FCE8E6; color: #B31412; }
+.divisi-card[data-color="yellow"] .divisi-icon { background: #FEF7E0; color: #B8860B; }
+.divisi-card[data-color="purple"] .divisi-icon { background: #F3E8FF; color: var(--color-purple); }
+.divisi-card[data-color="cyan"] .divisi-icon { background: #E0F7FA; color: #00838F; }
+.divisi-card h3 { font-size: 18px; margin-bottom: 8px; }
+.divisi-card p { font-size: 14px; line-height: 1.65; margin-bottom: 14px; color: var(--text-secondary); }
+.divisi-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding-top: 14px;
+  border-top: 1px solid var(--border-color);
+}
+.divisi-meta strong { color: var(--text-primary); font-weight: 700; }
+
+/* ============================================================
+   STRUKTUR / TEAM
+   ============================================================ */
+.struktur-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) { .struktur-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .struktur-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.struktur-card {
+  padding: 24px;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  background: white;
+  text-align: center;
+  transition: all var(--transition-base);
+}
+.struktur-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+.struktur-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  box-shadow: 0 8px 20px rgba(26,115,232,0.3);
+  overflow: hidden;
+  border: 4px solid white;
+  transition: transform var(--transition-base);
+}
+.struktur-card:hover .struktur-avatar { transform: scale(1.08) rotate(3deg); }
+.struktur-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.struktur-card[data-color="green"] .struktur-avatar { background: linear-gradient(135deg, #34A853, #5BB974); box-shadow: 0 8px 20px rgba(52,168,83,0.3); }
+.struktur-card[data-color="red"] .struktur-avatar { background: linear-gradient(135deg, #EA4335, #F28B82); box-shadow: 0 8px 20px rgba(234,67,53,0.3); }
+.struktur-card[data-color="yellow"] .struktur-avatar { background: linear-gradient(135deg, #FBBC04, #FDD663); color: #202124; box-shadow: 0 8px 20px rgba(251,188,4,0.3); }
+.struktur-card[data-color="purple"] .struktur-avatar { background: linear-gradient(135deg, #7C4DFF, #B39DFF); box-shadow: 0 8px 20px rgba(124,77,255,0.3); }
+.struktur-card h4 { font-size: 16px; margin-bottom: 4px; }
+.struktur-role {
+  font-size: 12px;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.struktur-kelas {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+  max-width: 720px;
+  margin-inline: auto;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+  border-radius: 1px;
+}
+.tl-item {
+  position: relative;
+  padding-bottom: 32px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(26,115,232,0.15);
+  transition: all var(--transition-base);
+}
+.tl-item:hover::before {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(26,115,232,0.25);
+}
+.tl-item[data-level="green"]::before { border-color: var(--color-secondary); box-shadow: 0 0 0 4px rgba(52,168,83,0.15); }
+.tl-year {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 4px 12px;
+  border-radius: var(--border-radius-full);
+  margin-bottom: 8px;
+}
+.tl-item h4 { font-size: 16px; margin-bottom: 6px; }
+.tl-item p { font-size: 14px; line-height: 1.7; color: var(--text-secondary); }
+
+/* ============================================================
+   CTA
+   ============================================================ */
+.cta-section { padding-block: clamp(48px, 8vw, 96px); }
+.cta-box {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #4285F4 60%, var(--color-secondary) 130%);
+  background-size: 200% 200%;
+  border-radius: var(--border-radius-lg);
+  padding: clamp(32px, 6vw, 64px);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: gradientMove 8s ease infinite;
+}
+.cta-box::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -20%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  border-radius: 50%;
+}
+.cta-box::after {
+  content: '';
+  position: absolute;
+  bottom: -50%; right: -20%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+  border-radius: 50%;
+}
+.cta-box h2 {
+  color: white;
+  font-size: clamp(24px, 4vw, 40px);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+.cta-box p {
+  color: rgba(255,255,255,0.9);
+  font-size: 17px;
+  margin-bottom: 28px;
+  max-width: 560px;
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+}
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
 
 /* ============================================================
    FOOTER
    ============================================================ */
-footer{ background:var(--ink); color:rgba(247,246,243,0.55); padding: 3rem 0 1.5rem; }
-.f-inner{ max-width:var(--max); margin:0 auto; padding:0 2rem; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2.5rem; }
-footer h4{ font-family:var(--f-mono); font-size:.65rem; text-transform:uppercase; letter-spacing:.1em; color:rgba(247,246,243,0.3); margin-bottom:.9rem; }
-footer a{ display:block; text-decoration:none; color:rgba(247,246,243,0.55); font-size:.85rem; margin-bottom:.5rem; }
-footer a:hover{ color:var(--accent); }
-footer p{ font-size:.85rem; line-height:1.7; max-width:32ch; color:rgba(247,246,243,0.4); }
-.f-bottom{ max-width:var(--max); margin:2rem auto 0; padding:1.2rem 2rem 0; border-top:1px solid rgba(247,246,243,0.1); display:flex; justify-content:space-between; font-family:var(--f-mono); font-size:.68rem; color:rgba(247,246,243,0.25); flex-wrap:wrap; gap:.5rem; }
+.footer {
+  background: var(--color-dark);
+  color: rgba(255,255,255,0.7);
+  padding-block: 60px 24px;
+  font-size: 14px;
+}
+.footer-grid {
+  display: grid;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+@media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; } }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 900px){
-  .section-head{ grid-template-columns:1fr; gap:1.2rem; }
-  .visi-misi{ grid-template-columns:1fr; }
-  .values-grid{ grid-template-columns:1fr; }
-  .team-grid{ grid-template-columns:1fr; max-width:360px; margin:0 auto; }
-  .f-inner{ grid-template-columns:1fr; }
+.footer-brand .nav-logo { color: white; margin-bottom: 16px; }
+.footer-brand .nav-logo-text small { color: rgba(255,255,255,0.5); }
+.footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a {
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7);
+  transition: all var(--transition-fast);
+}
+.footer-social a:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(26,115,232,0.4);
 }
 
-@media (max-width: 600px) {
-  .page-header h1{ font-size: clamp(2.2rem, 10vw, 3.5rem); }
-  .wrap{ padding:0 1.2rem; }
-  .nav-inner{ padding: 0.8rem 1.2rem; }
-  .visi-card{ padding:1.8rem 1.2rem; }
-  .team-card{ padding:1.2rem; }
-  .value-card{ padding:1.2rem; }
-  .f-inner{ gap:1.5rem; }
+.footer h4 {
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
+}
+.footer ul li { margin-bottom: 10px; }
+.footer ul a {
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  transition: color var(--transition-fast);
+}
+.footer ul a:hover { color: white; }
+
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+}
+.footer-bottom .heart { color: var(--color-accent); display: inline-block; animation: heartbeat 1.4s ease-in-out infinite; }
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.15); }
+}
+
+/* ============================================================
+   SCROLL TOP
+   ============================================================ */
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), #4285F4);
+  color: white;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-glow-primary);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-base);
+  z-index: 400;
+}
+.scroll-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.scroll-top:hover {
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  transform: translateY(-3px) scale(1.05);
+}
+.scroll-top .icon { width: 22px; height: 22px; }
+
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal.delay-1 { transition-delay: 0.05s; }
+.reveal.delay-2 { transition-delay: 0.10s; }
+.reveal.delay-3 { transition-delay: 0.15s; }
+.reveal.delay-4 { transition-delay: 0.20s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+@media (max-width: 480px) {
+  .timeline { padding-left: 32px; }
+  .tl-item::before { left: -32px; }
 }
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="brand">
-      <div class="mark"><img src="formula.png" alt="FORMULA Logo" /></div>
-      <div>
-        <div class="name">FORMULA</div>
-        <div class="sub">SMAN 1 MOJOSARI</div>
-      </div>
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="formula.png" alt="Logo FORMULA" width="38" height="38" style="border-radius:10px;object-fit:cover" />
+      <span class="nav-logo-text">
+        FORMULA
+        <small>SMAN 1 Mojosari</small>
+      </span>
     </a>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
-      <a href="news.html">News</a>
-      <a href="classes.html">Classes</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="nav-cta" id="navCta">
-      <div class="status-pill"><span class="status-dot"></span> STATUS: ONLINE</div>
-      <a href="login.html" class="btn btn-ghost">Masuk</a>
-      <a href="https://forms.gle/XmqEwsEDootfEceB7" class="btn btn-solid">Daftar</a>
-    </div>
-    <button class="menu-toggle" id="menuToggle">☰</button>
-  </div>
-</nav>
 
-<!-- ============ PAGE HEADER ============ -->
-<header class="page-header">
-  <div class="wrap">
-    <div class="tag">10.0.0.1 — about</div>
-    <h1>FORMULA<br/><span class="dim">Tentang Kami</span></h1>
-    <div class="subhead">SMAN 1 Mojosari — Mojokerto</div>
-    <p>Ekstrakurikuler Informatika dan Multimedia yang dibangun dari satu keyakinan: anak-anak muda belajar lebih cepat dengan proyek nyata, bukan slide presentasi.</p>
+    <nav class="nav-menu" aria-label="Navigasi utama">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="programs.html" class="nav-link">Programs</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="news.html" class="nav-link">News</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm" style="display:none" data-desktop>Login</a>
+      <a href="register.html" class="btn btn-primary btn-sm" style="display:none" data-desktop>Join Us</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
 
-<!-- ============ VISI & MISI ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="visi-misi">
-      <div class="visi-card">
-        <div class="tag">visi</div>
-        <h3>Menjadi wadah talenta kreatif digital yang dicari industri.</h3>
-        <p>Kami percaya bahwa setiap siswa punya potensi untuk menghasilkan karya yang berdampak — bukan cuma nilai di rapor, tapi portofolio yang bisa dibanggakan.</p>
-      </div>
-      <div>
-        <div class="tag">misi</div>
-        <div class="misi-list">
-          <div class="misi-item">
-            <span class="num">01</span>
-            <p>Membekali anggota dengan keterampilan teknis yang langsung aplikatif di dunia kerja.</p>
-          </div>
-          <div class="misi-item">
-            <span class="num">02</span>
-            <p>Menumbuhkan kemampuan berpikir kreatif dan solutif dalam menghadapi tantangan.</p>
-          </div>
-          <div class="misi-item">
-            <span class="num">03</span>
-            <p>Membangun ekosistem kolaborasi antar anggota yang saling menguatkan.</p>
-          </div>
-          <div class="misi-item">
-            <span class="num">04</span>
-            <p>Menjalin kemitraan dengan komunitas dan industri kreatif di Mojokerto dan sekitarnya.</p>
-          </div>
-          <div class="misi-item">
-            <span class="num">05</span>
-            <p>Mencetak lulusan yang siap berkontribusi di industri kreatif digital.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- MOBILE MENU -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Menu mobile">
+  <a href="index.html">Home</a>
+  <a href="about.html" class="active">About</a>
+  <a href="programs.html">Programs</a>
+  <a href="projects.html">Projects</a>
+  <a href="news.html">News</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="achievements.html">Achievements</a>
+  <a href="alumni.html">Alumni</a>
+  <a href="contact.html">Contact</a>
+  <div class="mobile-cta">
+    <a href="login.html" class="btn btn-outline">Login</a>
+    <a href="register.html" class="btn btn-primary">Join FORMULA</a>
   </div>
-</section>
+</nav>
 
-<!-- ============ VALUES ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">10.0.0.2 — nilai</div>
-      <h2>Apa yang membuat FORMULA berbeda?</h2>
-      <p>Empat prinsip yang kami pegang, yang muncul dari pengalaman mengurus ekskul selama bertahun-tahun.</p>
-    </div>
-    <div class="values-grid">
-      <div class="value-card">
-        <span class="icon">🔧</span>
-        <h3>Bikin, Bukan Hafal</h3>
-        <p>Anggota langsung bikin karya nyata — website, desain, animasi — bukan hafal materi untuk ujian.</p>
-      </div>
-      <div class="value-card">
-        <span class="icon">🤝</span>
-        <h3>Kolaborasi, Bukan Kompetisi</h3>
-        <p>Di sini kita belajar bersama, saling review, dan memajukan satu sama lain. Bukan saling menjatuhkan.</p>
-      </div>
-      <div class="value-card">
-        <span class="icon">📂</span>
-        <h3>Portofolio, Bukan Sertifikat</h3>
-        <p>Kami lebih bangga dengan proyek yang bisa dilihat publik daripada sertifikat yang cuma jadi pajangan.</p>
-      </div>
-      <div class="value-card">
-        <span class="icon">🌱</span>
-        <h3>Terbuka untuk Semua Level</h3>
-        <p>Tidak ada syarat pengalaman sebelumnya. Yang penting mau belajar dan konsisten datang ke lab.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<main>
 
-<!-- ============ TEAM / STRUKTUR ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">10.0.0.3 — tim</div>
-      <h2>Pembina &amp; koordinator</h2>
-      <p>Orang-orang di balik operasional FORMULA.</p>
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <div class="container page-header-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">/</span>
+        <span>About</span>
+      </nav>
+      <h1>Tentang <span class="gradient">FORMULA</span></h1>
+      <p>Mengenal lebih dekat komunitas Informatika &amp; Multimedia SMAN 1 Mojosari — sejarah, visi, misi, dan orang-orang di baliknya.</p>
     </div>
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="avatar">
-          <img src="Haqi.png" alt="haqi" />
-        </div>
-        <h3>Pak Baihaqqi Putra</h3>
-        <div class="role">Pembimbing</div>
-        <p>Guru Informatika dengan latar belakang software development.</p>
-      </div>
-      <div class="team-card">
-        <div class="avatar">
-          <img src="fardhan.jpg" alt="fardhan" />
-        </div>
-        <h3>Fardhan</h3>
-        <div class="role">Ketua Formula</div>
-        <p>Full-stack developer.</p>
-      </div>
-      <div class="team-card">
-        <div class="avatar">
-          <img src="Reza.webp" alt="Reza" />
-        </div>
-        <h3>Reza Permana</h3>
-        <div class="role">Wakil Ketua Formula</div>
-        <p>Full-stack developer dan Desain Komunikasi Visual</p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ STORY / SEJARAH ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">10.0.0.4 — sejarah</div>
-      <h2>Dari lab kosong ke komunitas yang berkarya</h2>
-      <p>&nbsp;</p>
-    </div>
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:3rem;">
-      <div>
-        <p style="color:var(--ink-soft); line-height:1.8; font-size:.95rem; margin-bottom:1rem;">
-          FORMULA lahir pada 2023 dari kegelisahan sekelompok siswa yang merasa materi pelajaran Informatika tidak cukup untuk membangun portofolio.
+  <!-- STORY -->
+  <section class="section">
+    <div class="container story-grid">
+      <div class="story-content reveal">
+        <span class="section-label">Sejarah Singkat</span>
+        <h2 class="section-title">Dari Ruang Kecil, Tumbuh Jadi Komunitas Besar</h2>
+        <p>
+          FORMULA lahir dari sebuah ruang kelas sederhana di SMAN 1 Mojosari. Sekelompok siswa
+          yang tertarik pada dunia komputer, desain, dan multimedia memutuskan untuk membuat
+          wadah belajar bersama di luar jam pelajaran.
         </p>
-        <p style="color:var(--ink-soft); line-height:1.8; font-size:.95rem;">
-          Awalnya cuma 4 orang yang berkumpul di lab komputer kosong setiap Kamis sore. Dari situlah gerakan dimulai: satu per satu anggota bertambah, proyek-proyek mulai dikerjakan.
+        <p>
+          Dari pertemuan kecil yang hanya diikuti belasan orang, kini FORMULA telah berkembang
+          menjadi salah satu ekstrakurikuler paling aktif di sekolah — dengan ratusan anggota,
+          puluhan project nyata, dan segudang prestasi di berbagai kompetisi.
+        </p>
+        <p>
+          Kami percaya bahwa belajar terbaik adalah dengan <strong>mengerjakan</strong>, bukan hanya
+          mendengarkan. Karena itu setiap anggota FORMULA didorong untuk langsung terlibat
+          dalam project, event, dan kolaborasi lintas divisi.
         </p>
       </div>
-      <div style="border-left:1px solid var(--line); padding-left:2rem;">
-        <div style="display:flex; flex-direction:column; gap:.8rem;">
-          <div><span style="font-family:var(--f-mono); font-size:.72rem; color:var(--accent);">2023</span><br/><span style="font-weight:600;">4 anggota · 1 proyek website</span></div>
-          <div><span style="font-family:var(--f-mono); font-size:.72rem; color:var(--accent);">2024</span><br/><span style="font-weight:600;">20+ anggota · 2 program aktif</span></div>
-          <div><span style="font-family:var(--f-mono); font-size:.72rem; color:var(--accent);">2025</span><br/><span style="font-weight:600;">30+ anggota · Mengembangkan Inovasi</span></div>
-          <div><span style="font-family:var(--f-mono); font-size:.72rem; color:var(--accent);">2026</span><br/><span style="font-weight:600;">Ekosistem kreatif terbesar di SMANSAMOZAR</span></div>
+
+      <div class="story-visual reveal delay-2">
+        <div class="story-visual-text">
+          <div class="big" data-counter="15">0</div>
+          <div class="label">Tahun Berkarya</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ CTA ============ -->
-<section class="section" style="border-bottom:none; padding:3rem 0 1rem;">
-  <div class="wrap" style="text-align:center;">
-    <div class="tag" style="justify-content:center;">10.0.0.5 — gabung</div>
-    <h2 style="font-size:clamp(1.6rem,3vw,2.2rem); font-weight:600; margin-bottom:1rem;">Siap jadi bagian dari FORMULA?</h2>
-    <p style="color:var(--ink-soft); margin-bottom:1.8rem;">Kami tunggu kamu di lab setiap Kamis sore.</p>
-    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-      <a href="classes.html" class="btn">Lihat Program</a>
-      <a href="https://forms.gle/XmqEwsEDootfEceB7" class="btn btn-solid">Daftar Sekarang →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<footer>
-  <div class="f-inner">
-    <div>
-      <div style="display:flex; align-items:center; gap:.7rem; margin-bottom:1rem;">
-        <div class="mark" style="border-color:rgba(247,246,243,.3); color:#F7F6F3; overflow:hidden; border-radius:4px; padding:0;">
-          <img src="formula.png" alt="FORMULA Logo" style="width:25%;height:25%;object-fit:cover;" />
-        </div>
-        <div style="color:#F7F6F3; font-family:var(--f-display); font-weight:700; font-size:.95rem;">FORMULA</div>
+  <!-- VISI MISI -->
+  <section class="section" style="background: var(--color-light)">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-label">Visi &amp; Misi</span>
+        <h2 class="section-title">Arah Gerak Kami</h2>
+        <p class="section-sub">Nilai dan tujuan yang menjadi kompas setiap kegiatan FORMULA.</p>
       </div>
-      <p>Komunitas teknologi Informatika dan Multimedia — mencetak talenta kreatif digital unggul dari SMAN 1 Mojosari.</p>
+
+      <div class="vm-grid">
+        <div class="vm-card reveal" data-type="visi">
+          <h3>
+            <span class="vm-icon"><span class="icon icon-target"></span></span>
+            Visi
+          </h3>
+          <p>
+            Menjadi komunitas Informatika dan Multimedia pelajar yang unggul, kreatif,
+            dan berdampak — tempat lahirnya talenta digital SMAN 1 Mojosari yang siap
+            bersaing di tingkat nasional maupun global.
+          </p>
+        </div>
+
+        <div class="vm-card reveal delay-1" data-type="misi">
+          <h3>
+            <span class="vm-icon"><span class="icon icon-rocket"></span></span>
+            Misi
+          </h3>
+          <ul class="misi-list">
+            <li>
+              <span class="icon icon-check"></span>
+              <span>Menyediakan pembelajaran terstruktur di bidang informatika dan multimedia.</span>
+            </li>
+            <li>
+              <span class="icon icon-check"></span>
+              <span>Mendorong anggota untuk membuat karya nyata dan portofolio digital.</span>
+            </li>
+            <li>
+              <span class="icon icon-check"></span>
+              <span>Membangun budaya kolaborasi, disiplin, dan kepemimpinan.</span>
+            </li>
+            <li>
+              <span class="icon icon-check"></span>
+              <span>Mewakili sekolah dalam kompetisi tingkat daerah hingga nasional.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div>
-      <h4>Navigasi</h4>
-      <a href="index.html">Home</a>
-      <a href="about.html">Tentang</a>
-      <a href="gallery.html">Galeri</a>
-      <a href="contact.html">Kontak</a>
+  </section>
+
+  <!-- NILAI / VALUES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-label">Nilai Kami</span>
+        <h2 class="section-title">Apa yang Membuat FORMULA Berbeda</h2>
+        <p class="section-sub">Empat prinsip yang kami pegang erat dalam setiap kegiatan.</p>
+      </div>
+
+      <div class="values-grid">
+        <article class="value-card reveal">
+          <div class="value-icon"><span class="icon icon-wrench"></span></div>
+          <h3>Bikin, Bukan Hafal</h3>
+          <p>Anggota langsung bikin karya nyata — website, desain, animasi — bukan hafal materi untuk ujian.</p>
+        </article>
+
+        <article class="value-card reveal delay-1" data-color="green">
+          <div class="value-icon"><span class="icon icon-users"></span></div>
+          <h3>Kolaborasi, Bukan Kompetisi</h3>
+          <p>Kita belajar bersama, saling review, dan memajukan satu sama lain. Bukan saling menjatuhkan.</p>
+        </article>
+
+        <article class="value-card reveal delay-2" data-color="red">
+          <div class="value-icon"><span class="icon icon-folder"></span></div>
+          <h3>Portofolio, Bukan Sertifikat</h3>
+          <p>Kami lebih bangga dengan proyek yang bisa dilihat publik daripada sertifikat yang cuma jadi pajangan.</p>
+        </article>
+
+        <article class="value-card reveal delay-3" data-color="yellow">
+          <div class="value-icon"><span class="icon icon-leaf"></span></div>
+          <h3>Terbuka untuk Semua</h3>
+          <p>Tidak ada syarat pengalaman. Yang penting mau belajar dan konsisten datang ke lab.</p>
+        </article>
+      </div>
     </div>
-    <div>
-      <h4>Program</h4>
-      <a href="web-development.html">Web Development</a>
-      <a href="desain-grafis.html">Desain Grafis</a>
-      <a href="classes.html">Semua Program →</a>
+  </section>
+
+  <!-- DIVISI -->
+  <section class="section" id="divisi" style="background: var(--color-light)">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-label">Divisi</span>
+        <h2 class="section-title">Bidang yang Kami Naungi</h2>
+        <p class="section-sub">FORMULA memiliki beberapa divisi yang bisa dipilih sesuai minat dan bakat anggota.</p>
+      </div>
+
+      <div class="divisi-grid">
+        <article class="divisi-card reveal">
+          <div class="divisi-icon"><span class="icon icon-code"></span></div>
+          <h3>Programming</h3>
+          <p>Belajar coding, algoritma, dan membangun aplikasi web maupun mobile dari nol.</p>
+          <div class="divisi-meta">
+            <span><strong>32</strong> Anggota</span>
+            <span><strong>12</strong> Project</span>
+          </div>
+        </article>
+
+        <article class="divisi-card reveal delay-1" data-color="green">
+          <div class="divisi-icon"><span class="icon icon-palette"></span></div>
+          <h3>Graphic Design</h3>
+          <p>Menguasai desain visual untuk kebutuhan digital, cetak, dan branding organisasi.</p>
+          <div class="divisi-meta">
+            <span><strong>28</strong> Anggota</span>
+            <span><strong>18</strong> Project</span>
+          </div>
+        </article>
+
+        <article class="divisi-card reveal delay-2" data-color="red">
+          <div class="divisi-icon"><span class="icon icon-video"></span></div>
+          <h3>Video &amp; Film</h3>
+          <p>Produksi video dari konsep, shooting, editing, hingga publikasi karya.</p>
+          <div class="divisi-meta">
+            <span><strong>24</strong> Anggota</span>
+            <span><strong>9</strong> Project</span>
+          </div>
+        </article>
+
+        <article class="divisi-card reveal delay-3" data-color="yellow">
+          <div class="divisi-icon"><span class="icon icon-camera"></span></div>
+          <h3>Photography</h3>
+          <p>Dokumentasi visual dan karya artistik melalui lensa kamera.</p>
+          <div class="divisi-meta">
+            <span><strong>20</strong> Anggota</span>
+            <span><strong>7</strong> Project</span>
+          </div>
+        </article>
+
+        <article class="divisi-card reveal" data-color="purple">
+          <div class="divisi-icon"><span class="icon icon-globe"></span></div>
+          <h3>Networking</h3>
+          <p>Belajar jaringan komputer, konfigurasi, dan troubleshooting.</p>
+          <div class="divisi-meta">
+            <span><strong>18</strong> Anggota</span>
+            <span><strong>5</strong> Project</span>
+          </div>
+        </article>
+
+        <article class="divisi-card reveal delay-1" data-color="cyan">
+          <div class="divisi-icon"><span class="icon icon-cpu"></span></div>
+          <h3>AI &amp; Data</h3>
+          <p>Eksplorasi kecerdasan buatan, data science, dan otomasi.</p>
+          <div class="divisi-meta">
+            <span><strong>16</strong> Anggota</span>
+            <span><strong>4</strong> Project</span>
+          </div>
+        </article>
+      </div>
     </div>
-  </div>
-  <div class="f-bottom">
-    <span>© 2026 FORMULA · SMAN 1 MOJOSARI</span>
-    <span>NODE: MOJOSARI-01 / STATUS: ONLINE</span>
+  </section>
+
+  <!-- STRUKTUR -->
+  <section class="section" id="struktur">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-label">Struktur Organisasi</span>
+        <h2 class="section-title">Pengurus Periode 2024/2025</h2>
+        <p class="section-sub">Orang-orang yang menggerakkan roda organisasi FORMULA.</p>
+      </div>
+
+      <div class="struktur-grid">
+        <div class="struktur-card reveal">
+          <div class="struktur-avatar">A</div>
+          <h4>Andi Pratama</h4>
+          <div class="struktur-role">Ketua</div>
+          <div class="struktur-kelas">XII IPA 1</div>
+        </div>
+
+        <div class="struktur-card reveal delay-1" data-color="green">
+          <div class="struktur-avatar">S</div>
+          <h4>Sari Melati</h4>
+          <div class="struktur-role">Wakil Ketua</div>
+          <div class="struktur-kelas">XII IPA 3</div>
+        </div>
+
+        <div class="struktur-card reveal delay-2" data-color="red">
+          <div class="struktur-avatar">R</div>
+          <h4>Reza Aditya</h4>
+          <div class="struktur-role">Sekretaris</div>
+          <div class="struktur-kelas">XI IPA 2</div>
+        </div>
+
+        <div class="struktur-card reveal" data-color="yellow">
+          <div class="struktur-avatar">N</div>
+          <h4>Nadia Putri</h4>
+          <div class="struktur-role">Bendahara</div>
+          <div class="struktur-kelas">XI IPS 1</div>
+        </div>
+
+        <div class="struktur-card reveal delay-1" data-color="purple">
+          <div class="struktur-avatar">B</div>
+          <h4>Bagas Saputra</h4>
+          <div class="struktur-role">Koord. Programming</div>
+          <div class="struktur-kelas">XI IPA 1</div>
+        </div>
+
+        <div class="struktur-card reveal delay-2" data-color="green">
+          <div class="struktur-avatar">D</div>
+          <h4>Dinda Ayu</h4>
+          <div class="struktur-role">Koord. Multimedia</div>
+          <div class="struktur-kelas">XI IPA 4</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section" style="background: var(--color-light)">
+    <div class="container">
+      <div class="section-head text-center">
+        <span class="section-label">Perjalanan Kami</span>
+        <h2 class="section-title">Timeline Perkembangan FORMULA</h2>
+        <p class="section-sub">Jejak langkah dari awal berdiri hingga sekarang.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-year">2010</div>
+          <h4>FORMULA Didirikan</h4>
+          <p>Dimulai dari komunitas kecil siswa yang tertarik pada komputer dan desain.</p>
+        </div>
+
+        <div class="tl-item reveal" data-level="green">
+          <div class="tl-year">2014</div>
+          <h4>Prestasi Pertama</h4>
+          <p>Meraih juara pertama di kompetisi desain grafis tingkat kabupaten.</p>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-year">2018</div>
+          <h4>Ekspansi Divisi</h4>
+          <p>Menambah divisi Video &amp; Film serta Networking untuk memperluas cakupan.</p>
+        </div>
+
+        <div class="tl-item reveal" data-level="green">
+          <div class="tl-year">2021</div>
+          <h4>Adaptasi Digital</h4>
+          <p>Mengembangkan kegiatan daring dan membangun sistem manajemen organisasi digital.</p>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-year">2024</div>
+          <h4>Prestasi Nasional</h4>
+          <p>Meraih juara 2 kompetisi UI/UX tingkat nasional — pencapaian tertinggi sejauh ini.</p>
+        </div>
+
+        <div class="tl-item reveal" data-level="green">
+          <div class="tl-year">2025</div>
+          <h4>Central Platform FORMULA</h4>
+          <p>Meluncurkan platform digital terpadu untuk anggota, project, dan pembelajaran.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box reveal">
+        <h2>Siap Berkarya Bersama Kami?</h2>
+        <p>Bergabunglah dengan FORMULA dan mulai bangun portofolio digitalmu sejak sekarang.</p>
+        <div class="cta-actions">
+          <a href="register.html" class="btn btn-white btn-lg">
+            Daftar Sekarang
+            <span class="icon icon-sm icon-arrow-right"></span>
+          </a>
+          <a href="projects.html" class="btn btn-ghost btn-lg" style="color:white;border:1.5px solid rgba(255,255,255,0.4)">Lihat Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="formula.png" alt="Logo FORMULA" width="38" height="38" style="border-radius:10px;object-fit:cover" />
+          <span class="nav-logo-text">
+            FORMULA
+            <small>SMAN 1 Mojosari</small>
+          </span>
+        </a>
+        <p>Informatika &amp; Multimedia SMAN 1 Mojosari. Wadah kreatif siswa untuk belajar, berkarya, dan berkolaborasi.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
+          </a>
+          <a href="#" aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Organisasi</h4>
+        <ul>
+          <li><a href="about.html">Tentang FORMULA</a></li>
+          <li><a href="about.html#struktur">Struktur</a></li>
+          <li><a href="about.html#divisi">Divisi</a></li>
+          <li><a href="programs.html">Program</a></li>
+          <li><a href="alumni.html">Alumni</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Konten</h4>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="news.html">Berita</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="achievements.html">Prestasi</a></li>
+          <li><a href="members.html">Anggota</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Akun</h4>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Daftar Anggota</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="contact.html">Kontak</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 FORMULA — SMAN 1 Mojosari. All rights reserved.</span>
+      <span>Dibuat dengan <span class="heart">❤</span> oleh anggota FORMULA</span>
+    </div>
   </div>
 </footer>
 
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scrollTop" aria-label="Kembali ke atas">
+  <span class="icon icon-chevron-up"></span>
+</button>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const menuToggle = document.getElementById('menuToggle');
-  const navLinks = document.getElementById('navLinks');
-  const navCta = document.getElementById('navCta');
+(function () {
+  'use strict';
 
-  menuToggle.addEventListener('click', function() {
-    navLinks.classList.toggle('open');
-    navCta.classList.toggle('open');
-    this.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
-    this.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+  /* NAVBAR scroll */
+  const navbar = document.getElementById('navbar');
+  const onScroll = () => {
+    if (!navbar) return;
+    navbar.classList.toggle('scrolled', window.scrollY > 8);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* MOBILE MENU */
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (navToggle && mobileMenu) {
+    navToggle.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  /* REVEAL + COUNTER */
+  const revealEls = document.querySelectorAll('.reveal');
+  const counterEls = document.querySelectorAll('[data-counter]');
+
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+  const animateCounter = (el) => {
+    const target = parseInt(el.getAttribute('data-counter'), 10) || 0;
+    const duration = 1600;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      el.textContent = Math.round(easeOut(p) * target).toLocaleString('id-ID');
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString('id-ID');
+    };
+    requestAnimationFrame(step);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach((el) => io.observe(el));
+
+    const ioCounter = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        animateCounter(entry.target);
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+    counterEls.forEach((el) => ioCounter.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('in'));
+    counterEls.forEach((el) => {
+      el.textContent = (parseInt(el.getAttribute('data-counter'), 10) || 0).toLocaleString('id-ID');
+    });
+  }
+
+  /* SCROLL TOP */
+  const scrollTopBtn = document.getElementById('scrollTop');
+  if (scrollTopBtn) {
+    const toggleBtn = () => {
+      scrollTopBtn.classList.toggle('show', window.scrollY > 400);
+    };
+    window.addEventListener('scroll', toggleBtn, { passive: true });
+    toggleBtn();
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* ACTIVE NAV */
+  const currentPage = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  document.querySelectorAll('.nav-link, .mobile-menu a').forEach((link) => {
+    const href = (link.getAttribute('href') || '').toLowerCase();
+    if (href === currentPage) link.classList.add('active');
   });
 
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.nav-inner')) {
-      navLinks.classList.remove('open');
-      navCta.classList.remove('open');
-      menuToggle.textContent = '☰';
-      menuToggle.setAttribute('aria-expanded', 'false');
-    }
+  /* SMOOTH ANCHOR */
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (!id || id === '#' || id.length < 2) return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
   });
-});
+
+  /* DESKTOP-ONLY ACTIONS */
+  const desktopActions = document.querySelectorAll('[data-desktop]');
+  const showDesktop = () => {
+    const isDesktop = window.matchMedia('(min-width: 900px)').matches;
+    desktopActions.forEach((el) => {
+      el.style.display = isDesktop ? 'inline-flex' : 'none';
+    });
+  };
+  showDesktop();
+  window.addEventListener('resize', showDesktop, { passive: true });
+
+})();
 </script>
+
 </body>
 </html>
