@@ -1,3 +1,132 @@
+<script>
+// ===== DUMMY ACCOUNT INJECTION =====
+(function() {
+  const DUMMY_USERS = [
+    {
+      id: '00000000-0000-0000-0000-000000000001',
+      email: 'admin@dummy.local',
+      password: 'admin123',
+      role: 'admin',
+      full_name: 'Admin Dummy',
+      username: 'admin'
+    },
+    {
+      id: '00000000-0000-0000-0000-000000000002',
+      email: 'guru@dummy.local',
+      password: 'guru123',
+      role: 'teacher',
+      full_name: 'Guru Dummy',
+      username: 'guru'
+    },
+    {
+      id: '00000000-0000-0000-0000-000000000003',
+      email: 'siswa@dummy.local',
+      password: 'siswa123',
+      role: 'student',
+      full_name: 'Siswa Dummy',
+      username: 'siswa'
+    }
+  ];
+
+  // Simpan daftar user dummy
+  localStorage.setItem('__DUMMY_USERS__', JSON.stringify(DUMMY_USERS));
+
+  // Patch Supabase auth.signInWithPassword
+  // Trik: timpa fetch ke endpoint Supabase auth jika email berakhiran @dummy.local
+  const originalFetch = window.fetch;
+  window.fetch = function(url, options) {
+    const urlStr = typeof url === 'string' ? url : url.url;
+    
+    if (urlStr && urlStr.includes('/auth/v1/token')) {
+      try {
+        const body = JSON.parse(options?.body || '{}');
+        const user = DUMMY_USERS.find(
+          u => u.email === body.email && u.password === body.password
+        );
+        
+        if (user) {
+          // Buat response palsu mirip Supabase
+          const fakeSession = {
+            access_token: 'dummy-access-token-' + user.id,
+            token_type: 'bearer',
+            expires_in: 3600,
+            expires_at: Math.floor(Date.now()/1000) + 3600,
+            refresh_token: 'dummy-refresh-token-' + user.id,
+            user: {
+              id: user.id,
+              aud: 'authenticated',
+              role: 'authenticated',
+              email: user.email,
+              email_confirmed_at: new Date().toISOString(),
+              phone: '',
+              confirmed_at: new Date().toISOString(),
+              last_sign_in_at: new Date().toISOString(),
+              app_metadata: { provider: 'email', providers: ['email'] },
+              user_metadata: {
+                full_name: user.full_name,
+                role: user.role,
+                username: user.username
+              },
+              identities: [],
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString()
+            }
+          };
+          
+          // Simpan ke localStorage dengan key Supabase standar
+          const projectRef = new URL(urlStr).hostname.split('.')[0];
+          const storageKey = `sb-${projectRef}-auth-token`;
+          localStorage.setItem(storageKey, JSON.stringify(fakeSession));
+          
+          return Promise.resolve(new Response(JSON.stringify(fakeSession), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          }));
+        }
+        
+        // Jika bukan dummy & bukan password benar → error 400
+        if (body.email?.endsWith('@dummy.local')) {
+          return Promise.resolve(new Response(
+            JSON.stringify({ error: 'invalid_grant', error_description: 'Invalid credentials' }),
+            { status: 400, headers: { 'Content-Type': 'application/json' } }
+          ));
+        }
+      } catch (e) {
+        console.warn('[DummyAuth] parse error:', e);
+      }
+    }
+    
+    // Intercept getUser / getSession
+    if (urlStr && urlStr.includes('/auth/v1/user')) {
+      const keys = Object.keys(localStorage).filter(k => k.startsWith('sb-') && k.endsWith('-auth-token'));
+      for (const key of keys) {
+        try {
+          const sess = JSON.parse(localStorage.getItem(key));
+          if (sess?.user?.email?.endsWith('@dummy.local')) {
+            return Promise.resolve(new Response(JSON.stringify(sess.user), {
+              status: 200,
+              headers: { 'Content-Type': 'application/json' }
+            }));
+          }
+        } catch {}
+      }
+    }
+    
+    // Intercept logout
+    if (urlStr && urlStr.includes('/auth/v1/logout')) {
+      Object.keys(localStorage)
+        .filter(k => k.startsWith('sb-') && k.endsWith('-auth-token'))
+        .forEach(k => localStorage.removeItem(k));
+      return Promise.resolve(new Response(null, { status: 204 }));
+    }
+    
+    return originalFetch.apply(this, arguments);
+  };
+
+  console.log('[DummyAuth] ✅ Dummy accounts ready:', DUMMY_USERS.map(u => u.email).join(', '));
+})();
+</script>
+
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/adm-zip-RcA9ybCW.js","assets/vendor-icons-DuTDrIin.js","assets/__vite-browser-external-D7Ct-6yo.js"])))=>i.map(i=>d[i]);
 import{r as j7,a as mh,b as E,R as QA,M as k7,S as S7,c as IA,T as Gu,K as E7,L as TA,Z as lv,W as I7,d as T7,e as Fg,f as Lg,C as Yc,h as Dl,i as Mp,j as U7,D as Rg,k as Dg,l as i0,H as M7,m as _7,n as F7,P as L7,o as R7,p as _p,X as D7,q as Q7,s as O7,t as H7,u as _u,v as P7,F as z7,U as K7,w as G7,x as V7,y as W7,z as X7,B as q7,A as Y7,E as $7,G as Q1}from"./vendor-icons-DuTDrIin.js";import{r as J7}from"./vendor-react-jOlSsrrq.js";import{c as ov}from"./vendor-supabase-CNtoDnIX.js";import{_ as Io,r as Z7,a as eB,u as Av,z as tB,T as O1,b as Fp,P as Cr,c as Fr,A as Gi,B as aB,S as Lp,W as Vu,d as sB,F as rB,e as nB,V as cv,I as iB,E as lB,f as oB}from"./vendor-docs-DpeikAQO.js";function dv(a,t){for(var s=0;s<t.length;s++){const n=t[s];if(typeof n!="string"&&!Array.isArray(n)){for(const A in n)if(A!=="default"&&!(A in a)){const d=Object.getOwnPropertyDescriptor(n,A);d&&Object.defineProperty(a,A,d.get?d:{enumerable:!0,get:()=>n[A]})}}}return Object.freeze(Object.defineProperty(a,Symbol.toStringTag,{value:"Module"}))}(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const A of document.querySelectorAll('link[rel="modulepreload"]'))n(A);new MutationObserver(A=>{for(const d of A)if(d.type==="childList")for(const m of d.addedNodes)m.tagName==="LINK"&&m.rel==="modulepreload"&&n(m)}).observe(document,{childList:!0,subtree:!0});function s(A){const d={};return A.integrity&&(d.integrity=A.integrity),A.referrerPolicy&&(d.referrerPolicy=A.referrerPolicy),A.crossOrigin==="use-credentials"?d.credentials="include":A.crossOrigin==="anonymous"?d.credentials="omit":d.credentials="same-origin",d}function n(A){if(A.ep)return;A.ep=!0;const d=s(A);fetch(A.href,d)}})();var H1={exports:{}},Hc={};/**
  * @license React
